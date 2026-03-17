@@ -42,7 +42,8 @@ def _is_aozora(text: str) -> bool:
 
 class TxtParser(BaseParser):
     def parse(self, path: Path) -> ParsedBook:
-        raw = path.read_text(encoding="utf-8", errors="replace")
+        from tateyomi.utils.encoding import read_text_auto
+        raw, detected_enc = read_text_auto(path)
 
         if _is_aozora(raw):
             return self._parse_aozora(raw, path)
