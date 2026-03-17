@@ -4,10 +4,13 @@ ebooklib を使用してチャプター・画像を抽出する
 """
 from __future__ import annotations
 import uuid
+import warnings
 from pathlib import Path
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, XMLParsedAsHTMLWarning
 import ebooklib
 from ebooklib import epub
+
+warnings.filterwarnings("ignore", category=XMLParsedAsHTMLWarning)
 from tateyomi.config import ParsedBook, Chapter, ImageItem
 from tateyomi.parsers.base import BaseParser
 from tateyomi.utils.image_handler import ext_from_media_type
