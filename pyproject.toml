@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tateyomi"
+version = "0.1.0"
+description = "電子書籍を縦書き（右から左）に変換するツール"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+dependencies = [
+    "typer>=0.12,<1.0",
+    "rich>=13.7",
+    "ebooklib>=0.18",
+    "lxml>=5.1",
+    "beautifulsoup4>=4.12",
+    "pdfplumber>=0.11",
+    "pypdf>=4.2",
+    "weasyprint>=62.0",
+    "Pillow>=10.3",
+    "pydantic>=2.6",
+]
+
+[project.scripts]
+tateyomi = "tateyomi.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tateyomi*"]
+
+[tool.setuptools.package-data]
+tateyomi = ["assets/*.css"]

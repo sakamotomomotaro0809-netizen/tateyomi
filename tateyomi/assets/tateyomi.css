@@ -1,0 +1,119 @@
+/* ================================================================
+   tateyomi.css — Kindle対応 縦書きCSS
+   writing-mode: vertical-rl (縦書き・右から左)
+   ================================================================ */
+
+/* 1. ルート: 縦書き・右から左 */
+html {
+    -epub-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+    direction: ltr;
+    text-orientation: mixed;
+    line-height: 1.8;
+    font-size: 1em;
+}
+
+html, body {
+    -webkit-writing-mode: vertical-rl !important;
+    writing-mode: vertical-rl !important;
+}
+
+body {
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+    text-orientation: mixed;
+    margin: 0;
+    padding: 0.5em 1em;
+    font-family: serif;
+    -webkit-text-size-adjust: none;
+}
+
+/* 2. 見出し */
+h1, h2, h3, h4, h5, h6 {
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+    font-weight: bold;
+    margin-block-start: 1em;
+    margin-block-end: 0.5em;
+}
+
+h1 { font-size: 1.4em; }
+h2 { font-size: 1.2em; }
+h3 { font-size: 1.1em; }
+
+/* 3. 段落 */
+p {
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+    text-indent: 1em;
+    margin: 0;
+    padding: 0;
+}
+
+/* 段落間の空き */
+p + p {
+    margin-block-start: 0;
+}
+
+/* 4. 縦中横 (tate-chu-yoko) — 数字・短いラテン文字を横組みにする */
+.tcy,
+.tate-chu-yoko {
+    -epub-text-combine: horizontal;
+    text-combine-upright: all;
+    -webkit-text-combine: horizontal;
+    display: inline;
+    font-size: 0.9em;
+}
+
+/* 5. 画像 */
+img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+}
+
+.full-page-image {
+    display: block;
+    text-align: center;
+}
+
+/* 6. ルビ（ふりがな） */
+ruby {
+    ruby-align: center;
+}
+
+rt {
+    font-size: 0.5em;
+}
+
+/* 7. セクション・div類も縦書きを明示 */
+section,
+article,
+div,
+aside,
+main {
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+}
+
+/* 8. 章区切り */
+.chapter-break {
+    break-before: page;
+    page-break-before: always;
+}
+
+/* 9. 傍点（圏点） */
+em {
+    font-style: normal;
+    -epub-text-emphasis: filled sesame;
+    text-emphasis: filled sesame;
+    -webkit-text-emphasis: filled sesame;
+}
+
+/* 10. 割注 */
+.warichu {
+    display: inline-block;
+    font-size: 0.5em;
+    line-height: 1.2;
+}

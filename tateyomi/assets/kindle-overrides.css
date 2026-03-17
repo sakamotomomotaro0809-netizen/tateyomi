@@ -1,0 +1,41 @@
+/* ================================================================
+   kindle-overrides.css — Kindle KDP互換性修正
+   tateyomi.css の後に読み込む
+   ================================================================ */
+
+/* Kindle CSS論理プロパティ対応補完 */
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Kindle はセクション類の writing-mode を上書きする場合がある */
+section, article, div, aside {
+    writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
+}
+
+/* Kindle ページブレーク */
+.chapter-break {
+    break-before: page;
+    -webkit-column-break-before: page;
+    page-break-before: always;
+}
+
+/* orphan/widow: Kindle縦書きでの最適値 */
+p {
+    orphans: 1;
+    widows: 1;
+}
+
+/* Kindle の font-size リセット対策 */
+body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* 見出しのページをまたぐ分割を防ぐ */
+h1, h2, h3 {
+    break-after: avoid;
+    page-break-after: avoid;
+}
