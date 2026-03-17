@@ -166,5 +166,60 @@ def info(
         raise typer.Exit(1)
 
 
+@app.command()
+def batch(
+    input_dir: Path = typer.Argument(..., help="入力ディレクトリ"),
+    output_dir: Path = typer.Argument(..., help="出力ディレクトリ"),
+    fmt: str = typer.Option("epub", "--format", "-f", help="出力形式: epub / html / pdf"),
+    no_tcy: bool = typer.Option(False, "--no-tcy"),
+    verbose: bool = typer.Option(False, "--verbose", "-v"),
+) -> None:
+    """ディレクトリ内の電子書籍を一括変換する"""
+    if not input_dir.is_dir():
+        console.print(f"[red]ディレクトリが見つかりません: {input_dir}[/red]")
+        raise typer.Exit(1)
+
+    out_ext = f".{fmt.lstrip('.')}"
+    if out_ext not in (".epub", ".pdf", ".html"):
+        console.print(f"[red]不正なフォーマット: {fmt}[/red]")
+        raise typer.Exit(1)
+
+    targets = [
+        p for p in input_dir.iterdir()
+        if p.suffix.lower() in (".epub", ".pdf", ".txt")
+    ]
+    if not targets:
+        console.print(f"[yellow]変換対象ファイルが見つかりません: {input_dir}[/yellow]")
+        raise typer.Exit(0)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    console.print(f"[bold]{len(targets)}件を変換します[/bold] -> {output_dir}")
+
+    ok, ng = 0, 0
+    for p in targets:
+        out = output_dir / (p.stem + "_縦書き" + out_ext)
+        try:
+            book = _parse(p, p.suffix.lower(), verbose, None)
+            from tateyomi.transform import text_transform, html_transform
+            book = text_transform.transform(book, enable_tcy=not no_tcy)
+            book = html_transform.transform(book)
+            _render(book, out, out_ext)
+            size_kb = out.stat().st_size // 1024
+            console.print(f"  [green]OK[/green] {p.name} -> {out.name} ({size_kb}KB)")
+            ok += 1
+        except Exception as e:
+            console.print(f"  [red]NG[/red] {p.name}: {e}")
+            ng += 1
+
+    console.print(f"\n完了: 成功={ok}, 失敗={ng}")
+
+
+@app.command()
+def gui() -> None:
+    """GUIウィンドウを起動する"""
+    from tateyomi.gui import main
+    main()
+
+
 if __name__ == "__main__":
     app()
