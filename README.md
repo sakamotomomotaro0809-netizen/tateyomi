@@ -3,6 +3,15 @@
 EPUB・PDF・Word・テキストファイルを日本語伝統の縦書き（右から左）に変換し、
 Kindle KDP で出版可能な EPUB3 を生成するツールです。
 
+[![GitHub Release](https://img.shields.io/github/v/release/sakamotomomotaro0809-netizen/tateyomi)](https://github.com/sakamotomomotaro0809-netizen/tateyomi/releases/latest)
+
+## ダウンロード
+
+| ファイル | 説明 |
+|---|---|
+| [tateyomi.exe](https://github.com/sakamotomomotaro0809-netizen/tateyomi/releases/latest/download/tateyomi.exe) | コマンドライン版（Python 不要） |
+| [tateyomi-gui.exe](https://github.com/sakamotomomotaro0809-netizen/tateyomi/releases/latest/download/tateyomi-gui.exe) | ダブルクリック起動 GUI版（Python 不要） |
+
 ---
 
 ## 特徴

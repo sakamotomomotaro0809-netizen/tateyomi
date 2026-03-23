@@ -97,5 +97,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon=None,  # アイコンを追加する場合は .ico パスを指定
+    icon=str(PKG / "assets" / "tateyomi.ico"),
 )
