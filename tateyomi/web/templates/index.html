@@ -10,7 +10,10 @@
   </p>
 
   {% if user %}
-    <a class="btn btn-primary btn-lg" href="/convert">今すぐ変換する</a>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;">
+      <a class="btn btn-primary btn-lg" href="/convert">今すぐ変換する</a>
+      <a class="btn btn-secondary btn-lg" href="/read/sample" target="_blank">📖 見本を読む</a>
+    </div>
   {% else %}
     <a class="btn btn-google btn-lg" href="/login">
       <svg width="20" height="20" viewBox="0 0 48 48" style="vertical-align:middle;margin-right:8px">

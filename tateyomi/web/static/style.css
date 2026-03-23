@@ -235,6 +235,22 @@ h2 { font-size: 1.3rem; color: var(--primary); margin-bottom: 1.5rem; }
 .history-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
 .history-header h2 { margin-bottom: 0; }
 
+/* ── スマホ対応 ── */
+@media (max-width: 600px) {
+  .navbar { padding: 0 1rem; }
+  .username { display: none; }
+  .convert-layout { flex-direction: column; }
+  .convert-form-section, .history-section { padding: 1rem; }
+  .history-table { font-size: .8rem; }
+  .history-table th, .history-table td { padding: .4rem .5rem; }
+  .action-btns { flex-direction: column; gap: .3rem; }
+  .btn-lg { font-size: 1rem; padding: .7rem 1.2rem; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .hero { padding: 2rem 1rem; }
+  .hero h1 { font-size: 1.5rem; }
+  .drop-zone { padding: 1.5rem 1rem; }
+}
+
 /* ── フッター ── */
 footer {
   text-align: center;

@@ -30,14 +30,41 @@ app.add_middleware(SessionMiddleware, secret_key=_SECRET_KEY)
 _WEB_DIR = Path(__file__).parent
 _UPLOAD_DIR = Path(tempfile.gettempdir()) / "tateyomi_uploads"
 _UPLOAD_DIR.mkdir(exist_ok=True)
+_SAMPLE_DIR = Path(tempfile.gettempdir()) / "tateyomi_sample"
+_SAMPLE_TXT = Path(__file__).parent.parent.parent / "samples" / "kokoro.txt"
 
 app.mount("/static", StaticFiles(directory=str(_WEB_DIR / "static")), name="static")
 templates = Jinja2Templates(directory=str(_WEB_DIR / "templates"))
 
 
+def _build_sample():
+    """起動時にサンプル本（こころ）を変換して章HTMLを生成する"""
+    if _SAMPLE_DIR.exists() and any(_SAMPLE_DIR.glob("chapter_*.html")):
+        return  # 既に生成済み
+    if not _SAMPLE_TXT.exists():
+        return
+    try:
+        from tateyomi.parsers.txt_parser import TxtParser
+        from tateyomi.transform import text_transform, html_transform
+        book = TxtParser().parse(_SAMPLE_TXT)
+        book.title = "こころ"
+        book.author = "夏目漱石"
+        book = text_transform.transform(book)
+        book = html_transform.transform(book)
+        _SAMPLE_DIR.mkdir(parents=True, exist_ok=True)
+        css = (Path(__file__).parent.parent / "assets" / "tateyomi.css").read_text(encoding="utf-8")
+        for i, ch in enumerate(book.chapters):
+            ch_file = _SAMPLE_DIR / f"chapter_{i:03d}.html"
+            ch_file.write_text(_wrap_reader_html(ch.html_content, ch.title or f"第{i+1}章", css), encoding="utf-8")
+    except Exception:
+        pass
+
+
 @app.on_event("startup")
 async def startup():
     init_db()
+    loop = asyncio.get_event_loop()
+    await loop.run_in_executor(None, _build_sample)
 
 
 # ── ヘルパー ──────────────────────────────────────────────────────────────
@@ -312,6 +339,32 @@ async def preview(conv_id: str, request: Request):
         return HTMLResponse(file_path.read_text(encoding="utf-8"))
     # EPUB/PDF はダウンロードを促す
     raise HTTPException(400, "このファイル形式はダウンロード後に専用リーダーで確認してください")
+
+
+@app.get("/read/sample", response_class=HTMLResponse)
+async def read_sample(request: Request, chapter: int = 0):
+    user = _current_user(request)
+    if not user:
+        return RedirectResponse("/login")
+    chapter_files = sorted(_SAMPLE_DIR.glob("chapter_*.html")) if _SAMPLE_DIR.exists() else []
+    if not chapter_files:
+        raise HTTPException(404, "サンプルデータが準備中です。しばらくお待ちください。")
+    chapter = max(0, min(chapter, len(chapter_files) - 1))
+    raw = chapter_files[chapter].read_text(encoding="utf-8")
+    import re as _re
+    m = _re.search(r"<body[^>]*>(.*?)</body>", raw, _re.DOTALL)
+    content = m.group(1) if m else raw
+    total = len(chapter_files)
+    return templates.TemplateResponse(
+        request=request, name="reader.html",
+        context={
+            "user": user, "content": content,
+            "conv_id": "sample", "chapter": chapter,
+            "total": total, "title": "こころ — 夏目漱石（見本）",
+            "prev": chapter - 1 if chapter > 0 else None,
+            "next": chapter + 1 if chapter < total - 1 else None,
+        }
+    )
 
 
 @app.get("/read/{conv_id}", response_class=HTMLResponse)
