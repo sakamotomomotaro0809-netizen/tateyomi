@@ -23,15 +23,15 @@
         <label>出力形式</label>
         <div class="radio-group">
           <label class="radio-label">
-            <input type="radio" name="output_format" value="epub" checked/>
+            <input id="opt-epub" type="radio" name="output_format" value="epub" checked/>
             EPUB3（Kindle KDP 用）
           </label>
           <label class="radio-label">
-            <input type="radio" name="output_format" value="html"/>
+            <input id="opt-html" type="radio" name="output_format" value="html"/>
             HTML（ブラウザプレビュー用）
           </label>
           <label class="radio-label">
-            <input type="radio" name="output_format" value="pdf"/>
+            <input id="opt-pdf" type="radio" name="output_format" value="pdf"/>
             PDF（印刷・汎用）
           </label>
         </div>
@@ -119,11 +119,30 @@ dropZone.addEventListener('drop', e => {
   e.preventDefault();
   dropZone.classList.remove('drag-over');
   fileInput.files = e.dataTransfer.files;
-  fileName.textContent = fileInput.files[0]?.name || '';
+  const f = fileInput.files[0];
+  fileName.textContent = f?.name || '';
+  if (f) updateOutputOptions(f.name);
 });
 fileInput.addEventListener('change', () => {
-  fileName.textContent = fileInput.files[0]?.name || '';
+  const f = fileInput.files[0];
+  fileName.textContent = f?.name || '';
+  if (f) updateOutputOptions(f.name);
 });
+
+function updateOutputOptions(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  const epubOpt = document.getElementById('opt-epub');
+  const htmlOpt = document.getElementById('opt-html');
+  const pdfOpt  = document.getElementById('opt-pdf');
+
+  // PDF入力 → PDF出力は意味ないので非表示
+  pdfOpt.parentElement.style.display  = ext === 'pdf' ? 'none' : '';
+  epubOpt.parentElement.style.display = '';
+  htmlOpt.parentElement.style.display = '';
+
+  // PDF入力のときデフォルトをEPUBに
+  if (ext === 'pdf') epubOpt.checked = true;
+}
 
 // 変換送信
 document.getElementById('convertForm').addEventListener('submit', async e => {
