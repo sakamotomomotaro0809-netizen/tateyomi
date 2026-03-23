@@ -227,6 +227,14 @@ h2 { font-size: 1.3rem; color: var(--primary); margin-bottom: 1.5rem; }
 .badge-pending { background: #fef3cd; color: #856404; }
 .empty-history { color: var(--muted); font-size: .9rem; }
 
+.action-btns { display: flex; gap: .4rem; flex-wrap: wrap; }
+.btn-danger  { background: #e74c3c; color: #fff; border-color: #c0392b; }
+.btn-danger:hover { background: #c0392b; }
+.btn-ghost   { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost:hover { background: var(--bg); }
+.history-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.history-header h2 { margin-bottom: 0; }
+
 /* ── フッター ── */
 footer {
   text-align: center;

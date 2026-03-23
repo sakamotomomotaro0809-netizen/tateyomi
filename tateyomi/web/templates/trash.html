@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}ゴミ箱 — tateyomi{% endblock %}
+
+{% block content %}
+<div class="convert-layout">
+  <section class="history-section">
+    <div class="history-header">
+      <h2>🗑 ゴミ箱</h2>
+      <a href="/convert" class="btn btn-sm btn-ghost">← 変換履歴に戻る</a>
+    </div>
+
+    {% if trashed %}
+      <p class="hint">ゴミ箱のファイルは復元するか、完全削除できます。</p>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>ファイル名</th>
+            <th>状態</th>
+            <th>削除日時</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for conv in trashed %}
+          <tr id="row-{{ conv.id }}">
+            <td>{{ conv.original_name }}</td>
+            <td>
+              {% if conv.status == 'done' %}
+                <span class="badge badge-ok">完了</span>
+              {% elif conv.status == 'error' %}
+                <span class="badge badge-err">エラー</span>
+              {% else %}
+                <span class="badge badge-pending">処理中</span>
+              {% endif %}
+            </td>
+            <td>{{ conv.deleted_at[:16] if conv.deleted_at else '—' }}</td>
+            <td class="action-btns">
+              <button class="btn btn-sm btn-secondary" onclick="restoreItem('{{ conv.id }}')">復元</button>
+              <button class="btn btn-sm btn-danger" onclick="deleteItem('{{ conv.id }}')">完全削除</button>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="empty-history">ゴミ箱は空です。</p>
+    {% endif %}
+  </section>
+</div>
+
+<script>
+async function restoreItem(id) {
+  const r = await fetch('/api/restore/' + id, { method: 'POST' });
+  if (r.ok) document.getElementById('row-' + id).remove();
+}
+
+async function deleteItem(id) {
+  if (!confirm('完全に削除します。元に戻せません。よろしいですか？')) return;
+  const r = await fetch('/api/delete/' + id, { method: 'DELETE' });
+  if (r.ok) document.getElementById('row-' + id).remove();
+}
+</script>
+{% endblock %}

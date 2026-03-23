@@ -16,7 +16,8 @@ from fastapi.templating import Jinja2Templates
 from starlette.middleware.sessions import SessionMiddleware
 
 from tateyomi.web.db import init_db, upsert_user, get_user, \
-    create_conversion, update_conversion, get_user_conversions, get_conversion
+    create_conversion, update_conversion, get_user_conversions, get_conversion, \
+    trash_conversion, restore_conversion, delete_conversion_permanent
 from tateyomi.web.auth import oauth
 
 # ── アプリ初期化 ───────────────────────────────────────────────────────────
@@ -73,6 +74,17 @@ async def convert_page(request: Request):
     history = get_user_conversions(user["id"])
     return templates.TemplateResponse(
         request=request, name="convert.html", context={"user": user, "history": history}
+    )
+
+
+@app.get("/trash", response_class=HTMLResponse)
+async def trash_page(request: Request):
+    user = _current_user(request)
+    if not user:
+        return RedirectResponse("/login")
+    trashed = get_user_conversions(user["id"], include_deleted=True)
+    return templates.TemplateResponse(
+        request=request, name="trash.html", context={"user": user, "trashed": trashed}
     )
 
 
@@ -221,3 +233,55 @@ async def download(conv_id: str, request: Request):
 async def api_history(request: Request):
     user = _require_login(request)
     return get_user_conversions(user["id"])
+
+
+@app.post("/api/trash/{conv_id}")
+async def api_trash(conv_id: str, request: Request):
+    user = _require_login(request)
+    conv = get_conversion(conv_id)
+    if not conv or conv["user_id"] != user["id"]:
+        raise HTTPException(404, "見つかりません")
+    trash_conversion(conv_id)
+    return {"ok": True}
+
+
+@app.post("/api/restore/{conv_id}")
+async def api_restore(conv_id: str, request: Request):
+    user = _require_login(request)
+    conv = get_conversion(conv_id)
+    if not conv or conv["user_id"] != user["id"]:
+        raise HTTPException(404, "見つかりません")
+    restore_conversion(conv_id)
+    return {"ok": True}
+
+
+@app.delete("/api/delete/{conv_id}")
+async def api_delete(conv_id: str, request: Request):
+    user = _require_login(request)
+    conv = get_conversion(conv_id)
+    if not conv or conv["user_id"] != user["id"]:
+        raise HTTPException(404, "見つかりません")
+    file_path = delete_conversion_permanent(conv_id)
+    if file_path:
+        try:
+            Path(file_path).unlink(missing_ok=True)
+        except Exception:
+            pass
+    return {"ok": True}
+
+
+@app.get("/preview/{conv_id}", response_class=HTMLResponse)
+async def preview(conv_id: str, request: Request):
+    user = _require_login(request)
+    conv = get_conversion(conv_id)
+    if not conv or conv["user_id"] != user["id"]:
+        raise HTTPException(404, "見つかりません")
+    if conv["status"] != "done":
+        raise HTTPException(404, "変換が完了していません")
+    file_path = Path(conv["file_path"])
+    if not file_path.exists():
+        raise HTTPException(404, "ファイルが見つかりません（期限切れの可能性）")
+    if file_path.suffix.lower() == ".html":
+        return HTMLResponse(file_path.read_text(encoding="utf-8"))
+    # EPUB の場合は変換ページにリダイレクト（ダウンロードを促す）
+    raise HTTPException(400, "EPUBのプレビューはダウンロード後にEPUBリーダーで確認してください")

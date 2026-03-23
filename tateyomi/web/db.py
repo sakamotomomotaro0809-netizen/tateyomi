@@ -19,6 +19,10 @@ def get_db() -> sqlite3.Connection:
 
 def init_db() -> None:
     with get_db() as conn:
+        # deleted_at カラムの追加（既存DBへのマイグレーション）
+        cols = [r[1] for r in conn.execute("PRAGMA table_info(conversions)").fetchall()]
+        if cols and "deleted_at" not in cols:
+            conn.execute("ALTER TABLE conversions ADD COLUMN deleted_at TEXT DEFAULT NULL")
         conn.executescript("""
             CREATE TABLE IF NOT EXISTS users (
                 id       TEXT PRIMARY KEY,
@@ -36,8 +40,11 @@ def init_db() -> None:
                 error_msg     TEXT,
                 file_path     TEXT,
                 created_at    TEXT DEFAULT (datetime('now')),
+                deleted_at    TEXT DEFAULT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
             );
+            -- 既存DBへのマイグレーション（カラムがなければ追加）
+            PRAGMA table_info(conversions);
         """)
 
 
@@ -89,16 +96,48 @@ def update_conversion(
         )
 
 
-def get_user_conversions(user_id: str, limit: int = 20) -> list[dict]:
+def get_user_conversions(user_id: str, limit: int = 20, include_deleted: bool = False) -> list[dict]:
     with get_db() as conn:
-        rows = conn.execute(
-            """SELECT * FROM conversions
-               WHERE user_id = ?
-               ORDER BY created_at DESC
-               LIMIT ?""",
-            (user_id, limit),
-        ).fetchall()
+        if include_deleted:
+            rows = conn.execute(
+                """SELECT * FROM conversions
+                   WHERE user_id = ? AND deleted_at IS NOT NULL
+                   ORDER BY deleted_at DESC LIMIT ?""",
+                (user_id, limit),
+            ).fetchall()
+        else:
+            rows = conn.execute(
+                """SELECT * FROM conversions
+                   WHERE user_id = ? AND deleted_at IS NULL
+                   ORDER BY created_at DESC LIMIT ?""",
+                (user_id, limit),
+            ).fetchall()
     return [dict(r) for r in rows]
+
+
+def trash_conversion(conv_id: str) -> None:
+    with get_db() as conn:
+        conn.execute(
+            "UPDATE conversions SET deleted_at = datetime('now') WHERE id = ?",
+            (conv_id,),
+        )
+
+
+def restore_conversion(conv_id: str) -> None:
+    with get_db() as conn:
+        conn.execute(
+            "UPDATE conversions SET deleted_at = NULL WHERE id = ?",
+            (conv_id,),
+        )
+
+
+def delete_conversion_permanent(conv_id: str) -> str | None:
+    """完全削除。削除前にファイルパスを返す。"""
+    with get_db() as conn:
+        row = conn.execute("SELECT file_path FROM conversions WHERE id = ?", (conv_id,)).fetchone()
+        file_path = dict(row)["file_path"] if row else None
+        conn.execute("DELETE FROM conversions WHERE id = ?", (conv_id,))
+    return file_path
 
 
 def get_conversion(conv_id: str) -> dict | None:

@@ -46,6 +46,7 @@
     <div id="result" class="result-area" style="display:none">
       <p class="success-msg">✅ 変換完了！</p>
       <a id="downloadLink" class="btn btn-primary" href="#">ダウンロード</a>
+      <a id="previewLink" class="btn btn-secondary" href="#" target="_blank" style="display:none">プレビュー</a>
     </div>
 
     <div id="errorMsg" class="error-area" style="display:none"></div>
@@ -53,7 +54,10 @@
 
   <!-- 変換履歴 -->
   <section class="history-section">
-    <h2>変換履歴</h2>
+    <div class="history-header">
+      <h2>変換履歴</h2>
+      <a href="/trash" class="btn btn-sm btn-ghost">🗑 ゴミ箱</a>
+    </div>
     {% if history %}
       <table class="history-table">
         <thead>
@@ -66,7 +70,7 @@
         </thead>
         <tbody>
           {% for conv in history %}
-          <tr>
+          <tr id="row-{{ conv.id }}">
             <td>{{ conv.original_name }}</td>
             <td>
               {% if conv.status == 'done' %}
@@ -78,10 +82,14 @@
               {% endif %}
             </td>
             <td>{{ conv.created_at[:16] }}</td>
-            <td>
+            <td class="action-btns">
               {% if conv.status == 'done' %}
                 <a href="/download/{{ conv.id }}" class="btn btn-sm">DL</a>
+                {% if conv.output_name.endswith('.html') %}
+                  <a href="/preview/{{ conv.id }}" class="btn btn-sm btn-secondary" target="_blank">プレビュー</a>
+                {% endif %}
               {% endif %}
+              <button class="btn btn-sm btn-danger" onclick="trashItem('{{ conv.id }}')">削除</button>
             </td>
           </tr>
           {% endfor %}
@@ -132,8 +140,14 @@ document.getElementById('convertForm').addEventListener('submit', async e => {
     const data = await resp.json();
     if (!resp.ok) throw new Error(data.detail || '変換失敗');
 
-    document.getElementById('downloadLink').href = '/download/' + data.conv_id;
-    document.getElementById('downloadLink').download = data.output_name;
+    const dlLink = document.getElementById('downloadLink');
+    const pvLink = document.getElementById('previewLink');
+    dlLink.href = '/download/' + data.conv_id;
+    dlLink.download = data.output_name;
+    if (data.output_name.endsWith('.html')) {
+      pvLink.href = '/preview/' + data.conv_id;
+      pvLink.style.display = 'inline-block';
+    }
     result.style.display = 'block';
     // 履歴をリロード
     setTimeout(() => location.reload(), 2000);
@@ -145,5 +159,13 @@ document.getElementById('convertForm').addEventListener('submit', async e => {
     progress.style.display = 'none';
   }
 });
+
+async function trashItem(id) {
+  if (!confirm('ゴミ箱に移動しますか？')) return;
+  const r = await fetch('/api/trash/' + id, { method: 'POST' });
+  if (r.ok) {
+    document.getElementById('row-' + id).remove();
+  }
+}
 </script>
 {% endblock %}
