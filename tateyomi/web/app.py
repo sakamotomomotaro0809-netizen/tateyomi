@@ -332,7 +332,11 @@ async def read_book(conv_id: str, request: Request, chapter: int = 0):
         raise HTTPException(404, "章データが見つかりません")
 
     chapter = max(0, min(chapter, len(chapter_files) - 1))
-    content = chapter_files[chapter].read_text(encoding="utf-8")
+    raw = chapter_files[chapter].read_text(encoding="utf-8")
+    # body内コンテンツのみ抽出
+    import re as _re
+    m = _re.search(r"<body[^>]*>(.*?)</body>", raw, _re.DOTALL)
+    content = m.group(1) if m else raw
     total = len(chapter_files)
     title = conv["original_name"]
 
