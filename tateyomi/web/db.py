@@ -7,7 +7,8 @@ import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
-_DB_PATH = Path(__file__).parent.parent.parent / "tateyomi_web.db"
+import os
+_DB_PATH = Path(os.environ.get("DB_PATH", str(Path(__file__).parent.parent.parent / "tateyomi_web.db")))
 
 
 def get_db() -> sqlite3.Connection:

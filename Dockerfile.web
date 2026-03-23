@@ -1,0 +1,39 @@
+# ============================================================
+# tateyomi Web — Docker イメージ
+# FastAPI + Google OAuth2 + SQLite
+#
+# ビルド:
+#   docker build -f Dockerfile.web -t tateyomi-web .
+# ローカル起動:
+#   docker run -p 8000:8000 --env-file .env tateyomi-web
+# ============================================================
+
+FROM python:3.11-slim
+
+# WeasyPrint 依存 + Noto CJK フォント
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libgdk-pixbuf2.0-0 \
+    libffi-dev \
+    libcairo2 \
+    fonts-noto-cjk \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY pyproject.toml ./
+COPY tateyomi/ ./tateyomi/
+
+# Web 依存も含めてインストール
+RUN pip install --no-cache-dir -e ".[web]"
+
+# データ保存ディレクトリ
+RUN mkdir -p /data/db /tmp/tateyomi_uploads
+
+ENV DB_PATH=/data/db/tateyomi.db
+ENV PORT=8000
+
+EXPOSE 8000
+
+CMD ["sh", "-c", "uvicorn tateyomi.web.app:app --host 0.0.0.0 --port $PORT"]
