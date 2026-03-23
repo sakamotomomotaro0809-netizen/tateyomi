@@ -54,8 +54,10 @@ def _build_sample():
         for i, ch in enumerate(book.chapters):
             ch_file = _SAMPLE_DIR / f"chapter_{i:03d}.html"
             ch_file.write_text(_wrap_reader_html(ch.html_content, ch.title or f"第{i+1}章", css), encoding="utf-8")
-    except Exception:
-        pass
+    except Exception as e:
+        import traceback
+        print(f"[sample build ERROR] {e}")
+        traceback.print_exc()
 
 
 @app.on_event("startup")
