@@ -125,8 +125,8 @@ async def logout(request: Request):
 
 # ── 変換 API ──────────────────────────────────────────────────────────────
 
-_ALLOWED_INPUT = {".epub", ".txt", ".docx", ".md", ".html", ".htm"}
-_ALLOWED_OUTPUT = {".epub", ".html"}
+_ALLOWED_INPUT = {".epub", ".txt", ".docx", ".md", ".html", ".htm", ".pdf"}
+_ALLOWED_OUTPUT = {".epub", ".html", ".pdf"}
 
 
 def _do_convert(input_path: Path, output_path: Path) -> None:
@@ -155,6 +155,9 @@ def _do_convert(input_path: Path, output_path: Path) -> None:
 
     if output_path.suffix.lower() == ".epub":
         epub_render(book, output_path)
+    elif output_path.suffix.lower() == ".pdf":
+        from tateyomi.renderers.pdf_renderer import render as pdf_render
+        pdf_render(book, output_path)
     else:
         html_render(book, output_path)
 
@@ -283,5 +286,5 @@ async def preview(conv_id: str, request: Request):
         raise HTTPException(404, "ファイルが見つかりません（期限切れの可能性）")
     if file_path.suffix.lower() == ".html":
         return HTMLResponse(file_path.read_text(encoding="utf-8"))
-    # EPUB の場合は変換ページにリダイレクト（ダウンロードを促す）
-    raise HTTPException(400, "EPUBのプレビューはダウンロード後にEPUBリーダーで確認してください")
+    # EPUB/PDF はダウンロードを促す
+    raise HTTPException(400, "このファイル形式はダウンロード後に専用リーダーで確認してください")

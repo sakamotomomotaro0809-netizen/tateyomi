@@ -12,9 +12,9 @@
         <label for="file">入力ファイル</label>
         <div class="drop-zone" id="dropZone">
           <input type="file" id="file" name="file"
-                 accept=".epub,.txt,.docx,.md,.html,.htm" required/>
+                 accept=".epub,.txt,.docx,.md,.html,.htm,.pdf" required/>
           <p>ここにファイルをドロップ<br/>または クリックして選択</p>
-          <p class="hint">対応形式: .epub .docx .txt .md .html</p>
+          <p class="hint">対応形式: .epub .docx .pdf .txt .md .html</p>
         </div>
         <p id="fileName" class="file-name"></p>
       </div>
@@ -29,6 +29,10 @@
           <label class="radio-label">
             <input type="radio" name="output_format" value="html"/>
             HTML（ブラウザプレビュー用）
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="output_format" value="pdf"/>
+            PDF（印刷・汎用）
           </label>
         </div>
       </div>
