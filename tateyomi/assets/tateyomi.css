@@ -59,9 +59,9 @@ p {
     hanging-punctuation: allow-end;
 }
 
-/* 段落間の空き */
+/* 段落間の空き — 読みやすさのため1行分の余白を追加 */
 p + p {
-    margin-block-start: 0;
+    margin-block-start: 1em;
 }
 
 /* 4. 縦中横 (tate-chu-yoko) — 数字・短いラテン文字を横組みにする */
