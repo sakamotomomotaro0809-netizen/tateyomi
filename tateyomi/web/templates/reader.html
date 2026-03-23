@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+  <title>{{ title }} — tateyomi Reader</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f0e8;
+      color: #1a1a1a;
+      font-family: "Hiragino Mincho ProN", "游明朝", "Yu Mincho", serif;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── ヘッダー ── */
+    .reader-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background: rgba(245,240,232,0.95);
+      border-bottom: 1px solid #d4c9b0;
+      gap: 0.5rem;
+      flex-shrink: 0;
+      backdrop-filter: blur(4px);
+    }
+    .reader-title {
+      font-size: 0.85rem;
+      color: #555;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex: 1;
+    }
+    .reader-progress {
+      font-size: 0.8rem;
+      color: #888;
+      white-space: nowrap;
+    }
+    .header-btn {
+      text-decoration: none;
+      color: #3d5a80;
+      font-size: 0.85rem;
+      padding: 0.3rem 0.6rem;
+      border: 1px solid #3d5a80;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* ── 読書エリア ── */
+    .reader-body {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chapter-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #f5f0e8;
+    }
+
+    /* ── フッター ナビゲーション ── */
+    .reader-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background: rgba(245,240,232,0.95);
+      border-top: 1px solid #d4c9b0;
+      flex-shrink: 0;
+      gap: 0.5rem;
+    }
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.5rem 1rem;
+      background: #3d5a80;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      min-width: 80px;
+      justify-content: center;
+    }
+    .nav-btn:disabled, .nav-btn.disabled {
+      background: #ccc;
+      pointer-events: none;
+    }
+    .nav-btn.ghost {
+      background: transparent;
+      color: #888;
+      border: 1px solid #ccc;
+      min-width: 80px;
+    }
+
+    /* ── スワイプ用オーバーレイ ── */
+    .swipe-left, .swipe-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 30%;
+      z-index: 10;
+      cursor: pointer;
+    }
+    .swipe-left  { left: 0; }
+    .swipe-right { right: 0; }
+  </style>
+</head>
+<body>
+
+<header class="reader-header">
+  <a class="header-btn" href="/convert">← 一覧</a>
+  <span class="reader-title">{{ title }}</span>
+  <span class="reader-progress">{{ chapter + 1 }} / {{ total }}</span>
+</header>
+
+<div class="reader-body">
+  <iframe class="chapter-frame" srcdoc="{{ content | e }}" sandbox="allow-same-origin"></iframe>
+
+  {% if prev is not none %}
+    <div class="swipe-right" onclick="location.href='/read/{{ conv_id }}?chapter={{ prev }}'"></div>
+  {% endif %}
+  {% if next is not none %}
+    <div class="swipe-left" onclick="location.href='/read/{{ conv_id }}?chapter={{ next }}'"></div>
+  {% endif %}
+</div>
+
+<footer class="reader-footer">
+  {% if prev is not none %}
+    <a class="nav-btn" href="/read/{{ conv_id }}?chapter={{ prev }}">◀ 前の章</a>
+  {% else %}
+    <span class="nav-btn ghost">◀ 前の章</span>
+  {% endif %}
+
+  <span style="font-size:.8rem;color:#888;">
+    {{ chapter + 1 }} / {{ total }} 章
+  </span>
+
+  {% if next is not none %}
+    <a class="nav-btn" href="/read/{{ conv_id }}?chapter={{ next }}">次の章 ▶</a>
+  {% else %}
+    <span class="nav-btn ghost">次の章 ▶</span>
+  {% endif %}
+</footer>
+
+<script>
+// スワイプ検出
+let startX = 0;
+document.addEventListener('touchstart', e => startX = e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - startX;
+  if (Math.abs(dx) < 50) return;
+  // 縦書きは右→左が「次」(RTL)
+  if (dx < 0) {
+    {% if next is not none %}location.href='/read/{{ conv_id }}?chapter={{ next }}';{% endif %}
+  } else {
+    {% if prev is not none %}location.href='/read/{{ conv_id }}?chapter={{ prev }}';{% endif %}
+  }
+}, {passive:true});
+
+// キーボード
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft')  {% if next is not none %}location.href='/read/{{ conv_id }}?chapter={{ next }}';{% else %}void 0;{% endif %}
+  if (e.key === 'ArrowRight') {% if prev is not none %}location.href='/read/{{ conv_id }}?chapter={{ prev }}';{% else %}void 0;{% endif %}
+});
+</script>
+
+</body>
+</html>

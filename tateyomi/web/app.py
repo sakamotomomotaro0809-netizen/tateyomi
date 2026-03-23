@@ -129,7 +129,7 @@ _ALLOWED_INPUT = {".epub", ".txt", ".docx", ".md", ".html", ".htm", ".pdf"}
 _ALLOWED_OUTPUT = {".epub", ".html", ".pdf"}
 
 
-def _do_convert(input_path: Path, output_path: Path) -> None:
+def _do_convert(input_path: Path, output_path: Path, chapters_dir: Path | None = None) -> None:
     """同期変換処理（スレッドプールで実行）"""
     from tateyomi.parsers.epub_parser import EpubParser
     from tateyomi.parsers.txt_parser import TxtParser
@@ -148,10 +148,19 @@ def _do_convert(input_path: Path, output_path: Path) -> None:
         ".md": MdParser,
         ".html": HtmlParser,
         ".htm": HtmlParser,
+        ".pdf": __import__("tateyomi.parsers.pdf_parser", fromlist=["PdfParser"]).PdfParser,
     }
     book = parser_map[ext]().parse(input_path)
     book = text_transform.transform(book)
     book = html_transform.transform(book)
+
+    # 読書ビューア用に章HTMLを保存
+    if chapters_dir:
+        chapters_dir.mkdir(parents=True, exist_ok=True)
+        css = (Path(__file__).parent.parent / "assets" / "tateyomi.css").read_text(encoding="utf-8")
+        for i, ch in enumerate(book.chapters):
+            ch_file = chapters_dir / f"chapter_{i:03d}.html"
+            ch_file.write_text(_wrap_reader_html(ch.html_content, ch.title or f"第{i+1}章", css), encoding="utf-8")
 
     if output_path.suffix.lower() == ".epub":
         epub_render(book, output_path)
@@ -160,6 +169,18 @@ def _do_convert(input_path: Path, output_path: Path) -> None:
         pdf_render(book, output_path)
     else:
         html_render(book, output_path)
+
+
+def _wrap_reader_html(body_html: str, title: str, css: str) -> str:
+    import re
+    body = re.search(r"<body[^>]*>(.*?)</body>", body_html, re.DOTALL)
+    content = body.group(1) if body else body_html
+    return f"""<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>{title}</title>
+<style>{css}</style>
+</head><body>{content}</body></html>"""
 
 
 @app.post("/api/convert")
@@ -193,13 +214,16 @@ async def api_convert(
     # DB に変換ジョブ登録
     conv_id = create_conversion(user["id"], file.filename or "", output_name)
 
+    # 章HTMLの保存先
+    chapters_dir = user_dir / f"{conv_id}_chapters"
+
     # バックグラウンドで変換実行
     loop = asyncio.get_event_loop()
     try:
         await loop.run_in_executor(
-            None, partial(_do_convert, input_path, output_path)
+            None, partial(_do_convert, input_path, output_path, chapters_dir)
         )
-        update_conversion(conv_id, "done", str(output_path))
+        update_conversion(conv_id, "done", str(output_path), chapters_dir=str(chapters_dir))
     except Exception as e:
         update_conversion(conv_id, "error", error_msg=str(e))
         raise HTTPException(500, f"変換エラー: {e}")
@@ -209,7 +233,7 @@ async def api_convert(
         except Exception:
             pass
 
-    return JSONResponse({"conv_id": conv_id, "output_name": output_name})
+    return JSONResponse({"conv_id": conv_id, "output_name": output_name, "read_url": f"/read/{conv_id}"})
 
 
 @app.get("/download/{conv_id}")
@@ -288,3 +312,41 @@ async def preview(conv_id: str, request: Request):
         return HTMLResponse(file_path.read_text(encoding="utf-8"))
     # EPUB/PDF はダウンロードを促す
     raise HTTPException(400, "このファイル形式はダウンロード後に専用リーダーで確認してください")
+
+
+@app.get("/read/{conv_id}", response_class=HTMLResponse)
+async def read_book(conv_id: str, request: Request, chapter: int = 0):
+    user = _require_login(request)
+    conv = get_conversion(conv_id)
+    if not conv or conv["user_id"] != user["id"]:
+        raise HTTPException(404, "見つかりません")
+    if conv["status"] != "done":
+        raise HTTPException(404, "変換が完了していません")
+
+    chapters_dir = Path(conv["chapters_dir"]) if conv.get("chapters_dir") else None
+    if not chapters_dir or not chapters_dir.exists():
+        raise HTTPException(404, "読書データが見つかりません。再変換してください。")
+
+    chapter_files = sorted(chapters_dir.glob("chapter_*.html"))
+    if not chapter_files:
+        raise HTTPException(404, "章データが見つかりません")
+
+    chapter = max(0, min(chapter, len(chapter_files) - 1))
+    content = chapter_files[chapter].read_text(encoding="utf-8")
+    total = len(chapter_files)
+    title = conv["original_name"]
+
+    return templates.TemplateResponse(
+        request=request,
+        name="reader.html",
+        context={
+            "user": user,
+            "content": content,
+            "conv_id": conv_id,
+            "chapter": chapter,
+            "total": total,
+            "title": title,
+            "prev": chapter - 1 if chapter > 0 else None,
+            "next": chapter + 1 if chapter < total - 1 else None,
+        }
+    )

@@ -23,6 +23,8 @@ def init_db() -> None:
         cols = [r[1] for r in conn.execute("PRAGMA table_info(conversions)").fetchall()]
         if cols and "deleted_at" not in cols:
             conn.execute("ALTER TABLE conversions ADD COLUMN deleted_at TEXT DEFAULT NULL")
+        if cols and "chapters_dir" not in cols:
+            conn.execute("ALTER TABLE conversions ADD COLUMN chapters_dir TEXT DEFAULT NULL")
         conn.executescript("""
             CREATE TABLE IF NOT EXISTS users (
                 id       TEXT PRIMARY KEY,
@@ -39,6 +41,7 @@ def init_db() -> None:
                 status        TEXT DEFAULT 'pending',
                 error_msg     TEXT,
                 file_path     TEXT,
+                chapters_dir  TEXT DEFAULT NULL,
                 created_at    TEXT DEFAULT (datetime('now')),
                 deleted_at    TEXT DEFAULT NULL,
                 FOREIGN KEY (user_id) REFERENCES users(id)
@@ -86,13 +89,14 @@ def update_conversion(
     status: str,
     file_path: str | None = None,
     error_msg: str | None = None,
+    chapters_dir: str | None = None,
 ) -> None:
     with get_db() as conn:
         conn.execute(
             """UPDATE conversions
-               SET status=?, file_path=?, error_msg=?
+               SET status=?, file_path=?, error_msg=?, chapters_dir=?
                WHERE id=?""",
-            (status, file_path, error_msg, conv_id),
+            (status, file_path, error_msg, chapters_dir, conv_id),
         )
 
 
