@@ -31,24 +31,22 @@ _WEB_DIR = Path(__file__).parent
 _UPLOAD_DIR = Path(tempfile.gettempdir()) / "tateyomi_uploads"
 _UPLOAD_DIR.mkdir(exist_ok=True)
 _SAMPLE_DIR = Path(tempfile.gettempdir()) / "tateyomi_sample"
-_SAMPLE_TXT = Path(__file__).parent.parent.parent / "samples" / "kokoro.txt"
+_SAMPLE_EPUB = Path(__file__).parent.parent.parent / "samples" / "sample.epub"
 
 app.mount("/static", StaticFiles(directory=str(_WEB_DIR / "static")), name="static")
 templates = Jinja2Templates(directory=str(_WEB_DIR / "templates"))
 
 
 def _build_sample():
-    """起動時にサンプル本（こころ）を変換して章HTMLを生成する"""
+    """起動時にサンプル本を変換して章HTMLを生成する"""
     if _SAMPLE_DIR.exists() and any(_SAMPLE_DIR.glob("chapter_*.html")):
         return  # 既に生成済み
-    if not _SAMPLE_TXT.exists():
+    if not _SAMPLE_EPUB.exists():
         return
     try:
-        from tateyomi.parsers.txt_parser import TxtParser
+        from tateyomi.parsers.epub_parser import EpubParser
         from tateyomi.transform import text_transform, html_transform
-        book = TxtParser().parse(_SAMPLE_TXT)
-        book.title = "こころ"
-        book.author = "夏目漱石"
+        book = EpubParser().parse(_SAMPLE_EPUB)
         book = text_transform.transform(book)
         book = html_transform.transform(book)
         _SAMPLE_DIR.mkdir(parents=True, exist_ok=True)
@@ -360,7 +358,7 @@ async def read_sample(request: Request, chapter: int = 0):
         context={
             "user": user, "content": content,
             "conv_id": "sample", "chapter": chapter,
-            "total": total, "title": "こころ — 夏目漱石（見本）",
+            "total": total, "title": "【即金保証】AI時代の最速収益化バイブル（見本）",
             "prev": chapter - 1 if chapter > 0 else None,
             "next": chapter + 1 if chapter < total - 1 else None,
         }
