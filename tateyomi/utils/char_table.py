@@ -23,7 +23,7 @@ HORIZONTAL_TO_VERTICAL: dict[str, str] = {
 # 2〜4桁の数字、アルファベット2〜4文字など
 import re
 
-TCY_PATTERN = re.compile(r"[0-9A-Za-z]{2,4}")
+TCY_PATTERN = re.compile(r"[0-9]{1,4}|[A-Za-z]{2,4}")
 
 
 def apply_vertical_chars(html: str) -> str:
