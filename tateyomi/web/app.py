@@ -61,7 +61,7 @@ def _require_login(request: Request) -> dict:
 async def index(request: Request):
     user = _current_user(request)
     return templates.TemplateResponse(
-        "index.html", {"request": request, "user": user}
+        request=request, name="index.html", context={"user": user}
     )
 
 
@@ -72,8 +72,7 @@ async def convert_page(request: Request):
         return RedirectResponse("/login")
     history = get_user_conversions(user["id"])
     return templates.TemplateResponse(
-        "convert.html",
-        {"request": request, "user": user, "history": history},
+        request=request, name="convert.html", context={"user": user, "history": history}
     )
 
 
