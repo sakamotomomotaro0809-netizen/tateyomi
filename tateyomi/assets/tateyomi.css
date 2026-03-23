@@ -27,6 +27,12 @@ body {
     padding: 0.5em 1em;
     font-family: serif;
     -webkit-text-size-adjust: none;
+    /* 禁則処理 (BH) */
+    line-break: strict;
+    overflow-wrap: break-word;
+    word-break: normal;
+    hanging-punctuation: allow-end;
+    text-justify: inter-ideograph;
 }
 
 /* 2. 見出し */
@@ -49,6 +55,8 @@ p {
     text-indent: 1em;
     margin: 0;
     padding: 0;
+    line-break: strict;
+    hanging-punctuation: allow-end;
 }
 
 /* 段落間の空き */
@@ -111,7 +119,32 @@ em {
     -webkit-text-emphasis: filled sesame;
 }
 
-/* 10. 割注 */
+/* 10. 脚注 */
+.footnotes {
+    margin-block-start: 2em;
+    border-block-start: 1px solid currentColor;
+    padding-block-start: 0.5em;
+    font-size: 0.85em;
+}
+
+aside[epub|type~="footnote"],
+aside.footnote {
+    margin-block-start: 0.5em;
+}
+
+a[epub|type~="noteref"] sup,
+a.noteref sup {
+    font-size: 0.7em;
+    line-height: 1;
+}
+
+.fn-inline {
+    font-size: 0.8em;
+    -epub-text-emphasis: none;
+    text-emphasis: none;
+}
+
+/* 11. 割注 */
 .warichu {
     display: inline-block;
     font-size: 0.5em;

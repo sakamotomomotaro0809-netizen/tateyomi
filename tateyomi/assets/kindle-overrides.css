@@ -3,19 +3,33 @@
    tateyomi.css の後に読み込む
    ================================================================ */
 
-/* Kindle CSS論理プロパティ対応補完 */
+/* ── 1. 縦書き強制（Kindle が上書きするケースへの対策） ─────── */
+html {
+    -webkit-writing-mode: vertical-rl !important;
+    writing-mode: vertical-rl !important;
+}
+
+body {
+    -webkit-writing-mode: vertical-rl !important;
+    writing-mode: vertical-rl !important;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Kindle はセクション類の writing-mode を上書きする場合がある */
+section, article, div, aside, main,
+p, h1, h2, h3, h4, h5, h6 {
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+}
+
+/* ── 2. マージン正規化 ──────────────────────────────────────── */
 p {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-/* Kindle はセクション類の writing-mode を上書きする場合がある */
-section, article, div, aside {
-    writing-mode: vertical-rl;
-    -webkit-writing-mode: vertical-rl;
-}
-
-/* Kindle ページブレーク */
+/* ── 3. ページブレーク ──────────────────────────────────────── */
 .chapter-break {
     break-before: page;
     -webkit-column-break-before: page;
@@ -28,14 +42,114 @@ p {
     widows: 1;
 }
 
-/* Kindle の font-size リセット対策 */
-body {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-}
-
-/* 見出しのページをまたぐ分割を防ぐ */
+/* 見出しがページ末で分断されないよう */
 h1, h2, h3 {
     break-after: avoid;
     page-break-after: avoid;
+    -webkit-column-break-after: avoid;
+}
+
+/* ── 4. 縦中横 (tate-chu-yoko) Kindle対応 ───────────────────── */
+.tcy,
+.tate-chu-yoko {
+    -epub-text-combine: horizontal;
+    -webkit-text-combine: horizontal;
+    text-combine-upright: all;
+    display: inline;
+    font-size: 0.9em;
+    line-height: 1;
+}
+
+/* ── 5. ルビ (furigana) Kindle対応 ──────────────────────────── */
+ruby {
+    ruby-align: center;
+    -webkit-ruby-align: center;
+}
+
+rt {
+    font-size: 0.5em;
+    line-height: 1;
+}
+
+/* ── 6. 傍点 (bouten) Kindle対応 ────────────────────────────── */
+em {
+    font-style: normal;
+    -epub-text-emphasis: filled sesame;
+    -webkit-text-emphasis: filled sesame;
+    text-emphasis: filled sesame;
+    -epub-text-emphasis-position: right;
+    -webkit-text-emphasis-position: right;
+    text-emphasis-position: right;
+}
+
+/* ── 7. 割注 (warichu) ──────────────────────────────────────── */
+.warichu {
+    display: inline-block;
+    font-size: 0.5em;
+    line-height: 1.2;
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    vertical-align: middle;
+}
+
+/* ── 8. 画像 Kindle対応 ─────────────────────────────────────── */
+img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    /* 縦書きモードでの画像の向き固定 */
+    -webkit-writing-mode: horizontal-tb;
+    writing-mode: horizontal-tb;
+}
+
+/* 表紙ページ用 */
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+/* ── 9. 表 ──────────────────────────────────────────────────── */
+table {
+    border-collapse: collapse;
+    -webkit-writing-mode: horizontal-tb;
+    writing-mode: horizontal-tb;
+    font-size: 0.85em;
+}
+
+th, td {
+    border: 1px solid currentColor;
+    padding: 0.3em 0.5em;
+    vertical-align: top;
+}
+
+/* ── 10. リスト ─────────────────────────────────────────────── */
+ul, ol {
+    padding-inline-start: 1.5em;
+    margin: 0.5em 0;
+}
+
+li {
+    margin-bottom: 0.3em;
+}
+
+/* ── 11. 脚注 ───────────────────────────────────────────────── */
+.footnotes,
+aside[epub|type~="footnote"] {
+    -webkit-writing-mode: vertical-rl;
+    writing-mode: vertical-rl;
+    font-size: 0.85em;
+}
+
+.fn-inline {
+    font-size: 0.8em;
+}
+
+/* ── 12. フォント・リンク ────────────────────────────────────── */
+body {
+    font-family: serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
 }

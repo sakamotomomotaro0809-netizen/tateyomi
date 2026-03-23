@@ -50,6 +50,9 @@ def _process_html(html: str) -> str:
         if "writing-mode" not in existing:
             body.set("style", (existing + ";" + WRITING_MODE_STYLE).lstrip(";"))
 
+    # alt属性のない <img> に alt="" を付与（アクセシビリティ必須）
+    _ensure_img_alt(root)
+
     # encoding="UTF-8" でバイト列として取得し、XML宣言を含める
     raw: bytes = etree.tostring(
         root,
@@ -69,6 +72,15 @@ def _process_html(html: str) -> str:
         result = doctype + result
 
     return result
+
+
+def _ensure_img_alt(root: etree._Element) -> None:
+    """alt属性のない <img> 要素に alt="" を設定する（WCAG 1.1.1 / EPUB Accessibility 要件）"""
+    for ns in (XHTML_NS, ""):
+        tag = f"{{{ns}}}img" if ns else "img"
+        for img in root.iter(tag):
+            if img.get("alt") is None:
+                img.set("alt", "")
 
 
 def _ensure_attr(elem: etree._Element, attr: str, value: str) -> None:

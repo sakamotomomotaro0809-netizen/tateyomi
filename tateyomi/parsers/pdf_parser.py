@@ -119,6 +119,10 @@ class PdfParser(BaseParser):
         # カラム分割（大きな水平ギャップを検出）
         columns = self._detect_columns(words, page_w)
 
+        # 日本語は右から左へ読むため、カラムを逆順にする（右カラムが先）
+        if len(columns) > 1:
+            columns = list(reversed(columns))
+
         paragraphs: list[str] = []
         for col_words in columns:
             col_paras = self._words_to_paragraphs(col_words, line_tol, median_h)

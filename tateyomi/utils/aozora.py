@@ -31,6 +31,10 @@ _HEADING_SML = re.compile(rf"(?:［＃{_DIGIT}字下げ］)?(.+?)(?:［＃「.+?
 _INDENT = re.compile(rf"［＃{_DIGIT}字下げ］")
 # 傍点（後処理: em タグ）
 _BOUTEN_START = re.compile(r"［＃「([^」]+)」に傍点］")
+# 割注 → <span class="warichu">
+_WARICHU = re.compile(r"［＃割注］(.+?)［＃割注終わり］", re.DOTALL)
+# 青空文庫スタイルの注記: （注：内容） → インライン脚注
+_INLINE_NOTE = re.compile(r"（注：([^）]+)）")
 # その他の注記・外字をすべて除去
 _ANNOTATION = re.compile(r"［＃[^\]]*］")
 # ※ 外字記号
@@ -57,6 +61,14 @@ def _process_annotations(line: str) -> tuple[str, str]:
     if m:
         title = m.group(1).strip()
         return _ruby_to_html(_clean(title)), "h3"
+
+    # 割注 → <span class="warichu">
+    line = _WARICHU.sub(r'<span class="warichu">\1</span>', line)
+
+    # 青空注記（注：内容）→ インライン脚注
+    line = _INLINE_NOTE.sub(
+        r'<span class="fn-inline" role="doc-footnote">（注：\1）</span>', line
+    )
 
     # 傍点 → <em>
     line = _BOUTEN_START.sub(r"<em>\1</em>", line)
@@ -151,6 +163,8 @@ def parse_aozora(text: str) -> tuple[str, str, list[AozoraBlock]]:
     """
     青空文庫テキストを解析し (title, author, blocks) を返す
     """
+    # 割注（複数行にまたがる場合）を前処理
+    text = _WARICHU.sub(r'<span class="warichu">\1</span>', text)
     lines = text.splitlines()
     title, author, body_lines = strip_aozora_meta(lines)
 

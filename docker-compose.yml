@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  tateyomi:
+    build: .
+    image: tateyomi:latest
+    volumes:
+      # ホストのカレントディレクトリを /work にマウント
+      - .:/work
+    working_dir: /work
+    # 使い方例:
+    #   docker compose run --rm tateyomi convert input.epub output.epub
+    #   docker compose run --rm tateyomi info input.epub
+    entrypoint: ["python", "-m", "tateyomi.cli"]
+    command: ["--help"]

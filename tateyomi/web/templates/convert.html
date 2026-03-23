@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% block title %}変換 — tateyomi{% endblock %}
+
+{% block content %}
+<div class="convert-layout">
+
+  <!-- 変換フォーム -->
+  <section class="convert-form-section">
+    <h2>ファイルを変換</h2>
+    <form id="convertForm" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="file">入力ファイル</label>
+        <div class="drop-zone" id="dropZone">
+          <input type="file" id="file" name="file"
+                 accept=".epub,.txt,.docx,.md,.html,.htm" required/>
+          <p>ここにファイルをドロップ<br/>または クリックして選択</p>
+          <p class="hint">対応形式: .epub .docx .txt .md .html</p>
+        </div>
+        <p id="fileName" class="file-name"></p>
+      </div>
+
+      <div class="form-group">
+        <label>出力形式</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="output_format" value="epub" checked/>
+            EPUB3（Kindle KDP 用）
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="output_format" value="html"/>
+            HTML（ブラウザプレビュー用）
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-lg" id="convertBtn">
+        縦書きに変換
+      </button>
+    </form>
+
+    <div id="progress" class="progress-area" style="display:none">
+      <div class="spinner"></div>
+      <p>変換中...</p>
+    </div>
+
+    <div id="result" class="result-area" style="display:none">
+      <p class="success-msg">✅ 変換完了！</p>
+      <a id="downloadLink" class="btn btn-primary" href="#">ダウンロード</a>
+    </div>
+
+    <div id="errorMsg" class="error-area" style="display:none"></div>
+  </section>
+
+  <!-- 変換履歴 -->
+  <section class="history-section">
+    <h2>変換履歴</h2>
+    {% if history %}
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>ファイル名</th>
+            <th>状態</th>
+            <th>日時</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for conv in history %}
+          <tr>
+            <td>{{ conv.original_name }}</td>
+            <td>
+              {% if conv.status == 'done' %}
+                <span class="badge badge-ok">完了</span>
+              {% elif conv.status == 'error' %}
+                <span class="badge badge-err">エラー</span>
+              {% else %}
+                <span class="badge badge-pending">処理中</span>
+              {% endif %}
+            </td>
+            <td>{{ conv.created_at[:16] }}</td>
+            <td>
+              {% if conv.status == 'done' %}
+                <a href="/download/{{ conv.id }}" class="btn btn-sm">DL</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p class="empty-history">まだ変換履歴がありません。</p>
+    {% endif %}
+  </section>
+
+</div>
+
+<script>
+// ドラッグ&ドロップ
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('file');
+const fileName  = document.getElementById('fileName');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  fileInput.files = e.dataTransfer.files;
+  fileName.textContent = fileInput.files[0]?.name || '';
+});
+fileInput.addEventListener('change', () => {
+  fileName.textContent = fileInput.files[0]?.name || '';
+});
+
+// 変換送信
+document.getElementById('convertForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn      = document.getElementById('convertBtn');
+  const progress = document.getElementById('progress');
+  const result   = document.getElementById('result');
+  const errorDiv = document.getElementById('errorMsg');
+
+  btn.disabled = true;
+  progress.style.display = 'block';
+  result.style.display   = 'none';
+  errorDiv.style.display = 'none';
+
+  const fd = new FormData(e.target);
+  try {
+    const resp = await fetch('/api/convert', { method: 'POST', body: fd });
+    const data = await resp.json();
+    if (!resp.ok) throw new Error(data.detail || '変換失敗');
+
+    document.getElementById('downloadLink').href = '/download/' + data.conv_id;
+    document.getElementById('downloadLink').download = data.output_name;
+    result.style.display = 'block';
+    // 履歴をリロード
+    setTimeout(() => location.reload(), 2000);
+  } catch (err) {
+    errorDiv.textContent = '⚠️ ' + err.message;
+    errorDiv.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    progress.style.display = 'none';
+  }
+});
+</script>
+{% endblock %}

@@ -26,11 +26,15 @@ import re
 TCY_PATTERN = re.compile(r"[0-9A-Za-z]{2,4}")
 
 
-def apply_vertical_chars(text: str) -> str:
-    """横書き約物を縦書きUnicodeフォームに変換"""
+def apply_vertical_chars(html: str) -> str:
+    """横書き約物を縦書きUnicodeフォームに変換。HTMLタグ内は変換しない。"""
+    parts = re.split(r"(<[^>]+>)", html)
     result = []
-    for ch in text:
-        result.append(HORIZONTAL_TO_VERTICAL.get(ch, ch))
+    for part in parts:
+        if part.startswith("<"):
+            result.append(part)
+        else:
+            result.append("".join(HORIZONTAL_TO_VERTICAL.get(ch, ch) for ch in part))
     return "".join(result)
 
 

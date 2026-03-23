@@ -38,3 +38,14 @@ desktop.ini
 
 # node_modules (taisun_agentリンク用)
 node_modules/
+
+# 除外: 別プロジェクト・個人設定
+taisun_agent/
+.claude/
+.mcp.json
+
+# テスト生成物
+test_out*.epub
+test_out*.pdf
+test_batch_in/
+test_batch_out/
