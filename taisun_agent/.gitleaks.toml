@@ -1,0 +1,30 @@
+# Gitleaks configuration for TAISUN v2
+# Exclude skill documentation files containing example/placeholder API keys
+
+title = "TAISUN Gitleaks Config"
+
+[allowlist]
+  description = "Allowlist for TAISUN skill docs and example files"
+
+  # Paths containing only documentation/examples with placeholder keys
+  paths = [
+    '''.claude/skills/.*/SKILL\.md''',
+    '''.claude/skills/.*/scripts/.*''',
+    '''.claude/skills/.*/setup-.*\.sh''',
+    '''.claude/skills/.*/templates/.*''',
+    '''docs/.*''',
+    '''\.env\.example''',
+    '''\.env\.sample''',
+  ]
+
+  # Common placeholder patterns that are not real secrets
+  regexes = [
+    '''your-.*-key''',
+    '''your-key''',
+    '''xxxx+''',
+    '''figd_x+''',
+    '''tvly-x+''',
+    '''pplx-x+''',
+    '''BSAx+''',
+    '''sk-proj-xxxxx''',
+  ]

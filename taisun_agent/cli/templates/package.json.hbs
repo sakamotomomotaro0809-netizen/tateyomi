@@ -1,0 +1,21 @@
+{
+  "name": "{{projectName}}",
+  "version": "1.0.0",
+  "description": "{{description}}",
+  "main": "{{#if typescript}}dist/index.js{{/if}}{{#unless typescript}}src/index.js{{/unless}}",
+  "scripts": {
+{{#each scripts}}    "{{@key}}": "{{this}}"{{#unless @last}},{{/unless}}
+{{/each}}  },
+  "keywords": [],
+  "author": "{{author}}",
+  "license": "MIT",
+  "dependencies": {
+{{#each dependencies}}    "{{@key}}": "{{this}}"{{#unless @last}},{{/unless}}
+{{/each}}  },
+  "devDependencies": {
+{{#each devDependencies}}    "{{@key}}": "{{this}}"{{#unless @last}},{{/unless}}
+{{/each}}  }{{#if engines}},
+  "engines": {
+{{#each engines}}    "{{@key}}": "{{this}}"{{#unless @last}},{{/unless}}
+{{/each}}  }{{/if}}
+}

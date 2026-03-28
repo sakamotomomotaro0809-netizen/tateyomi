@@ -5,14 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
   <title>{{ title }} — tateyomi Reader</title>
   <style>
+    :root {
+      --bg:         {{ theme.bg         | default('#f5f0e8') }};
+      --text:       {{ theme.text       | default('#1a1a1a') }};
+      --accent:     {{ theme.accent     | default('#3d5a80') }};
+      --header-bg:  {{ theme.header_bg  | default('rgba(245,240,232,0.97)') }};
+      --border:     {{ theme.border     | default('#d4c9b0') }};
+      --font:       {{ theme.font       | default('"Hiragino Mincho ProN","游明朝","Yu Mincho",serif') }};
+      --nav-btn:    {{ theme.nav_btn    | default('#3d5a80') }};
+      --nav-btn-text: {{ theme.nav_btn_text | default('#ffffff') }};
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     html, body {
       height: 100%;
       overflow: hidden;
-      background: #f5f0e8;
-      font-family: "Hiragino Mincho ProN", "游明朝", "Yu Mincho", serif;
-      color: #1a1a1a;
+      background: var(--bg);
+      font-family: var(--font);
+      color: var(--text);
     }
 
     /* ── レイアウト ── */
@@ -28,14 +39,15 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.5rem 1rem;
-      background: rgba(245,240,232,0.97);
-      border-bottom: 1px solid #d4c9b0;
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--border);
       flex-shrink: 0;
       gap: 0.5rem;
     }
     .reader-title {
       font-size: 0.85rem;
-      color: #555;
+      color: var(--text);
+      opacity: 0.65;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -44,16 +56,28 @@
     }
     .header-btn {
       text-decoration: none;
-      color: #3d5a80;
+      color: var(--accent);
       font-size: 0.85rem;
       padding: 0.3rem 0.6rem;
-      border: 1px solid #3d5a80;
+      border: 1px solid var(--accent);
       border-radius: 4px;
       white-space: nowrap;
     }
+    {% if theme.name %}
+    .theme-badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      background: var(--accent);
+      color: var(--nav-btn-text);
+      white-space: nowrap;
+      opacity: 0.85;
+    }
+    {% endif %}
     .reader-progress {
       font-size: 0.8rem;
-      color: #888;
+      color: var(--text);
+      opacity: 0.5;
       white-space: nowrap;
     }
 
@@ -67,31 +91,71 @@
       padding: 1.5rem 2rem;
     }
 
-    /* 縦書きコンテンツ */
+    /* ── 縦書きコンテンツ本体 ── */
     .chapter-content {
       writing-mode: vertical-rl;
       -webkit-writing-mode: vertical-rl;
       text-orientation: mixed;
       height: 100%;
-      line-height: 1.6;
-      font-size: 1.05rem;
-      white-space: nowrap;
+      font-family: var(--font);
+      font-size: 1.1rem;
+      line-height: 2.0;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      white-space: nowrap;      /* 段落をカラムとして横スクロール */
     }
 
+    /* 段落 */
     .chapter-content p {
+      display: inline-block;
+      white-space: normal;      /* p内は折り返しあり */
+      vertical-align: top;
+      margin: 0;
+      padding: 0;
+      text-indent: 1em;
+      line-break: strict;
+      overflow-wrap: break-word;
+      hanging-punctuation: allow-end;
+    }
+
+    /* 段落間の余白（縦書きではblock方向 = 横方向の隙間） */
+    .chapter-content p + p {
+      margin-block-end: 1.8em;
+    }
+
+    /* 見出し */
+    .chapter-content h1,
+    .chapter-content h2,
+    .chapter-content h3 {
       display: inline-block;
       white-space: normal;
       vertical-align: top;
-      max-height: 100%;
-      margin-inline-start: 1.5em;
-      text-indent: 1em;
+      font-weight: bold;
+      margin-block-end: 1.5em;
+      letter-spacing: 0.1em;
     }
+    .chapter-content h1 { font-size: 1.4em; }
+    .chapter-content h2 { font-size: 1.2em; }
+    .chapter-content h3 { font-size: 1.1em; }
 
-    /* TCY（縦中横） */
+    /* ルビ */
+    .chapter-content ruby { ruby-align: center; }
+    .chapter-content rt   { font-size: 0.5em; }
+
+    /* 縦中横（数字・英字） */
     .chapter-content .tcy,
     .chapter-content .tate-chu-yoko {
       text-combine-upright: all;
       -webkit-text-combine: horizontal;
+      display: inline;
+      font-size: 0.9em;
+    }
+
+    /* 傍点 */
+    .chapter-content em {
+      font-style: normal;
+      text-emphasis: filled sesame;
+      -webkit-text-emphasis: filled sesame;
     }
 
     /* ── フッター ── */
@@ -100,16 +164,16 @@
       align-items: center;
       justify-content: space-between;
       padding: 0.5rem 1rem;
-      background: rgba(245,240,232,0.97);
-      border-top: 1px solid #d4c9b0;
+      background: var(--header-bg);
+      border-top: 1px solid var(--border);
       flex-shrink: 0;
     }
     .nav-btn {
       display: inline-flex;
       align-items: center;
       padding: 0.5rem 1.2rem;
-      background: #3d5a80;
-      color: #fff;
+      background: var(--nav-btn);
+      color: var(--nav-btn-text);
       border-radius: 6px;
       font-size: 0.9rem;
       text-decoration: none;
@@ -118,8 +182,9 @@
     }
     .nav-btn.ghost {
       background: transparent;
-      color: #bbb;
-      border: 1px solid #ddd;
+      color: var(--text);
+      opacity: 0.25;
+      border: 1px solid var(--border);
     }
   </style>
 </head>
@@ -129,6 +194,9 @@
   <header class="reader-header">
     <a class="header-btn" href="/convert">← 一覧</a>
     <span class="reader-title">{{ title }}</span>
+    {% if theme.name %}
+      <span class="theme-badge">{{ theme.name }}</span>
+    {% endif %}
     <span class="reader-progress">{{ chapter + 1 }}/{{ total }}章</span>
   </header>
 
@@ -145,7 +213,7 @@
       <span class="nav-btn ghost">◀ 前の章</span>
     {% endif %}
 
-    <span style="font-size:.8rem;color:#888;">{{ chapter + 1 }} / {{ total }}</span>
+    <span style="font-size:.8rem;opacity:.5;">{{ chapter + 1 }} / {{ total }}</span>
 
     {% if next is not none %}
       <a class="nav-btn" href="/read/{{ conv_id }}?chapter={{ next }}">次の章 ▶</a>
@@ -169,9 +237,7 @@ body.addEventListener('touchstart', e => {
 body.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - startX;
   const dy = e.changedTouches[0].clientY - startY;
-  // 縦スクロール中は章送りしない
   if (Math.abs(dy) > Math.abs(dx)) return;
-  // スクロール中の章送りを防ぐ（端まで来たら章送り）
   const atRight = body.scrollLeft <= 0;
   const atLeft  = body.scrollLeft >= body.scrollWidth - body.clientWidth - 10;
   if (dx > 60 && atRight) {

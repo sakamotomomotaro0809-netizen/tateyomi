@@ -1,0 +1,8 @@
+type: web_research
+title: 米国株オプション取引 自動化システム構築 - 戦略・リスク管理・ツール徹底リサーチ
+key_insights[10]: ホイール戦略はCSP→カバードコールの循環型で年間10%+のリターンが可能。QuantConnectバックテストでシャープレシオ1.083,"アイアンコンドル: 16デルタ、30-45DTE、IVランク70%+、50%利益確定/100%損切りが推奨パラメータ","ポートフォリオシータ目標: 口座の0.06-0.10%/日（$100k口座で$60-100/日）","PMCC（LEAPS）: 0.80デルタLEAPS+0.30デルタ短期コール、資本効率88%改善",0DTEオプションがSPX取引量の59%を占める（2025年記録）,"45DTE神話への挑戦: 56-63DTEが実際には最良パフォーマンス",ThetaGang Bot（GitHub 2.4k stars）がIBKR用の最も完成度の高いオプション自動売買ボット,Alpaca options-wheelリポジトリがPython実装のテンプレートとして最適,ib_asyncがib_insyncの後継としてIBKR Python APIの推奨ライブラリ,"VIXヘッジ: コールレシオバックスプレッドで年間1-3%のコストで暴落保護"
+refs[5]: リサーチ_取引戦略_リスク管理_自動化.md - 完全なリサーチレポート,github.com/brndnmtthws/thetagang - IBKR用ホイール戦略ボット,github.com/alpacahq/options-wheel - Alpaca用ホイール戦略テンプレート,github.com/ib-api-reloaded/ib_async - IBKR Python API,quantconnect.com/lean - LEAN バックテストエンジン
+recommendations[5]: ブローカーはIBKR + ib_asyncを第一候補に（最も完全なオプションAPI）,バックテストはQuantConnect LEANを使用（オプション完全対応）,ThetaGangのTOML設定パターンを参考にシステム設計,"段階的実装: ホイール戦略 → アイアンコンドル → PMCC → VIXヘッジ",リスク管理は単一トレード3%以下、セクター20%以下、合計25-30%以下を厳守
+id: cpt_1770731727773_tq1hm
+created: "2026-02-10T13:55:27.773Z"
+updated: "2026-02-10T13:55:27.773Z"

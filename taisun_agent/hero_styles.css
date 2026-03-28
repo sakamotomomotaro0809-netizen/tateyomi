@@ -1,0 +1,705 @@
+/* ========================================
+   ゲーム観戦×AI副業 ヒーローセクション
+   CSS Stylesheet
+   ======================================== */
+
+/* ========================================
+   リセット & ベース設定
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* カラーパレット: ゲーミング + 家族の温かみ */
+    --gaming-purple: #9C27B0;
+    --gaming-cyan: #00BCD4;
+    --family-orange: #FF6F00;
+    --family-blue: #42A5F5;
+    --accent-green: #00C853;
+    --accent-yellow: #FFD54F;
+
+    /* ニュートラルカラー */
+    --text-primary: #1A1A1A;
+    --text-secondary: #4A4A4A;
+    --text-white: #FFFFFF;
+    --bg-overlay: rgba(0, 0, 0, 0.5);
+    --bg-light: #F5F5F5;
+
+    /* タイポグラフィ */
+    --font-main: 'Noto Sans JP', sans-serif;
+    --font-accent: 'Zen Antique', serif;
+
+    /* スペーシング */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 40px;
+    --spacing-xl: 60px;
+
+    /* エフェクト */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+body {
+    font-family: var(--font-main);
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ========================================
+   ヒーローセクション
+   ======================================== */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 背景画像 */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.9);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        135deg,
+        rgba(156, 39, 176, 0.35) 0%,
+        rgba(0, 188, 212, 0.25) 50%,
+        rgba(255, 111, 0, 0.35) 100%
+    );
+    backdrop-filter: blur(3px);
+}
+
+/* コンテンツ */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    color: var(--text-white);
+    padding: var(--spacing-xl) 0;
+    width: 100%;
+}
+
+/* ========================================
+   ヘッドライン
+   ======================================== */
+.hero-headline {
+    font-family: var(--font-main);
+    font-weight: 900;
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8),
+                 0 2px 10px rgba(0, 0, 0, 0.6);
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.headline-main {
+    display: block;
+    font-size: clamp(28px, 5vw, 48px);
+    line-height: 1.4;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+}
+
+.headline-accent {
+    display: block;
+    font-size: clamp(20px, 3.5vw, 32px);
+    margin-top: 20px;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent-yellow), var(--family-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 2px 8px rgba(255, 213, 79, 0.5));
+}
+
+/* ========================================
+   サブコピー（ベネフィット）
+   ======================================== */
+.hero-benefits {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 30px 40px;
+    margin: var(--spacing-lg) auto;
+    max-width: 800px;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: var(--spacing-sm) 0;
+    text-align: left;
+    color: var(--text-primary);
+    transition: transform var(--transition-fast);
+}
+
+.benefit-item:hover {
+    transform: translateX(8px);
+}
+
+.benefit-icon {
+    font-size: 24px;
+    color: var(--accent-green);
+    margin-right: 12px;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.benefit-text {
+    font-size: clamp(14px, 2vw, 18px);
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+}
+
+/* ========================================
+   ボディコピー
+   ======================================== */
+.hero-body {
+    background: rgba(26, 26, 26, 0.92);
+    border-radius: 16px;
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) auto;
+    max-width: 900px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.body-intro {
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-white);
+    letter-spacing: 0.02em;
+}
+
+.body-text {
+    font-size: clamp(14px, 2vw, 18px);
+    line-height: 2;
+    margin-bottom: var(--spacing-md);
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.01em;
+}
+
+.body-highlight {
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 900;
+    color: var(--accent-yellow);
+    margin: 30px 0;
+    text-shadow: 0 2px 10px rgba(255, 213, 79, 0.5);
+    letter-spacing: 0.02em;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.body-conclusion {
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-weight: 700;
+    margin-top: 30px;
+    color: var(--text-white);
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    padding-top: 20px;
+    letter-spacing: 0.01em;
+}
+
+/* ========================================
+   CTA ボタン
+   ======================================== */
+.hero-cta {
+    margin-top: 50px;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 900;
+    color: var(--text-white);
+
+    background: linear-gradient(135deg, var(--family-orange), var(--gaming-purple));
+    padding: 20px 60px;
+    border-radius: 50px;
+
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(255, 111, 0, 0.5);
+
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left var(--transition-slow);
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 111, 0, 0.7);
+}
+
+.cta-button:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.cta-icon {
+    font-size: 28px;
+    animation: rotate 3s ease-in-out infinite;
+}
+
+.cta-text {
+    letter-spacing: 0.02em;
+}
+
+.cta-arrow {
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform var(--transition-normal);
+}
+
+.cta-button:hover .cta-arrow {
+    transform: translateX(5px);
+}
+
+.cta-subtext {
+    margin-top: var(--spacing-sm);
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+/* ========================================
+   スクロールインジケーター
+   ======================================== */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--text-white);
+    z-index: 10;
+    animation: bounce 2s infinite;
+    opacity: 0.8;
+    transition: opacity var(--transition-normal);
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.scroll-text {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.scroll-arrow {
+    font-size: 20px;
+}
+
+/* ========================================
+   アニメーション
+   ======================================== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        filter: brightness(1);
+    }
+    50% {
+        opacity: 0.8;
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes rotate {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+/* ========================================
+   レスポンシブ対応
+   ======================================== */
+
+/* タブレット（横向き含む） */
+@media (max-width: 1024px) {
+    .hero-section {
+        min-height: auto;
+        padding: 80px 0 60px;
+    }
+
+    .hero-benefits {
+        padding: 24px 30px;
+        max-width: 700px;
+    }
+
+    .hero-body {
+        padding: 30px;
+        max-width: 700px;
+    }
+}
+
+/* タブレット（縦向き） */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0 50px;
+    }
+
+    .hero-benefits {
+        padding: 20px 24px;
+    }
+
+    .benefit-item {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .benefit-icon {
+        margin-top: 2px;
+    }
+
+    .hero-body {
+        padding: 24px 20px;
+    }
+
+    .cta-button {
+        padding: 16px 40px;
+        font-size: clamp(16px, 4vw, 20px);
+    }
+
+    .scroll-indicator {
+        bottom: 20px;
+    }
+}
+
+/* モバイル */
+@media (max-width: 480px) {
+    .hero-section {
+        padding: 40px 0;
+    }
+
+    .headline-main {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .headline-accent {
+        font-size: 18px;
+        margin-top: 16px;
+    }
+
+    .hero-benefits {
+        padding: 16px 20px;
+        border-radius: 12px;
+    }
+
+    .benefit-item {
+        margin: 12px 0;
+    }
+
+    .benefit-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .benefit-text {
+        font-size: 14px;
+    }
+
+    .hero-body {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    .body-intro {
+        font-size: 20px;
+    }
+
+    .body-text {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    .body-highlight {
+        font-size: 18px;
+        margin: 20px 0;
+    }
+
+    .body-conclusion {
+        font-size: 16px;
+    }
+
+    .hero-cta {
+        margin-top: 30px;
+    }
+
+    .cta-button {
+        padding: 14px 30px;
+        font-size: 16px;
+        width: 100%;
+        max-width: 320px;
+        gap: 8px;
+    }
+
+    .cta-icon {
+        font-size: 24px;
+    }
+
+    .cta-arrow {
+        font-size: 20px;
+    }
+
+    .cta-subtext {
+        font-size: 12px;
+    }
+
+    .scroll-indicator {
+        bottom: 15px;
+    }
+
+    .scroll-text {
+        font-size: 10px;
+    }
+
+    .scroll-arrow {
+        font-size: 16px;
+    }
+}
+
+/* 極小モバイル */
+@media (max-width: 360px) {
+    .headline-main {
+        font-size: 20px;
+    }
+
+    .headline-accent {
+        font-size: 16px;
+    }
+
+    .benefit-text {
+        font-size: 13px;
+    }
+
+    .body-text {
+        font-size: 13px;
+    }
+
+    .cta-button {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
+
+/* ========================================
+   アクセシビリティ
+   ======================================== */
+
+/* アニメーション削減設定 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .scroll-indicator {
+        animation: none;
+    }
+
+    .body-highlight {
+        animation: none;
+    }
+
+    .cta-icon {
+        animation: none;
+    }
+}
+
+/* ハイコントラストモード対応 */
+@media (prefers-contrast: high) {
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .hero-benefits {
+        background: rgba(255, 255, 255, 1);
+        border: 3px solid var(--text-primary);
+    }
+
+    .hero-body {
+        background: rgba(0, 0, 0, 1);
+        border: 2px solid var(--text-white);
+    }
+
+    .benefit-text,
+    .body-text {
+        font-weight: 700;
+    }
+
+    .cta-button {
+        border: 3px solid var(--text-white);
+    }
+}
+
+/* ダークモード対応（追加の微調整） */
+@media (prefers-color-scheme: dark) {
+    .hero-benefits {
+        background: rgba(255, 255, 255, 0.98);
+    }
+}
+
+/* フォーカス表示強化（キーボードナビゲーション） */
+.cta-button:focus {
+    outline: 3px solid var(--accent-yellow);
+    outline-offset: 4px;
+}
+
+.cta-button:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ========================================
+   印刷スタイル
+   ======================================== */
+@media print {
+    .hero-background,
+    .hero-overlay,
+    .scroll-indicator {
+        display: none;
+    }
+
+    .hero-section {
+        min-height: auto;
+        background: white;
+        color: black;
+    }
+
+    .hero-content {
+        color: black;
+    }
+
+    .hero-benefits,
+    .hero-body {
+        background: white;
+        border: 2px solid black;
+        box-shadow: none;
+    }
+
+    .benefit-text,
+    .body-text,
+    .body-intro,
+    .body-conclusion {
+        color: black;
+    }
+
+    .cta-button {
+        background: black;
+        color: white;
+        box-shadow: none;
+    }
+}

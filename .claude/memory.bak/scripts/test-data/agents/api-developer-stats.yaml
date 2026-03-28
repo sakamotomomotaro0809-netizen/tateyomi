@@ -1,0 +1,38 @@
+# Agent Statistics for api-developer
+# Test data generated for integration testing
+
+agent_name: "api-developer"
+total_tasks: 75
+successful_tasks: 68
+failed_tasks: 7
+success_rate: 0.907
+avg_quality_score: 90.0
+avg_duration_ms: 28000
+last_updated: "2025-11-04T10:00:00Z"
+
+recent_tasks:
+  - id: "2025-11-03-008"
+    success: true
+    score: 92
+  - id: "2025-11-03-007"
+    success: true
+    score: 91
+  - id: "2025-11-03-006"
+    success: true
+    score: 89
+  - id: "2025-11-03-005"
+    success: false
+    score: 0
+  - id: "2025-11-03-004"
+    success: true
+    score: 93
+
+trends:
+  success_rate_trend: 0.02
+  quality_score_trend: 1.8
+  avg_duration_trend: -300
+
+specializations:
+  api: 60
+  implementation: 45
+  integration: 20

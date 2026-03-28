@@ -1,0 +1,54 @@
+# Agent Statistics for backend-developer
+# Test data generated for integration testing
+
+agent_name: "backend-developer"
+total_tasks: 100
+successful_tasks: 90
+failed_tasks: 10
+success_rate: 0.90
+avg_quality_score: 92.0
+avg_duration_ms: 30000
+last_updated: "2025-11-04T10:00:00Z"
+
+recent_tasks:
+  - id: "2025-11-03-010"
+    success: true
+    score: 95
+  - id: "2025-11-03-009"
+    success: true
+    score: 88
+  - id: "2025-11-03-008"
+    success: false
+    score: 0
+  - id: "2025-11-03-007"
+    success: true
+    score: 92
+  - id: "2025-11-03-006"
+    success: true
+    score: 94
+  - id: "2025-11-03-005"
+    success: true
+    score: 89
+  - id: "2025-11-03-004"
+    success: true
+    score: 93
+  - id: "2025-11-03-003"
+    success: true
+    score: 91
+  - id: "2025-11-03-002"
+    success: true
+    score: 90
+  - id: "2025-11-03-001"
+    success: true
+    score: 87
+
+trends:
+  success_rate_trend: 0.05  # Improving
+  quality_score_trend: 2.3
+  avg_duration_trend: -500  # Getting faster
+
+specializations:
+  implementation: 50
+  bug-fix: 25
+  refactoring: 15
+  api: 40

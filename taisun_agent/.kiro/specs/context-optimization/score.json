@@ -1,0 +1,16 @@
+{
+  "score_total": 100,
+  "score_breakdown": {
+    "C": 25,
+    "U": 25,
+    "T": 25,
+    "E": 25
+  },
+  "counts": {
+    "requirements": 19,
+    "missing_sections": 0,
+    "open_questions": 0,
+    "banned_word_total": 0
+  },
+  "violations": []
+}

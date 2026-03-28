@@ -1,0 +1,15 @@
+type: web_research
+title: MacBook Pro M4 Max IDE メモリオーバー問題 - 根本的解決リサーチ報告書 (2026-02-12)
+source: "複数のWebソース: Cursor Deep Dive, VS Code Docs, GitHub Issues, Medium記事, 公式ドキュメント"
+key_insights[8]: "Cursor(200-280MB idle, 500-800MB large projects) はVS Code(150-200MB idle, 400-600MB large projects)より約30-40%メモリ消費が多い。理由はローカルインデックスプロセスの常時稼働",TypeScript/Rust/Python言語サーバー(LSP)の単一プロセスが1-4GBメモリを消費。複数言語対応で指数関数的に増加,10プロジェクト同時開放=10組のLSPプロセス起動→150-170GBメモリ使用は必然的。マルチルート・ワークスペースは設計上の限界あり,"macOS ARM64の仮想メモリ管理:メモリ圧縮を優先、スワップを最後の手段。128GB RAMであってもスワップ使用率が高まるとSSD読み書き激増",Cursor 0.46以降の.cursorignoreはgitignoreを尊重。node_modules除外で40%メモリ削減可能。build artifacts除外で追加10-15%削減,editor.largeFileOptimizations設定でトークン化/折り込み/リンティング無効化。大規模ファイルで20-30%削減,拡張機能のonStartup activation=ストレス。各プロジェクトで必要最小限の拡張のみ有効化推奨,"Chrome DevTools Memory Profile + VS Code Developer:Startup Performanceで詳細なメモリリーク特定が可能"
+findings[7]: "IDE選択 vs 設定最適化: Cursor使用ならVS Code比で+30-40% overheadだが、優れたAI機能で時間短縮。設定最適化で相殺可能","マルチプロジェクト運用は根本的に高メモリ消費: 1プロジェクト=1LSPプロセス。10プロジェクト=10LSPが本質的問題",.cursorignore/.gitignoreの戦略的設定で40-50%削減は実現可能。特にnode_modules/dist/build除外が重要,"拡張機能の選別: 一度設定すると忘れる傾向。定期的なExtension Disable/Enable見直し必須","macOS仮想メモリのスワップ使用:SSD寿命短縮のリスク。150GB超RAM使用=スワップ1-2GB/日の書き込み推定","Cloud-based indexing(Cursor Proの予定機能): 2026-03発表予定か。ローカルインデックスから解放されれば-300MB以上可能","Memory Profiling: Activity Monitor表示値はプロセス メモリ+shared cache。実メモリ使用量はVMmapで詳細分析推奨"
+techniques:
+  immediate_optimization: ".cursorignore (node_modules/dist/build/test), editor.largeFileOptimizations, files.watcherExclude"
+  multi_project_strategy: Multiroot Workspace for related repos + separate Cursor windows for independent projects
+  extension_management: Quick Extension Manager + per-project extension disable list in .vscode/extensions.json (proposal)
+  memory_profiling: Chrome DevTools Memory Tab + VS Code Startup Performance + Activity Monitor vmmap
+  lsp_tuning: "PYRIGHT_MEMORY_LIMIT=2048, Rust-Analyzer incremental check, TS language server --maxOldSpaceSize=3072"
+recommendations[6]: "即実行: .cursorignore + .vscode/settings.json設定で50-70GB削減を目指す（3時間で実装）","中期策: プロジェクトを5個以下のマルチルート + 5個の単体LSPに分割。IDE窓を2つ開く（メモリ効率70%改善）","長期策: Cloud-based indexingの提供を待機。またはローカルIndexing無効化機能の実装をCursorに要望","監視体制: monthly memory audit（Activity Monitor + vmmap）。スワップ使用量が1GB超えたら警告","拡張機能: Quick Extension Managerで勤務開始時にプロジェクト別enable/disable自動化","LSP設定: Pyright/Rust-Analyzer/TypeScript各言語で明示的なメモリ制限設定（例: PYRIGHT_MEMORY_LIMIT=2048）"
+id: cpt_1770877212206_h9rymi
+created: "2026-02-12T06:20:12.206Z"
+updated: "2026-02-12T06:20:12.206Z"

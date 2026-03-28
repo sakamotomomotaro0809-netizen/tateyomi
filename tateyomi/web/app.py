@@ -36,6 +36,9 @@ _SAMPLE_EPUB = Path(__file__).parent.parent.parent / "samples" / "sample.epub"
 app.mount("/static", StaticFiles(directory=str(_WEB_DIR / "static")), name="static")
 templates = Jinja2Templates(directory=str(_WEB_DIR / "templates"))
 
+_TATEYOMI_CSS_PATH = Path(__file__).parent.parent / "assets" / "tateyomi.css"
+_TATEYOMI_CSS: str = _TATEYOMI_CSS_PATH.read_text(encoding="utf-8") if _TATEYOMI_CSS_PATH.exists() else ""
+
 
 def _build_sample():
     """起動時にサンプル本を変換して章HTMLを生成する"""
@@ -54,6 +57,10 @@ def _build_sample():
         for i, ch in enumerate(book.chapters):
             ch_file = _SAMPLE_DIR / f"chapter_{i:03d}.html"
             ch_file.write_text(_wrap_reader_html(ch.html_content, ch.title or f"第{i+1}章", css), encoding="utf-8")
+        import json
+        from tateyomi.web.theme_generator import detect_theme
+        theme = detect_theme(book)
+        (_SAMPLE_DIR / "theme.json").write_text(json.dumps(theme, ensure_ascii=False), encoding="utf-8")
     except Exception as e:
         import traceback
         print(f"[sample build ERROR] {e}")
@@ -188,6 +195,12 @@ def _do_convert(input_path: Path, output_path: Path, chapters_dir: Path | None =
         for i, ch in enumerate(book.chapters):
             ch_file = chapters_dir / f"chapter_{i:03d}.html"
             ch_file.write_text(_wrap_reader_html(ch.html_content, ch.title or f"第{i+1}章", css), encoding="utf-8")
+
+        # テーマ自動生成
+        import json
+        from tateyomi.web.theme_generator import detect_theme
+        theme = detect_theme(book)
+        (chapters_dir / "theme.json").write_text(json.dumps(theme, ensure_ascii=False), encoding="utf-8")
 
     if output_path.suffix.lower() == ".epub":
         epub_render(book, output_path)
@@ -352,9 +365,12 @@ async def read_sample(request: Request, chapter: int = 0):
     chapter = max(0, min(chapter, len(chapter_files) - 1))
     raw = chapter_files[chapter].read_text(encoding="utf-8")
     import re as _re
+    import json as _json
     m = _re.search(r"<body[^>]*>(.*?)</body>", raw, _re.DOTALL)
     content = m.group(1) if m else raw
     total = len(chapter_files)
+    theme_file = _SAMPLE_DIR / "theme.json"
+    theme = _json.loads(theme_file.read_text(encoding="utf-8")) if theme_file.exists() else {}
     return templates.TemplateResponse(
         request=request, name="reader.html",
         context={
@@ -363,6 +379,8 @@ async def read_sample(request: Request, chapter: int = 0):
             "total": total, "title": "【即金保証】AI時代の最速収益化バイブル（見本）",
             "prev": chapter - 1 if chapter > 0 else None,
             "next": chapter + 1 if chapter < total - 1 else None,
+            "theme": theme,
+            "tateyomi_css": _TATEYOMI_CSS,
         }
     )
 
@@ -388,10 +406,13 @@ async def read_book(conv_id: str, request: Request, chapter: int = 0):
     raw = chapter_files[chapter].read_text(encoding="utf-8")
     # body内コンテンツのみ抽出
     import re as _re
+    import json as _json
     m = _re.search(r"<body[^>]*>(.*?)</body>", raw, _re.DOTALL)
     content = m.group(1) if m else raw
     total = len(chapter_files)
     title = conv["original_name"]
+    theme_file = chapters_dir / "theme.json"
+    theme = _json.loads(theme_file.read_text(encoding="utf-8")) if theme_file.exists() else {}
 
     return templates.TemplateResponse(
         request=request,
@@ -403,6 +424,8 @@ async def read_book(conv_id: str, request: Request, chapter: int = 0):
             "chapter": chapter,
             "total": total,
             "title": title,
+            "theme": theme,
+            "tateyomi_css": _TATEYOMI_CSS,
             "prev": chapter - 1 if chapter > 0 else None,
             "next": chapter + 1 if chapter < total - 1 else None,
         }

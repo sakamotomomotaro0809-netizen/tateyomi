@@ -1,0 +1,99 @@
+{
+  "id": "wf_ops_runbook_v1",
+  "name": "Workflow: 運用・障害対応",
+  "version": "1.0.0",
+  "description": "運用・障害対応向けワークフロー。ops_runbook_v1 policy と組で使用。",
+  "policy_id": "ops_runbook_v1",
+  "phases": [
+    {
+      "id": "phase_1_triage",
+      "name": "トリアージ",
+      "description": "事象の切り分け（影響範囲・優先度・一次情報）を確定する。",
+      "allowedSkills": ["incident-responder", "system-diagnostician", "log-analyzer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "date && uptime || true",
+          "errorMessage": "システム状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_2_investigation"
+    },
+    {
+      "id": "phase_2_investigation",
+      "name": "調査",
+      "description": "調査（観測・ログ・現状把握）を実施し、原因仮説を立てる。",
+      "allowedSkills": ["log-analyzer", "system-diagnostician", "monitoring-specialist"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm run workflow:status || true",
+          "errorMessage": "ワークフロー状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_3_plan"
+    },
+    {
+      "id": "phase_3_plan",
+      "name": "計画・承認",
+      "description": "対応案（ロールバック含む）を固め、実行前承認に進む。",
+      "allowedSkills": ["error-recovery-planner", "incident-responder"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm run workflow:status || true",
+          "errorMessage": "ワークフロー状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_4_execute"
+    },
+    {
+      "id": "phase_4_execute",
+      "name": "実行",
+      "description": "計画に従って実行し、逸脱しない。",
+      "allowedSkills": ["devops-engineer", "container-specialist", "cloud-architect"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm run workflow:status || true",
+          "errorMessage": "ワークフロー状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_5_verify"
+    },
+    {
+      "id": "phase_5_verify",
+      "name": "検証",
+      "description": "復旧・正常性を検証し、再発リスクを評価する。",
+      "allowedSkills": ["qa-validator", "monitoring-specialist", "system-diagnostician"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm run workflow:status || true",
+          "errorMessage": "ワークフロー状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_6_postmortem"
+    },
+    {
+      "id": "phase_6_postmortem",
+      "name": "ポストモーテム",
+      "description": "事後レビュー（再発防止策）を残し、知識として資産化する。",
+      "allowedSkills": ["learning-agent", "knowledge-manager", "tech-writer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm run workflow:verify || true",
+          "errorMessage": "ワークフロー検証に失敗しました"
+        }
+      ],
+      "nextPhase": null
+    }
+  ]
+}

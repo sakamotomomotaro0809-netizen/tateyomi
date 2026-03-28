@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "notifications.schema.json",
+  "title": "Notifications Configuration",
+  "description": "Configuration for SLO alert notifications (P16)",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Enable/disable notifications globally",
+      "default": true
+    },
+    "notifyOn": {
+      "type": "array",
+      "description": "Events to notify on",
+      "items": {
+        "type": "string",
+        "enum": ["critical", "warn", "recovery"]
+      },
+      "default": ["critical", "recovery"],
+      "uniqueItems": true
+    },
+    "channels": {
+      "type": "object",
+      "description": "Notification channels configuration",
+      "properties": {
+        "apprise": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "url": {
+              "type": "string",
+              "description": "Apprise URL (from env var APPRISE_URL)"
+            }
+          }
+        },
+        "slack": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "webhookUrl": {
+              "type": "string",
+              "description": "Slack webhook URL (from env var SLACK_WEBHOOK_URL)"
+            }
+          }
+        },
+        "discord": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "webhookUrl": {
+              "type": "string",
+              "description": "Discord webhook URL (from env var DISCORD_WEBHOOK_URL)"
+            }
+          }
+        }
+      }
+    },
+    "cooldown": {
+      "type": "object",
+      "description": "Cooldown periods to prevent notification spam",
+      "properties": {
+        "criticalMinutes": {
+          "type": "integer",
+          "description": "Cooldown for CRITICAL notifications",
+          "default": 30,
+          "minimum": 1
+        },
+        "warnMinutes": {
+          "type": "integer",
+          "description": "Cooldown for WARN notifications",
+          "default": 120,
+          "minimum": 1
+        },
+        "recoveryMinutes": {
+          "type": "integer",
+          "description": "Cooldown for RECOVERY notifications",
+          "default": 60,
+          "minimum": 1
+        }
+      }
+    },
+    "quietHours": {
+      "type": "object",
+      "description": "Suppress non-critical notifications during these hours",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "startHour": {
+          "type": "integer",
+          "description": "Start hour (0-23, local time)",
+          "minimum": 0,
+          "maximum": 23,
+          "default": 22
+        },
+        "endHour": {
+          "type": "integer",
+          "description": "End hour (0-23, local time)",
+          "minimum": 0,
+          "maximum": 23,
+          "default": 7
+        },
+        "allowCritical": {
+          "type": "boolean",
+          "description": "Allow CRITICAL notifications during quiet hours",
+          "default": true
+        }
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "description": "Secret redaction settings",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "Additional regex patterns to redact",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Replacement text for redacted content",
+          "default": "[REDACTED]"
+        }
+      }
+    }
+  },
+  "required": ["enabled"]
+}

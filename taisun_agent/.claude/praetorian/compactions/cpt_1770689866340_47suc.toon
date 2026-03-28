@@ -1,0 +1,17 @@
+type: web_research
+title: "Final Validation: Cost-Optimized Model Routing for Claude Code (Round 3)"
+key_insights[15]: "Claude Max $200/month is 18x cheaper than equivalent API usage ($3,650/month for heavy coding)","Break-even: ~133K input + 44K output tokens/day (~2-3 hours moderate usage)","Average Claude Code API cost: ~$6/day/developer, 90% under $12/day","Claude Max limits: Max5=$100 (88K tokens/5hr), Max20=$200 (220K tokens/5hr) + weekly caps","January 2026: developers reported ~60% token limit reduction on Max plans","Qwen3-Coder 30B is MoE with only 3.3B active params, supports 256K context natively","Qwen3-Coder 30B: Q4=18.6GB RAM, M4 Max=100-172 tok/s, M2 Max=68 tok/s",32GB Mac can run Qwen3-Coder 30B comfortably with 4-bit quantization,"claude-code-router: 27.5K stars, 712 open issues, MIT license, active development","claude-code-router supports: default/background/think/longContext routing rules","OpenRouter free models with tool calling: qwen/qwen3-coder:free, openai/gpt-oss-20b:free, openai/gpt-oss-120b:free","OpenRouter Claude Code setup: ANTHROPIC_BASE_URL=https://openrouter.ai/api, ANTHROPIC_API_KEY=empty","LiteLLM setup: ANTHROPIC_BASE_URL=http://0.0.0.0:4000, ANTHROPIC_AUTH_TOKEN=$LITELLM_MASTER_KEY","Sonnet 4.5: $3/$15 per M tokens, Opus 4.5: $5/$25, Haiku 4.5: $1/$5",Prompt caching reduces cost to 10% after first request
+decisions[3]:
+  - chose: Claude Max $200/month as primary for single developer
+    over[2]: API-only routing,Free models only
+    reason: "18x cheaper than API for heavy usage, predictable cost, but needs API fallback for limit hits"
+  - chose: Qwen3-Coder 30B via Ollama as local fallback
+    over[2]: Qwen3 8B,DeepSeek V3
+    reason: "Only 3.3B active params = fast on Mac, 256K context, 100+ tok/s on M4 Max, fits in 32GB"
+  - chose: claude-code-router over LiteLLM for solo developer
+    over[2]: LiteLLM proxy,Raw OpenRouter
+    reason: "27.5K stars, built-in routing rules (think/background/longContext), simpler than LiteLLM for solo use"
+recommendations[5]: "Use Claude Max $200 as primary, API as overflow when limits hit",Set up Qwen3-Coder 30B Q4 via Ollama for background/simple tasks,Use claude-code-router for intelligent routing between providers,Keep OpenRouter free models as emergency fallback,Monitor actual token usage to determine if Max or API is more cost-effective
+id: cpt_1770689866340_47suc
+created: "2026-02-10T02:17:46.341Z"
+updated: "2026-02-10T02:17:46.341Z"

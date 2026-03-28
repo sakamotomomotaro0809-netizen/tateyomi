@@ -1,0 +1,14 @@
+type: web_research
+title: Hugging Face - Model Marketplace Safety & Community Governance
+source: "https://huggingface.co/ + security partnership reports"
+key_insights[6]: Partnership with Protect AI scanned 4.47M model versions,"352,000 unsafe/suspicious issues identified across 51,700 models",96%+ false positives in Pickle scanning,Picklescan + safetensors format for security,Collaborative review process with repository owners,Appeal process via legal@huggingface.co
+findings[4]: Some malicious models not flagged by security scanning,Safety results visible before download,Content Policy with iterative decision-making,Priority on collaborative solutions vs. removal
+techniques:
+  "Safety Scanning": Guardian + Picklescan + commercial scanners
+  "Format Security": "safetensors (pure data, no code)"
+  Moderation: Iterative review with owner collaboration
+  Reporting: safety@huggingface.co for abuse/harassment
+recommendations[5]: Implement multi-scanner approach for taisun_agent skills,Accept false positives as cost of security,Create collaborative review process with skill authors,Add safety badges visible before installation,Build appeal/complaint process for transparency
+id: cpt_1770948998089_ix0a1k
+created: "2026-02-13T02:16:38.089Z"
+updated: "2026-02-13T02:16:38.089Z"

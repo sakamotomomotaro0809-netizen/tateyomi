@@ -1,0 +1,11 @@
+type: web_research
+title: OpenAI Codex 2026 現状調査
+key_insights[9]: Codex は2026年2月時点で完全なソフトウェアエンジニアリングエージェントプラットフォームに進化,"CLI (npm i -g @openai/codex), macOSアプリ(2/2発売), Web, IDE拡張の4インターフェース",GPT-5.3-Codex が最新(2/5リリース) - SWE-Bench Pro 56.4%でSOTA,ChatGPT Plus ($20/月)以上で利用可能、Free/Goは期間限定無料,"API: codex-mini $1.50/$6.00 per MTok、GPT-5.2-Codex $1.75/$14.00 per MTok",Claude Code = ローカル実行・精密なレビュー向き、Codex = クラウド・並列タスク・高速プロトタイプ向き,GitHub Agent HQでClaude CodeとCodexを同時に使い分け可能(2/4発表),MCP対応済み(stdio + streamable HTTP),codex-mini-latest は1/16に非推奨化、GPT-4o/o4-miniは2/13に引退
+decisions[1]:
+  - chose: Claude Code + Codex 併用ワークフロー
+    over[2]: Codexのみ,Claude Codeのみ
+    reason: それぞれ得意分野が異なる。設計/レビュー=Claude、高速プロトタイプ/並列=Codex
+recommendations[4]: "Claude Code: Opus=設計、Sonnet=通常コーディング、Haiku=軽量タスク","Codex: 大量コード生成、並列タスク、高速プロトタイプ","Gemini: 画像分析(agentic-vision)、リサーチ(Google AI Studio無料枠)","ローカルモデル: Ollama + qwen2.5-coder:32b で簡単なスクリプト"
+id: cpt_1770689064360_9d8f9n
+created: "2026-02-10T02:04:24.360Z"
+updated: "2026-02-10T02:04:24.360Z"

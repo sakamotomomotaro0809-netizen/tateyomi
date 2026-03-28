@@ -1,0 +1,21 @@
+type: web_research
+title: Claude Code向けモデルルーティングシステム調査結果
+key_insights[6]: "CCProxy: LiteLLMベースでルール駆動型ルーティング。TokenCountRule(60k+)、MatchToolRule(WebSearch等)、ThinkingRuleなどの組み込みルールあり","RouteLLM: 人間の嗜好データで訓練された機械学習ルーター。GPT-4品質を維持しながら85%コスト削減を実現","FrugalGPT: カスケード方式で最も安いモデルから順番に試行。98%コスト削減またはGPT-4より4%精度向上","Requesty AI: 商用の自動ルーティングサービス。500+モデルに対応、フェイルオーバー・負荷分散機能付き","LiteLLM Proxy: 8ms P95レイテンシ@1k RPS。x-litellm-overhead-duration-msヘッダーでオーバーヘッド計測可能","タスク複雑度シグナル: トークン数、ツール使用、thinking有無、コンテキスト長、マルチターン会話の有無が判定に有効"
+techniques:
+  CCProxy_TokenCountRule: 60k以上のトークンで高容量モデルへルーティング
+  CCProxy_MatchToolRule: WebSearch等の特定ツール使用時に専用モデルへルーティング
+  FrugalGPT_Cascade: 安価なモデルから順に試行、信頼度閾値で次段階へエスカレーション
+  RouteLLM_SW_Ranking: 類似度重み付けランキングで最適モデルを選択
+  LiteLLM_Model_Alias: モデル名を動的に書き換えて異なるプロバイダーへルーティング
+decisions[2]:
+  - chose: CCProxyをベースにカスタムルールを追加する方式
+    over[2]: RouteLLMの機械学習ルーター,完全自作プロキシ
+    reason: LiteLLMエコシステムとの統合が容易。ルールベースは挙動が予測可能で保守性が高い。Python実装でカスタマイズが容易
+  - chose: 複数段階のカスケードルーティング（Haiku→Sonnet→Opus）
+    over[1]: 単純な二択ルーティング
+    reason: FrugalGPTの研究で最大98%コスト削減を実証済み。段階的エスカレーションで最適なコスト/品質バランスを実現
+refs[5]: github.com/starbased-co/ccproxy - CCProxyメインリポジトリ,github.com/lm-sys/RouteLLM - RouteLLMフレームワーク,arxiv.org/abs/2305.05176 - FrugalGPT論文,docs.litellm.ai/docs/benchmarks - LiteLLMベンチマーク,docs.requesty.ai/integrations/claude-code - Requesty AI統合ガイド
+recommendations[6]: "Phase 1: CCProxyの基本セットアップとビルトインルールの評価","Phase 2: カスタム複雑度検出ルール（セッション長、エラー頻度、リトライ回数）の実装","Phase 3: 予算アラートとコスト追跡ダッシュボードの構築","Phase 4: 機械学習ベースのルーター（RouteLLM）の段階的導入検討","監視: x-litellm-overhead-duration-msヘッダーで常にレイテンシオーバーヘッドを計測","最適化: 1ヶ月運用後のデータで閾値とルールをチューニング"
+id: cpt_1770648267784_if16b4
+created: "2026-02-09T14:44:27.784Z"
+updated: "2026-02-09T14:44:27.784Z"

@@ -1,0 +1,32 @@
+# Agent Statistics for security-architect
+# Test data generated for integration testing
+
+agent_name: "security-architect"
+total_tasks: 30
+successful_tasks: 28
+failed_tasks: 2
+success_rate: 0.933
+avg_quality_score: 95.0
+avg_duration_ms: 45000
+last_updated: "2025-11-04T10:00:00Z"
+
+recent_tasks:
+  - id: "2025-11-03-003"
+    success: true
+    score: 98
+  - id: "2025-11-03-002"
+    success: true
+    score: 96
+  - id: "2025-11-03-001"
+    success: true
+    score: 94
+
+trends:
+  success_rate_trend: 0.03  # Improving
+  quality_score_trend: 1.5
+  avg_duration_trend: -1000
+
+specializations:
+  security: 25
+  implementation: 15
+  review: 10

@@ -1,0 +1,45 @@
+version: "1.0"
+last_updated: "2026-01-10"
+
+runtime:
+  python_min: "3.10"
+  retries_max: 3
+  stop_on_fail: true
+
+paths:
+  work_root: "work"
+  job_root_template: "work/jobs/{job_id}"
+  logs_dir: "logs"
+  artifacts_dir: "artifacts"
+  cache_dir: "cache"
+
+memory_bank:
+  root: "memory_bank"
+  files:
+    projectbrief: "projectbrief.md"
+    system_patterns: "systemPatterns.md"
+    policies: "policies.md"
+    active_context: "activeContext.md"
+    progress: "progress.md"
+    glossary: "glossary.yaml"
+    preferences: "preferences.yaml"
+
+artifacts:
+  manifest_file: "artifacts/manifest.json"
+  include_hashes: true
+  include_tool_versions: true
+  reuse_if_validated: true
+
+validation:
+  jsonschema_strict: true
+  fail_fast: true
+
+llm:
+  mode: "disabled_by_default"      # disabled_by_default / enabled
+  structured_output: true
+  max_parse_retries: 2
+
+tasks:
+  root: "tasks"
+  allow_shell: true
+  allow_python: true

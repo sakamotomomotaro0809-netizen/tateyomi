@@ -1,0 +1,15 @@
+type: web_research
+title: MCP/API/スキルリソース深掘り分析 - メモリ管理・IDE最適化・セッション永続化
+source: WebSearch調査 (9回) + マーケットプレイスリサーチ
+key_insights[5]: MCP Memory Service (doobidoo) と Memory Keeper (mkreyman) が市場の2強,Composio が最新のToolRouter機能でセッション管理を強化,MacBook Pro M4は103個のApple-native MCPで対応可能,Claude 70%コンテキスト管理ルール が定着,RapidAPI/Hugging Face/Libraries.io 各プラットフォームが拡張
+findings[8]: "MCP Memory Service: pip install, 13+ AI互換, 5ms速度, ベクトル検索","Memory Keeper: npm/npx, ~/mcp-data永続化, session fork対応","PyCharm + Hugging Face統合: モデルキャッシュ管理","Composio ToolRouter: isolated sessions, 800+ツール","RapidAPI Sessions: Cookie管理型, Redux統合","public-apis GitHub: 無料APIコレクション","Claude Code MCP Tool Search: 95%削減, lazy loading","Memory Bank MCP: enterprise-grade persistent knowledge"
+techniques:
+  memory_management: vector_search_semantic_recall
+  crash_recovery: session_checkpointing
+  ide_optimization: lazy_loading_95pct
+  context_management: 70pct_threshold
+refs[7]: "https://github.com/doobidoo/mcp-memory-service","https://github.com/mkreyman/mcp-memory-keeper","https://docs.composio.dev/","https://claudefa.st/blog/guide/mechanics/context-management","https://docs.rapidapi.com/docs/sessions","https://smithery.ai/","https://mcp.so/"
+recommendations[4]: "即導入: MCP Memory Service (数時間)","中期: Composio ToolRouter (数日)","長期: Memory Bank MCP (enterprise)","MacBook Pro: Apple MCP 103個活用"
+id: cpt_1770877228184_muvw6
+created: "2026-02-12T06:20:28.184Z"
+updated: "2026-02-12T06:20:28.184Z"

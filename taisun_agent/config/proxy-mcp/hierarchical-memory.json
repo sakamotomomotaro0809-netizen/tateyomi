@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "description": "Hierarchical Memory Configuration based on Mem0 research",
+
+  "layers": {
+    "short-term": {
+      "backend": "taisun-proxy",
+      "ttl": "session",
+      "maxItems": 100,
+      "search": "token-based",
+      "enabled": true
+    },
+    "long-term": {
+      "backend": "qdrant",
+      "ttl": "permanent",
+      "maxItems": "unlimited",
+      "search": "vector-similarity",
+      "enabled": true,
+      "qdrant": {
+        "url": "${QDRANT_URL:-http://localhost:6333}",
+        "collection": "${QDRANT_COLLECTION_NAME:-taisun_memory}",
+        "embeddingModel": "sentence-transformers/all-MiniLM-L6-v2"
+      }
+    },
+    "episodic": {
+      "backend": "claude-mem",
+      "ttl": "30d",
+      "maxItems": "50/day",
+      "search": "id-time-based",
+      "enabled": true
+    }
+  },
+
+  "consolidation": {
+    "enabled": true,
+    "triggers": {
+      "sessionEnd": true,
+      "patternDetected": true,
+      "decisionMade": true,
+      "errorResolved": true
+    },
+    "rules": [
+      {
+        "name": "important-to-longterm",
+        "condition": "importance >= 0.7 AND layer == 'short-term'",
+        "action": "promote to long-term"
+      },
+      {
+        "name": "code-pattern-save",
+        "condition": "type == 'code-pattern' AND layer == 'short-term'",
+        "action": "promote to long-term with tags['code', 'pattern']"
+      },
+      {
+        "name": "decision-log",
+        "condition": "type == 'decision'",
+        "action": "log to episodic"
+      }
+    ]
+  },
+
+  "retrieval": {
+    "strategy": "multi-layer",
+    "priority": ["short-term", "long-term", "episodic"],
+    "fusion": {
+      "enabled": true,
+      "weights": {
+        "short-term": 0.4,
+        "long-term": 0.4,
+        "episodic": 0.2
+      }
+    }
+  },
+
+  "performance": {
+    "expectedAccuracyBoost": "+26%",
+    "expectedLatencyReduction": "-91%",
+    "expectedTokenSavings": "-90%",
+    "source": "Mem0 Research (arxiv:2504.19413)"
+  }
+}

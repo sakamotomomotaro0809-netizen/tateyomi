@@ -1,0 +1,58 @@
+# Protected Files Configuration
+# AIT42 回帰防止システム - v1.5.0
+#
+# このファイルは、一度デバッグ修正したファイルを保護し、
+# 再度壊れないようにするための設定ファイルです。
+#
+# Protection Levels:
+#   - strict: 一切の変更を禁止（ユーザー承認必須）
+#   - moderate: 警告を表示し、理由を説明（変更は可能）
+#   - soft: ログに記録のみ（変更は自由）
+
+version: "1.5.0"
+last_updated: "2025-11-17"
+
+# 保護対象ファイルのリスト
+protected_files:
+  # 例: .env.example の削除を防止
+  # - path: ".env.example"
+  #   protection_level: "strict"
+  #   reason: "セキュリティ修正済み（機密情報漏洩防止）"
+  #   fixed_date: "2025-11-17"
+  #   fixed_by: "bug-fixer"
+  #   git_hash: "abc123"
+  #   allowed_changes: []  # 空配列 = 一切の変更禁止
+  #   related_issue: "https://github.com/yuco944/AIT42/issues/123"
+
+  # 例: 認証ロジックの保護（コメントのみ許可）
+  # - path: "api/auth.ts"
+  #   protection_level: "moderate"
+  #   reason: "認証バグ修正済み（CVE-2025-XXXX）"
+  #   fixed_date: "2025-11-15"
+  #   fixed_by: "security-scanner + bug-fixer"
+  #   git_hash: "def456"
+  #   allowed_changes: ["comments", "formatting", "type-annotations"]
+  #   related_issue: "#456"
+
+# 保護ルールのグローバル設定
+global_settings:
+  # デフォルトの保護レベル（新規追加時）
+  default_protection_level: "moderate"
+
+  # 保護期限（日数）- この期間を過ぎたら自動的にsoftに格下げ
+  # null = 無期限
+  protection_expiry_days: null
+
+  # 変更時の通知先（GitHub Issue, Slack等）
+  notification_targets: []
+
+  # 自動バックアップ
+  auto_backup: true
+  backup_on_change: true
+
+# 統計情報（自動更新）
+statistics:
+  total_protected_files: 0
+  protection_triggers: 0  # 保護が発動した回数
+  last_trigger: null
+  regression_prevented: 0  # 回帰を防いだ回数

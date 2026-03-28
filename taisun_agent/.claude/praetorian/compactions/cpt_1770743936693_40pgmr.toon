@@ -1,0 +1,16 @@
+type: web_research
+title: Apple Silicon I2V Models - Technical Capabilities & Limitations 2026
+source: Multiple web searches Jan-Feb 2026
+key_insights[9]: Wan 2.1/2.2 has partial MPS support but FP8 still not supported on MPS (breaking issue),CogVideoX-5B-I2V works on MPS but 20x slower than RTX 4090,LTX-2 has MLX optimization (mlx-video) but only distilled variant currently supported,HunyuanVideo has community MLX port (HunyuanVideo_MLX) but official lacks native macOS support,"SVD (Stable Video Diffusion) works with ComfyUI on MPS, 14-25 frames at 576×1024",AnimateDiff on macOS has memory crash issues with certain operations,Open-Sora lacks specific MPS implementation details in 2026,Mochi 1 (Genmo) supports PyTorch MPS on Apple Silicon,mlx-community has Wan2.1 I2V support via Draw Things alternative implementation
+findings[9]: "Apple Silicon I2V requires 50GB+ storage, 64GB RAM recommended (M2 MAX+)",M5 iPad 16GB can run Wan 2.2 A14B at 480p (448×768) 5-second clips,"Wan2.1-I2V-14B-720P-Turbo: 30% faster via TeaCache, 720p HD quality","Top 2026 models: Wan2.1-I2V-14B-720P-Turbo, Wan2.2-I2V-A14B, Wan2.2-T2V-A14B",ComfyUI is primary deployment method for I2V on macOS,GGUF quantization enables low-VRAM (12GB) inference for Wan2.2,"ComfyUI-MLX: 70% faster model loading, 35% faster inference on Apple Silicon","fal.ai MiniMax Hailuo: $0.28/video (6sec 768p = $0.27), ranked #2 globally",MiniMax specializes in ultra-realistic physics + cinematic quality
+techniques:
+  "MPS backend": PyTorch Metal Performance Shaders for GPU acceleration
+  "MLX framework": Apple's native ML framework (alternative to PyTorch MPS)
+  "GGUF quantization": Low-memory variant for resource-constrained systems
+  "TeaCache acceleration": 30% speed boost for Wan2.1 I2V
+  "ComfyUI workflows": Node-based I2V pipeline orchestration
+anti_patterns[4]: "FP8 on MPS: Still unsupported after years, breaks Wan 2.2 KSampler","Direct CUDA ports: Won't work on Apple Silicon without MPS/MLX adaptation","Full model on low RAM: Requires GGUF quantization or crashes","Official repos: Often lack macOS support; community forks required"
+recommendations[5]: Use ComfyUI + Wan2.2 GGUF for best Apple Silicon I2V experience,"For production quality: fal.ai MiniMax Hailuo ($0.28/clip) more reliable","MLX-optimized models (LTX-2 distilled, HunyuanVideo_MLX) for native performance",Budget 64GB+ RAM for smooth 720p generation,Avoid FP8 models until MPS backend adds support
+id: cpt_1770743936693_40pgmr
+created: "2026-02-10T17:18:56.693Z"
+updated: "2026-02-10T17:18:56.693Z"

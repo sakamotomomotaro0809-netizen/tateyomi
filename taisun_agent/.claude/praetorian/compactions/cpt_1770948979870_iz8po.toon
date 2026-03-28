@@ -1,0 +1,14 @@
+type: web_research
+title: Smithery AI - MCP Registry with Community Reviews
+source: "https://smithery.ai/ + GitHub cli repo"
+key_insights[6]: Client-agnostic registry installer/manager,smithery.yaml config + Docker packaging,Community review system with upvote/downvote,Interactive server testing via inspect command,Developers pledged to open-source after minification concerns,Local-first approach for token safety
+findings[4]: Pre-configured data support during installation,Environment variables recommended for tokens,Community raised transparency concerns (minified code),Reference implementations showcase MCP versatility
+techniques:
+  Installation: npx @smithery/cli install <server> --client claude
+  Publishing: smithery deploy . with smithery.yaml + Docker
+  Reviews: smithery skills review add/list/upvote/downvote
+  Testing: smithery inspect <server>
+recommendations[4]: Implement community review system for taisun_agent skills,Add interactive testing before deployment,Create Docker packaging for easy distribution,Ensure transparency (no minification) for trust
+id: cpt_1770948979870_iz8po
+created: "2026-02-13T02:16:19.870Z"
+updated: "2026-02-13T02:16:19.870Z"

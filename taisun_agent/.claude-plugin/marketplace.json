@@ -1,0 +1,44 @@
+{
+  "name": "taisun-agent",
+  "owner": {
+    "name": "taiyousan15",
+    "email": "taiyousan15@example.com"
+  },
+  "metadata": {
+    "description": "68スキル・85エージェント・227 MCPツールの統合開発・マーケティングプラットフォーム"
+  },
+  "plugins": [
+    {
+      "name": "taisun-agent",
+      "source": "./",
+      "description": "太陽スタイルのコピーライティング、動画制作、Deep Research、要件定義、13層防御システムを含む統合プラットフォーム",
+      "author": {
+        "name": "taiyousan15"
+      },
+      "homepage": "https://github.com/taiyousan15/taisun_agent",
+      "repository": "https://github.com/taiyousan15/taisun_agent",
+      "license": "MIT",
+      "keywords": [
+        "agents",
+        "skills",
+        "hooks",
+        "marketing",
+        "copywriting",
+        "taiyo-style",
+        "video-production",
+        "deep-research",
+        "mcp"
+      ],
+      "category": "workflow",
+      "tags": [
+        "agents",
+        "skills",
+        "marketing",
+        "japanese",
+        "tdd",
+        "copywriting",
+        "automation"
+      ]
+    }
+  ]
+}

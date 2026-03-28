@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-02-13T18:45:16.116Z",
+  "complexity": "simple",
+  "confidence": 87,
+  "taskModel": "haiku",
+  "claudeCodeModel": "haiku",
+  "description": "検索・一覧表示・状況確認",
+  "reason": "キーワード検出: 教えて, 調査",
+  "previousModel": "sonnet",
+  "switched": true
+}

@@ -1,0 +1,48 @@
+{
+  "id": "docs_update_v1",
+  "name": "Docs Update Policy (v1)",
+  "description": "ドキュメント更新（設計書/README/運用手順）向けの汎用 strict policy。目的は『勝手にコード変更へ逸脱』『検証なし公開』『完了詐称』を防ぐこと。",
+  "strict_default": true,
+  "triggers_when_state_missing": [
+    "Bash command contains: git push",
+    "Bash command contains: gh pr create",
+    "Bash command contains: npm publish"
+  ],
+  "invariants": {
+    "read_before_write": true,
+    "completion_requires_verify": true,
+    "no_new_pipeline_scripts": true,
+    "baseline_files": [],
+    "require_skill_evidence": {
+      "enabled": false,
+      "required_skill_ids": []
+    }
+  },
+  "phase_permissions": {
+    "1_intake": {
+      "name": "目的確認",
+      "deny_bash_patterns": ["git push", "gh pr create", "npm publish", "rm -rf", "sudo"],
+      "allow_bash_patterns": ["ls", "rg", "cat", "git status"]
+    },
+    "2_research": {
+      "name": "調査",
+      "deny_bash_patterns": ["git push", "gh pr create", "npm publish", "rm -rf", "sudo"],
+      "allow_bash_patterns": ["rg", "cat", "git status", "git diff"]
+    },
+    "3_write_edit": {
+      "name": "執筆・編集",
+      "deny_bash_patterns": ["git push", "gh pr create", "npm publish", "rm -rf", "sudo"],
+      "allow_bash_patterns": ["git diff", "git status"]
+    },
+    "4_review": {
+      "name": "レビュー",
+      "deny_bash_patterns": ["git push", "gh pr create", "npm publish", "rm -rf", "sudo"],
+      "allow_bash_patterns": ["git diff", "git status"]
+    },
+    "5_publish_pr": {
+      "name": "公開・PR作成",
+      "deny_bash_patterns": ["rm -rf", "sudo"],
+      "allow_bash_patterns": ["git commit", "git push", "gh pr create", "git status", "git diff"]
+    }
+  }
+}

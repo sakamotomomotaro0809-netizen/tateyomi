@@ -1,0 +1,29 @@
+{
+  "version": "1.0.0",
+  "storage": {
+    "defaultBackend": "jsonl",
+    "directory": ".taisun/memory"
+  },
+  "namespaces": {
+    "short-term": {
+      "maxEntries": 2000,
+      "ttlDays": 14,
+      "maxContentChars": 200000,
+      "maxSummaryChars": 1200
+    },
+    "long-term": {
+      "maxEntries": 20000,
+      "ttlDays": 3650,
+      "maxContentChars": 500000,
+      "maxSummaryChars": 1200
+    }
+  },
+  "retrieval": {
+    "topK": 5,
+    "minScore": 0.15
+  },
+  "output": {
+    "includeContentByDefault": false,
+    "contentPreviewChars": 1200
+  }
+}

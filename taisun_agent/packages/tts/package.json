@@ -1,0 +1,79 @@
+{
+  "name": "@taisun/tts",
+  "version": "1.0.0",
+  "description": "Unified Japanese TTS Package - T5Gemma-TTS + Edge TTS Integration",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "taisun-tts": "./dist/cli/index.js"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./clients": {
+      "import": "./dist/clients/index.js",
+      "types": "./dist/clients/index.d.ts"
+    },
+    "./manager": {
+      "import": "./dist/manager/tts-manager.js",
+      "types": "./dist/manager/tts-manager.d.ts"
+    },
+    "./skills": {
+      "import": "./dist/skills/japanese-reading.js",
+      "types": "./dist/skills/japanese-reading.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "lint": "eslint src",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "tts",
+    "text-to-speech",
+    "japanese",
+    "t5gemma",
+    "edge-tts",
+    "ai",
+    "audio",
+    "narration"
+  ],
+  "author": "TAISUN",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^12.1.0",
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "peerDependencies": {
+    "edge-tts": ">=1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "edge-tts": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist",
+    "scripts",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taiyousan15/taisun_v2.git",
+    "directory": "packages/tts"
+  }
+}

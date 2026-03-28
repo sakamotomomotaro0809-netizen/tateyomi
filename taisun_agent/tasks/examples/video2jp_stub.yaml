@@ -1,0 +1,38 @@
+name: "video2jp_stub"
+description: "Video to Japanese subtitle workflow (stub implementation)"
+
+steps:
+  - id: "transcribe_stub"
+    name: "Transcribe Audio (Stub)"
+    type: "StubStep"
+    config:
+      mode: "transcribe"
+    inputs: []
+    outputs:
+      - "transcript.json"
+    validator:
+      type: "file_exists"
+
+  - id: "translate_stub"
+    name: "Translate to Japanese (Stub)"
+    type: "StubStep"
+    config:
+      mode: "translate"
+    inputs:
+      - "transcript.json"
+    outputs:
+      - "translation.json"
+    validator:
+      type: "file_exists"
+
+  - id: "subtitles_stub"
+    name: "Generate Subtitles (Stub)"
+    type: "StubStep"
+    config:
+      mode: "subtitles"
+    inputs:
+      - "translation.json"
+    outputs:
+      - "subtitles.srt"
+    validator:
+      type: "file_exists"

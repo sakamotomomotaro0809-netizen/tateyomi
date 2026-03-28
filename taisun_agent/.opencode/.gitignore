@@ -1,0 +1,7 @@
+# OpenCode/OMO 実行で生成される可能性があるもの（コミットしない）
+state/
+runs/
+exports/
+patches/
+*.log
+*.tmp

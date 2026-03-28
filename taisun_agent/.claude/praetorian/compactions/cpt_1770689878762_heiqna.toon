@@ -1,0 +1,8 @@
+type: web_research
+title: X記事配信システム - 実装検証リサーチ完了
+key_insights[5]: "LiteLLM + Claude Code: pip install 'litellm[proxy]', config.yaml設定, 環境変数ANTHROPIC_BASE_URL/ANTHROPIC_AUTH_TOKEN/ANTHROPIC_API_KEY設定, litellm --config config.yaml起動","Qdrant Semantic Cache: type: qdrant-semantic, embedding dimension 1536ハードコード問題が未解決, Ollama embeddingは768次元のためそのままでは使えない","Ollama + Claude Code: ANTHROPIC_AUTH_TOKEN=ollama, ANTHROPIC_BASE_URL=http://localhost:11434, ollama launch claude (v0.15+), 推奨モデル: glm-4.7-flash, qwen3-coder, 最低64Kコンテキスト必要","0xrdan/claude-router: /plugin marketplace add 0xrdan/claude-plugins -> /plugin install claude-router, ゼロ設定ルーティング, Haiku/Sonnet/Opus自動振り分け, 最大80%コスト削減","Docker Compose: LiteLLM公式はPostgreSQL+Prometheusのみ, Redis/Qdrant/Ollamaは自前追加が必要"
+anti_patterns[3]: Qdrant semantic cacheでOllama embedding (768次元) を直接使うと1536次元ハードコードと衝突してエラー,LiteLLMのQdrant semantic cacheのembedding dimension問題はissue #6262で報告済みだが未修正 (not planned),Claude Codeのローカルモデルは最低64Kトークンのコンテキストが必要、不足するとツール呼び出しが失敗する可能性
+recommendations[3]: Qdrant semantic cache使用時はOpenAI text-embedding-3-small (1536次元) を使うか、Redis semantic cacheに切り替える,Ollama embeddingでQdrant使いたい場合はLiteLLMのソースを修正するか、別のキャッシュ戦略を検討,Docker Compose構成はLiteLLM公式 + Qdrant + Redis + Ollamaを個別に追加構成する必要あり
+id: cpt_1770689878762_heiqna
+created: "2026-02-10T02:17:58.762Z"
+updated: "2026-02-10T02:17:58.762Z"

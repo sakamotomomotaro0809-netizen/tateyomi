@@ -1,0 +1,7 @@
+type: task_result
+title: SKILL.md暗号通貨詳細データ統合完了（Phase 2）
+key_insights[9]: "SKILL.md: 1831行→2140行（+309行）のPhase 2統合完了",4カテゴリ×サブカテゴリの3言語キーワードテーブル追加（CEX/DEX/ウォレット/規制/L1/L2/DeFi/NFT/TA/アルゴ/リスク管理/構造化商品/オンチェーン/ホエール/センチメント/日本語スラング）,40+ API詳細仕様追加（マーケット/オンチェーン/DeFi/センチメント/ホエール/ブロックチェーンノード/NFT）,X検索テンプレート6パターン×3言語（バイラル/ホエール/上場/DeFi/トレーディング/規制）,Reddit検索テンプレート5パターン（戦略/TA/DeFi/オンチェーン/開発者）,GitHub検索テンプレート3カテゴリ（トレーディングBot/DeFiツール/分析ツール）,注目研究者25+名（プロトコル設計/オンチェーンアナリスト/VC/Bitcoin Core開発者）,学術機関4（Stanford CBR/MIT DCI/IC3 Cornell/CryptoRC）,開発者活動追跡4プラットフォーム（Electric Capital/Cryptometheus/CryptoMiso/Token Terminal）
+refs[4]: "SKILL.md - 暗号通貨詳細キーワードリファレンス: lines 160-213","SKILL.md - Layer 8 追加API (8-2b〜8-2h): lines 1342-1432","SKILL.md - X/Reddit/GitHub検索テンプレート: lines 1577-1717","SKILL.md - 注目研究者・学術機関: lines 2052-2113"
+id: cpt_1770569452816_od7la
+created: "2026-02-08T16:50:52.816Z"
+updated: "2026-02-08T16:50:52.816Z"

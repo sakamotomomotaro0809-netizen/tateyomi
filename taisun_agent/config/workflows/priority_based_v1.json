@@ -1,0 +1,205 @@
+{
+  "id": "priority_based_v1",
+  "name": "優先度ベースプロジェクトワークフロー",
+  "version": "1.0.0",
+  "description": "Phase 3の全機能を統合した例。メタデータで優先度を判定し、優先度に応じて異なる並列実行戦略を適用します。",
+  "phases": [
+    {
+      "id": "phase_0_intake",
+      "name": "プロジェクト受付",
+      "description": "プロジェクト情報を収集します。metadata.priorityにhigh/normal/lowを設定してください。",
+      "requiredArtifacts": ["output/priority/project_info.txt"],
+      "conditionalNext": {
+        "condition": {
+          "type": "metadata_value",
+          "source": "priority",
+          "pattern": "^(high|normal|low)$"
+        },
+        "branches": {
+          "high": "phase_1_high_priority_planning",
+          "normal": "phase_1_normal_priority_planning",
+          "low": "phase_1_low_priority_planning"
+        },
+        "defaultNext": "phase_error"
+      }
+    },
+    {
+      "id": "phase_1_high_priority_planning",
+      "name": "高優先度企画",
+      "description": "高優先度プロジェクトの企画（迅速対応）",
+      "requiredArtifacts": ["output/priority/high_plan.txt"],
+      "allowedSkills": ["planner", "system-architect"],
+      "parallelNext": {
+        "phases": [
+          "phase_2_design",
+          "phase_2_resource_allocation",
+          "phase_2_risk_assessment"
+        ],
+        "waitStrategy": "any"
+      }
+    },
+    {
+      "id": "phase_1_normal_priority_planning",
+      "name": "通常優先度企画",
+      "description": "通常優先度プロジェクトの企画（標準対応）",
+      "requiredArtifacts": ["output/priority/normal_plan.txt"],
+      "allowedSkills": ["planner"],
+      "parallelNext": {
+        "phases": [
+          "phase_2_design",
+          "phase_2_resource_allocation",
+          "phase_2_risk_assessment"
+        ],
+        "waitStrategy": "all"
+      }
+    },
+    {
+      "id": "phase_1_low_priority_planning",
+      "name": "低優先度企画",
+      "description": "低優先度プロジェクトの企画（待機可）",
+      "requiredArtifacts": ["output/priority/low_plan.txt"],
+      "nextPhase": "phase_2_design"
+    },
+    {
+      "id": "phase_2_design",
+      "name": "設計",
+      "description": "システム設計を行います",
+      "requiredArtifacts": ["output/priority/design.txt"],
+      "allowedSkills": [
+        "system-architect",
+        "api-designer",
+        "database-designer",
+        "security-architect"
+      ],
+      "nextPhase": "phase_3_implementation_planning"
+    },
+    {
+      "id": "phase_2_resource_allocation",
+      "name": "リソース割り当て",
+      "description": "必要なリソースを割り当てます",
+      "requiredArtifacts": ["output/priority/resources.txt"],
+      "nextPhase": "phase_3_implementation_planning"
+    },
+    {
+      "id": "phase_2_risk_assessment",
+      "name": "リスク評価",
+      "description": "プロジェクトリスクを評価します",
+      "requiredArtifacts": ["output/priority/risks.txt"],
+      "nextPhase": "phase_3_implementation_planning"
+    },
+    {
+      "id": "phase_3_implementation_planning",
+      "name": "実装計画",
+      "description": "実装計画を立てます",
+      "requiredArtifacts": ["output/priority/implementation_plan.txt"],
+      "conditionalNext": {
+        "condition": {
+          "type": "metadata_value",
+          "source": "priority",
+          "pattern": "^(high|normal|low)$"
+        },
+        "branches": {
+          "high": "phase_4_high_priority_execution",
+          "normal": "phase_4_normal_priority_execution",
+          "low": "phase_4_low_priority_execution"
+        }
+      }
+    },
+    {
+      "id": "phase_4_high_priority_execution",
+      "name": "高優先度実装",
+      "description": "高優先度プロジェクトの実装（並列、any戦略）",
+      "requiredArtifacts": ["output/priority/high_exec_plan.txt"],
+      "parallelNext": {
+        "phases": [
+          "phase_5_development",
+          "phase_5_testing"
+        ],
+        "waitStrategy": "any"
+      }
+    },
+    {
+      "id": "phase_4_normal_priority_execution",
+      "name": "通常優先度実装",
+      "description": "通常優先度プロジェクトの実装（並列、all戦略）",
+      "requiredArtifacts": ["output/priority/normal_exec_plan.txt"],
+      "parallelNext": {
+        "phases": [
+          "phase_5_development",
+          "phase_5_testing"
+        ],
+        "waitStrategy": "all"
+      }
+    },
+    {
+      "id": "phase_4_low_priority_execution",
+      "name": "低優先度実装",
+      "description": "低優先度プロジェクトの実装（順次実行）",
+      "requiredArtifacts": ["output/priority/low_exec_plan.txt"],
+      "nextPhase": "phase_5_development"
+    },
+    {
+      "id": "phase_5_development",
+      "name": "開発",
+      "description": "実装を行います",
+      "requiredArtifacts": ["output/priority/code.txt"],
+      "allowedSkills": [
+        "backend-developer",
+        "frontend-developer",
+        "feature-builder"
+      ],
+      "nextPhase": "phase_6_review"
+    },
+    {
+      "id": "phase_5_testing",
+      "name": "テスト",
+      "description": "テストを実行します",
+      "requiredArtifacts": ["output/priority/tests.txt"],
+      "allowedSkills": [
+        "test-generator",
+        "qa-validator",
+        "integration-tester"
+      ],
+      "nextPhase": "phase_6_review"
+    },
+    {
+      "id": "phase_6_review",
+      "name": "レビュー",
+      "description": "完成物をレビューします。問題があればロールバック可能です。",
+      "allowRollbackTo": [
+        "phase_0_intake",
+        "phase_1_high_priority_planning",
+        "phase_1_normal_priority_planning",
+        "phase_1_low_priority_planning",
+        "phase_2_design",
+        "phase_3_implementation_planning"
+      ],
+      "conditionalNext": {
+        "condition": {
+          "type": "file_content",
+          "source": "output/priority/review_result.txt",
+          "pattern": "^(approved|rejected)$"
+        },
+        "branches": {
+          "approved": "phase_7_deployment",
+          "rejected": "phase_error"
+        },
+        "defaultNext": "phase_error"
+      }
+    },
+    {
+      "id": "phase_7_deployment",
+      "name": "デプロイメント",
+      "description": "プロダクションにデプロイします",
+      "requiredArtifacts": ["output/priority/deployment_log.txt"],
+      "allowedSkills": ["devops-engineer", "cicd-manager"],
+      "nextPhase": null
+    },
+    {
+      "id": "phase_error",
+      "name": "エラー処理",
+      "description": "予期しない状態またはレビュー却下の処理",
+      "nextPhase": null
+    }
+  ]
+}

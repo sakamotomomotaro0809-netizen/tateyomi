@@ -1,0 +1,17 @@
+type: decisions
+title: LINE AI Agent統合レポート - 最終判断材料
+key_insights[10]: "推奨アーキテクチャ: Option 3 ハイブリッド（Claude Agent SDK for LINE + Optional OpenClaw internal）","LINE 2秒タイムアウト必須対策: Lambda即時200→SQS→ECS Fargate非同期→Push Message","OpenClaw単体は危険: CVE-2026-25253(RCE), CVE-2026-24763, Gartner警告","日本市場ブルーオーシャン（条件付き）: OpenClaw+LINE+MCP統合は未存在","50ユースケース: 収益High23件, Medium22件, Low5件 / 難易度Easy12, Medium24, Hard14","コスト: 50ユーザー$190-340/月, 500ユーザー$1,145-2,695/月","Smart Model Routing: Haiku/Sonnet/Opus自動選択で50%+コスト削減","ビジネスモデル推奨: Setup-as-a-Service(最速), White-label(高利益率70-90%)","補助金活用可: IT導入補助金(最大450万円), 省力化投資補助(最大1億円)","実装ロードマップ: 6フェーズ構成"
+decisions[3]:
+  - chose: Option 3 ハイブリッドアーキテクチャ
+    over[3]: Option 1 OpenClaw Hub単体,Option 2 Claude Agent SDK単体,Option 4 LINE MCP + Claude Desktop
+    reason: "OpenClawのセキュリティリスク(CVE複数)をClaude Agent SDKで回避しつつ、OpenClawの5,705スキルエコシステムを内部利用可能"
+  - chose: Lambda+SQS非同期パターン
+    over[2]: 同期レスポンス,WebSocket常時接続
+    reason: LINE webhook 2秒タイムアウト制約により同期AI処理は不可能。Lambda即時200返却→SQS→非同期処理→Push Messageが唯一の解
+  - chose: Claude Agent SDK for LINE-facing
+    over[1]: OpenClaw直接LINE接続
+    reason: Claude Agent SDKは公式サポート・production-ready・セキュリティ成熟。OpenClawは30K+インスタンス露出・認証バイパス93.4%
+recommendations[6]: "Phase 1 MVP: Lambda+SQS+ECS Fargate+Claude Agent SDK+LINE Push Message","Phase 2: taisun_agent主要スキル10個をMCP Server化（High収益ユースケース優先）","Phase 3: セキュリティ・認証・コスト管理","Phase 4: OpenClaw内部統合（Optional）","Phase 5: マルチメディア・動画生成","Phase 6: マルチテナント・収益化"
+id: cpt_1770725168008_kuha4
+created: "2026-02-10T12:06:08.008Z"
+updated: "2026-02-10T12:06:08.008Z"

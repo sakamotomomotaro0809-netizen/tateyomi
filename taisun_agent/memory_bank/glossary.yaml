@@ -1,0 +1,9 @@
+# Glossary (Terminology)
+
+SSOT: "Single Source of Truth - spec/agent_os.yaml"
+TDO: "Test-Driven Operations - validation gates on every step"
+Memory Bank: "External long-term memory (not chat history)"
+Artifact: "Versioned output file with validation status"
+Gate: "Validation checkpoint that prevents progression on failure"
+Circuit Breaker: "3-retry limit before hard stop"
+Deterministic Replay: "Reusing validated artifacts instead of regenerating"

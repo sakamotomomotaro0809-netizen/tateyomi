@@ -1,0 +1,38 @@
+name: "summarize"
+description: "Summarize text file with validation"
+
+steps:
+  - id: "load_input"
+    name: "Load Input Text"
+    type: "LoadInputStep"
+    config:
+      input_file: "{input_file}"  # Will be replaced with actual file path
+    inputs: []
+    outputs:
+      - "input_data.json"
+    validator:
+      type: "file_exists"
+
+  - id: "summarize"
+    name: "Generate Summary"
+    type: "SummarizeStep"
+    config:
+      max_summary_length: 200
+    inputs:
+      - "input_data.json"
+    outputs:
+      - "summary.json"
+    validator:
+      type: "custom"  # Uses step's validate() method
+
+  - id: "validate_summary"
+    name: "Validate Summary Output"
+    type: "ValidateStep"
+    config:
+      schema_file: "schemas/summary.schema.json"
+    inputs:
+      - "summary.json"
+    outputs: []
+    validator:
+      type: "jsonschema"
+      schema: "schemas/summary.schema.json"

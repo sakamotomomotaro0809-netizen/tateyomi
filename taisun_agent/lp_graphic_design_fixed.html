@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>グラフィックデザイン講座 - 5日間チャレンジ | ゼロから始める無料オンライン講座</title>
+  <meta name="description" content="グラフィックデザイン初心者の女性限定。無料5日間チャレンジでゼロからプロのスキルを学べるオンライン講座。">
+
+  <style>
+    /* ========================================
+       リセット & 基本設定
+       ======================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        'Hiragino Sans',
+        'Hiragino Kaku Gothic ProN',
+        'メイリオ',
+        Meiryo,
+        sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ========================================
+       メインコンテナ
+       ======================================== */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #D4C5B9; /* ベージュ背景 */
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ========================================
+       ヘッダーセクション
+       ======================================== */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header-text {
+      font-size: 18px;
+      font-weight: 500;
+      color: #2c2c2c;
+      line-height: 1.8;
+      margin-bottom: 16px;
+      padding: 0 20px;
+    }
+
+    .header-highlight {
+      font-size: 16px;
+      font-weight: bold;
+      color: #C67B5C; /* オレンジ */
+      background: rgba(255, 255, 255, 0.5);
+      padding: 12px 24px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    /* ========================================
+       ヒーローセクション（メインビジュアル）
+       ======================================== */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px; /* 要素間の余白を確保 → 重なり防止 */
+      margin-bottom: 48px;
+      padding: 0 20px;
+    }
+
+    /* サブタイトル：「ゼロから始める」 */
+    .hero-subtitle {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      background: #F5E153; /* 黄色 */
+      padding: 8px 32px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* メインタイトル：「グラフィックデザイン」 */
+    .hero-title {
+      font-size: 48px;
+      font-weight: bold;
+      color: #2c2c2c;
+      background: white;
+      border: 4px solid #8B4513; /* 茶色の枠線 */
+      padding: 32px 48px;
+      text-align: center;
+      line-height: 1.4; /* 行間を確保 → 読みやすさ向上 */
+      margin: 16px 0; /* 上下の余白 → 重なり防止 */
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      letter-spacing: 0.05em;
+    }
+
+    /* CTA バッジ：「無料・開催決定 5日間チャレンジ」 */
+    .hero-badge {
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #C67B5C 0%, #A85F47 100%); /* グラデーションでリッチに */
+      padding: 24px 56px;
+      border-radius: 12px;
+      text-align: center;
+      margin-top: 16px; /* 重ならないように余白 */
+      box-shadow: 0 6px 16px rgba(198, 123, 92, 0.4);
+      line-height: 1.5;
+    }
+
+    .hero-badge-sub {
+      font-size: 36px;
+      font-weight: 900;
+      display: block;
+      margin-top: 8px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* ========================================
+       参加条件セクション
+       ======================================== */
+    .conditions {
+      background: #F5E153; /* 黄色 */
+      border: 4px solid #8B4513; /* 茶色の枠線 */
+      border-radius: 16px;
+      padding: 40px;
+      margin: 32px auto;
+      width: 100%; /* 固定幅を避ける → レスポンシブ対応 */
+      max-width: 650px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      position: relative;
+    }
+
+    /* 吹き出しの三角形 */
+    .conditions::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 20px solid #8B4513;
+    }
+
+    .conditions::after {
+      content: '';
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 18px solid transparent;
+      border-right: 18px solid transparent;
+      border-bottom: 18px solid #F5E153;
+    }
+
+    .conditions-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2c2c2c;
+      text-align: center;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 3px solid #8B4513;
+    }
+
+    .conditions-list {
+      list-style: none;
+    }
+
+    .conditions-item {
+      font-size: 18px;
+      line-height: 1.8; /* 読みやすい行間 */
+      margin-bottom: 20px;
+      color: #2c2c2c;
+      word-wrap: break-word; /* 長い単語を折り返す → テキスト切れ防止 */
+      overflow-wrap: break-word;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .conditions-item::before {
+      content: '✅';
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .conditions-note {
+      font-size: 14px;
+      color: #666;
+      margin-left: 32px;
+      margin-top: -12px;
+      display: block;
+    }
+
+    /* ========================================
+       フッターセクション
+       ======================================== */
+    .footer {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 48px; /* 十分な間隔 → 重なり防止 */
+      margin-top: 48px;
+      padding: 32px 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 12px;
+    }
+
+    .footer-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .emoji {
+      font-size: 48px;
+      line-height: 1;
+    }
+
+    .footer-text {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2c2c2c;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ========================================
+       CTAボタン（追加提案）
+       ======================================== */
+    .cta-section {
+      text-align: center;
+      margin-top: 48px;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 12px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #F5E153 0%, #E5C743 100%);
+      padding: 20px 64px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(245, 225, 83, 0.4);
+      transition: all 0.3s ease;
+      border: 3px solid #8B4513;
+      color: #2c2c2c;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(245, 225, 83, 0.6);
+    }
+
+    .cta-button:active {
+      transform: translateY(-1px);
+    }
+
+    /* ========================================
+       レスポンシブ対応（モバイルファースト）
+       ======================================== */
+
+    /* タブレット */
+    @media (max-width: 768px) {
+      .container {
+        padding: 32px 16px;
+      }
+
+      .hero-subtitle {
+        font-size: 20px;
+        padding: 6px 24px;
+      }
+
+      .hero-title {
+        font-size: 36px; /* PCの48pxから縮小 */
+        padding: 24px 32px;
+      }
+
+      .hero-badge {
+        font-size: 24px;
+        padding: 20px 40px;
+      }
+
+      .hero-badge-sub {
+        font-size: 28px;
+      }
+
+      .conditions {
+        padding: 28px 24px;
+      }
+
+      .conditions-title {
+        font-size: 20px;
+      }
+
+      .conditions-item {
+        font-size: 16px;
+      }
+
+      .footer {
+        flex-direction: column; /* 縦並び */
+        gap: 24px;
+      }
+
+      .footer-text {
+        font-size: 18px;
+      }
+
+      .cta-button {
+        font-size: 20px;
+        padding: 16px 48px;
+      }
+    }
+
+    /* スマートフォン */
+    @media (max-width: 480px) {
+      .container {
+        padding: 24px 12px;
+      }
+
+      .header-text {
+        font-size: 16px;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        padding: 6px 20px;
+      }
+
+      .hero-title {
+        font-size: 28px;
+        padding: 20px 24px;
+        border-width: 3px;
+      }
+
+      .hero-badge {
+        font-size: 20px;
+        padding: 16px 32px;
+        border-radius: 8px;
+      }
+
+      .hero-badge-sub {
+        font-size: 24px;
+      }
+
+      .conditions {
+        padding: 24px 20px;
+        border-width: 3px;
+      }
+
+      .conditions-title {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .conditions-item {
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+
+      .emoji {
+        font-size: 36px;
+      }
+
+      .footer-text {
+        font-size: 16px;
+      }
+
+      .cta-button {
+        font-size: 18px;
+        padding: 14px 40px;
+      }
+    }
+
+    /* ========================================
+       アクセシビリティ対応
+       ======================================== */
+
+    /* フォーカス状態を明確に */
+    a:focus, button:focus {
+      outline: 3px solid #C67B5C;
+      outline-offset: 4px;
+    }
+
+    /* ハイコントラストモード対応 */
+    @media (prefers-contrast: high) {
+      .hero-title {
+        border-width: 6px;
+      }
+
+      .conditions {
+        border-width: 6px;
+      }
+
+      .cta-button {
+        border-width: 4px;
+      }
+    }
+
+    /* 動きを減らしたい人への配慮 */
+    @media (prefers-reduced-motion: reduce) {
+      .cta-button {
+        transition: none;
+      }
+
+      .cta-button:hover {
+        transform: none;
+      }
+    }
+
+    /* ダークモード対応（オプション） */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #1a1a1a;
+      }
+
+      .container {
+        background: #2c2416;
+      }
+
+      .header-text,
+      .hero-title,
+      .conditions-title,
+      .conditions-item,
+      .footer-text {
+        color: #f5f5f5;
+      }
+
+      .hero-title {
+        background: #3a3a3a;
+        border-color: #8B4513;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main class="container" role="main">
+
+    <!-- ヘッダーセクション -->
+    <header class="header">
+      <p class="header-text">
+        「グラフィックデザイナー」が<br>
+        どのようなお仕事か知っていますか？
+      </p>
+      <span class="header-highlight">
+        この先を読み進めていただきたいです。
+      </span>
+    </header>
+
+    <!-- ヒーローセクション（メインビジュアル） -->
+    <section class="hero" aria-labelledby="hero-title">
+
+      <!-- サブタイトル -->
+      <div class="hero-subtitle" role="text">
+        ゼロから始める
+      </div>
+
+      <!-- メインタイトル -->
+      <h1 class="hero-title" id="hero-title">
+        グラフィック<br>
+        デザイン
+      </h1>
+
+      <!-- CTAバッジ -->
+      <div class="hero-badge" role="text">
+        無料・開催決定
+        <span class="hero-badge-sub">5日間チャレンジ</span>
+      </div>
+
+    </section>
+
+    <!-- 参加条件セクション -->
+    <section class="conditions" aria-labelledby="conditions-title">
+
+      <h2 class="conditions-title" id="conditions-title">
+        📋 参加条件はたったこれだけ
+      </h2>
+
+      <ul class="conditions-list">
+        <li class="conditions-item">
+          女性限定
+          <span class="conditions-note">（男性は参加できません）</span>
+        </li>
+        <li class="conditions-item">
+          パソコンとWi-Fi環境が揃っている人
+        </li>
+        <li class="conditions-item">
+          グラフィックデザインを何から始めればいいかわからない方
+        </li>
+        <li class="conditions-item">
+          いきなりスクールに入るのは不安という方
+        </li>
+      </ul>
+
+    </section>
+
+    <!-- CTAセクション（申し込みボタン） -->
+    <section class="cta-section">
+      <a href="#apply" class="cta-button" role="button" aria-label="5日間チャレンジに今すぐ申し込む">
+        今すぐ無料で参加する
+      </a>
+    </section>
+
+    <!-- フッターセクション -->
+    <footer class="footer" role="contentinfo">
+
+      <div class="footer-item">
+        <span class="emoji" role="img" aria-label="心配な顔">😰</span>
+        <span class="footer-text">完全無料講座</span>
+      </div>
+
+      <div class="footer-item">
+        <span class="emoji" role="img" aria-label="パソコン">💻</span>
+        <span class="footer-text">オンライン開催</span>
+      </div>
+
+    </footer>
+
+  </main>
+
+</body>
+</html>

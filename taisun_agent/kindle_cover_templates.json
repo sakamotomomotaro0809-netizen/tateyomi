@@ -1,0 +1,233 @@
+{
+  "version": "1.0",
+  "created": "2026-02-04",
+  "description": "Kindle AI美少女イラスト表紙テンプレート集",
+
+  "specifications": {
+    "dimensions": {
+      "width": 1600,
+      "height": 2560,
+      "aspect_ratio": "1:1.6",
+      "dpi": 300
+    },
+    "file_format": ["JPEG", "PNG"],
+    "max_file_size_mb": 50,
+    "color_mode": "RGB"
+  },
+
+  "layout_zones": {
+    "top_margin": {"start": 0, "end": 0.08, "purpose": "余白・装飾"},
+    "character_area": {"start": 0.08, "end": 0.65, "purpose": "キャラクターイラスト"},
+    "title_area": {"start": 0.65, "end": 0.82, "purpose": "タイトル・サブタイトル"},
+    "band_area": {"start": 0.82, "end": 1.0, "purpose": "帯・キャッチコピー・著者名"}
+  },
+
+  "patterns": {
+    "cyberpunk": {
+      "name": "サイバーパンク・未来系",
+      "description": "ネオンライト、デジタル要素、近未来的なスタイル",
+      "color_palette": {
+        "primary": "#0D1B2A",
+        "secondary": "#1B263B",
+        "accent1": "#00D4FF",
+        "accent2": "#FF006E",
+        "text_main": "#FFFFFF",
+        "text_sub": "#A0D2DB"
+      },
+      "fonts": {
+        "title": ["Orbitron", "源柱ゴシック", "Bebas Neue"],
+        "subtitle": ["Noto Sans JP", "Montserrat"]
+      },
+      "keywords": [
+        "cyberpunk", "neon lights", "futuristic",
+        "holographic", "glowing eyes", "digital interface",
+        "dark city", "LED accents", "tech wear"
+      ],
+      "prompt_template": "(masterpiece:1.2), (best quality:1.2), anime girl, cyberpunk style, {hair_color} hair with neon highlights, glowing {eye_color} eyes, futuristic {outfit} with LED lights, {pose}, dark city background with neon signs, dramatic lighting, volumetric fog, highly detailed, 8k resolution"
+    },
+
+    "fantasy": {
+      "name": "ファンタジー・魔法系",
+      "description": "魔法陣、光のエフェクト、神秘的な雰囲気",
+      "color_palette": {
+        "primary": "#1A1A2E",
+        "secondary": "#16213E",
+        "accent1": "#FFD700",
+        "accent2": "#E94560",
+        "text_main": "#FFFFFF",
+        "text_sub": "#C4B7A6"
+      },
+      "fonts": {
+        "title": ["Cinzel", "游明朝", "Playfair Display"],
+        "subtitle": ["源ノ角ゴシック", "Lora"]
+      },
+      "keywords": [
+        "fantasy", "magic circle", "mystical",
+        "starry sky", "glowing staff", "flowing dress",
+        "aurora", "sparkles", "ethereal"
+      ],
+      "prompt_template": "(masterpiece:1.2), (best quality:1.2), beautiful anime sorceress, {hair_color} flowing hair, {eye_color} eyes, elegant magical dress with {accent_color} accents, holding {magical_item}, magic circle beneath feet, {background} background, soft magical lighting, particle effects, highly detailed"
+    },
+
+    "kawaii": {
+      "name": "清楚・日常系",
+      "description": "パステルカラー、優しい雰囲気、可愛らしいスタイル",
+      "color_palette": {
+        "primary": "#FFF5F5",
+        "secondary": "#FFEEF0",
+        "accent1": "#FFB6C1",
+        "accent2": "#87CEEB",
+        "text_main": "#333333",
+        "text_sub": "#666666"
+      },
+      "fonts": {
+        "title": ["ラノベPOP", "コーポレート・ロゴ丸", "Kosugi Maru"],
+        "subtitle": ["M PLUS Rounded 1c", "丸ゴシック"]
+      },
+      "keywords": [
+        "cute", "kawaii", "pastel colors",
+        "cherry blossoms", "soft lighting", "school uniform",
+        "gentle smile", "ribbon", "innocent"
+      ],
+      "prompt_template": "(masterpiece:1.2), (best quality:1.2), cute anime girl, gentle smile, {hair_color} hair with {hair_accessory}, {outfit}, {background_element} floating, soft pastel pink and white background, warm natural lighting, bokeh effect, kawaii style, innocent expression"
+    },
+
+    "gothic": {
+      "name": "ダーク・ゴシック系",
+      "description": "ダークな雰囲気、優雅で神秘的なスタイル",
+      "color_palette": {
+        "primary": "#0D0D0D",
+        "secondary": "#1A1A1A",
+        "accent1": "#8B0000",
+        "accent2": "#4B0082",
+        "text_main": "#C0C0C0",
+        "text_sub": "#808080"
+      },
+      "fonts": {
+        "title": ["Old English Text MT", "衡山毛筆フォント", "Cinzel Decorative"],
+        "subtitle": ["Noto Serif JP", "EB Garamond"]
+      },
+      "keywords": [
+        "gothic", "dark", "Victorian",
+        "black dress", "red eyes", "roses",
+        "mysterious", "elegant", "dark wings"
+      ],
+      "prompt_template": "(masterpiece:1.2), (best quality:1.2), gothic anime girl, {hair_color} hair, piercing {eye_color} eyes, Victorian {outfit} with lace details, {accessory}, dark atmospheric background with {background_element}, dramatic lighting, elegant pose, highly detailed"
+    },
+
+    "ai_tech": {
+      "name": "AI・テクノロジー系",
+      "description": "人工知能、データビジュアライゼーション、近未来技術",
+      "color_palette": {
+        "primary": "#0A192F",
+        "secondary": "#172A45",
+        "accent1": "#64FFDA",
+        "accent2": "#BD93F9",
+        "text_main": "#E6F1FF",
+        "text_sub": "#8892B0"
+      },
+      "fonts": {
+        "title": ["Roboto Mono", "Source Code Pro", "M PLUS 1 Code"],
+        "subtitle": ["Inter", "Noto Sans JP"]
+      },
+      "keywords": [
+        "artificial intelligence", "neural network",
+        "data visualization", "circuit patterns",
+        "hologram", "binary code", "digital brain",
+        "futuristic interface", "tech goddess"
+      ],
+      "prompt_template": "(masterpiece:1.2), (best quality:1.2), anime girl as AI entity, {hair_color} hair with digital particles, glowing {eye_color} circuit-pattern eyes, wearing sleek tech suit with neural network patterns, holographic data streams around her, dark blue background with floating code and data visualizations, soft cyan glow, highly detailed, 8k"
+    }
+  },
+
+  "text_styles": {
+    "title": {
+      "size_ratio": 0.12,
+      "weight": "bold",
+      "max_characters": 15,
+      "effects": ["drop_shadow", "outer_glow", "stroke"]
+    },
+    "subtitle": {
+      "size_ratio": 0.05,
+      "weight": "regular",
+      "max_characters": 30
+    },
+    "author": {
+      "size_ratio": 0.03,
+      "weight": "regular",
+      "position": "bottom_center"
+    },
+    "catchphrase": {
+      "size_ratio": 0.035,
+      "weight": "medium",
+      "position": "band_area"
+    }
+  },
+
+  "band_templates": {
+    "simple": {
+      "height_ratio": 0.15,
+      "background": "solid_color",
+      "elements": ["catchphrase", "author"]
+    },
+    "gradient": {
+      "height_ratio": 0.18,
+      "background": "gradient",
+      "elements": ["catchphrase", "series_name", "author"]
+    },
+    "decorative": {
+      "height_ratio": 0.2,
+      "background": "pattern",
+      "elements": ["badge", "catchphrase", "author", "volume_number"]
+    }
+  },
+
+  "quality_checklist": {
+    "thumbnail_readability": {
+      "description": "160x256pxでタイトルが読めること",
+      "threshold": 0.8
+    },
+    "contrast_ratio": {
+      "description": "背景とテキストのコントラスト",
+      "minimum": 4.5
+    },
+    "color_count": {
+      "description": "使用色数",
+      "maximum": 5
+    },
+    "character_visibility": {
+      "description": "キャラクターの視認性",
+      "threshold": 0.85
+    }
+  },
+
+  "negative_prompts": {
+    "common": "low quality, blurry, distorted face, extra fingers, bad anatomy, watermark, text, logo, signature, cropped, out of frame",
+    "cyberpunk": "medieval, fantasy, natural lighting, soft colors",
+    "fantasy": "modern clothing, technology, neon lights, urban",
+    "kawaii": "dark themes, revealing clothes, violence, horror",
+    "gothic": "bright colors, cheerful, modern tech, casual clothes"
+  },
+
+  "example_titles": {
+    "ai_collection": [
+      "AI美少女図鑑",
+      "デジタル・ミューズ",
+      "人工知能の夢",
+      "AIが描く理想の少女",
+      "次世代ビジュアルアート集"
+    ],
+    "cyberpunk": [
+      "ネオン・ドリーマー",
+      "電脳少女",
+      "2077年の天使",
+      "サイバー・ミューズ"
+    ],
+    "fantasy": [
+      "魔法少女イラスト集",
+      "ファンタジー・ガールズ",
+      "異世界の少女たち",
+      "魔導書イラストレーション"
+    ]
+  }
+}

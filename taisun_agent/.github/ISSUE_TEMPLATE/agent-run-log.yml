@@ -1,0 +1,93 @@
+name: "Agent Run Log（作業ログ）"
+description: "毎回の作業を同じ形式で記録し、再現性と品質を上げるためのテンプレート"
+title: "[Agent Run] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 目的
+        このIssueは「作業ログ」です。
+        **作業の開始＝Issue作成**、**作業の完了＝ここに結果を追記** してください。
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: "1. 目的（何を達成したい？）"
+      description: "例：URLからリンクを抽出して、Docsテンプレでスキル化したい"
+      placeholder: "ここに目的を1〜3行で書く"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "2. 背景（なぜ今それが必要？）"
+      placeholder: "背景・前提・制約（できれば短く）"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: risk
+    attributes:
+      label: "3. リスク区分（重要）"
+      description: "読むだけか／書き換えるか／デプロイ等を含むか"
+      options:
+        - "READ（読むだけ）"
+        - "WRITE（書き換え/作成を含む）"
+        - "DEPLOY（公開・本番反映・削除など重大）"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: approvals
+    attributes:
+      label: "4. 承認が必要な操作はある？"
+      options:
+        - label: "はい（WRITE/DEPLOY相当）→ 人間承認が必要"
+        - label: "いいえ（READのみ）"
+
+  - type: textarea
+    id: inputs
+    attributes:
+      label: "5. 入力（URL/対象/範囲）"
+      description: "作業対象を具体的に。URL、リポジトリパス、対象ページ、対象期間など。"
+      placeholder: "- URL: ...\n- 対象: ...\n- 範囲: ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "6. 期待する成果物（何ができたら完了？）"
+      placeholder: "- 例：docs/third-agent/ に新スキル仕様が追加\n- 例：PR作成、テスト通過"
+    validations:
+      required: true
+
+  - type: textarea
+    id: plan
+    attributes:
+      label: "7. 作業計画（ざっくりでOK）"
+      placeholder: "1) 〜\n2) 〜\n3) 〜"
+    validations:
+      required: false
+
+  - type: textarea
+    id: log
+    attributes:
+      label: "8. 実行ログ（作業後に追記）"
+      description: "作業が進むたびに追記。最終的にPRリンク・結果・注意点を書く。"
+      placeholder: "- 実施内容:\n- 変更点:\n- PR:\n- 検証結果:\n- 注意点:\n- 次アクション:"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: quality_gate
+    attributes:
+      label: "9. 品質ゲート（作業後にチェック）"
+      options:
+        - label: "Issueに結果（PR/成果物/注意点）を追記した"
+        - label: "壊れる変更を避けた（変更は小さく）"
+        - label: "npm test を実行した（または不要理由を書いた）"
+        - label: "npm run lint を実行した（または不要理由を書いた）"
+        - label: "npm run typecheck を実行した（または不要理由を書いた）"
+        - label: "WRITE/DEPLOY相当なら、人間承認を通した"

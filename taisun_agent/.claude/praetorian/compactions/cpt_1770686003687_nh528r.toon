@@ -1,0 +1,11 @@
+type: decisions
+title: TTS数字読みバグ修正と再発防止
+key_insights[4]: Fish Audio TTSは「1000万」を「せんまん」と読む（正しくは「いっせんまん」）,text_preprocessor.pyの正規表現が漢字「千」のみマッチし、アラビア数字「1000」をハンドルしていなかった,"_number_to_reading()メソッドを新設: 千(いっせん/さんぜん/はっせん)・百(さんびゃく/ろっぴゃく/はっぴゃく)完全対応",14/15テスト合格（残1つは万/億/兆なしの1000円で、Fish Audio側で正しく読むため変換不要）
+decisions[1]:
+  - chose: "text_preprocessor.pyの正規表現を(\\d)?千→([\\d,]+)(万|億|兆)に拡張し_number_to_reading()を追加"
+    over[2]: Fish Audio API側のパラメータで制御,テキスト中の数字を全て手動でひらがなに置換
+    reason: 根本原因（正規表現のパターン不足）を修正し、全アラビア数字+万/億/兆パターンを自動変換
+refs[4]: ~/.claude/skills/interactive-video-platform/scripts/text_preprocessor.py - 全面修正,"~/.claude/skills/interactive-video-platform/SKILL.md:305 - TTS前処理必須化ルール追加",taisun_agent/.claude/CLAUDE.md - Section 9 TTS数字読み前処理ルール追加,taisun_agent/.claude/hooks/mistakes.md - tts-number-reading-1000man エントリ追加
+id: cpt_1770686003687_nh528r
+created: "2026-02-10T01:13:23.687Z"
+updated: "2026-02-10T01:13:23.687Z"

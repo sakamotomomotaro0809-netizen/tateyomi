@@ -1,0 +1,14 @@
+type: web_research
+title: MCP.so Platform Analysis - Security & Quality Control
+source: "https://mcp.so/ + multiple sources"
+key_insights[7]: OAuth 2.1 emerging as primary authentication standard,Type II certification for quality MCP gateways,"Future: granular permission controls based on context/time",Registry implementing verification mechanisms,SAST + SCA required for security,.well-known/mcp discovery endpoint for metadata,mcp-index CLI tool for submission to mcprepository.com
+findings[4]: Only subset of MCP gateways achieved Type II certification as of 2026,Duplicate checks automated during submission,Automatic capability cataloging through .well-known metadata,96%+ false positives in some security scans (Pickle scanning)
+techniques:
+  Submission: npx mcp-index <github-repo-url>
+  Discovery: .well-known URLs standard
+  Security: OAuth 2.1 + SAST + SCA pipelines
+  "Quality Gate": Type II certification
+recommendations[4]: Implement OAuth 2.1 for taisun_agent MCP servers,Add SAST/SCA to CI/CD pipeline,Create .well-known/mcp endpoint for metadata,Build verification mechanism before adding to registry
+id: cpt_1770948965449_19s1w8
+created: "2026-02-13T02:16:05.449Z"
+updated: "2026-02-13T02:16:05.449Z"

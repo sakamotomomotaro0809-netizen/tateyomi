@@ -1,0 +1,14 @@
+type: web_research
+title: SkillsMP - Agent Skills Marketplace Architecture
+source: "https://skillsmp.com/ + smartscope.blog guide"
+key_insights[6]: "25,000+ skills following SKILL.md open standard","Progressive disclosure architecture - metadata first, details on-demand",One-click ZIP + CLI installation,Minimum 2 stars filter for quality,"Currently in collection phase, quality curation is next priority",Semantic search + category filtering
+findings[4]: Auto-discovery by AI assistants from designated directories,"Skills compatible with Claude Code, Codex CLI, ChatGPT",Context window optimization via progressive disclosure,skill-creator skill provides creation guidance
+techniques:
+  "Quality Filter": Minimum 2 GitHub stars
+  Installation: One-click ZIP or CLI
+  Discovery: Semantic search + advanced filtering
+  Standard: SKILL.md specification for portability
+recommendations[4]: Adopt SKILL.md standard for taisun_agent skills,Implement progressive disclosure to save context,Add semantic search to skill discovery,Create skill-creator helper for standardization
+id: cpt_1770948972305_haakdg
+created: "2026-02-13T02:16:12.305Z"
+updated: "2026-02-13T02:16:12.305Z"

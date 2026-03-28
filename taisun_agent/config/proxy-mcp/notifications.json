@@ -1,0 +1,34 @@
+{
+  "$schema": "./notifications.schema.json",
+  "enabled": true,
+  "notifyOn": ["critical", "recovery"],
+  "channels": {
+    "apprise": {
+      "enabled": false,
+      "url": "${APPRISE_URL}"
+    },
+    "slack": {
+      "enabled": false,
+      "webhookUrl": "${SLACK_WEBHOOK_URL}"
+    },
+    "discord": {
+      "enabled": false,
+      "webhookUrl": "${DISCORD_WEBHOOK_URL}"
+    }
+  },
+  "cooldown": {
+    "criticalMinutes": 30,
+    "warnMinutes": 120,
+    "recoveryMinutes": 60
+  },
+  "quietHours": {
+    "enabled": false,
+    "startHour": 22,
+    "endHour": 7,
+    "allowCritical": true
+  },
+  "redaction": {
+    "patterns": [],
+    "placeholder": "[REDACTED]"
+  }
+}

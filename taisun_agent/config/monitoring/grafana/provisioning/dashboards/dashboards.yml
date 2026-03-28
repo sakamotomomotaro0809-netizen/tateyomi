@@ -1,0 +1,14 @@
+# TAISUN v2 - Grafana Dashboard Provisioning
+apiVersion: 1
+
+providers:
+  - name: 'taisun-dashboards'
+    orgId: 1
+    folder: 'TAISUN'
+    folderUid: 'taisun'
+    type: file
+    disableDeletion: false
+    updateIntervalSeconds: 30
+    allowUiUpdates: true
+    options:
+      path: /var/lib/grafana/dashboards

@@ -1,0 +1,18 @@
+# Preferences (Output Style)
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
+
+output:
+  json_indent: 2
+  include_timestamps: true
+  include_hashes: true
+
+reporting:
+  failure_report_format: "detailed"
+  success_summary_format: "concise"
+
+distill:
+  auto_apply: false  # Safety: proposals only
+  include_metadata: true

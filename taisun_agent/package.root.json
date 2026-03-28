@@ -1,0 +1,25 @@
+{
+  "name": "taisun-agent-workspace",
+  "version": "1.0.0",
+  "description": "TAISUN Agent workspace - Run commands from root directory",
+  "private": true,
+  "scripts": {
+    "install": "cd taisun_agent && npm install",
+    "postinstall": "cd taisun_agent && npm run build:all || echo 'Build failed but continuing...'",
+    "test": "cd taisun_agent && npm test",
+    "start": "cd taisun_agent && npm start",
+    "dev": "cd taisun_agent && npm run dev",
+    "doctor": "cd taisun_agent && npm run doctor",
+    "taisun:diagnose": "cd taisun_agent && npm run taisun:diagnose",
+    "taisun:diagnose:full": "cd taisun_agent && npm run taisun:diagnose:full",
+    "taisun:diagnose:fix": "cd taisun_agent && npm run taisun:diagnose:fix",
+    "taisun:setup": "cd taisun_agent && npm run taisun:setup",
+    "setup": "cd taisun_agent && npm run setup",
+    "build:all": "cd taisun_agent && npm run build:all",
+    "lint": "cd taisun_agent && npm run lint",
+    "lint:fix": "cd taisun_agent && npm run lint:fix"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

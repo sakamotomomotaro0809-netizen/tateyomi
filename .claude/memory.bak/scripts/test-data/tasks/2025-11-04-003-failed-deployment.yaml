@@ -1,0 +1,50 @@
+# Task Record: Failed Deployment
+# Test data generated for integration testing
+
+id: "2025-11-04-003"
+timestamp: "2025-11-04T16:00:00Z"
+request: "Deploy to production environment"
+task_type: "deployment"
+
+selected_agents:
+  - cicd-manager
+  - cloud-architect
+
+duration_ms: 60000
+success: false
+quality_score: 0
+
+errors:
+  - "Database migration failed: connection timeout"
+  - "Rollback initiated"
+
+warnings:
+  - "Production database unreachable"
+
+quality_metrics:
+  code_coverage: 0
+  documentation_complete: false
+  security_review_passed: false
+  performance_benchmark: "n/a"
+
+reflection:
+  score: 0
+  decision: "rejected"
+  feedback: "デプロイ失敗。データベース接続タイムアウト。ネットワーク設定を確認する必要があります。"
+  improvements:
+    - "Check network connectivity"
+    - "Verify database credentials"
+    - "Increase timeout settings"
+
+artifacts: []
+
+resources:
+  tokens_used: 25000
+  api_calls: 15
+  files_modified: 0
+
+tags:
+  - deployment
+  - failed
+  - database
+  - network

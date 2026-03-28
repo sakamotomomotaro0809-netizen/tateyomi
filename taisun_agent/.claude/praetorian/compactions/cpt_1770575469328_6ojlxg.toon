@@ -1,0 +1,15 @@
+type: task_result
+title: Kindle漫画マスター Gemini Gem構築
+key_insights[6]: "Gemini Gemsカスタム指示は4要素: ペルソナ・タスク・コンテキスト・形式","日本語テキストの2段階アプローチ: 8文字以内→直接描画、9文字以上→テキストなし画像+Canva後付け","キャラクター一貫性: 最初にリファレンスシート生成+同一チャット完結が鍵",YAML構造化ストーリーボードで100ページ/週の制作実績あり,Nano Banana Pro(2025年12月〜)で日本語テキスト描画が大幅改善,"Kindle推奨画像サイズ: 1600x2560px、Kindle Comic CreatorでMOBI変換"
+decisions[2]:
+  - chose: 4フェーズ構成(分析→キャラデザ→ストーリーボード→パネル生成)
+    over[2]: 全自動一括生成,シーン単位の個別対応
+    reason: ユーザー確認ポイントを設け品質を担保しつつ、構造化で効率化
+  - chose: 日本語テキスト2段階アプローチ(方式A/B自動判定)
+    over[2]: 全て直接描画,全てテキストなし
+    reason: 短文は直接描画で効率化、長文は確実性優先でCanva後付け
+refs[4]: note.com/orion_silverwood - プロレベル漫画生成Gem,note.com/sasukebrain - 長編漫画ワークフロー,note.com/google_gemini - Nano Banana Pro公式ガイド,GitHub/Yutarop/comic-generator - Streamlit自動生成ツール
+next[2]: ユーザーがGemを作成・テスト後、フィードバックに基づいて改善,実際のKindle原稿でのテスト実行
+id: cpt_1770575469328_6ojlxg
+created: "2026-02-08T18:31:09.328Z"
+updated: "2026-02-08T18:31:09.328Z"

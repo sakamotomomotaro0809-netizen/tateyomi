@@ -1,0 +1,9 @@
+type: web_research
+title: OpenClaw 総合リサーチ 2026年2月
+source: "https://note.com/preview/n4a1c4983f926, https://docs.openclaw.ai/automation/webhook, https://openclaw.ai/"
+key_insights[9]: OpenClaw（旧Clawdbot/Moltbot）はPSPDFKit創業者Peter Steinbergerが開発したオープンソースAIエージェント。GitHub 150K+スター,Claude Codeの弱点=PCを閉じたら止まる。OpenClaw on EC2=24時間動き続けるClaude Code,"アーキテクチャの差: Manus/MCP/Claude Code=人が指示→AI動く、OpenClaw=イベント(Webhook)→AIが自律動作",Webhook→自動構築→Vercelデプロイの半自動パイプラインが可能。営業承認→システム自動構築,"EC2 t3.small + ALB で月額約$40（約6,000円）で24/7稼働","Agent Teams（2026年2月発表）とOpenClawの二重レイヤー: OpenClaw=チャネルレベル、Agent Teams=セッションレベル並列処理","Skills(プラグイン)が5,705+、AgentSkillsスタンダードでClaude Code/Cursor間の移植も可能","セキュリティ注意: ClawHubのTwitterスキルにマルウェア事例あり。Docker sandbox必須",API費用が月$300-750になる場合もある。コスト管理が重要
+findings[6]: "note記事(れん@AIでアプリ開発)の全文取得成功: Claude Codeの弱点をOpenClawが埋める、EC2上でWebhook→自動構築→Vercelデプロイの実例",Vercel CLI/clasp/Google API(OAuth)/GitHub CLIをEC2上で認証通して連携,"Multi-Agent Routing: チャネル+アカウントIDで複数エージェントをルーティング可能","Webhook設定: hooks.enabled=true, Bearer token認証, /hooks/wake, /hooks/agentエンドポイント",Docker Compose推奨デプロイ。DigitalOcean 1-Click Deploy、Cloudflare Workers(Moltworker)もあり,"YouTube動画: https://www.youtube.com/watch?v=8Tc9kWVO0Vo"
+recommendations[5]: Claude Code(ローカル)で高品質テンプレート/スキルを開発→OpenClawに移植して24/7自動化,EC2 Docker Compose + ALB + webhook endpointのアーキテクチャ,カスタムSkill開発でビジネスロジックを組み込む,Agent Teams統合で複雑タスクの並列処理,"セキュリティ: Docker sandbox必須、専用トークン、reverse proxy、スキル審査"
+id: cpt_1770618608238_yz7tsf
+created: "2026-02-09T06:30:08.238Z"
+updated: "2026-02-09T06:30:08.238Z"

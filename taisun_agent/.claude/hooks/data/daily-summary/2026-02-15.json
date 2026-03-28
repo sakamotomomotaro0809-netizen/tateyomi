@@ -1,0 +1,13 @@
+{
+  "date": "2026-02-15",
+  "sessions": 2,
+  "avgDurationMinutes": 0,
+  "completionRate": 1,
+  "totalToolCalls": 0,
+  "tokenSavings": {
+    "tier1": 184,
+    "tier2": 0,
+    "tier3": 0,
+    "total": 184
+  }
+}

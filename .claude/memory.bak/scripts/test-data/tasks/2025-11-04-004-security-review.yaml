@@ -1,0 +1,47 @@
+# Task Record: Security Review
+# Test data generated for integration testing
+
+id: "2025-11-04-004"
+timestamp: "2025-11-04T17:00:00Z"
+request: "Security audit of authentication system"
+task_type: "security"
+
+selected_agents:
+  - security-architect
+  - code-reviewer
+
+duration_ms: 50000
+success: true
+quality_score: 98
+
+errors: []
+warnings: []
+
+quality_metrics:
+  code_coverage: 95
+  documentation_complete: true
+  security_review_passed: true
+  performance_benchmark: "excellent"
+
+reflection:
+  score: 98
+  decision: "approved"
+  feedback: "包括的なセキュリティレビュー。すべてのベストプラクティスに準拠。"
+  improvements: []
+
+artifacts:
+  - path: "docs/security/auth-audit-report.md"
+    type: "documentation"
+  - path: "tests/security/auth_security_test.rs"
+    type: "test"
+
+resources:
+  tokens_used: 65000
+  api_calls: 10
+  files_modified: 5
+
+tags:
+  - security
+  - audit
+  - authentication
+  - review

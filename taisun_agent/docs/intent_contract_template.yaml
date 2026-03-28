@@ -1,0 +1,45 @@
+# Intent Contract Template
+# このファイルをコピーして artifacts/intent_contract.yaml を作成してください
+
+# タスクの目的（必須）
+# 何を達成するのかを明確に記述
+objective: |
+  [ここにタスクの目的を記述]
+
+# やらないこと（必須）
+# スコープ外を明示して逸脱を防止
+non_goals:
+  - "[やらないこと1]"
+  - "[やらないこと2]"
+
+# 入力（必須）
+# 参考画像、ファイル、URL等
+inputs:
+  reference_images: []
+  files: []
+  urls: []
+  user_provided_text: |
+    [ユーザーから提供されたテキスト]
+
+# 制約条件（必須）
+# 守るべきルール、禁止事項
+constraints:
+  - "[制約1]"
+  - "[制約2]"
+
+# 完了条件（必須）
+# Definition of Done - 何をもって完了とするか
+definition_of_done:
+  - "[完了条件1]"
+  - "[完了条件2]"
+
+# 許容される逸脱（必須）
+# どのような逸脱なら事前承認なしで許可するか
+allowed_deviations_policy:
+  allow_without_approval:
+    - "軽微な文言修正"
+    - "コードフォーマット調整"
+  require_approval:
+    - "新規ファイル作成"
+    - "既存ファイルの大幅変更"
+    - "アーキテクチャ変更"

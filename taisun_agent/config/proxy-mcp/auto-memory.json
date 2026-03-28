@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "description": "スーパーメモリー自動化設定 - コンテキスト節約とコスト削減",
+
+  "autoSave": {
+    "enabled": true,
+    "description": "自動保存機能の有効化"
+  },
+
+  "triggers": {
+    "contextThreshold": {
+      "enabled": true,
+      "percentage": 70,
+      "description": "コンテキスト使用率が70%を超えたら自動保存"
+    },
+
+    "outputSize": {
+      "enabled": true,
+      "threshold": 50000,
+      "description": "ツール出力が50KB（約50,000文字）を超えたら自動保存"
+    },
+
+    "fileOperations": {
+      "enabled": true,
+      "extensions": [".log", ".txt", ".json", ".md"],
+      "minSize": 20000,
+      "description": "特定の拡張子で20KB以上のファイルを自動保存"
+    },
+
+    "openCodeIntegration": {
+      "enabled": true,
+      "autoSaveLog": true,
+      "autoExportSession": true,
+      "description": "OpenCode実行時にログとセッションを自動保存"
+    }
+  },
+
+  "storage": {
+    "namespace": "short-term",
+    "autoCleanup": true,
+    "cleanupAfterDays": 14,
+    "description": "短期メモリー（14日後に自動削除）に保存"
+  },
+
+  "notification": {
+    "showRefId": true,
+    "showSummary": true,
+    "showSavings": true,
+    "description": "保存時にrefIDと節約量を表示"
+  },
+
+  "exclusions": {
+    "paths": [
+      "node_modules/**",
+      ".git/**",
+      "dist/**",
+      "build/**"
+    ],
+    "description": "自動保存対象外のパス"
+  },
+
+  "advanced": {
+    "compressLargeFiles": false,
+    "deduplication": true,
+    "maxAutoSavesPerSession": 100,
+    "description": "高度な設定（通常は変更不要）"
+  }
+}

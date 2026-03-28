@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "google-calendar": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-calendar"],
+      "env": {
+        "GOOGLE_OAUTH_CREDENTIALS": "/Users/tonodukaren/credentials/gcp-oauth.keys.json"
+      }
+    },
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-drive"],
+      "env": {
+        "GOOGLE_OAUTH_CREDENTIALS": "/Users/tonodukaren/credentials/gcp-oauth.keys.json"
+      }
+    },
+    "google-tasks": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/Users/tonodukaren/Programming/AI/01_APP/google-tasks-mcp/dist/index.js"],
+      "env": {
+        "GOOGLE_OAUTH_CREDENTIALS": "/Users/tonodukaren/credentials/gcp-oauth.keys.json"
+      }
+    }
+  }
+}

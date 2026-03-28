@@ -1,0 +1,196 @@
+name: Integration Tests
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - '.claude/**'
+      - 'package*.json'
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+    inputs:
+      test_filter:
+        description: 'Test filter pattern (e.g., agents, skills, mcp)'
+        required: false
+        default: ''
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --selectProjects unit
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: unit-tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run agent integration tests
+        run: npm test -- --selectProjects integration --testPathPattern="agents.integration"
+
+      - name: Run skill integration tests
+        run: npm test -- --selectProjects integration --testPathPattern="skills.integration"
+
+      - name: Run MCP integration tests
+        run: npm test -- --selectProjects integration --testPathPattern="mcp.integration"
+
+  multi-agent-tests:
+    name: Multi-Agent Coordination Tests
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify coordinator agents
+        run: |
+          echo "Checking coordinator agent definitions..."
+          ls .claude/agents/*coordinator*.md 2>/dev/null | wc -l | xargs echo "Found coordinator agents:"
+
+      - name: Verify multi-agent modes
+        run: |
+          echo "Checking multi-agent mode definitions..."
+          ls .claude/agents/*multi-agent*.md 2>/dev/null | wc -l | xargs echo "Found multi-agent modes:"
+
+      - name: Run multi-agent tests
+        run: npm test -- --selectProjects integration --testPathPattern="Multi-Agent" --passWithNoTests
+
+  skill-chain-tests:
+    name: Skill Chain Tests
+    runs-on: ubuntu-latest
+    needs: integration-tests
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify skill definitions
+        run: |
+          echo "Checking skill definitions..."
+          for skill in .claude/skills/*/SKILL.md; do
+            echo "✓ $(dirname $skill | xargs basename)"
+          done
+
+      - name: Run skill chain tests
+        run: npm test -- --selectProjects integration --testPathPattern="Skill Chaining" --passWithNoTests
+
+  test-report:
+    name: Generate Test Report
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, multi-agent-tests, skill-chain-tests]
+    if: always()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run all tests with coverage
+        run: npm test -- --coverage --coverageReporters=json-summary
+
+      - name: Generate test summary
+        run: |
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Test Suite | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Unit Tests | ${{ needs.unit-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Integration Tests | ${{ needs.integration-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Multi-Agent Tests | ${{ needs.multi-agent-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Skill Chain Tests | ${{ needs.skill-chain-tests.result }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: |
+            coverage/
+            test-results/
+          retention-days: 7
+
+  quality-gate:
+    name: Quality Gate
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, multi-agent-tests, skill-chain-tests]
+
+    steps:
+      - name: Check test results
+        run: |
+          if [ "${{ needs.unit-tests.result }}" != "success" ]; then
+            echo "Unit tests failed"
+            exit 1
+          fi
+          if [ "${{ needs.integration-tests.result }}" != "success" ]; then
+            echo "Integration tests failed"
+            exit 1
+          fi
+          if [ "${{ needs.multi-agent-tests.result }}" != "success" ]; then
+            echo "Multi-agent tests failed"
+            exit 1
+          fi
+          if [ "${{ needs.skill-chain-tests.result }}" != "success" ]; then
+            echo "Skill chain tests failed"
+            exit 1
+          fi
+          echo "All tests passed! ✅"

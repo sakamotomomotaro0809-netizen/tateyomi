@@ -1,0 +1,142 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "ops-schedule.schema.json",
+  "title": "Ops Schedule Configuration",
+  "description": "Configuration for scheduled ops jobs (daily/weekly automation) - P18",
+  "type": "object",
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "description": "Enable/disable schedule runner globally",
+      "default": false
+    },
+    "timezone": {
+      "type": "string",
+      "description": "Timezone for schedule execution (IANA format)",
+      "default": "Asia/Tokyo"
+    },
+    "stateDir": {
+      "type": "string",
+      "description": "Directory for state persistence (relative to project root)",
+      "default": "logs/schedule-state"
+    },
+    "dashboardIssue": {
+      "type": "integer",
+      "description": "GitHub Issue number for Ops Dashboard (optional, for posting summaries)",
+      "minimum": 1
+    },
+    "jobs": {
+      "type": "object",
+      "description": "Scheduled job definitions",
+      "properties": {
+        "daily_observability_report": {
+          "type": "object",
+          "description": "Daily observability report generation",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "cadence": {
+              "type": "string",
+              "const": "daily"
+            },
+            "at": {
+              "type": "string",
+              "description": "Time to run (HH:MM format)",
+              "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
+              "default": "09:00"
+            },
+            "postToIssue": {
+              "type": "boolean",
+              "description": "Post summary to dashboard issue",
+              "default": false
+            }
+          }
+        },
+        "weekly_observability_report": {
+          "type": "object",
+          "description": "Weekly observability report generation",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "cadence": {
+              "type": "string",
+              "const": "weekly"
+            },
+            "dow": {
+              "type": "string",
+              "description": "Day of week",
+              "enum": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+              "default": "Mon"
+            },
+            "at": {
+              "type": "string",
+              "description": "Time to run (HH:MM format)",
+              "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
+              "default": "09:10"
+            },
+            "postToIssue": {
+              "type": "boolean",
+              "description": "Post summary to dashboard issue",
+              "default": false
+            }
+          }
+        },
+        "weekly_improvement_digest": {
+          "type": "object",
+          "description": "Weekly improvement digest from incidents",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": false
+            },
+            "cadence": {
+              "type": "string",
+              "const": "weekly"
+            },
+            "dow": {
+              "type": "string",
+              "description": "Day of week",
+              "enum": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+              "default": "Mon"
+            },
+            "at": {
+              "type": "string",
+              "description": "Time to run (HH:MM format)",
+              "pattern": "^([01]?[0-9]|2[0-3]):[0-5][0-9]$",
+              "default": "09:20"
+            },
+            "postToIssue": {
+              "type": "boolean",
+              "description": "Post summary to dashboard issue",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "redaction": {
+      "type": "object",
+      "description": "Secret redaction settings for posted content",
+      "properties": {
+        "patterns": {
+          "type": "array",
+          "description": "Additional regex patterns to redact",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Replacement text for redacted content",
+          "default": "[REDACTED]"
+        }
+      }
+    }
+  },
+  "required": ["enabled"]
+}

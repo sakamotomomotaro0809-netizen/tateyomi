@@ -1,0 +1,18 @@
+type: task_result
+title: Dual Investment暗号通貨システム リサーチ&設計完了
+key_insights[8]: "Dual Investmentの本質はオプションのプレミアム売り（Buy Low=Cash-Secured Put, Sell High=Covered Call）",Bitget APIにはDual Investment専用エンドポイントが未公開。Earn API(Shark Fin/Savings)とSpot APIで代替,"最も体系的な戦略はホイール（回転）戦略: Buy Low→Sell High→Buy Low...のサイクル","MCPMarketに暗号通貨関連MCP多数: CCXT(126★), Crypto Indicators(112★), Web3 Research(154★), TrendRadar(45,709★)","SkillsMPに170,226スキル、Apifyに16,245アクター（暗号通貨関連62件）","リスク管理: 1ポジション10-20%、DI全体30-50%、流動性30-50%確保",CCXT(40.9k stars)が100+取引所統一APIの事実上の標準,Freqtrade(25k+ stars)がOSSトレーディングBotの最有力
+decisions[3]:
+  - chose: TypeScript(Node.js) + Python ハイブリッド構成
+    over[3]: Python only,Go,Rust
+    reason: CCXT/bitget-apiのTS対応、MCP統合のしやすさ、PythonはML/分析用
+  - chose: Spot API + Earn API 代替方式
+    over[2]: Dual Investment API直接利用,ブラウザ自動化
+    reason: DI APIが未公開のため。Spot Limitオーダーでオプション的ポジション構築
+  - chose: Redis Streams（メッセージバス）
+    over[2]: Apache Kafka,RabbitMQ
+    reason: 個人運用規模では軽量で十分なスループット
+refs[5]: 統合リサーチレポート_システム構築提案.md - 全体設計,dual_investment_research_report.md - 戦略詳細,mcpmarket.com/ja - MCP一覧,skillsmp.com/ja - スキル一覧,apify.com/store - アクター一覧
+next[4]: "Phase 1: MCP環境構築 + Bitget API接続テスト",Bitgetサポートへ Dual Investment API公開予定を問い合わせ,CCXT MCP / Bitget Trading MCP の導入,ホイール戦略のバックテスト実装
+id: cpt_1770565355879_2j6ojk
+created: "2026-02-08T15:42:35.879Z"
+updated: "2026-02-08T15:42:35.879Z"

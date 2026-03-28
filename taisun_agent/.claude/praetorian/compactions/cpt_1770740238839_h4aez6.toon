@@ -1,0 +1,8 @@
+type: web_research
+title: 日本語VSL感情分析と画像設計 Round2リサーチ結果
+key_insights[8]: DeBERTa-v3-large (WRIME fine-tune) が日本語感情分析で最高精度 F1=0.662,"Plutchik 8感情 → VSL 5カテゴリマッピング: fear+disgust→恐怖, joy+anticipation→希望, anger+surprise→興奮, sadness→共感, trust→信頼","FLUX 2 Proプロンプト4柱構造: Subject→Action→Style→Context","VSL 8段階シーン構造: Hook→Problem→Agitate→Solution→Proof→Social Proof→Offer→CTA","60-30-10色彩ルール: 60%基調色 + 30%補完色 + 10%アクセント色","情報密度スコアでvisual_type自動決定: high→data_viz, medium→hybrid, low→narrative_image","Google Cloud NL API: 日本語対応 sentence-level sentiment score(-1~+1) + magnitude",LLM Structured Output (Claude/GPT) でシーン記述JSON自動生成が最新手法
+findings[7]: "恐怖シーン色彩: ダークグレー#1a1a1a + 赤#cc0000, low-key chiaroscuro, 35mm f/2.8","希望シーン色彩: 白#ffffff + 金#ffd700 + 空色#87ceeb, golden hour, 85mm f/2.0","信頼シーン色彩: 紺#003366 + 金#d4af37, even studio lighting, 50mm f/5.6","緊急性シーン: 赤#ff0000 + オレンジ#ff6600, dramatic rim light, 24mm f/8","WRIMEデータセット: 43,200件日本語SNS投稿、8感情×4段階強度","VideoDrafter: LLM→マルチシーンスクリプト→エンティティ抽出→T2I→動画パイプライン","画像切り替え自動決定: 文境界 + 感情変化 + 情報密度急変 + 最小3秒/最大12秒制約"
+recommendations[4]: DeBERTa-v3-large + WRIMEで台本テキストの感情自動分析を実装,Claude Structured Outputでシーン記述JSON自動生成,感情別プロンプトテンプレート(恐怖/希望/信頼/緊急性)をFLUX 2 Proに適用,情報密度スコアリングで画像の視覚的複雑さを自動決定
+id: cpt_1770740238839_h4aez6
+created: "2026-02-10T16:17:18.839Z"
+updated: "2026-02-10T16:17:18.839Z"

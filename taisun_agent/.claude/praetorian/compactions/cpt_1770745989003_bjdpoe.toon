@@ -1,0 +1,11 @@
+type: task_result
+title: Local I2V vs fal.ai Comparison Test Results
+key_insights[5]: "CogVideoX-5B on M4 Max MPS: 11+ minutes elapsed, 0/30 steps completed → completely impractical","fal.ai MiniMax Hailuo: 4.2 min, $0.28/clip, 3.5 MB output → production ready","Estimated local generation time: 5-7.5 hours per 5-second clip (extrapolated from step timing)","MPS backend for CogVideoX is ~100x slower than CUDA RTX 4090, making it useless for production",6 video scenes × $0.28 = $1.68 (~250円) total with fal.ai → highly cost effective
+decisions[1]:
+  - chose: fal.ai MiniMax Hailuo for all 6 video scenes
+    over[2]: Local CogVideoX-5B (too slow),Hybrid approach (no benefit since local fails)
+    reason: "Local CogVideoX-5B on M4 Max MPS is completely impractical (11+ min for 0/30 steps). fal.ai delivers in 4.2 min for $0.28/clip. Total cost for 6 clips: ~$1.68 (250円)."
+refs[3]: local-i2v-test/test_cogvideo.py - CogVideoX-5B local test script,local-i2v-test/test_falai.py - fal.ai MiniMax comparison test,"local-i2v-test/output/s01-hook_falai_minimax.mp4 - fal.ai output (3.5 MB, 4.2 min)"
+id: cpt_1770745989003_bjdpoe
+created: "2026-02-10T17:53:09.003Z"
+updated: "2026-02-10T17:53:09.003Z"

@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "taisun-proxy": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["dist/proxy-mcp/server.js"],
+      "disabled": false,
+      "description": "TAISUN Proxy MCP (single entrypoint)",
+      "category": "system"
+    },
+    "youtube": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/Users/matsumototoshihiko/mcp-youtube/dist/index.js"],
+      "disabled": false,
+      "description": "YouTube字幕ダウンロード",
+      "category": "media"
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "disabled": false,
+      "description": "ブラウザ自動化",
+      "category": "browser-automation"
+    }
+  }
+}

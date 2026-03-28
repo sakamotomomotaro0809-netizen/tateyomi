@@ -1,0 +1,4 @@
+{"timestamp":"2026-02-15T13:11:11.826Z","event":"semantic_verification","pass":3,"fail":2,"total_autoload_size":7530,"restoration_accuracy":60}
+{"timestamp":"2026-02-15T13:12:06.818Z","event":"semantic_verification","pass":5,"fail":0,"total_autoload_size":7530,"restoration_accuracy":100}
+{"timestamp":"2026-02-15T13:12:08.290Z","event":"semantic_verification","pass":5,"fail":0,"total_autoload_size":7530,"restoration_accuracy":100}
+{"timestamp":"2026-02-15T13:16:08.208Z","event":"semantic_verification","pass":5,"fail":0,"total_autoload_size":7530,"restoration_accuracy":100}

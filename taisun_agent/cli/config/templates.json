@@ -1,0 +1,42 @@
+{
+  "templates": {
+    "package.json": {
+      "languages": ["javascript", "typescript"],
+      "template": "package.json.hbs"
+    },
+    "tsconfig.json": {
+      "languages": ["typescript"],
+      "template": "tsconfig.json.hbs"
+    },
+    ".env.example": {
+      "languages": ["javascript", "typescript", "python"],
+      "template": ".env.example.hbs"
+    },
+    "requirements.txt": {
+      "languages": ["python"],
+      "template": "requirements.txt.hbs"
+    },
+    "src/index.ts": {
+      "languages": ["typescript"],
+      "frameworks": ["express", "hono"],
+      "template": "src/index.ts.hbs"
+    },
+    "src/main.py": {
+      "languages": ["python"],
+      "frameworks": ["fastapi", "flask"],
+      "template": "src/main.py.hbs"
+    },
+    "README.md": {
+      "languages": ["javascript", "typescript", "python"],
+      "template": "README.md.hbs"
+    },
+    ".gitignore": {
+      "languages": ["javascript", "typescript", "python"],
+      "template": ".gitignore.hbs"
+    },
+    ".clauderc.json": {
+      "languages": ["javascript", "typescript", "python"],
+      "template": ".clauderc.json.hbs"
+    }
+  }
+}

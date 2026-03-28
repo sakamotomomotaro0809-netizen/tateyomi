@@ -1,0 +1,30 @@
+{
+  "$comment": "Staging overlay example. Copy to internal-mcps.staging.json (gitignored)",
+  "mcps": [
+    {
+      "name": "github",
+      "enabled": true,
+      "rollout": {
+        "mode": "full"
+      }
+    },
+    {
+      "name": "notion",
+      "enabled": false
+    },
+    {
+      "name": "postgres",
+      "enabled": true,
+      "rollout": {
+        "mode": "full"
+      }
+    },
+    {
+      "name": "filesystem",
+      "enabled": true,
+      "rollout": {
+        "mode": "full"
+      }
+    }
+  ]
+}

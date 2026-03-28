@@ -1,0 +1,408 @@
+{
+  "lp_metadata": {
+    "title": "フランチャイズ募集｜ホリエモンAI学校",
+    "description": "ホリエモンAI学校のフランチャイズ(FC)加盟店を募集しています",
+    "category": "side-business",
+    "publish_date": "2025-06-26",
+    "url": "https://horiemon.ai/side-business/side-meta"
+  },
+
+  "design_system": {
+    "colors": {
+      "primary_black": "#121212",
+      "primary_white": "#FFFFFF",
+      "gradient_hero": "linear-gradient(135deg, #ff273c, #0088ff)",
+      "gradient_sub": "linear-gradient(135deg, pink, gray)",
+      "accent_orange": "#ef6c00"
+    },
+    "typography": {
+      "heading_font": "Zen Antique",
+      "body_font": "Noto Sans JP",
+      "sizes": {
+        "title_xl": "48px",
+        "title_l": "32px",
+        "paragraph_l": "16px"
+      }
+    },
+    "spacing": {
+      "section_padding": "80px 0",
+      "container_max_width": "1200px"
+    }
+  },
+
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero_section",
+      "layout": "full_width_gradient",
+      "content": {
+        "headline": "ホリエモンAI学校\nフランチャイズパートナー募集",
+        "subheadline": "次世代AI教育ビジネスで、新しい収益の柱を",
+        "background": {
+          "type": "gradient",
+          "gradient": "linear-gradient(135deg, #ff273c, #0088ff)"
+        },
+        "cta_button": {
+          "text": "資料請求・説明会申込",
+          "color": "#ef6c00",
+          "position": "center"
+        }
+      },
+      "image_requirements": {
+        "hero_image": {
+          "type": "business_concept",
+          "description": "AI教育、フランチャイズビジネス、成功イメージ",
+          "style": "modern, professional, tech-focused",
+          "composition": "横長、グラデーション背景に溶け込むデザイン"
+        }
+      }
+    },
+
+    {
+      "id": "partner_logos",
+      "type": "logo_slider",
+      "content": {
+        "title": "導入企業・パートナー実績",
+        "logos": [
+          "LIFEFUND",
+          "あおぞらケアグループ",
+          "Fellows",
+          "RANNYs",
+          "その他5社"
+        ],
+        "slider_config": {
+          "auto_scroll": true,
+          "infinite_loop": true,
+          "height_pc": "80px",
+          "height_mobile": "40px"
+        }
+      },
+      "image_requirements": {
+        "logo_section_bg": {
+          "type": "trust_background",
+          "description": "企業ロゴを並べる信頼性の高い背景",
+          "style": "clean, white or light gray background",
+          "composition": "横長、ロゴが際立つシンプルなデザイン"
+        }
+      }
+    },
+
+    {
+      "id": "benefits",
+      "type": "feature_section",
+      "layout": "three_column",
+      "content": {
+        "title": "選ばれる3つの理由",
+        "items": [
+          {
+            "icon": "trending_up",
+            "title": "成長市場",
+            "description": "AI教育市場は年率30%で拡大中。今がチャンス"
+          },
+          {
+            "icon": "support",
+            "title": "充実サポート",
+            "description": "開業から運営まで、本部が完全バックアップ"
+          },
+          {
+            "icon": "monetization",
+            "title": "高収益モデル",
+            "description": "少ない初期投資で、安定した収益を実現"
+          }
+        ]
+      },
+      "image_requirements": {
+        "benefit_icons": [
+          {
+            "type": "icon_illustration",
+            "description": "上昇するグラフ、成長イメージ",
+            "style": "flat design, icon style, gradient colors",
+            "color_scheme": "red to blue gradient"
+          },
+          {
+            "type": "icon_illustration",
+            "description": "サポート、握手、パートナーシップ",
+            "style": "flat design, icon style, warm colors",
+            "color_scheme": "orange accent"
+          },
+          {
+            "type": "icon_illustration",
+            "description": "お金、収益、ビジネス成功",
+            "style": "flat design, icon style, professional",
+            "color_scheme": "gold and blue"
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "business_model",
+      "type": "explanation_section",
+      "layout": "alternating",
+      "content": {
+        "title": "ビジネスモデル",
+        "steps": [
+          {
+            "number": "01",
+            "title": "初期投資を抑えて開業",
+            "description": "教室不要のオンライン完結モデル。低リスクでスタート可能"
+          },
+          {
+            "number": "02",
+            "title": "集客は本部がサポート",
+            "description": "ホリエモンブランドを活用した集客支援システム"
+          },
+          {
+            "number": "03",
+            "title": "運営ノウハウを提供",
+            "description": "研修プログラムと運営マニュアルで安心スタート"
+          }
+        ]
+      },
+      "image_requirements": {
+        "step_illustrations": [
+          {
+            "type": "process_diagram",
+            "description": "オンラインビジネス、PCとスマホ、リモートワーク",
+            "style": "modern illustration, clean lines, tech aesthetic",
+            "composition": "横長、ステップ1のイメージ"
+          },
+          {
+            "type": "process_diagram",
+            "description": "集客、マーケティング、顧客獲得",
+            "style": "modern illustration, dynamic, growth focused",
+            "composition": "横長、ステップ2のイメージ"
+          },
+          {
+            "type": "process_diagram",
+            "description": "研修、教育、スキルアップ",
+            "style": "modern illustration, professional, supportive",
+            "composition": "横長、ステップ3のイメージ"
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "revenue",
+      "type": "table_section",
+      "content": {
+        "title": "収益シミュレーション",
+        "table": {
+          "headers": ["項目", "月間", "年間"],
+          "rows": [
+            ["受講生数", "20名", "240名"],
+            ["月額受講料", "¥50,000", "-"],
+            ["売上", "¥1,000,000", "¥12,000,000"],
+            ["ロイヤリティ", "¥200,000", "¥2,400,000"],
+            ["粗利益", "¥800,000", "¥9,600,000"]
+          ]
+        }
+      },
+      "image_requirements": {
+        "revenue_chart": {
+          "type": "infographic",
+          "description": "収益グラフ、右肩上がりのチャート、お金のイメージ",
+          "style": "professional chart, clean design, data visualization",
+          "color_scheme": "gradient from red to blue, with orange accents",
+          "composition": "横長、表やグラフのビジュアル"
+        }
+      }
+    },
+
+    {
+      "id": "voice",
+      "type": "testimonial_section",
+      "layout": "card_grid",
+      "content": {
+        "title": "パートナーの声",
+        "testimonials": [
+          {
+            "name": "A様（40代・元会社員）",
+            "location": "東京都",
+            "quote": "未経験からでも本部のサポートで半年で黒字化できました",
+            "result": "月商150万円達成"
+          },
+          {
+            "name": "B様（30代・副業）",
+            "location": "大阪府",
+            "quote": "本業を続けながら、週末だけでも十分な収益が得られています",
+            "result": "副業で月50万円"
+          }
+        ]
+      },
+      "image_requirements": {
+        "testimonial_photos": [
+          {
+            "type": "portrait_professional",
+            "description": "40代男性ビジネスマン、成功した表情、オフィス背景",
+            "style": "professional portrait, warm lighting, confident pose",
+            "composition": "正方形、人物写真風"
+          },
+          {
+            "type": "portrait_professional",
+            "description": "30代女性、副業で成功、明るい表情、カフェ背景",
+            "style": "professional portrait, natural lighting, friendly pose",
+            "composition": "正方形、人物写真風"
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "flow",
+      "type": "process_section",
+      "content": {
+        "title": "加盟までの流れ",
+        "steps": [
+          {
+            "step": "STEP 1",
+            "title": "資料請求・説明会",
+            "description": "まずは無料の資料請求または説明会にご参加ください"
+          },
+          {
+            "step": "STEP 2",
+            "title": "個別相談",
+            "description": "ご不明点やご質問に個別でお答えします"
+          },
+          {
+            "step": "STEP 3",
+            "title": "加盟審査",
+            "description": "双方の条件が合致すれば加盟契約を締結"
+          },
+          {
+            "step": "STEP 4",
+            "title": "研修・開業準備",
+            "description": "3ヶ月の研修プログラムで開業準備"
+          },
+          {
+            "step": "STEP 5",
+            "title": "開業・運営開始",
+            "description": "本部のサポートを受けながら運営スタート"
+          }
+        ]
+      },
+      "image_requirements": {
+        "flow_diagram": {
+          "type": "timeline_illustration",
+          "description": "5ステップのプロセス、矢印で繋がるフロー図",
+          "style": "clean infographic, step-by-step visualization, modern",
+          "color_scheme": "gradient progression from red to blue",
+          "composition": "縦長または横長、フローチャート風"
+        }
+      }
+    },
+
+    {
+      "id": "faq",
+      "type": "accordion_section",
+      "content": {
+        "title": "よくある質問",
+        "items": [
+          {
+            "question": "未経験でも開業できますか？",
+            "answer": "はい、可能です。充実した研修プログラムと運営マニュアルで未経験者でも安心して開業できます。"
+          },
+          {
+            "question": "初期費用はいくらですか？",
+            "answer": "加盟金300万円、研修費50万円、運転資金50万円の合計400万円が目安です。"
+          },
+          {
+            "question": "どのくらいの期間で回収できますか？",
+            "answer": "平均的に12〜18ヶ月で初期投資を回収される方が多いです。"
+          }
+        ]
+      }
+    },
+
+    {
+      "id": "cta_main",
+      "type": "form_section",
+      "content": {
+        "title": "無料資料請求・説明会申込",
+        "subtitle": "まずは資料をご請求ください。オンライン説明会も随時開催中",
+        "form_fields": [
+          {
+            "name": "name",
+            "label": "お名前",
+            "type": "text",
+            "required": true
+          },
+          {
+            "name": "email",
+            "label": "メールアドレス",
+            "type": "email",
+            "required": true
+          },
+          {
+            "name": "phone",
+            "label": "電話番号",
+            "type": "tel",
+            "required": true
+          },
+          {
+            "name": "prefecture",
+            "label": "都道府県",
+            "type": "select",
+            "required": true
+          },
+          {
+            "name": "request_type",
+            "label": "ご希望",
+            "type": "checkbox",
+            "options": ["資料請求", "説明会参加", "個別相談"]
+          },
+          {
+            "name": "message",
+            "label": "ご質問・ご要望",
+            "type": "textarea",
+            "required": false
+          }
+        ],
+        "submit_button": {
+          "text": "送信する",
+          "color": "#ef6c00"
+        }
+      },
+      "image_requirements": {
+        "form_background": {
+          "type": "call_to_action_visual",
+          "description": "ビジネス成功、握手、パートナーシップ、前向きなイメージ",
+          "style": "professional, inspiring, warm atmosphere",
+          "color_scheme": "gradient background with orange CTA",
+          "composition": "フォーム背景、左右分割可能"
+        }
+      }
+    },
+
+    {
+      "id": "fixed_cta",
+      "type": "fixed_footer",
+      "content": {
+        "trigger": "scroll_300px",
+        "button_text": "今すぐ資料請求",
+        "button_color": "#ef6c00",
+        "position": "fixed_bottom"
+      }
+    }
+  ],
+
+  "technical_specs": {
+    "responsive": true,
+    "breakpoints": {
+      "mobile": "375px",
+      "tablet": "768px",
+      "desktop": "1200px"
+    },
+    "animations": {
+      "scroll_reveal": true,
+      "logo_slider": "infinite_loop",
+      "cta_fade_in": "on_scroll"
+    },
+    "integrations": {
+      "form_platform": "HubSpot",
+      "analytics": "Google Analytics",
+      "chatbot": "optional"
+    }
+  }
+}

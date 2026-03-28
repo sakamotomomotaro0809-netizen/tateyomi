@@ -1,0 +1,11 @@
+type: web_research
+title: ローカルI2V動画生成 Apple Silicon調査 2026-02
+key_insights[8]: Apple SiliconでのローカルI2V生成は現時点で商用クオリティに未到達,FP8精度がMPSで未サポート（Wan 2.2で致命的）,CogVideoX-5B-I2VはMPS対応だがRTX 4090の20倍遅い,fal.ai MiniMax Hailuo I2Vは$0.28/clipで世界2位の品質,ComfyUI + Wan2.2 GGUF版が現時点で最も実用的なローカル選択肢（12GB RAM可）,"MLX対応: LTX-2 distilled版、HunyuanVideo_MLX（コミュニティ版）",推奨64GB RAM以上、50GB+ストレージ,月10クリップ以下ならfal.aiがコスト有利
+decisions[1]:
+  - chose: fal.ai MiniMax Hailuo I2V（クラウド）を推奨維持
+    over[3]: ローカルWan2.2 GGUF,ローカルCogVideoX,ローカルLTX-2 MLX
+    reason: 品質世界2位、$0.28/clip、Apple SiliconのFP8未対応・20倍遅延により、ローカルは品質・速度・安定性で劣る
+recommendations[3]: "短期: fal.ai継続、ローカルは非推奨","中期（2026 Q3〜）: FP8 MPS対応完了なら再検討","ハイブリッド案: ローカルで低解像度プロトタイプ → fal.aiで本番レンダリング"
+id: cpt_1770744039980_6ylo0j
+created: "2026-02-10T17:20:39.980Z"
+updated: "2026-02-10T17:20:39.980Z"

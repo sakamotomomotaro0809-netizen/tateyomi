@@ -1,0 +1,18 @@
+type: task_result
+title: トレード停止シグナルシステム 精査・ファクトチェック結果
+key_insights[12]: "61項目のファクトチェック: 38%正確、30%注意、10%不正確、23%検証不能",月額$0 MVPは不可能 → Fly.io無料枠廃止、最低$2-10/月必要,LunarCrushに詐欺疑惑（Trustpilot出金不可報告）→ 推奨から削除必要,Google Trends 80%減=クラッシュ予兆は因果関係が逆（クラッシュ後の現象）,FinBERT-BiLSTM 98%はarXivプレプリント（査読なし）かつバックテスト精度,MVRV Z-Score閾値 >3.2は過小。歴史的に >7が極端な過大評価レベル,"Elon Musk研究: 2分→2時間が正しい（Ante 2023）",60秒$32.1B清算は修辞的表現の可能性。確認済みは24時間で$19-20B,Freqtrade実際46.7K Stars（レポート26K+は古い）、CrewAI 43.9K Stars,"AutoGPT: CVE-2026-22038（APIキーロギング）+ 無限ループリスク","Fly.io代替: Railway $5/月、Render 750h/月無料、Hetzner €3.29/月","LunarCrush代替: Santiment $49/月、CryptoPanic無料枠"
+decisions[3]:
+  - chose: LunarCrush除外・Santiment代替推奨
+    over[1]: LunarCrush継続使用
+    reason: Trustpilotで出金不可・アカウント凍結の複数報告。Scam Detector 50.7/100
+  - chose: 月額$5 MVPに修正
+    over[1]: 月額$0 MVP
+    reason: Fly.io無料枠実質廃止。Railway $5/月が最安代替
+  - chose: CrewAIをマルチエージェントフレームワークに統一
+    over[1]: AutoGPT併用
+    reason: AutoGPTにCVE-2026-22038脆弱性と無限ループリスク
+refs[5]: トレード停止シグナルシステム_精査レポート.md - 全精査結果,"arXiv:2411.12748 - FinBERT-BiLSTM論文（査読なし）",fly.io/pricing - 無料枠廃止確認,trustpilot.com/review/lunarcrush.com - 詐欺報告,bitninja.com - AutoGPT CVE-2026-22038
+recommendations[4]: "最優先: LunarCrush推奨削除、月額$0→$5修正、Google Trends因果関係修正","高: MVRV閾値再検討、精度に「バックテスト」注記追加、未検証リポ5個のコードレビュー","中: フォールバック設計追加、バックテスト計画策定、APIキーセキュリティ設計","低: ポジションサイズ管理、自動回復・ヘルスチェック"
+id: cpt_1770737118817_cnfksm
+created: "2026-02-10T15:25:18.817Z"
+updated: "2026-02-10T15:25:18.817Z"

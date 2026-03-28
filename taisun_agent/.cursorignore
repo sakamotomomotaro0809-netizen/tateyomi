@@ -1,0 +1,74 @@
+# ========================================
+# Cursor Index Optimization
+# Expected reduction: 30-40% per project
+# ========================================
+
+# 必須除外: Package managers & dependencies
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+out/
+coverage/
+.turbo/
+
+# キャッシュ・ログ・一時ファイル
+.cache/
+.vscode/.cache/
+*.log
+.turbopack/
+*.swp
+*.swo
+*~
+
+# テスト関連（インデックスから外す）
+**/__tests__/
+**/*.test.ts
+**/*.test.js
+**/*.spec.ts
+**/*.spec.js
+coverage/
+.nyc_output/
+
+# 開発用ツール（AIには不要）
+.husky/
+.git/
+.gitignore
+.env.local
+.env.*.local
+.env.production.local
+
+# 大規模ライブラリ（メモリ負荷が高い）
+.next/cache/
+.swc/
+.eslintcache
+.prettier-cache/
+.gradle/
+target/
+.output/
+
+# プロジェクト特有（taisun_agent2026）
+.claude/
+.workflow_state.json
+videos/
+slides/
+artifacts/
+transcripts/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.idea/
+*.iml
+.vscode/extensions/
+.vscode/ipch/
+
+# 不要な言語 (TypeScript + Python + Go のみ使用)
+**/*.java
+**/*.scala
+**/*.kt
+**/*.gradle

@@ -1,0 +1,54 @@
+# Deep Research - 調査入力テンプレート
+# このファイルをコピーして runs/YYYYMMDD-HHMMSS__<slug>/input.yaml として使用
+
+# 調査テーマ（必須）
+topic: ""
+
+# ドメイン: ai_system | marketing | investing | spiritual | custom
+domain: "custom"
+
+# 時間軸: 24h | 7d | 30d | 180d | all
+horizon: "30d"
+
+# 言語（配列）
+languages:
+  - ja
+  - en
+
+# 深さ: lite | standard | deep
+# lite: 10-20件、高速スキャン
+# standard: 30-50件、標準調査
+# deep: 50-100件、徹底調査
+depth: "standard"
+
+# 必須キーワード（これを含む情報を優先）
+must_include: []
+
+# 除外キーワード（これを含む情報を除外）
+must_exclude: []
+
+# 調査の背景・目的（自由記述）
+context: |
+  なぜこの調査が必要か？
+  何を知りたいか？
+  どのような意思決定に使うか？
+
+# 仮説（あれば）
+hypotheses:
+  - "仮説1: ..."
+  - "仮説2: ..."
+
+# 優先する情報源（あれば）
+preferred_sources:
+  - "公式ドキュメント"
+  - "GitHub"
+  - "論文"
+
+# 除外する情報源（あれば）
+excluded_sources: []
+
+# 作成日時（自動設定）
+created_at: ""
+
+# 備考
+notes: ""

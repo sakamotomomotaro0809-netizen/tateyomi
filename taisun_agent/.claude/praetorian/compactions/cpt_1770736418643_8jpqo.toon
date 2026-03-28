@@ -1,0 +1,8 @@
+type: web_research
+title: 日本語テロップ改行最適化 ディープリサーチ
+key_insights[9]: "BudouX: Google製の軽量(~20KB)文節分割ライブラリ。AdaBoostアルゴリズム+Nグラム特徴量。KNBコーパスで訓練。","CSS word-break: auto-phrase はChrome 119+/Edge 119+のみ対応。Firefox/Safari未対応。内部でBudouX使用。","Next.js SSR対応: loadDefaultJapaneseParser()はwindowに依存→NG。Parser+jaModelを直接使う。","テロップルール: 1行16文字以内、2行以内、4文字/秒、表示最低3秒、句読点なし","CSS推奨設定: overflow-wrap: anywhere + word-break: normal + line-break: strict","text-wrap: pretty (Chrome 117+, Safari 26+) で段落の最後の1文字だけの改行を防止","Intl.Segmenter: ブラウザネイティブAPI、Chrome/Safari/Firefox対応。word粒度で文節分割可能","TinySegmenter: 23KB、辞書不要だが精度低い。kuromoji.js: 17MB辞書読込が必要で重い","keep-all + overflow-wrap: anywhere + <wbr>タグ方式がBudouXの代替として有効"
+refs[4]: TelopComponents.tsx - 現在のテロップ実装（改行最適化なし）,"BudouX GitHub: google/budoux","CSS word-break: auto-phrase - Chrome 119+",Intl.Segmenter API - MDN
+recommendations[4]: BudouXをReactコンポーネントとして統合（SSR対応パターン）,"CSS word-break: auto-phraseをプログレッシブエンハンスメントで適用",テロップは1行16文字制限をロジックに組み込む,Intl.Segmenter APIをフォールバックとして検討
+id: cpt_1770736418643_8jpqo
+created: "2026-02-10T15:13:38.643Z"
+updated: "2026-02-10T15:13:38.643Z"

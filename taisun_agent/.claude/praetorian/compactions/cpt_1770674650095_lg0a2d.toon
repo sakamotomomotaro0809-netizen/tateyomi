@@ -1,0 +1,18 @@
+id: cpt_1770674650095_lg0a2d
+type: task_result
+title: LP孫正義版インタラクティブVSL 最終QA完了
+created: "2026-02-09T22:04:10.095Z"
+updated: "2026-02-10T02:29:25.064Z"
+findings[7]: 全28アセット(14 MP3 + 14 PNG)がHTTP 200で正常配信確認済み,JSバンドルにVideoPlayer/SceneRenderer/ChoiceOverlayの3コンポーネントが確認済み,"wordBreak:'keep-all' + overflowWrap:'anywhere' がバンドルJSで確認済み",CTA文言「次世代AI四次元ポケットシステムを先行案内で知る権利を掴む」確認済み,"LINE URL https://line.me/ 確認済み","agentic-vision 2回実施: 1回目=画像品質検証(全7/10以上), 2回目=デプロイ後サイト検証","Vercel本番URL: https://vsl-player.vercel.app"
+refs[11]: "branch-structure.ts: 14シーン定義(3共通+1CP+9分岐+1CTA)","VideoPlayer.tsx: CTA文言+LINEリンク","SceneRenderer.tsx: word-break修正済み","ChoiceOverlay.tsx: word-break修正済み",vsl-player/src/components/SceneRenderer.tsx - テロップ+Ken Burns+画像表示,vsl-player/src/app/globals.css - テロップスタイル+アニメーション,vsl-player/src/app/layout.tsx - Noto Sans JPフォント設定,vsl-player/src/data/branch-structure.ts - 全20シーン+1分岐点データ,vsl-player/vercel.json - キャッシュ+セキュリティヘッダー,vsl-player/src/components/VideoPlayer.tsx - プレイヤー+CTA,vsl-player/src/components/ChoiceOverlay.tsx - 選択UI+タイマー
+next[5]: ユーザーに最終成果物を報告,必要に応じてLINE URLを実際のLINE公式アカウントURLに変更,"LINE登録URLを実際のURLに更新（現在はhttps://line.me/）",Phase 7 Remotion動画合成は必要に応じて実施,OGP画像の設定を検討
+key_insights[9]: 全20シーンの漫画風画像をNanoBanana Pro (Gemini ブラウザ自動化)で生成完了,flow-imageが壊れていたためnanobanana-proにフォールバック、全画像生成に成功,s07c-bonusが1回タイムアウト→リトライで成功（全20/20枚完成）,"Vercelデプロイ成功: https://vsl-player.vercel.app",全20シーンの画像+音声がHTTP 200で正常アクセス確認済み,Next.js 16.1.6 + React 19 + Tailwind 4 + Noto Sans JPフォント,"テロップ: keyPhrase cycling + telop-text (text-stroke) + telop-emphasis (赤)",Ken Burns効果 + マンガ線オーバーレイ追加済み,"vercel.json: キャッシュヘッダー(1年) + セキュリティヘッダー追加"
+anti_patterns: null
+recommendations: null
+decisions[2]:
+  - chose: NanoBanana Pro (Gemini ブラウザ自動化)
+    over[1]: flow-image (UseAPI.net)
+    reason: flow-imageがcaptchaプロバイダーエラーで壊れていたため、ブラウザ認証済みのnanobanana-proにフォールバック
+  - chose: Noto Sans JP フォント
+    over[1]: Geist Sans/Mono
+    reason: 日本語テロップの正しいレンダリングに必要

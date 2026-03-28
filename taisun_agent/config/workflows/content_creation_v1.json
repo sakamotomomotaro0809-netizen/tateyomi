@@ -1,0 +1,118 @@
+{
+  "id": "content_creation_v1",
+  "name": "コンテンツ制作ワークフロー",
+  "version": "1.0.0",
+  "description": "Phase 3機能を活用したコンテンツ制作の例。条件分岐でコンテンツタイプを選択し、並列実行で効率的に制作します。",
+  "phases": [
+    {
+      "id": "phase_0_planning",
+      "name": "企画立案",
+      "description": "コンテンツの企画を立てます",
+      "requiredArtifacts": ["output/content/plan.txt"],
+      "nextPhase": "phase_1_type_selection"
+    },
+    {
+      "id": "phase_1_type_selection",
+      "name": "コンテンツタイプ選択",
+      "description": "output/content/content_type.txt にvideo/article/podcastを書き込んでください",
+      "conditionalNext": {
+        "condition": {
+          "type": "file_content",
+          "source": "output/content/content_type.txt",
+          "pattern": "^(video|article|podcast)$"
+        },
+        "branches": {
+          "video": "phase_2_video_plan",
+          "article": "phase_2_article_plan",
+          "podcast": "phase_2_podcast_plan"
+        },
+        "defaultNext": "phase_error"
+      }
+    },
+    {
+      "id": "phase_2_video_plan",
+      "name": "動画企画",
+      "description": "動画の詳細企画を作成します",
+      "requiredArtifacts": ["output/content/video_plan.txt"],
+      "parallelNext": {
+        "phases": [
+          "phase_3_video_script",
+          "phase_3_video_thumbnail",
+          "phase_3_video_seo"
+        ],
+        "waitStrategy": "all"
+      }
+    },
+    {
+      "id": "phase_3_video_script",
+      "name": "台本作成",
+      "description": "動画の台本を作成します",
+      "requiredArtifacts": ["output/content/video_script.txt"],
+      "allowedSkills": ["copywriting-helper", "taiyo-style", "vsl"],
+      "nextPhase": "phase_4_review"
+    },
+    {
+      "id": "phase_3_video_thumbnail",
+      "name": "サムネイル作成",
+      "description": "動画のサムネイルを作成します",
+      "requiredArtifacts": ["output/content/thumbnail.txt"],
+      "allowedSkills": ["gemini-image-generator", "nanobanana-pro"],
+      "nextPhase": "phase_4_review"
+    },
+    {
+      "id": "phase_3_video_seo",
+      "name": "SEO最適化",
+      "description": "タイトル、説明文、タグを最適化します",
+      "requiredArtifacts": ["output/content/seo.txt"],
+      "nextPhase": "phase_4_review"
+    },
+    {
+      "id": "phase_2_article_plan",
+      "name": "記事企画",
+      "description": "記事の詳細企画を作成します",
+      "requiredArtifacts": ["output/content/article_plan.txt"],
+      "nextPhase": "phase_3_article_writing"
+    },
+    {
+      "id": "phase_3_article_writing",
+      "name": "記事執筆",
+      "description": "記事本文を執筆します",
+      "requiredArtifacts": ["output/content/article.txt"],
+      "allowedSkills": ["copywriting-helper", "taiyo-style", "sales-letter"],
+      "nextPhase": "phase_4_review"
+    },
+    {
+      "id": "phase_2_podcast_plan",
+      "name": "ポッドキャスト企画",
+      "description": "ポッドキャストの詳細企画を作成します",
+      "requiredArtifacts": ["output/content/podcast_plan.txt"],
+      "nextPhase": "phase_3_podcast_script"
+    },
+    {
+      "id": "phase_3_podcast_script",
+      "name": "台本作成",
+      "description": "ポッドキャストの台本を作成します",
+      "requiredArtifacts": ["output/content/podcast_script.txt"],
+      "allowedSkills": ["copywriting-helper", "launch-video"],
+      "nextPhase": "phase_4_review"
+    },
+    {
+      "id": "phase_4_review",
+      "name": "最終レビュー",
+      "description": "完成したコンテンツをレビューします。問題があればロールバック可能です。",
+      "allowRollbackTo": [
+        "phase_0_planning",
+        "phase_2_video_plan",
+        "phase_2_article_plan",
+        "phase_2_podcast_plan"
+      ],
+      "nextPhase": null
+    },
+    {
+      "id": "phase_error",
+      "name": "エラー処理",
+      "description": "予期しないコンテンツタイプの処理",
+      "nextPhase": null
+    }
+  ]
+}

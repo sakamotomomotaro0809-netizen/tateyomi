@@ -1,0 +1,294 @@
+name: CD
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - staging
+          - production
+      rollback_version:
+        description: 'Rollback to version (leave empty for normal deploy)'
+        required: false
+        type: string
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  # ============================================
+  # Prepare Deployment
+  # ============================================
+  prepare:
+    name: Prepare Deployment
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.set-env.outputs.environment }}
+      version: ${{ steps.set-version.outputs.version }}
+      is_rollback: ${{ steps.check-rollback.outputs.is_rollback }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set environment
+        id: set-env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "environment=${{ inputs.environment }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]] || [[ "${{ github.ref }}" == refs/tags/v* ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+          else
+            echo "environment=staging" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Set version
+        id: set-version
+        run: |
+          if [[ -n "${{ inputs.rollback_version }}" ]]; then
+            echo "version=${{ inputs.rollback_version }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          else
+            echo "version=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if rollback
+        id: check-rollback
+        run: |
+          if [[ -n "${{ inputs.rollback_version }}" ]]; then
+            echo "is_rollback=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_rollback=false" >> $GITHUB_OUTPUT
+          fi
+
+  # ============================================
+  # Build
+  # ============================================
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: needs.prepare.outputs.is_rollback == 'false'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Create deployment package
+        run: |
+          mkdir -p deployment
+          cp -r dist deployment/ 2>/dev/null || true
+          cp -r src deployment/
+          cp package*.json deployment/
+          echo "${{ needs.prepare.outputs.version }}" > deployment/VERSION
+          # Note: .claude directory is excluded from deployment package
+
+      - name: Upload deployment package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-${{ needs.prepare.outputs.version }}
+          path: deployment/
+          retention-days: 30
+
+  # ============================================
+  # Deploy to Staging
+  # ============================================
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [prepare, build]
+    if: needs.prepare.outputs.environment == 'staging' && needs.prepare.outputs.is_rollback == 'false'
+    environment:
+      name: staging
+      url: https://staging.example.com
+    steps:
+      - name: Download deployment package
+        uses: actions/download-artifact@v4
+        with:
+          name: deployment-${{ needs.prepare.outputs.version }}
+          path: deployment/
+
+      - name: Deploy to staging
+        run: |
+          echo "🚀 Deploying version ${{ needs.prepare.outputs.version }} to staging..."
+          echo "Deployment package contents:"
+          ls -la deployment/
+          # Add actual deployment commands here
+          # e.g., rsync, scp, cloud CLI commands
+          echo "✅ Deployed to staging successfully!"
+
+      - name: Health check
+        run: |
+          echo "🔍 Running health check..."
+          # Add actual health check
+          # curl -f https://staging.example.com/health || exit 1
+          echo "✅ Health check passed!"
+
+      - name: Notify deployment
+        run: |
+          echo "## Staging Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Version | ${{ needs.prepare.outputs.version }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | staging |" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | ✅ Success |" >> $GITHUB_STEP_SUMMARY
+          echo "| Time | $(date -u) |" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================
+  # Deploy to Production
+  # ============================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [prepare, build]
+    if: needs.prepare.outputs.environment == 'production' && needs.prepare.outputs.is_rollback == 'false'
+    environment:
+      name: production
+      url: https://example.com
+    steps:
+      - name: Download deployment package
+        uses: actions/download-artifact@v4
+        with:
+          name: deployment-${{ needs.prepare.outputs.version }}
+          path: deployment/
+
+      - name: Backup current version
+        run: |
+          echo "📦 Backing up current production version..."
+          # Add backup commands
+          echo "✅ Backup completed!"
+
+      - name: Deploy to production
+        run: |
+          echo "🚀 Deploying version ${{ needs.prepare.outputs.version }} to production..."
+          echo "Deployment package contents:"
+          ls -la deployment/
+          # Add actual deployment commands here
+          echo "✅ Deployed to production successfully!"
+
+      - name: Health check
+        run: |
+          echo "🔍 Running health check..."
+          # Add actual health check
+          # curl -f https://example.com/health || exit 1
+          echo "✅ Health check passed!"
+
+      - name: Notify deployment
+        run: |
+          echo "## Production Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Version | ${{ needs.prepare.outputs.version }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | production |" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | ✅ Success |" >> $GITHUB_STEP_SUMMARY
+          echo "| Time | $(date -u) |" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================
+  # Rollback
+  # ============================================
+  rollback:
+    name: Rollback
+    runs-on: ubuntu-latest
+    needs: prepare
+    if: needs.prepare.outputs.is_rollback == 'true'
+    environment:
+      name: ${{ needs.prepare.outputs.environment }}
+    steps:
+      - name: Download previous deployment package
+        uses: dawidd6/action-download-artifact@v3
+        with:
+          name: deployment-${{ inputs.rollback_version }}
+          workflow: cd.yml
+          workflow_conclusion: success
+
+      - name: Rollback deployment
+        run: |
+          echo "⏪ Rolling back to version ${{ inputs.rollback_version }}..."
+          echo "Target environment: ${{ needs.prepare.outputs.environment }}"
+          ls -la
+          # Add actual rollback commands here
+          echo "✅ Rollback completed!"
+
+      - name: Verify rollback
+        run: |
+          echo "🔍 Verifying rollback..."
+          # Add verification commands
+          echo "✅ Rollback verified!"
+
+      - name: Notify rollback
+        run: |
+          echo "## Rollback Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Rollback Version | ${{ inputs.rollback_version }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | ${{ needs.prepare.outputs.environment }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Status | ✅ Success |" >> $GITHUB_STEP_SUMMARY
+          echo "| Time | $(date -u) |" >> $GITHUB_STEP_SUMMARY
+
+  # ============================================
+  # Create Release
+  # ============================================
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    needs: [prepare, deploy-production]
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          if [[ -n "$PREV_TAG" ]]; then
+            CHANGES=$(git log $PREV_TAG..HEAD --pretty=format:"- %s" --no-merges)
+          else
+            CHANGES=$(git log --pretty=format:"- %s" --no-merges -10)
+          fi
+          echo "changes<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ needs.prepare.outputs.version }}
+          body: |
+            ## Changes
+            ${{ steps.changelog.outputs.changes }}
+
+            ## Deployment
+            - Environment: Production
+            - Deploy Time: ${{ github.event.head_commit.timestamp }}
+
+            ---
+            🤖 Generated with [Claude Code](https://claude.com/claude-code)
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

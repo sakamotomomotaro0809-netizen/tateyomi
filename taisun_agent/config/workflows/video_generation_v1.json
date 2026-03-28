@@ -1,0 +1,207 @@
+{
+  "id": "video_generation_v1",
+  "name": "Video Generation Workflow",
+  "version": "1.0.0",
+  "description": "教育動画・VSL・セミナー動画の生成ワークフロー（Phase 0-8）",
+  "phases": [
+    {
+      "id": "phase_0",
+      "name": "Phase 0: 企画・コンセプト設計",
+      "description": "動画の目的、ターゲット、構成を決定",
+      "allowedSkills": [],
+      "requiredArtifacts": [
+        "concept.md",
+        "target_audience.md"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "concept.md",
+          "errorMessage": "concept.md が作成されていません。動画のコンセプトを明確にしてください。"
+        }
+      ],
+      "nextPhase": "phase_1"
+    },
+    {
+      "id": "phase_1",
+      "name": "Phase 1: 台本作成",
+      "description": "セクション分割、ストーリーライン、スクリプト作成",
+      "allowedSkills": [
+        "vsl",
+        "launch-video",
+        "copywriting-helper",
+        "taiyo-style-vsl"
+      ],
+      "requiredArtifacts": [
+        "sections.json",
+        "script.md"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "sections.json",
+          "errorMessage": "sections.json が必要です。動画のセクション構成を定義してください。"
+        },
+        {
+          "type": "file_exists",
+          "target": "script.md",
+          "errorMessage": "script.md が必要です。ナレーション用の台本を作成してください。"
+        }
+      ],
+      "nextPhase": "phase_2"
+    },
+    {
+      "id": "phase_2",
+      "name": "Phase 2: 音声収録・TTS生成",
+      "description": "ナレーション音声の生成（VOICEVOX/Edge TTS）",
+      "allowedSkills": [
+        "japanese-tts-reading",
+        "video-production"
+      ],
+      "requiredArtifacts": [
+        "narration/audio_001.wav",
+        "narration/audio_manifest.json"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "narration/audio_manifest.json",
+          "errorMessage": "audio_manifest.json が必要です。音声ファイルの一覧を作成してください。"
+        }
+      ],
+      "nextPhase": "phase_3"
+    },
+    {
+      "id": "phase_3",
+      "name": "Phase 3: 映像素材準備",
+      "description": "画像、動画クリップ、図解の準備",
+      "allowedSkills": [
+        "gemini-image-generator",
+        "nanobanana-pro",
+        "diagram-illustration",
+        "omnihuman1-video"
+      ],
+      "requiredArtifacts": [
+        "assets/images/",
+        "assets/videos/"
+      ],
+      "validations": [
+        {
+          "type": "command",
+          "command": "test -d assets/images && echo 'OK'",
+          "errorMessage": "assets/images ディレクトリが必要です"
+        }
+      ],
+      "nextPhase": "phase_4"
+    },
+    {
+      "id": "phase_4",
+      "name": "Phase 4: 編集・合成",
+      "description": "Remotionによる動画編集、音声・映像の合成",
+      "allowedSkills": [
+        "video-production"
+      ],
+      "requiredArtifacts": [
+        "output/draft_video.mp4"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "output/draft_video.mp4",
+          "errorMessage": "draft_video.mp4 が生成されていません"
+        }
+      ],
+      "nextPhase": "phase_5"
+    },
+    {
+      "id": "phase_5",
+      "name": "Phase 5: テロップ追加",
+      "description": "字幕・テロップの追加",
+      "allowedSkills": [
+        "video-production"
+      ],
+      "requiredArtifacts": [
+        "subtitles.srt",
+        "output/video_with_subtitles.mp4"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "output/video_with_subtitles.mp4",
+          "errorMessage": "テロップ付き動画が生成されていません"
+        }
+      ],
+      "nextPhase": "phase_6"
+    },
+    {
+      "id": "phase_6",
+      "name": "Phase 6: 品質チェック（QC）",
+      "description": "音声・映像の品質確認、エラー検出",
+      "allowedSkills": [
+        "video-validate",
+        "video-eval"
+      ],
+      "requiredArtifacts": [
+        "qc_report.json"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "qc_report.json",
+          "errorMessage": "品質チェックレポートが必要です"
+        },
+        {
+          "type": "command",
+          "command": "node -e \"const r = require('./qc_report.json'); if (r.passed !== true) process.exit(1);\"",
+          "errorMessage": "品質チェックが失敗しています。qc_report.json を確認してください"
+        }
+      ],
+      "nextPhase": "phase_7"
+    },
+    {
+      "id": "phase_7",
+      "name": "Phase 7: 最終書き出し",
+      "description": "最終動画のエンコード・書き出し",
+      "allowedSkills": [
+        "video-production"
+      ],
+      "requiredArtifacts": [
+        "output/final_video.mp4",
+        "output/final_video_metadata.json"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "output/final_video.mp4",
+          "errorMessage": "最終動画ファイルが生成されていません"
+        },
+        {
+          "type": "command",
+          "command": "test -s output/final_video.mp4",
+          "errorMessage": "final_video.mp4 のファイルサイズが0です"
+        }
+      ],
+      "nextPhase": "phase_8"
+    },
+    {
+      "id": "phase_8",
+      "name": "Phase 8: 配信・アップロード",
+      "description": "YouTube等へのアップロード、メタデータ設定",
+      "allowedSkills": [
+        "youtube-content",
+        "youtube-thumbnail"
+      ],
+      "requiredArtifacts": [
+        "upload_confirmation.json"
+      ],
+      "validations": [
+        {
+          "type": "file_exists",
+          "target": "upload_confirmation.json",
+          "errorMessage": "アップロード確認ファイルが必要です"
+        }
+      ],
+      "nextPhase": null
+    }
+  ]
+}

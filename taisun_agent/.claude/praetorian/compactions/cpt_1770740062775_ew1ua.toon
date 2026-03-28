@@ -1,0 +1,8 @@
+type: task_result
+title: 追加画像11枚生成 + Vercelデプロイ完了
+key_insights[5]: fal.ai Flux Pro で11枚の追加画像を生成 (全11/11成功),"imageCount>3のシーン用: _04画像9枚 + _05画像2枚","Vercelデプロイ完了: https://vsl-player.vercel.app",全11枚新画像 + 全音声 + 全動画 + ページ = 200 OK確認済み,"合計画像: 71枚の番号付き画像 (20シーン × 平均3.55枚/シーン)"
+refs[4]: scripts/generate-extra-images.py - 追加画像生成スクリプト,public/images/scenes/*_04.png - 9シーン分の4枚目画像,"public/images/scenes/s01-hook_05.png, s10-final-cta_05.png - 5枚目画像","https://vsl-player.vercel.app - 本番デプロイ済み"
+next[2]: 全20シーンの再生確認 (ブラウザでの動作テスト),imageCount cycling動作確認 (4枚/5枚シーンで正しくローテーションするか)
+id: cpt_1770740062775_ew1ua
+created: "2026-02-10T16:14:22.775Z"
+updated: "2026-02-10T16:14:22.775Z"

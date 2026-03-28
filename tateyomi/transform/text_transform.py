@@ -30,6 +30,8 @@ def transform(
         if progress_cb:
             progress_cb(i, total, chapter.title or f"章 {i + 1}")
         html = chapter.html_content
+        # Markdown記法の残骸をHTMLタグに変換（EPUBへの変換漏れ対策）
+        html = convert_markdown_inline(html)
         if normalize:
             from tateyomi.utils.normalize import normalize_html_text
             html = normalize_html_text(html)
@@ -42,6 +44,27 @@ def transform(
     if progress_cb and total:
         progress_cb(total, total, "完了")
     return book
+
+
+def convert_markdown_inline(html: str) -> str:
+    """
+    HTMLテキスト内に残ったMarkdown記法をHTMLタグに変換する。
+    **太字** → <strong>太字</strong>
+    *斜体* / _斜体_ → <em>斜体</em>
+
+    注: **...** の中に <ruby> 等のHTMLタグが含まれる場合でも正しく変換できるよう、
+    HTML全体に対して正規表現を適用する（属性値内の ** は実用上ほぼ存在しないため安全）。
+    """
+    # ** bold ** → <strong> (先に処理して * との競合を避ける)
+    html = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", html, flags=re.DOTALL)
+    # __bold__ → <strong>
+    html = re.sub(r"__(.+?)__", r"<strong>\1</strong>", html, flags=re.DOTALL)
+    # *italic* → <em> (** は処理済みなので残りの単体 * のみ)
+    # タグをまたがらない範囲のみ（greedy ではなく行内で完結するパターン）
+    html = re.sub(r"\*([^*<>\n]+?)\*", r"<em>\1</em>", html)
+    # _italic_ → <em>
+    html = re.sub(r"_([^_<>\n]+?)_", r"<em>\1</em>", html)
+    return html
 
 
 def split_long_paragraphs(html: str, threshold: int = _PARA_SPLIT_THRESHOLD) -> str:

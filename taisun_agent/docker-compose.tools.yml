@@ -1,0 +1,57 @@
+# TAISUN v2 - Phase 1 Document Processing Tools
+# Isolated configuration - does not affect main application
+
+version: '3.8'
+
+services:
+  # Gotenberg - HTML/Office to PDF conversion
+  gotenberg:
+    image: gotenberg/gotenberg:8
+    container_name: taisun-gotenberg
+    restart: unless-stopped
+    ports:
+      - "${GOTENBERG_PORT:-3000}:3000"
+    environment:
+      - GOTENBERG_API_TIMEOUT=300s
+      - GOTENBERG_CHROMIUM_DISABLE_JAVASCRIPT=false
+      - GOTENBERG_CHROMIUM_ALLOW_LIST=file:///tmp/.*
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - taisun-tools
+
+  # Stirling-PDF - PDF manipulation toolkit
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    container_name: taisun-stirling-pdf
+    restart: unless-stopped
+    ports:
+      - "${STIRLING_PDF_PORT:-8080}:8080"
+    environment:
+      - DOCKER_ENABLE_SECURITY=false
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=true
+      - LANGS=en_US,ja_JP
+    volumes:
+      - stirling-data:/usr/share/tessdata
+      - ./docs/exports:/pdf/exports
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/info"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - taisun-tools
+
+volumes:
+  stirling-data:
+    driver: local
+
+networks:
+  taisun-tools:
+    driver: bridge
+    name: taisun-tools-network

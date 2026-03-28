@@ -1,0 +1,94 @@
+{
+  "id": "video_generation_v1",
+  "name": "Video Generation Policy (v1)",
+  "description": "動画生成ワークフロー向けの strict policy。目的は『スキル指示の無視』『既存スクリプトの無視』『勝手な新規スクリプト作成』『要約比率の無視』を構造的に防ぐこと。",
+  "strict_default": true,
+  "triggers_when_state_missing": [
+    "Bash command contains: ffmpeg",
+    "Bash command contains: python create_video.py",
+    "Bash command contains: python generate_video.py",
+    "Write/Edit target basename: create_video.py",
+    "Write/Edit creates *.py/*.sh under project"
+  ],
+  "invariants": {
+    "read_before_write": true,
+    "completion_requires_verify": true,
+    "no_new_pipeline_scripts": true,
+    "baseline_files": ["create_video.py", "generate_video.py"],
+    "require_skill_evidence": {
+      "enabled": true,
+      "required_skill_ids": ["video-production", "youtubeschool-creator", "video-policy"]
+    }
+  },
+  "phase_permissions": {
+    "1_planning": {
+      "name": "企画・構成",
+      "deny_bash_patterns": [
+        "ffmpeg",
+        "python.*create_video",
+        "python.*generate_video",
+        "rm -rf"
+      ],
+      "allow_bash_patterns": ["ls", "cat", "rg", "git status"]
+    },
+    "2_script_writing": {
+      "name": "台本作成",
+      "deny_bash_patterns": [
+        "ffmpeg",
+        "python.*create_video",
+        "python.*generate_video",
+        "rm -rf"
+      ],
+      "allow_bash_patterns": ["ls", "cat", "rg", "git status"]
+    },
+    "3_asset_preparation": {
+      "name": "素材準備",
+      "deny_bash_patterns": [
+        "ffmpeg",
+        "python.*create_video",
+        "python.*generate_video",
+        "rm -rf"
+      ],
+      "allow_bash_patterns": ["ls", "cat", "rg", "curl", "wget"]
+    },
+    "4_audio_generation": {
+      "name": "音声生成",
+      "deny_bash_patterns": [
+        "ffmpeg.*video",
+        "python.*create_video",
+        "rm -rf"
+      ],
+      "allow_bash_patterns": ["ffmpeg.*audio", "python.*tts", "ls", "cat"]
+    },
+    "5_image_generation": {
+      "name": "画像生成",
+      "deny_bash_patterns": [
+        "ffmpeg.*video",
+        "python.*create_video",
+        "rm -rf"
+      ],
+      "allow_bash_patterns": ["ls", "cat", "curl"]
+    },
+    "6_video_assembly": {
+      "name": "動画組み立て",
+      "deny_bash_patterns": ["rm -rf"],
+      "allow_bash_patterns": [
+        "python create_video.py",
+        "python generate_video.py",
+        "ffmpeg",
+        "ls",
+        "cat"
+      ]
+    },
+    "7_quality_check": {
+      "name": "品質チェック",
+      "deny_bash_patterns": ["rm -rf"],
+      "allow_bash_patterns": ["ffprobe", "python.*qa", "ls", "cat", "stat"]
+    },
+    "8_finalize": {
+      "name": "最終処理",
+      "deny_bash_patterns": ["rm -rf"],
+      "allow_bash_patterns": ["ffmpeg", "ls", "stat", "md5", "shasum"]
+    }
+  }
+}

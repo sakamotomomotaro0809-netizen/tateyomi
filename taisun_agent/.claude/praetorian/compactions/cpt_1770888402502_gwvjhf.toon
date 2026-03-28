@@ -1,0 +1,15 @@
+type: decisions
+title: Hook システム詳細分析 - 実装理由とメリット・デメリット
+findings[7]: TAISUN v2 = Ultimate Unified System。AIの行動を制約する最上位ルール（WORKFLOW FIDELITY CONTRACT）を実装,13層防御システムで構成：Layer 0-12で段階的なチェック,"workflow-fidelity-guard.js: 新規スクリプト作成（.py/.sh/.js/.ts）を物理的にブロック","deviation-approval-guard.js: 指示にない行動（逸脱）を事前承認なしでブロック","unified-guard.js: パフォーマンス最適化された統合ガード。キャッシュシステム・正規表現キャッシュ","workflow-state-manager.js: フェーズ・ベースラインファイル・Read履歴を永続管理","skill-mapping.json: 87タスク種別 × スキル自動マッピング。strict=true時に強制"
+decisions[2]:
+  - chose: Hook システムを現在のまま維持する（推奨）
+    over[2]: Hook を無効化して完全自由放任にする,Hook を緩和して一部のチェックのみにする
+    reason: 過去の問題（AI による勝手な実装・ファイル改変・ワークフロー無視）を防止。複数プロジェクト・複数エージェント・複数スキルの並行実行環境で、ユーザーの意図を正確に追跡・記録するために必須
+  - chose: Layer 2 実装は『手動代行』ではなく『ドキュメント提供』で対応
+    over[2]: Hook をすべて無効化してスクリプト作成,Hook を一時的に無効化して実装してから再有効化
+    reason: Hook は設計思想。無効化・迂回は『背反』に当たる。代わりに、詳細なドキュメント + ユーザーが選別できるテンプレートコードを提供する方が設計原則に沿う
+refs[5]: ".claude/CLAUDE.md:6-56 - 13層防御システム定義",".claude/hooks/deviation-approval-guard.js:1-100 - 逸脱検出ロジック",".claude/hooks/workflow-fidelity-guard.js:1-80 - ワークフロー忠実性強制",".claude/hooks/unified-guard.js:1-100 - 統合ガード実装",.claude/hooks/config/skill-mapping.json - 87タスク種別 × スキルマッピング
+recommendations[4]: Hook システムの実装理由を理解し、その上で『承認を得るための手順書』を提供する,Layer 2 のドキュメント化（CRASH_RECOVERY_SYSTEM.md）を完成させ、ユーザーが手動実装・カスタマイズできる形にする,Hook 無効化ではなく『正しい承認フロー』の確立が重要,"3層解決策（Layer 1: 完了、Layer 2: ドキュメント化、Layer 3: MCP統合）を段階的に提供"
+id: cpt_1770888402502_gwvjhf
+created: "2026-02-12T09:26:42.502Z"
+updated: "2026-02-12T09:26:42.502Z"

@@ -1,0 +1,15 @@
+type: file_reads
+title: TAISUN v2 既存Hook実装・フェーズ構造
+key_insights[7]: "現在の13層防御システム: Layer 0(CLAUDE.md) - 12(Context Quality)",Stage 1メトリクス収集システム完了（2026-02-13）、処理時間<10ms達成,"既存Hook群: 35個超のファイル、~500KB総量、複数ガード機能実装済み","Unified Hook実装済み: copy-safety, input-sanitizer, workflow-fidelity統合済み","Workflow State Manager v2.0.0: Intent Contract First対応、Evidence Ledger機能","Agent Enforcement Guard: 66個複雑タスクパターン、Task tool強制機能","メトリクス基盤: イベント記録・バッファ管理・ログローテーション完成"
+findings[6]: .claude/hooks/ に35個以上の実装ファイル、各ファイル3-26KB,"settings.json では Hook連鎖設定可能: UserPromptSubmit→PreToolUse→PostToolUse→SessionEnd",".workflow_state.json v2.0.0: intentContractRef, activeSkillId, evidence ledger を管理","Cache機構既存: unified-guard.js に5秒TTLキャッシュ実装","処理時間計測: metrics-collector で <10ms目標達成中","スキル自動マッピング: skill-mapping.json で71スキルの自動割当ルール定義済み"
+techniques:
+  "Hook Execution": settings.json matcher正規表現 + command型で実行
+  "State Persistence": JSON形式 .workflow_state.json で全状態永続化
+  "Caching Strategy": TTL付きメモリキャッシュ + SHA256ハッシュ化
+  "Pattern Detection": 事前コンパイル正規表現で6つのカテゴリ検査
+  Metrics: JSONLines形式ログ + 100MB自動ローテーション
+  "Error Handling": リトライロジック + graceful degradation
+next[5]: "Stage 2A Unified Hook Architecture設計: 13層→3-5層へ統合","Fast Path最適化: 95%操作を100-300msで許可（目標）","キャッシング戦略詳細化: LRU + パターンマッチング高速化","マイグレーション計画: 既存13層スクリプト→新3-5層へのマッピング","パフォーマンスベンチマーク: 処理時間分析・メモリプロファイル取得"
+id: cpt_1770959071710_sju9i
+created: "2026-02-13T05:04:31.710Z"
+updated: "2026-02-13T05:04:31.710Z"

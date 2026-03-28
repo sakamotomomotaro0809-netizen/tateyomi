@@ -1,0 +1,15 @@
+type: task_result
+title: branch-structure.ts 全20シーン視覚設計完了
+key_insights[5]: 全20シーンにimageCount/imageInterval/mediaTypeを研究ベースで設定完了,"video→image変更: s02-son, s04a-practice, s06a-beginner, s07a-top, s05c-evolution, s08c-goevolve (6シーン)","videoのまま維持: s01-hook, s04b-gap, s06b-revolution, s07b-05percent, s04c-pocket, s10-final-cta (6シーン)","imageのまま維持: s03-two-types, cp1, s05a-ceo, s08a-join, s05b-bubble, s08b-stillintime, s06c-seminar, s07c-bonus (8シーン)","合計画像枚数: 63枚(1+5+4+3+4+3+4+3+2+4+4+3+3+2+4+3+4+2+2+5)"
+decisions[2]:
+  - chose: video→imageに6シーン変更(testimonial/proof/data系)
+    over[1]: 全12シーンをvideo維持
+    reason: "リサーチ結果: AI動画の不気味の谷問題、データ密度が高いシーンはKen Burnsの方が読みやすい"
+  - chose: シーンタイプ別ASLに基づくimageCount算出
+    over[1]: 全シーン一律3枚
+    reason: "Hook=2-4.5s, Fear=2-4.5s, Proof=4-6s, Testimonial=10-15s, CTA=5-8sの研究データ"
+refs[3]: "branch-structure.ts: 全20シーン imageCount/imageInterval設定済","video.ts:33-34 - imageCount/imageInterval optional fields追加済","SceneRenderer.tsx:111-113 - 動的imageCount/imageInterval対応済"
+next[4]: 63枚分の画像生成が必要(現在は各シーン3枚=60枚しかない),"imageCount>3のシーン用に追加画像生成: s01-hook(_04,_05), s04a-practice(_04), s06a-beginner(_04), s04b-gap(_04), s05b-bubble(_04), s04c-pocket(_04), s06c-seminar(_04), s10-final-cta(_04,_05)","imageCount<3のシーン: cp1(1枚のみ使用), s08a-join(2枚), s08b-stillintime(2枚), s07c-bonus(2枚), s08c-goevolve(2枚) - 既存_03は無視される",Vercelデプロイ + 最終QA
+id: cpt_1770739661438_dgzk9
+created: "2026-02-10T16:07:41.438Z"
+updated: "2026-02-10T16:07:41.438Z"

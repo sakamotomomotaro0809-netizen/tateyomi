@@ -1,0 +1,17 @@
+type: flow_analysis
+title: gem-research skill design - codebase analysis
+key_insights[12]: Marketing AI Factory lives at /Desktop/dev/gem自動生成システム/marketing-ai-factory/,"SkillConfig dataclass in src/generator/models.py has: name, display_name, description, system_prompt, instructions, examples, knowledge_files, tools, temperature, constraints, guardrails, tags, metadata","Industry YAML configs follow pattern: keywords[], persona{}, tone{}, content_types[], platforms{}, hashtags{}, cta_templates[]","world-research has 6 layers (Academic->Curation->Blog->Ecosystem->SNS->Community), modes: quick/standard/deep/academic/survey/ecosystem","mega-research-plus has 8 sources with trust scoring algorithm: DA(0.25)+Freshness(0.2)+CrossValidation(0.3)+Citations(0.15)+SNS(0.1)",market_research.py uses Tavily/SerpAPI/Brave with async parallel execution and rate limiting via semaphores,"note_analyzer.py has NoteAnalyzer class with engagement calculation, search_by_keyword, batch_analyze","API routes have 3 research endpoints: /api/research/market, /api/research/note, /api/research/sns (all TODO stub)","GemExporter transforms SkillConfig into Gemini-compatible JSON with instructions, tools, safety_settings, knowledge","BaseExporter ABC pattern: get_platform(), get_template_name(), validate(), transform(), export()","Skills dir pattern: SKILL.md (main) + optional CLAUDE.md (summary) + optional scripts/ dir","gem-research must output JSON matching industry YAML structure: keywords, persona, tone, content_types, platforms, hashtags, cta_templates"
+paths:
+  research_to_gem:
+    status: working
+    trace[5]: "API input (industry, keywords)",market_research.py -> Tavily/SerpAPI/Brave,note_analyzer.py -> note.com API,system_instructions.py -> Jinja2 template,gem_exporter.py -> Gemini JSON config
+  skill_invocation:
+    status: working
+    trace[4]: /gem-research trigger,SKILL.md loaded as system prompt,WebSearch/WebFetch for data collection,Structured JSON output for factory
+  industry_config_flow:
+    status: working
+    trace[4]: "config/industries/{industry}.yaml loaded",Parsed into SkillConfig fields,Fed to SystemInstructionsGenerator,Exported via platform-specific exporter
+refs[8]: "marketing-ai-factory/src/generator/models.py:18 - SkillConfig dataclass","marketing-ai-factory/src/research/market_research.py:21 - MarketResearcher class","marketing-ai-factory/src/research/note_analyzer.py:18 - NoteAnalyzer class","marketing-ai-factory/src/api/routes/research.py:35 - market_research endpoint (TODO)","marketing-ai-factory/src/generator/exporters/gem_exporter.py:10 - GemExporter",marketing-ai-factory/config/industries/beauty-salon.yaml - reference industry template,taisun_agent/.claude/skills/world-research/SKILL.md - 6-layer architecture reference,taisun_agent/.claude/skills/mega-research-plus/SKILL.md - trust scoring reference
+id: cpt_1770567754875_7otfsa
+created: "2026-02-08T16:22:34.875Z"
+updated: "2026-02-08T16:22:34.875Z"

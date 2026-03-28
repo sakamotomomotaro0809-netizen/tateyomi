@@ -1,0 +1,62 @@
+{
+  "mcpServers": {
+    "taisun-proxy": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["dist/proxy-mcp/server.js"],
+      "disabled": false,
+      "defer_loading": false,
+      "description": "TAISUN Proxy MCP (single entrypoint)",
+      "category": "system"
+    },
+    "open-websearch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["open-websearch-mcp"],
+      "disabled": false,
+      "defer_loading": false,
+      "description": "無料検索（DuckDuckGo/Bing/Brave）",
+      "category": "search"
+    },
+    "gpt-researcher": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["--from", "gpt-researcher-mcp", "gpt-researcher-mcp"],
+      "env": {
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      },
+      "disabled": false,
+      "defer_loading": true,
+      "search_keywords": ["deep research", "深層調査", "レポート"],
+      "description": "GPT Researcher - 深層リサーチ（APIコスト発生）",
+      "category": "research"
+    },
+    "apify": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@apify/mcp-server"],
+      "env": {
+        "APIFY_API_TOKEN": "${APIFY_API_TOKEN}"
+      },
+      "disabled": false,
+      "defer_loading": true,
+      "search_keywords": ["scrape", "SNS", "Instagram", "Twitter", "Amazon"],
+      "description": "Apify MCP - SNS/検索/ECスクレイピング",
+      "category": "research"
+    },
+    "tavily": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "tavily-mcp"],
+      "env": {
+        "TAVILY_API_KEY": "${TAVILY_API_KEY}"
+      },
+      "disabled": false,
+      "defer_loading": true,
+      "search_keywords": ["AI検索", "最新情報"],
+      "description": "Tavily MCP - AI特化検索",
+      "category": "search"
+    }
+  }
+}

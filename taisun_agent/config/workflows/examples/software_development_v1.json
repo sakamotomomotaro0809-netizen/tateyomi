@@ -1,0 +1,138 @@
+{
+  "id": "software_development_v1",
+  "name": "ソフトウェア開発ワークフロー",
+  "version": "1.0.0",
+  "description": "Phase 3機能を活用した開発ワークフロー。並列実行で開発とテストを同時進行し、レビュー後のロールバックに対応します。",
+  "phases": [
+    {
+      "id": "phase_0_requirements",
+      "name": "要件定義",
+      "description": "機能要件を定義します",
+      "requiredArtifacts": ["output/dev/requirements.txt"],
+      "allowedSkills": ["requirements-elicitation", "planner"],
+      "nextPhase": "phase_1_design"
+    },
+    {
+      "id": "phase_1_design",
+      "name": "設計",
+      "description": "システム設計を行います",
+      "requiredArtifacts": ["output/dev/design.txt"],
+      "allowedSkills": [
+        "system-architect",
+        "api-designer",
+        "database-designer"
+      ],
+      "nextPhase": "phase_2_implementation"
+    },
+    {
+      "id": "phase_2_implementation",
+      "name": "実装計画",
+      "description": "実装の準備をします",
+      "requiredArtifacts": ["output/dev/implementation_plan.txt"],
+      "parallelNext": {
+        "phases": [
+          "phase_3_backend",
+          "phase_3_frontend",
+          "phase_3_tests"
+        ],
+        "waitStrategy": "all"
+      }
+    },
+    {
+      "id": "phase_3_backend",
+      "name": "バックエンド実装",
+      "description": "バックエンドAPIを実装します",
+      "requiredArtifacts": ["output/dev/backend_code.txt"],
+      "allowedSkills": [
+        "backend-developer",
+        "api-developer",
+        "database-developer"
+      ],
+      "nextPhase": "phase_4_code_review"
+    },
+    {
+      "id": "phase_3_frontend",
+      "name": "フロントエンド実装",
+      "description": "UIを実装します",
+      "requiredArtifacts": ["output/dev/frontend_code.txt"],
+      "allowedSkills": ["frontend-developer", "ui-ux-designer"],
+      "nextPhase": "phase_4_code_review"
+    },
+    {
+      "id": "phase_3_tests",
+      "name": "テスト作成",
+      "description": "ユニットテストと統合テストを作成します",
+      "requiredArtifacts": ["output/dev/tests.txt"],
+      "allowedSkills": [
+        "test-generator",
+        "integration-tester",
+        "test-engineer"
+      ],
+      "nextPhase": "phase_4_code_review"
+    },
+    {
+      "id": "phase_4_code_review",
+      "name": "コードレビュー",
+      "description": "実装コードをレビューします",
+      "requiredArtifacts": ["output/dev/review_result.txt"],
+      "allowedSkills": ["code-reviewer", "security-auditor"],
+      "allowRollbackTo": ["phase_1_design", "phase_2_implementation"],
+      "nextPhase": "phase_5_qa"
+    },
+    {
+      "id": "phase_5_qa",
+      "name": "品質保証",
+      "description": "QAテストを実行します",
+      "requiredArtifacts": ["output/dev/qa_report.txt"],
+      "allowedSkills": [
+        "qa-validator",
+        "security-tester",
+        "performance-tester"
+      ],
+      "parallelNext": {
+        "phases": [
+          "phase_6_security_scan",
+          "phase_6_performance_test"
+        ],
+        "waitStrategy": "all"
+      }
+    },
+    {
+      "id": "phase_6_security_scan",
+      "name": "セキュリティスキャン",
+      "description": "セキュリティ脆弱性をスキャンします",
+      "requiredArtifacts": ["output/dev/security_scan.txt"],
+      "allowedSkills": ["security-scanner", "security-auditor"],
+      "nextPhase": "phase_7_final_review"
+    },
+    {
+      "id": "phase_6_performance_test",
+      "name": "パフォーマンステスト",
+      "description": "負荷テストとベンチマークを実行します",
+      "requiredArtifacts": ["output/dev/performance_report.txt"],
+      "allowedSkills": ["performance-tester"],
+      "nextPhase": "phase_7_final_review"
+    },
+    {
+      "id": "phase_7_final_review",
+      "name": "最終レビュー",
+      "description": "リリース前の最終確認。問題があればロールバック可能です。",
+      "allowRollbackTo": [
+        "phase_0_requirements",
+        "phase_1_design",
+        "phase_2_implementation",
+        "phase_4_code_review",
+        "phase_5_qa"
+      ],
+      "nextPhase": "phase_8_deployment"
+    },
+    {
+      "id": "phase_8_deployment",
+      "name": "デプロイメント",
+      "description": "本番環境にデプロイします",
+      "requiredArtifacts": ["output/dev/deployment_log.txt"],
+      "allowedSkills": ["devops-engineer", "cicd-manager"],
+      "nextPhase": null
+    }
+  ]
+}

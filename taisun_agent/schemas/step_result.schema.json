@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Step Result",
+  "description": "Schema for step execution result",
+  "type": "object",
+  "properties": {
+    "step_id": {
+      "type": "string",
+      "description": "Step identifier"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["success", "failure", "skipped"],
+      "description": "Execution status"
+    },
+    "outputs": {
+      "type": "object",
+      "description": "Output artifacts produced"
+    },
+    "validated": {
+      "type": "boolean",
+      "description": "Whether outputs passed validation"
+    },
+    "error": {
+      "type": ["string", "null"],
+      "description": "Error message if failed"
+    }
+  },
+  "required": ["step_id", "status", "validated"],
+  "additionalProperties": false
+}

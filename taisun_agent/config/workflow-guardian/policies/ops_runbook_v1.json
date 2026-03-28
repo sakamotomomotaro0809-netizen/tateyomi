@@ -1,0 +1,110 @@
+{
+  "id": "ops_runbook_v1",
+  "name": "Ops / Incident Runbook Policy (v1)",
+  "description": "運用（障害対応/リリース作業/インフラ操作）向けの汎用 strict policy。目的は『調査不足のまま破壊的操作を実行』『手順の飛ばし』『検証なし完了宣言』を防ぐこと。",
+  "strict_default": true,
+  "triggers_when_state_missing": [
+    "Bash command contains: kubectl",
+    "Bash command contains: terraform",
+    "Bash command contains: aws ",
+    "Bash command contains: gcloud",
+    "Bash command contains: helm",
+    "Bash command contains: rm -rf",
+    "Bash command contains: shutdown",
+    "Bash command contains: reboot"
+  ],
+  "invariants": {
+    "read_before_write": true,
+    "completion_requires_verify": true,
+    "no_new_pipeline_scripts": true,
+    "baseline_files": [],
+    "require_skill_evidence": {
+      "enabled": false,
+      "required_skill_ids": []
+    }
+  },
+  "phase_permissions": {
+    "1_triage": {
+      "name": "トリアージ",
+      "deny_bash_patterns": [
+        "kubectl apply",
+        "kubectl delete",
+        "terraform apply",
+        "terraform destroy",
+        "aws .*delete",
+        "gcloud .*delete",
+        "helm uninstall",
+        "rm -rf",
+        "shutdown",
+        "reboot",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["date", "uptime", "whoami", "ls", "rg", "cat"]
+    },
+    "2_investigation": {
+      "name": "調査",
+      "deny_bash_patterns": [
+        "kubectl apply",
+        "kubectl delete",
+        "terraform apply",
+        "terraform destroy",
+        "aws .*delete",
+        "gcloud .*delete",
+        "helm uninstall",
+        "rm -rf",
+        "shutdown",
+        "reboot",
+        "sudo"
+      ],
+      "allow_bash_patterns": [
+        "kubectl get",
+        "kubectl describe",
+        "kubectl logs",
+        "terraform plan",
+        "helm list",
+        "aws .*list",
+        "aws .*describe",
+        "gcloud .*list",
+        "gcloud .*describe"
+      ]
+    },
+    "3_plan_approval": {
+      "name": "計画・承認",
+      "deny_bash_patterns": [
+        "kubectl apply",
+        "kubectl delete",
+        "terraform apply",
+        "terraform destroy",
+        "rm -rf",
+        "shutdown",
+        "reboot",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["kubectl get", "kubectl describe", "terraform plan"]
+    },
+    "4_execute": {
+      "name": "実行",
+      "deny_bash_patterns": ["terraform destroy", "rm -rf", "shutdown", "reboot"],
+      "allow_bash_patterns": ["kubectl apply", "kubectl rollout", "kubectl delete", "terraform apply", "helm upgrade", "helm uninstall"]
+    },
+    "5_verify": {
+      "name": "検証",
+      "deny_bash_patterns": ["terraform destroy", "rm -rf", "shutdown", "reboot"],
+      "allow_bash_patterns": ["kubectl get", "kubectl describe", "kubectl logs", "terraform plan"]
+    },
+    "6_postmortem": {
+      "name": "ポストモーテム",
+      "deny_bash_patterns": [
+        "kubectl apply",
+        "kubectl delete",
+        "terraform apply",
+        "terraform destroy",
+        "rm -rf",
+        "shutdown",
+        "reboot",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["ls", "rg", "cat", "git status", "git diff"]
+    }
+  }
+}

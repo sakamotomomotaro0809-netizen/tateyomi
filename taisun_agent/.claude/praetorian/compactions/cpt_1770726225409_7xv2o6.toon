@@ -1,0 +1,21 @@
+type: web_research
+title: 動画テロップデザイン・音声同期・AI画像/動画挿入の最新手法リサーチ
+source: "Web Search 2026-02-10: TikTok/Reels/Shorts caption design, Whisper API, Remotion, Stock APIs, VOICEVOX, Next.js video"
+key_insights[10]: "モバイル動画テロップのベストプラクティス: Montserrat/Poppins/Futura等の太字サンスセリフ、20-27文字/行、1-3秒表示、画面上部1/3配置（TikTok）",Whisperタイムスタンプ → SRT/VTT変換でミリ秒精度の音声同期可能（word_timestamps=True利用）,Remotion公式でWhisper統合、Caption型定義（text/startMs/endMs）、useMediaPlayback() hookで完全同期,LLMセマンティック解析 + Pexels/Pixabay/Unsplash APIで台本→キーワード→画像/動画自動選択可能,"VOICEVOX固有名詞対策: カスタム辞書+優先度設定で読み間違い克服","Fish Audio: SSML/PLS利用可能性あるが、詳細ドキュメント不足","Next.js + Canvas/Video実装: position:absoluteオーバーレイ + react-konva、Cloudinary変換","日本語テロップ: ゴシック体推奨、源ノ角ゴシック（Source Han Sans）高評価、1秒4文字基準、最低3秒表示","テロップ同期タイミング: 発話開始で表示、終了or1秒後に消去（ミリ秒精度データなし）","fal.ai Flux Pro: プロンプト→画像生成は強力だが、セマンティックマッピング機能は明記なし"
+findings[14]: "Kapwing, CapCut, Submagic等のプラットフォームでテロップスタイルガイド提供","Whisper公式: get_writer()でSRT/VTT/JSON/TSV直接出力可能","whisper-timestamped: DTW（Dynamic Time Warping）でより精密なワード境界検出","stable-ts: word-level/segment-level両方のタイムスタンプサポート","Remotion: @remotion/openai-whisper + @remotion/whisper-web（ローカル実行可能）","Pexels API: orientation/size/color指定可、24MP/12MP/4MP画質選択",Pixabay API同様にキーワード検索+パラメータフィルタリング対応,"video-analyzer（GitHub）: Whisper + Vision LLM で動画フレーム解析","Azure Vision API: 自然言語で画像検索、Open World Recognition機能","VOICEVOX: 単語登録+優先度調整でカスタム読み","Wikipedia API furigana: 直接APIなし、MediaWiki解析必要","Next.js Video: Mux/Cloudinary統合、HTMLVideoElement → Canvas描画可能","日本語動画フォント: ヒラギノ、源ノ角ゴシック、Keifont、Ranobe POP等","テロップ視認性: エッジ/ドロップシャドウ/半透明背景で背景分離"
+techniques:
+  "Whisper word_timestamps": ワード単位タイムスタンプ取得
+  "Remotion Caption型": "{text, startMs, endMs, timestampMs, confidence}標準構造"
+  "LLM Vision + Whisper統合": 音声書き起こし + 画像セマンティック理解の組み合わせ
+  "Stock API並列検索": Pexels/Pixabay/Unsplashを同時クエリして最適素材選択
+  "VOICEVOX辞書優先度": 単語登録時に優先度パラメータで強制適用
+  "Next.js Canvas Overlay": "position:absolute + z-index + requestAnimationFrame"
+  "SRT/VTT形式変換": "regex でタイムスタンプ抽出、HH:MM:SS,MS（SRT）/ HH:MM:SS.MS（VTT）形式化"
+  "react-konva": "宣言的Canvas操作、'use client' + dynamic import（ssr: false）必須"
+  "テロップアニメーション": フェードイン/タイプライター/ポップエフェクト
+  "音声同期マージン": 視聴者読み速度1.5-2倍遅延を想定した表示時間設定
+refs[7]: "Kapwing Caption Style Guide: https://www.kapwing.com/resources/social-media-captions-styles-a-complete-guide/","Remotion Caption docs: https://www.remotion.dev/docs/captions/caption","Whisper Timestamped: https://github.com/linto-ai/whisper-timestamped","Pexels API: https://www.pexels.com/api/","VOICEVOX Custom Dictionary: https://note.com/tsuki_kotoba/n/n66f7c639f9d3","fal.ai Flux Pro: https://fal.ai/models/fal-ai/flux-pro/v1.1/api","日本語テロップフォント: https://designpocket.jp/static/font/feature/douga-eizou.html"
+recommendations[8]: "テロップシステム: Remotion + Whisper API（word_timestamps）で完全自動同期、源ノ角ゴシック太字、画面上部1/3配置","視覚素材選択: LLM（GPT-4/Claude）で台本セマンティック解析 → キーワード抽出 → Pexels/Pixabay API並列検索 → 関連度スコアリング","TTS固有名詞: text_preprocessor.py前処理 + Wikipedia/固有名詞辞書でふりがな取得 → Fish Audio送信前に変換","動的映像合成: Next.js + HTML5 Video + Canvas、2-3秒インターバルで画像スライドショー、Intersection Observer + requestAnimationFrame","品質保証: agentic-vision（Gemini）で生成画像品質7/10以上検証、japanese-text-verifier（manga-ocr）でテキスト検証","フォント選定: 日本語はSource Han Sans Bold、英語はMontserrat Bold、モバイル最適化で画面比率に応じた動的サイズ調整","同期精度目標: 音声とテロップのズレ±100ms以内（Whisperワードタイムスタンプ精度）、視聴者読み速度1.5倍想定で表示時間+0.5秒","実装効率: Remotion Editorスターター利用でキャプション機能既存実装、カスタマイズで台本→素材マッピング追加"
+id: cpt_1770726225409_7xv2o6
+created: "2026-02-10T12:23:45.409Z"
+updated: "2026-02-10T12:23:45.409Z"

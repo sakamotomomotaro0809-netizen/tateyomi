@@ -1,0 +1,5382 @@
+schema_version: 2.0.0
+consolidation_date: '2025-11-13T03:08:12.022837Z'
+total_agents: 51
+agents:
+  api-designer:
+    agent_name: api-designer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 6
+        little_omega: 6
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          agents:
+          - api-designer
+          - 2025-01-01T00
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.381000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  api-developer:
+    agent_name: api-developer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 8
+        little_omega: 8
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - api-developer
+          - GraphQL-Go
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.386000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  backend-developer:
+    agent_name: backend-developer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 56
+        min_success_rate: 0.8
+        max_latency_ms: 165000
+        worst_case:
+          quality_score: 56
+          success_rate: 0
+          latency_ms: 165000
+      dependencies:
+        omega: 12
+        little_omega: 11
+        coupling_ratio: 1.09
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents: []
+          external:
+          - server-side
+          - Domain-Driven
+          - Server-Sent
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.95
+          medium: 0.865
+          high: 0.65
+        by_category:
+          implementation: 0.55
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 1
+        prediction_accuracy:
+          total_predictions: 1
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:13:43.870000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: false
+        acceptable_coupling: true
+      overall_health: fair
+  backup-manager:
+    agent_name: backup-manager
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 56
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 56
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 80
+        little_omega: 51
+        coupling_ratio: 1.5686274509803921
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - backup-manager
+          - Point-in-Time
+          - backup-recovery
+          - backup-database
+          - backup-files
+          - restore-database
+          - restore-files
+          - velero-install
+          - backup-schedule
+          - restore-job
+          - rds-backup-automation
+          - s3-lifecycle-policy
+          - backup-vault
+          - backup-dashboard
+          - backup-alerts
+          - disaster-recovery
+          - dr-plan
+          - rto-rpo-matrix
+          - dr-drill-checklist
+          - restore-validation
+          - backup-integrity-check
+          - my-backup-bucket
+          - aes-256-cbc
+          - storage-class
+          - server-side-encryption
+          - put-bucket-lifecycle
+          - lifecycle-configuration
+          - put-metric-data
+          - metric-name
+          - if-exists
+          - no-owner
+          - no-acl
+          - tuples-only
+          - daily-backup
+          - kube-system
+          - hourly-backup-critical
+          - my-velero-backups
+          - us-east-1
+          - abcd-1234
+          - validation-queries
+          - Pre-Drill
+          - T-0
+          - Post-Drill
+          - Cross-Region
+          - Multi-region
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.7100000000000001
+          medium: 0.6100000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.390000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  bug-fixer:
+    agent_name: bug-fixer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 7
+        little_omega: 7
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - bug-fixer
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.393000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  chaos-engineer:
+    agent_name: chaos-engineer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 50
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 50
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 61
+        little_omega: 43
+        coupling_ratio: 1.4186046511627908
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - chaos-engineer
+          - network-latency
+          - service-failure
+          - resource-exhaustion
+          - database-failure
+          - dependency-outage
+          - cascading-failure
+          - split-brain
+          - steady-state-metrics
+          - chaos-metrics
+          - deviation-alerts
+          - chaos-experiment-report
+          - resilience-score
+          - improvement-recommendations
+          - run-chaos-experiment
+          - inject-failure
+          - analyze-resilience
+          - chaos-mesh
+          - network-delay-experiment
+          - fixed-percent
+          - random-max-percent
+          - backend-service
+          - pod-kill-experiment
+          - pod-kill
+          - pod-failure
+          - container-kill
+          - memory-stress-experiment
+          - payment-service
+          - network-chaos
+          - user-friendly
+          - api-gateway
+          - order-service
+          - user-service
+          - db-latency
+          - Kubernetes-native
+          - non-production
+          - Real-time
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.65
+          medium: 0.55
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.394000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  cicd-manager:
+    agent_name: cicd-manager
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 51
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 51
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 150
+        little_omega: 85
+        coupling_ratio: 1.7647058823529411
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - cicd-manager
+          - cd-staging
+          - cd-production
+          - security-scan
+          - performance-test
+          - setup-node
+          - quality-gates
+          - code-quality
+          - runs-on
+          - ubuntu-latest
+          - fetch-depth
+          - node-version
+          - output-file
+          - eslint-report
+          - continue-on-error
+          - type-check
+          - commitlint-github-action
+          - upload-artifact
+          - eslint-results
+          - unit-tests
+          - coverage-summary
+          - codecov-action
+          - coverage-final
+          - coverage-reports
+          - integration-tests
+          - health-cmd
+          - health-interval
+          - health-timeout
+          - health-retries
+          - 7-alpine
+          - redis-cli
+          - security-events
+          - audit-level
+          - severity-threshold
+          - semgrep-action
+          - security-audit
+          - owasp-top-ten
+          - codeql-action
+          - build-artifacts
+          - retention-days
+          - docker-build
+          - setup-buildx-action
+          - login-action
+          - metadata-action
+          - build-push-action
+          - cache-from
+          - cache-to
+          - build-args
+          - e2e-tests
+          - with-deps
+          - e2e-results
+          - quality-gate
+          - download-artifact
+          - us-east-1
+          - Pre-deployment
+          - validate-release
+          - 0-9
+          - deploy-blue-green
+          - aws-actions
+          - configure-aws-credentials
+          - aws-access-key
+          - aws-secret-access
+          - aws-region
+          - app-green
+          - prometheus-0
+          - app-blue
+          - deploy-canary
+          - blue-green
+          - Post-deployment
+          - post-deployment
+          - Post-Deployment
+          - slack-github-action
+          - webhook-url
+          - vulnerability-report
+          - complexity-report
+          - benchmark-results
+          - Multi-Stage
+          - Real-time
+          - 7-day
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.66
+          medium: 0.56
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.395000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  cloud-architect:
+    agent_name: cloud-architect
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 44
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 44
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 138
+        little_omega: 90
+        coupling_ratio: 1.5333333333333334
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - cloud-architect
+          - multi-cloud
+          - Multi-Region
+          - Lift-and-Shift
+          - Re-Platform
+          - Re-Architect
+          - Well-Architected
+          - 3-tier
+          - Multi-AZ
+          - Auto-Scaling
+          - cloud-architecture
+          - infrastructure-diagram
+          - data-flow-diagram
+          - network-topology
+          - 3-tier-web
+          - microservices-eks
+          - serverless-api
+          - vpc-stack
+          - ecs-stack
+          - rds-stack
+          - cost-optimization
+          - rightsizing-report
+          - reserved-instances
+          - gke-microservices
+          - cloud-run-api
+          - cloud-sql
+          - aks-microservices
+          - migration-plan
+          - rollback-plan
+          - architecture-decision-records
+          - ADR-001-database
+          - ADR-002-compute
+          - disaster-recovery
+          - scaling-procedures
+          - 3-Tier
+          - AZ-1
+          - AZ-2
+          - three-tier-stack
+          - aws-cdk-lib
+          - aws-ec2
+          - aws-ecs
+          - aws-ecs-patterns
+          - aws-rds
+          - aws-elasticache
+          - aws-s3
+          - aws-cloudfront
+          - aws-wafv2
+          - Private-Application
+          - Private-Database
+          - amazon-ecs-sample
+          - Auto-scaling
+          - AWS-AWSManagedRulesCommonRuleSet
+          - serverless-api-stack
+          - aws-lambda
+          - aws-apigateway
+          - aws-dynamodb
+          - aws-sqs
+          - aws-lambda-event
+          - api-handler
+          - X-Ray
+          - queue-processor
+          - stream-processor
+          - awscli-exe-linux
+          - describe-instances
+          - get-metric-statistics
+          - metric-name
+          - start-time
+          - end-time
+          - describe-volumes
+          - long-running
+          - fault-tolerant
+          - Intelligent-Tiering
+          - ML-based
+          - ADR-001
+          - e-commerce
+          - Multi-region
+          - point-in-time
+          - Cross-region
+          - pay-per-second
+          - ADR-002
+          - ADR-003
+          - Multi-cloud
+          - event-driven
+          - cross-region
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.59
+          medium: 0.49
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.397000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  code-reviewer:
+    agent_name: code-reviewer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 90
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 90
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 14
+        little_omega: 12
+        coupling_ratio: 1.1666666666666667
+        dependencies_list:
+          tools:
+          - Read
+          - Grep
+          - Glob
+          agents:
+          - code-reviewer
+          - 0-100
+          - well-structured
+          - try-catch
+          - Re-run
+          - 90-100
+          - 80-89
+          - 70-79
+          - trade-offs
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.75
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.398000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  complexity-analyzer:
+    agent_name: complexity-analyzer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 50
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 50
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 35
+        little_omega: 32
+        coupling_ratio: 1.09375
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - complexity-analyzer
+          - cyclomatic-complexity
+          - cognitive-complexity
+          - maintainability-index
+          - complexity-hotspots
+          - trend-analysis
+          - complexity-thresholds
+          - complexity-heatmap
+          - hotspots-chart
+          - trend-graph
+          - analyze-complexity
+          - calculate-maintainability
+          - generate-recommendations
+          - utf-8
+          - 5-9
+          - 10-19
+          - 85-100
+          - 65-84
+          - 40-64
+          - 0-39
+          - 0-100
+          - generate-complexity-heatmap
+          - plotly-2
+          - font-family
+          - sans-serif
+          - high-complexity
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.65
+          medium: 0.55
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.399000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  config-manager:
+    agent_name: config-manager
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 65
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 65
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 23
+        little_omega: 20
+        coupling_ratio: 1.15
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          agents:
+          - config-manager
+          - dotenv-vault
+          - class-validator
+          - feature-flags
+          - change-me
+          - your-secret-here
+          - user-specific
+          - your-super-secret
+          - key-minimum-32
+          - your-oauth-client
+          - super-secret-key
+          - with-32-characters
+          - too-short
+          - aws-sdk
+          - client-secrets-manager
+          - us-east-1
+          - type-safe
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.8
+          medium: 0.7000000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.400000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  container-specialist:
+    agent_name: container-specialist
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 39
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 39
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 99
+        little_omega: 61
+        coupling_ratio: 1.6229508196721312
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - container-specialist
+          - docker-compose
+          - trivy-scan
+          - security-policy
+          - pod-security-policy
+          - prometheus-config
+          - grafana-dashboard
+          - build-optimized
+          - scan-vulnerabilities
+          - push-to-registry
+          - Multi-Stage
+          - Production-Ready
+          - 18-alpine
+          - package-lock
+          - nodejs18-debian11
+          - non-root
+          - start-period
+          - 11-slim
+          - apt-get
+          - no-install-recommends
+          - libpq-dev
+          - no-cache-dir
+          - npm-debug
+          - yarn-error
+          - gitlab-ci
+          - multi-stage
+          - backend-api
+          - Zero-downtime
+          - db-migration
+          - database-credentials
+          - redis-credentials
+          - app-config
+          - X-Health-Check
+          - slow-starting
+          - redis-cluster
+          - 7-alpine
+          - redis-server
+          - redis-cli
+          - redis-config
+          - fast-ssd
+          - backend-api-hpa
+          - CPU-based
+          - Memory-based
+          - exit-code
+          - no-progress
+          - trivy-report
+          - human-readable
+          - machine-readable
+          - cache-from
+          - cache-to
+          - build-arg
+          - Multi-stage
+          - Non-root
+          - Production-ready
+          - Zero-Downtime
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.54
+          medium: 0.44
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.401000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  coordinator:
+    agent_name: coordinator
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 75
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 75
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 0
+        little_omega: 0
+        coupling_ratio: 1
+        dependencies_list:
+          tools: []
+          agents: []
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.9
+          medium: 0.8
+          high: 0.6
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.402000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  database-designer:
+    agent_name: database-designer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 5
+        little_omega: 5
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          agents:
+          - database-designer
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.403000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  database-developer:
+    agent_name: database-developer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 66
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 66
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 13
+        little_omega: 12
+        coupling_ratio: 1.0833333333333333
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Bash
+          agents:
+          - database-developer
+          - 2025-01-01
+          - A-Za-z0
+          - A-Z
+          - a-z
+          - user-uuid-here
+          - Version-controlled
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.81
+          medium: 0.7100000000000001
+          high: 0.51
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.404000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  devops-engineer:
+    agent_name: devops-engineer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 78
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 78
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 49
+        little_omega: 33
+        coupling_ratio: 1.4848484848484849
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - devops-engineer
+          - configure-servers
+          - cluster-role
+          - 2012-10-17
+          - node-role
+          - node-group
+          - my-terraform-state
+          - us-east-1
+          - terraform-lock
+          - us-east-1a
+          - us-east-1b
+          - us-east-1c
+          - 00-04
+          - 00-mon
+          - backend-api
+          - database-credentials
+          - cert-manager
+          - cluster-issuer
+          - letsencrypt-prod
+          - api-tls
+          - deployment-patch
+          - app-config
+          - kubernetes-apiservers
+          - kubernetes-nodes
+          - Multi-AZ
+          - zero-downtime
+          - month-over-month
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.93
+          medium: 0.8300000000000001
+          high: 0.63
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.405000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  doc-reviewer:
+    agent_name: doc-reviewer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 81
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 81
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 34
+        little_omega: 21
+        coupling_ratio: 1.619047619047619
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - doc-reviewer
+          - 0-100
+          - doc-files
+          - doc-templates
+          - validate-openapi
+          - validate-code-comments
+          - 75-89
+          - 60-74
+          - 2025-11-06
+          - api-validation-results
+          - doc-coverage-report
+          - documentation-quality-report
+          - generate-readme
+          - generate-doc-quality
+          - Up-to-date
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.9600000000000001
+          medium: 0.8600000000000001
+          high: 0.66
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.406000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  feature-builder:
+    agent_name: feature-builder
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 76
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 76
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 11
+        little_omega: 11
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - feature-builder
+          - Test-Driven
+          - Meta-RAG
+          - try-catch
+          - language-specific
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.91
+          medium: 0.81
+          high: 0.61
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.407000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  feedback-analyzer:
+    agent_name: feedback-analyzer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 88
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 88
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 13
+        little_omega: 12
+        coupling_ratio: 1.0833333333333333
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - feedback-analyzer
+          - support-ticket
+          - 0-10
+          - keyword-based
+          - Real-time
+          - Follow-up
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.93
+          high: 0.73
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.409000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  frontend-developer:
+    agent_name: frontend-developer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 94
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 94
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 40
+        little_omega: 34
+        coupling_ratio: 1.1764705882352942
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - frontend-developer
+          - CSS-in-JS
+          - user-profile
+          - aria-label
+          - user-info
+          - edit-button
+          - testing-library
+          - items-center
+          - gap-4
+          - p-4
+          - bg-white
+          - rounded-lg
+          - shadow-md
+          - w-16
+          - h-16
+          - rounded-full
+          - object-cover
+          - flex-1
+          - px-4
+          - py-2
+          - bg-blue-500
+          - text-white
+          - bg-blue-600
+          - transition-colors
+          - flex-direction
+          - min-width
+          - align-items
+          - react-window
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.7899999999999999
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.410000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  implementation-assistant:
+    agent_name: implementation-assistant
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 61
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 61
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 14
+        little_omega: 12
+        coupling_ratio: 1.1666666666666667
+        dependencies_list:
+          tools: []
+          agents:
+          - implementation-assistant
+          - agent-based
+          - production-ready
+          - Industry-standard
+          - Project-specific
+          - decision-making
+          - Self-documenting
+          - sk-1234567890abcdef
+          - my-agent
+          - Self-Verification
+          - up-to-date
+          - Self-review
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.76
+          medium: 0.66
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.411000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  incident-responder:
+    agent_name: incident-responder
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 43
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 43
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 120
+        little_omega: 66
+        coupling_ratio: 1.8181818181818181
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - incident-responder
+          - on-call
+          - SEV1-4
+          - incident-response
+          - high-latency
+          - database-outage
+          - service-down
+          - high-error-rate
+          - 2024-01-15
+          - incident-severity-matrix
+          - escalation-policy
+          - communication-plan
+          - incident-tracker
+          - rca-helper
+          - metrics-aggregator
+          - pagerduty-config
+          - escalation-policies
+          - SEV-1
+          - SEV-2
+          - SEV-3
+          - Non-critical
+          - 5-10
+          - non-peak
+          - SEV-4
+          - Low-priority
+          - backend-api
+          - pod-name
+          - postgres-0
+          - redis-0
+          - redis-cli
+          - curl-format
+          - external-api
+          - field-selector
+          - Medium-term
+          - 5-30
+          - Long-term
+          - read-only
+          - read-replica
+          - team-lead
+          - eng-manager
+          - Post-Incident
+          - On-call
+          - Write-Ahead
+          - devops-team
+          - 2024-01-17
+          - backend-team
+          - 2024-01-18
+          - sre-team
+          - 2024-01-25
+          - incident-team
+          - 2024-01-20
+          - 2024-02-01
+          - 2024-02-10
+          - 2024-02-15
+          - real-time
+          - incident-2024-01
+          - database-health
+          - Follow-up
+          - Step-by-step
+          - On-Call
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.58
+          medium: 0.48
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.413000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  innovation-scout:
+    agent_name: innovation-scout
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 64
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 64
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 25
+        little_omega: 23
+        coupling_ratio: 1.0869565217391304
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - innovation-scout
+          - Utility-first
+          - End-to-end
+          - High-performance
+          - Performance-critical
+          - Micro-frontends
+          - YYYY-MM-DD
+          - competitive-analysis
+          - Context-aware
+          - Multi-language
+          - PoC-to-production
+          - 2-3
+          - 1-5
+          - 4-week
+          - Time-boxed
+          - 10-15
+          - Data-driven
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.79
+          medium: 0.6900000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.414000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  integration-developer:
+    agent_name: integration-developer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 53
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 53
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 12
+        little_omega: 12
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Bash
+          agents:
+          - integration-developer
+          - Third-party
+          - 2023-10-16
+          - stripe-signature
+          - Type-safe
+          - error-handled
+          - try-catch
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.68
+          medium: 0.5800000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.415000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  integration-planner:
+    agent_name: integration-planner
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 5
+        little_omega: 5
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          agents:
+          - integration-planner
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.416000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  integration-tester:
+    agent_name: integration-tester
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 61
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 61
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 46
+        little_omega: 32
+        coupling_ratio: 1.4375
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - integration-tester
+          - end-to-end
+          - cross-service
+          - message-handler
+          - user-flows
+          - admin-flows
+          - user-management
+          - user-service
+          - user-api
+          - docker-compose
+          - post-creation
+          - cart-badge
+          - cart-item
+          - a-zA-Z0
+          - pact-foundation
+          - frontend-app
+          - user-123
+          - token-abc
+          - Content-Type
+          - 2025-01-01T00
+          - user-999
+          - non-existent
+          - CMD-SHELL
+          - 7-alpine
+          - redis-cli
+          - 3-management
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.76
+          medium: 0.66
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.417000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  knowledge-manager:
+    agent_name: knowledge-manager
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 72
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 72
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 11
+        little_omega: 10
+        coupling_ratio: 1.1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - knowledge-manager
+          - doc-001
+          - cross-references
+          - up-to-date
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.87
+          medium: 0.77
+          high: 0.57
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.418000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  learning-agent:
+    agent_name: learning-agent
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 60
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 60
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 46
+        little_omega: 34
+        coupling_ratio: 1.3529411764705883
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - learning-agent
+          - YYYY-MM-DD
+          - Anti-Patterns
+          - Anti-Pattern
+          - best-practices-catalog
+          - code-quality
+          - bp-001
+          - ap-002
+          - bp-002
+          - sk-1234567890abcdef
+          - ap-001
+          - bp-003
+          - bp-004
+          - anti-patterns-registry
+          - Anti-pattern
+          - bp-solid-srp
+          - commented-out
+          - Copy-pasted
+          - bp-kiss
+          - bp-code-review
+          - knowledge-base-builder
+          - knowledge-base
+          - utf-8
+          - best-practices
+          - lessons-learned
+          - ap-003
+          - well-organized
+          - Up-to-date
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.75
+          medium: 0.65
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.420000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  metrics-collector:
+    agent_name: metrics-collector
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 68
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 68
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 10
+        little_omega: 8
+        coupling_ratio: 1.25
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - metrics-collector
+          - Real-time
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.8300000000000001
+          medium: 0.7300000000000001
+          high: 0.53
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.421000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  migration-developer:
+    agent_name: migration-developer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 60
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 60
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 21
+        little_omega: 13
+        coupling_ratio: 1.6153846153846154
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Bash
+          agents:
+          - migration-developer
+          - zero-downtime
+          - Expand-Contract
+          - Zero-Downtime
+          - Re-add
+          - rolled-back
+          - Pre-Migration
+          - Post-Migration
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.75
+          medium: 0.65
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.422000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  monitoring-specialist:
+    agent_name: monitoring-specialist
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 54
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 54
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 50
+        little_omega: 44
+        coupling_ratio: 1.1363636363636365
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - monitoring-specialist
+          - X-Ray
+          - prom-client
+          - recording-rules
+          - prometheus-deployment
+          - prometheus-config
+          - service-monitor
+          - application-dashboard
+          - infrastructure-dashboard
+          - slo-dashboard
+          - dashboard-provider
+          - grafana-deployment
+          - jaeger-all-in
+          - jaeger-production
+          - loki-config
+          - promtail-config
+          - slo-definitions
+          - error-budget-calculator
+          - self-monitoring
+          - kubernetes-apiservers
+          - kubernetes-pods
+          - Application-specific
+          - backend-api
+          - 30-day
+          - Content-Type
+          - sdk-node
+          - auto-instrumentations-node
+          - exporter-jaeger
+          - semantic-conventions
+          - sdk-trace-base
+          - instrumentation-http
+          - instrumentation-express
+          - instrumentation-pg
+          - instrumentation-redis
+          - auto-instrumentation
+          - severity-based
+          - On-Call
+          - low-priority
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.6900000000000001
+          medium: 0.5900000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.423000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  mutation-tester:
+    agent_name: mutation-tester
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 74
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 74
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 38
+        little_omega: 34
+        coupling_ratio: 1.1176470588235294
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - mutation-tester
+          - mutation-operators
+          - mutation-score
+          - surviving-mutants
+          - killed-mutants
+          - mutation-report
+          - equivalent-mutants
+          - run-mutation-testing
+          - analyze-survivors
+          - generate-recommendations
+          - stryker-mutator
+          - clear-text
+          - typescript-checker
+          - low-value
+          - stryker-tmp
+          - custom-mutators
+          - generate-mutation-report
+          - font-family
+          - sans-serif
+          - font-size
+          - font-weight
+          - border-collapse
+          - text-align
+          - background-color
+          - re-runs
+          - high-value
+          - Auto-detect
+          - Auto-detected
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.89
+          medium: 0.79
+          high: 0.59
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.424000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  optimization-report-coordinator:
+    agent_name: optimization-report-coordinator
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 91
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 91
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 24
+        little_omega: 21
+        coupling_ratio: 1.1428571428571428
+        dependencies_list:
+          tools: []
+          agents:
+          - 2025-11-03
+          - 3-5
+          - api-designer
+          - api-developer
+          - backend-developer
+          - security-architect
+          - high-frequency
+          - 200-500ms
+          - 10-50ms
+          - 80-95
+          - 2-5
+          - 1-3
+          - Post-optimization
+          - 80-90
+          - 667-673
+          - 224-253
+          - real-world
+          - High-Performance
+          - Future-Ready
+          - production-ready
+          - tmux-session-manager
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.76
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.425000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  performance-tester:
+    agent_name: performance-tester
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 82
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 82
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 31
+        little_omega: 23
+        coupling_ratio: 1.3478260869565217
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Bash
+          agents:
+          - performance-tester
+          - api-load
+          - database-load
+          - spike-test
+          - query-benchmark
+          - function-benchmark
+          - load-test-2025
+          - 01-01
+          - Ramp-up
+          - Ramp-down
+          - Content-Type
+          - perf-test
+          - generate-report
+          - font-family
+          - sans-serif
+          - border-collapse
+          - text-align
+          - background-color
+          - font-weight
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.97
+          medium: 0.87
+          high: 0.6699999999999999
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.425000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  process-optimizer:
+    agent_name: process-optimizer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 56
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 56
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 41
+        little_omega: 32
+        coupling_ratio: 1.28125
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - process-optimizer
+          - Long-term
+          - process-optimization
+          - value-stream-map
+          - bottleneck-analysis
+          - metrics-baseline
+          - quick-wins
+          - automation-opportunities
+          - long-term-initiatives
+          - experiment-template
+          - ab-test-results
+          - productivity-dashboard
+          - developer-experience-survey
+          - monthly-improvement-report
+          - roi-calculator
+          - non-value-added
+          - auto-assign
+          - Break-Even
+          - 1-5
+          - 1-100
+          - 0-100
+          - break-even
+          - Real-time
+          - Data-Driven
+          - Buy-In
+          - year-over-year
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.7100000000000001
+          medium: 0.6100000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.426000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  qa-validator:
+    agent_name: qa-validator
+    total_tasks: 1
+    successful_tasks: 1
+    failed_tasks: 0
+    success_rate: 1.0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: '2025-11-12T14:40:13.869456Z'
+    recent_tasks:
+    - task_id: 2025-11-12-test-001
+      quality_score: 92
+      success: true
+      timestamp: '2025-11-12T14:40:13.869464Z'
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 39
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 39
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 60
+        little_omega: 35
+        coupling_ratio: 1.7142857142857142
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - qa-validator
+          - axe-core
+          - lcov-report
+          - coverage-summary
+          - quality-gates
+          - sonar-project
+          - quality-gate-rules
+          - gate-results
+          - regression-tests
+          - axe-results
+          - lighthouse-scores
+          - wcag-report
+          - complexity-report
+          - code-smells
+          - technical-debt
+          - qa-summary
+          - release-readiness
+          - json-summary
+          - Per-file
+          - validate-coverage
+          - utf-8
+          - per-file
+          - validate-quality-gates
+          - vulnerability-summary
+          - visual-regression
+          - homepage-diff
+          - a11y-audit
+          - ts-node
+          - Multi-dimensional
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.54
+          medium: 0.44
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.427000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  refactor-specialist:
+    agent_name: refactor-specialist
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 39
+        min_success_rate: 0.8
+        max_latency_ms: 610000
+        worst_case:
+          quality_score: 39
+          success_rate: 0
+          latency_ms: 610000
+      dependencies:
+        omega: 55
+        little_omega: 39
+        coupling_ratio: 1.4102564102564104
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - refactor-specialist
+          - code-smells
+          - complexity-report
+          - duplication-report
+          - tech-debt-assessment
+          - refactoring-plan
+          - priority-matrix
+          - migration-strategy
+          - before-after-metrics
+          - performance-comparison
+          - improvement-summary
+          - detect-code-smells
+          - calculate-complexity
+          - measure-tech-debt
+          - max-depth
+          - max-lines-per
+          - max-params
+          - no-duplicate-imports
+          - no-magic-numbers
+          - prefer-const
+          - no-unused-vars
+          - no-empty-function
+          - utf-8
+          - cc-123
+          - pp-456
+          - btc-789
+          - generate-refactoring-report
+          - font-family
+          - sans-serif
+          - font-weight
+          - inline-block
+          - border-radius
+          - Non-Breaking
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.54
+          medium: 0.44
+          high: 0.55
+        by_category:
+          implementation: 0
+          refactoring: 0.55
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 1
+        prediction_accuracy:
+          total_predictions: 1
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 10:08:21.293000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: false
+        acceptable_coupling: true
+      overall_health: fair
+  release-manager:
+    agent_name: release-manager
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 43
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 43
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 143
+        little_omega: 62
+        coupling_ratio: 2.306451612903226
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - release-manager
+          - Multi-stage
+          - release-management
+          - standard-version
+          - release-please-config
+          - semantic-release
+          - changelog-template
+          - github-actions
+          - deploy-staging
+          - deploy-production
+          - create-release
+          - deploy-canary
+          - release-gates
+          - quality-gate
+          - approval-workflow
+          - dora-metrics
+          - release-dashboard
+          - config-conventional
+          - type-enum
+          - subject-case
+          - upper-case
+          - subject-full-stop
+          - header-max-length
+          - release-type
+          - package-name
+          - my-app
+          - changelog-sections
+          - extra-files
+          - package-lock
+          - pull-requests
+          - release-please
+          - runs-on
+          - ubuntu-latest
+          - release-created
+          - tag-name
+          - google-github-actions
+          - release-please-action
+          - changelog-types
+          - setup-node
+          - node-version
+          - coverage-summary
+          - severity-threshold
+          - backend-api
+          - slack-github-action
+          - channel-id
+          - slack-message
+          - pre-deployment-checks
+          - Pre-Deployment
+          - load-test
+          - manual-approval
+          - production-approval
+          - backend-api-canary
+          - deploy-full
+          - DD-API-KEY
+          - Content-Type
+          - One-command
+          external: []
+        coupling_health:
+          status: poor
+          recommendation: High coupling detected. Consider refactoring to reduce dependencies.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.58
+          medium: 0.48
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.428000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: false
+      overall_health: fair
+  requirements-elicitation:
+    agent_name: requirements-elicitation
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 91
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 91
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 5
+        little_omega: 5
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          agents:
+          - requirements-elicitation
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.76
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.429000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  script-writer:
+    agent_name: script-writer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 53
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 53
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 26
+        little_omega: 17
+        coupling_ratio: 1.5294117647058822
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Bash
+          agents:
+          - script-writer
+          - Blue-Green
+          - health-check
+          - backup-database
+          - cleanup-logs
+          - error-handler
+          - dry-run
+          - Pre-flight
+          - deployment-green
+          - myapp-green
+          - myapp-blue
+          - my-backups
+          - runs-on
+          - ubuntu-latest
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.68
+          medium: 0.5800000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.430000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  security-architect:
+    agent_name: security-architect
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 13
+        little_omega: 13
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          agents:
+          - security-architect
+          - at-rest
+          - in-transit
+          - AES-256
+          - Multi-Factor
+          - Role-Based
+          - At-rest
+          - AES-256-GCM
+          - In-transit
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.431000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  security-scanner:
+    agent_name: security-scanner
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 49
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 49
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 154
+        little_omega: 90
+        coupling_ratio: 1.711111111111111
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - security-scanner
+          - PCI-DSS
+          - pre-commit
+          - security-scanning
+          - custom-rules
+          - owasp-top10
+          - sonar-project
+          - codeql-config
+          - zap-baseline
+          - zap-full-scan
+          - burp-scan
+          - snyk-test
+          - npm-audit
+          - audit-script
+          - trivy-scan
+          - trivy-config
+          - grype-scan
+          - trufflehog-scan
+          - git-secrets
+          - git-secrets-setup
+          - checkov-scan
+          - tfsec-scan
+          - cis-benchmarks
+          - docker-bench-security
+          - opa-policies
+          - github-actions
+          - security-scan
+          - vulnerability-dashboard
+          - hardcoded-secret
+          - pattern-either
+          - CWE-798
+          - Hard-coded
+          - sql-injection
+          - CWE-89
+          - insecure-random
+          - CWE-330
+          - unsafe-regex
+          - pattern-regex
+          - CWE-22
+          - jwt-no-verify
+          - CWE-347
+          - dangerous-eval
+          - CWE-95
+          - semgrep-scan
+          - runs-on
+          - ubuntu-latest
+          - semgrep-results
+          - codeql-action
+          - upload-sarif
+          - SNYK-JS-LODASH
+          - 2024-06-01T00
+          - SNYK-JS-MINIMIST
+          - language-settings
+          - severity-threshold
+          - fail-on
+          - json-file-output
+          - snyk-report
+          - project-name
+          - snyk-to-html
+          - trivy-report
+          - download-db-only
+          - ignore-unfixed
+          - trivy-results
+          - since-commit
+          - trufflehog-results
+          - trufflehog-filesystem
+          - output-file
+          - checkov-report
+          - soft-fail
+          - checkov-results
+          - semgrep-action
+          - security-audit
+          - owasp-top-ten
+          - dependency-scan
+          - setup-node
+          - node-version
+          - container-scan
+          - trivy-action
+          - image-ref
+          - secret-scan
+          - fetch-depth
+          - iac-scan
+          - checkov-action
+          - security-report
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.64
+          medium: 0.54
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.432000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  security-tester:
+    agent_name: security-tester
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 64
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 64
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 100
+        little_omega: 65
+        coupling_ratio: 1.5384615384615385
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - security-tester
+          - Dependency-Check
+          - broken-auth
+          - api-pentest
+          - auth-pentest
+          - static-analysis
+          - bandit-config
+          - semgrep-rules
+          - dependency-scan
+          - audit-report
+          - vulnerability-report
+          - cvss-scores
+          - zap-scan
+          - dependency-check
+          - security-audit
+          - valid-search
+          - wrong-password
+          - lockout-test
+          - a-f0-9
+          - Cross-Site
+          - double-escaped
+          - Content-Security-Policy
+          - content-security-policy
+          - script-src
+          - DOM-based
+          - user-controlled
+          - user-content
+          - state-changing
+          - X-CSRF-Token
+          - set-cookie
+          - zap2docker-stable
+          - zap-cli
+          - active-scan
+          - zap-report
+          - high-risk
+          - npm-audit
+          - snyk-report
+          - hardcoded-secret
+          - pattern-either
+          - sql-injection-risk
+          - command-injection
+          - insecure-random
+          - missing-csrf-protection
+          - semgrep-results
+          - bandit-results
+          - output-file
+          - eslint-security
+          - generate-security-report
+          - font-family
+          - sans-serif
+          - font-weight
+          - border-collapse
+          - text-align
+          - background-color
+          - border-radius
+          - Code-level
+          - 0-8
+          - Non-Destructive
+          - 90-day
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.79
+          medium: 0.6900000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.432000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  session-summarizer:
+    agent_name: session-summarizer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 11
+        little_omega: 11
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          - WebFetch
+          - WebSearch
+          - Task
+          agents:
+          - session-summarizer
+          - jwt-service
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.433000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  system-architect:
+    agent_name: system-architect
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 6
+        little_omega: 6
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          agents:
+          - system-architect
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.434000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  tech-writer:
+    agent_name: tech-writer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 92
+        min_success_rate: 0.8
+        max_latency_ms: 420000
+        worst_case:
+          quality_score: 92
+          success_rate: 0
+          latency_ms: 420000
+      dependencies:
+        omega: 9
+        little_omega: 8
+        coupling_ratio: 1.125
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          agents:
+          - tech-writer
+          - Content-Type
+          - 2025-01-01T00
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.991
+          medium: 0.955
+          high: 0.83
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0.5950000000000001
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 2
+        prediction_accuracy:
+          total_predictions: 2
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:50:43.797000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: false
+        acceptable_coupling: true
+      overall_health: good
+  test-generator:
+    agent_name: test-generator
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 52
+        min_success_rate: 0.8
+        max_latency_ms: 378000
+        worst_case:
+          quality_score: 52
+          success_rate: 0
+          latency_ms: 378000
+      dependencies:
+        omega: 18
+        little_omega: 16
+        coupling_ratio: 1.125
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Grep
+          - Glob
+          - Bash
+          agents:
+          - Arrange-Act-Assert
+          - auth-flow
+          - user-registration
+          - user-123
+          - user-456
+          - invalid-email
+          - aria-label
+          - faker-js
+          - wait-for
+          - testing-library
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.67
+          medium: 0.6130000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0.55
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 1
+        prediction_accuracy:
+          total_predictions: 1
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:57:52.673000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: false
+        acceptable_coupling: true
+      overall_health: fair
+  tmux-session-manager-optimization-report:
+    agent_name: tmux-session-manager-optimization-report
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 56
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 56
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 55
+        little_omega: 31
+        coupling_ratio: 1.7741935483870968
+        dependencies_list:
+          tools: []
+          agents:
+          - 2025-11-03
+          - tmux-session-manager
+          - Real-time
+          - multi-agent
+          - One-shot
+          - pipe-pane
+          - long-running
+          - real-time
+          - post-mortem
+          - Multi-agent
+          - Cross-platform
+          - auto-refresh
+          - Human-readable
+          - new-session
+          - send-keys
+          - C-m
+          - ait42-test-streaming
+          - CPU-intensive
+          - ait42-test
+          - Multi-Agent
+          - side-by-side
+          - split-window
+          - ait42-api-designer
+          - ait42-backend-dev
+          - ait42-metrics
+          - ait42-historical-metrics
+          - web-based
+          - Write-only
+          - production-ready
+          - production-grade
+          - 2-3
+          external: []
+        coupling_health:
+          status: fair
+          recommendation: Moderate coupling. Monitor and consider refactoring if increasing.
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.7100000000000001
+          medium: 0.6100000000000001
+          high: 0.5
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.436000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: false
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: good
+  tmux-session-manager:
+    agent_name: tmux-session-manager
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 75
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 75
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 0
+        little_omega: 0
+        coupling_ratio: 1
+        dependencies_list:
+          tools: []
+          agents: []
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.9
+          medium: 0.8
+          high: 0.6
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.437000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  ui-ux-designer:
+    agent_name: ui-ux-designer
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 100
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 100
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 15
+        little_omega: 14
+        coupling_ratio: 1.0714285714285714
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          agents:
+          - ui-ux-designer
+          - 30-40
+          - 0-767px
+          - 768-1023px
+          - font-heading
+          - sans-serif
+          - font-body
+          - space-xs
+          - space-sm
+          - space-md
+          - space-lg
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.85
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.438000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+  workflow-coordinator:
+    agent_name: workflow-coordinator
+    total_tasks: 0
+    successful_tasks: 0
+    failed_tasks: 0
+    success_rate: 0
+    avg_quality_score: 0
+    avg_duration_ms: 0
+    last_updated: 2025-11-04 00:00:00+00:00
+    recent_tasks: []
+    trends:
+      success_rate_trend: 0
+      quality_score_trend: 0
+      avg_duration_trend: 0
+    specializations: {}
+    omega_metrics:
+      performance_bounds:
+        min_quality_score: 96
+        min_success_rate: 0.8
+        max_latency_ms: 5000
+        worst_case:
+          quality_score: 96
+          success_rate: 0
+          latency_ms: 0
+      dependencies:
+        omega: 7
+        little_omega: 7
+        coupling_ratio: 1
+        dependencies_list:
+          tools:
+          - Read
+          - Write
+          - Edit
+          - Bash
+          agents:
+          - workflow-coordinator
+          - runs-on
+          - ubuntu-latest
+          external: []
+        coupling_health:
+          status: good
+          recommendation: ''
+      completion_probability:
+        base_omega: 0
+        by_complexity:
+          low: 0.99
+          medium: 0.95
+          high: 0.8099999999999999
+        by_category:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+        confidence_interval: 0.05
+        sample_size: 0
+        prediction_accuracy:
+          total_predictions: 0
+          accurate_predictions: 0
+          accuracy_rate: 0
+    learning_metrics:
+      learning_rate: 0.1
+      quality_trend:
+        direction: stable
+        rate: 0
+      success_trend:
+        direction: stable
+        rate: 0
+      specialization:
+        primary_category: implementation
+        specialization_score: 0
+        categories:
+          implementation: 0
+          refactoring: 0
+          testing: 0
+          documentation: 0
+          debugging: 0
+    metadata:
+      last_updated: 2025-11-06 09:25:44.439000+00:00
+      schema_version: 1.0.0
+      omega_integration_date: 2025-11-06
+      passes_quality_gates:
+        min_quality: true
+        min_success_rate: true
+        acceptable_coupling: true
+      overall_health: excellent
+metadata:
+  format: consolidated
+  backward_compatible: true
+  migration_version: 1.0.0
+  source: Agent Stats Consolidation Script v1.0.0

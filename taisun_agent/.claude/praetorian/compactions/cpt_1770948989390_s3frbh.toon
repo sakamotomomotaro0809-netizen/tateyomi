@@ -1,0 +1,14 @@
+type: web_research
+title: RapidAPI - API Marketplace Quality & Error Handling
+source: "https://rapidapi.com/ + best practices guides"
+key_insights[6]: Approval workflow for API plans requiring authorization,Management dashboard for usage/cost/error monitoring,Recommendation Engine API with multiple algorithms,Team reviews thousands of APIs for recommendations,Consistent error response structure critical,Standard HTTP status codes as first line of error reporting
+findings[4]: API gateway centralizes error management,Retry logic + client-side rate limiting recommended from start,Quality/reliability/documentation vary across marketplace,Specific submission quality standards not publicly detailed
+techniques:
+  "Error Handling": Consistent JSON structure + HTTP status codes
+  Quality: Team review + performance testing
+  Monitoring: Dashboard for usage/costs/errors
+  Discovery: Recommendation algorithms + manual curation
+recommendations[4]: Implement consistent error response format across all taisun_agent APIs,Add centralized error management gateway,Create usage/cost/error monitoring dashboard,Build recommendation engine for skill/agent selection
+id: cpt_1770948989390_s3frbh
+created: "2026-02-13T02:16:29.390Z"
+updated: "2026-02-13T02:16:29.390Z"

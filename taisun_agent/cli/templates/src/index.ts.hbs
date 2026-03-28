@@ -1,0 +1,50 @@
+/**
+ * {{projectName}}
+ * {{description}}
+ */
+
+import express, { Request, Response } from 'express';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Routes
+app.get('/', (req: Request, res: Response) => {
+  res.json({
+    message: 'Welcome to {{projectName}}',
+    version: '1.0.0',
+    status: 'running'
+  });
+});
+
+app.get('/health', (req: Request, res: Response) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Error handling
+app.use((err: Error, req: Request, res: Response, next: any) => {
+  console.error(err.stack);
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: err.message
+  });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`📝 Environment: ${process.env.NODE_ENV || 'development'}`);
+});
+
+export default app;

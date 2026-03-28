@@ -1,0 +1,29 @@
+{
+  "name": "taisun-agent",
+  "version": "2.9.2",
+  "description": "68スキル・85エージェント・227 MCPツールを統合した開発・マーケティングプラットフォーム。太陽スタイルのコピーライティング、動画制作、Deep Research、要件定義など",
+  "author": {
+    "name": "taiyousan15",
+    "url": "https://github.com/taiyousan15"
+  },
+  "homepage": "https://github.com/taiyousan15/taisun_agent",
+  "repository": "https://github.com/taiyousan15/taisun_agent",
+  "license": "MIT",
+  "keywords": [
+    "claude-code",
+    "agents",
+    "skills",
+    "hooks",
+    "marketing",
+    "copywriting",
+    "taiyo-style",
+    "video-production",
+    "deep-research",
+    "mcp",
+    "japanese"
+  ],
+  "skills": ["./.claude/skills/", "./.claude/commands/"],
+  "agents": ["./.claude/agents/"],
+  "hooks": ["./.claude/hooks/"],
+  "rules": ["./.claude/rules/"]
+}

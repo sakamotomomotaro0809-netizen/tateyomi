@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LP プレビュー - TAISUN Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 900px;
+            width: 100%;
+            padding: 50px;
+        }
+
+        h1 {
+            font-size: 42px;
+            color: #2d3748;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #718096;
+            font-size: 18px;
+            margin-bottom: 40px;
+        }
+
+        .lp-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .lp-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 30px;
+            color: white;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lp-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .lp-card:hover::before {
+            left: 100%;
+        }
+
+        .lp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .lp-card h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lp-card .icon {
+            font-size: 32px;
+        }
+
+        .lp-card p {
+            font-size: 16px;
+            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .lp-card .tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-right: 8px;
+            margin-top: 10px;
+        }
+
+        .info-box {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .info-box h3 {
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .info-box p {
+            color: #4a5568;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .info-box code {
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+        }
+
+        .server-info {
+            background: #48bb78;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .server-info code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .lp-card h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 LP プレビュー</h1>
+        <p class="subtitle">作成されたランディングページを確認できます</p>
+
+        <div class="server-info">
+            ✅ ローカルサーバー起動中: <code>http://localhost:8080</code>
+        </div>
+
+        <div class="info-box">
+            <h3>📋 アクセス方法</h3>
+            <p>以下のリンクをクリックすると、ブラウザで各LPが開きます。</p>
+            <p><strong>Claude Agent SDK</strong>からアクセスする場合も、これらのURLを使用してください。</p>
+        </div>
+
+        <div class="lp-grid">
+            <!-- メインLP: ゲーム観戦×AI副業 -->
+            <a href="hero_index.html" class="lp-card" target="_blank">
+                <h2>
+                    <span class="icon">🎮</span>
+                    ゲーム観戦×AI副業 ヒーローセクション
+                </h2>
+                <p>
+                    eスポーツ観戦が趣味の家族持ちサラリーマン向け。<br>
+                    月20万円の副収入、時間も家族も諦めない生活を訴求。
+                </p>
+                <div>
+                    <span class="tag">レスポンシブ対応</span>
+                    <span class="tag">グラデーション背景</span>
+                    <span class="tag">共感型コピー</span>
+                </div>
+            </a>
+
+            <!-- ドキュメント -->
+            <a href="esports_ai_hero_section.md" class="lp-card" target="_blank" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h2>
+                    <span class="icon">📄</span>
+                    完全ドキュメント
+                </h2>
+                <p>
+                    NanoBanana画像生成プロンプト、デザイン仕様書、実装手順の完全版。<br>
+                    A/Bテスト案、チェックリスト付き。
+                </p>
+                <div>
+                    <span class="tag">22KB</span>
+                    <span class="tag">Markdown</span>
+                </div>
+            </a>
+
+            <!-- クイックスタート -->
+            <a href="HERO_QUICKSTART.md" class="lp-card" target="_blank" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h2>
+                    <span class="icon">⚡</span>
+                    5分実装ガイド
+                </h2>
+                <p>
+                    即実行可能な手順書、トラブルシューティング、カスタマイズ例。<br>
+                    初心者でも5分でヒーローセクションが完成。
+                </p>
+                <div>
+                    <span class="tag">ステップバイステップ</span>
+                    <span class="tag">トラブルシューティング</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <h3>🔗 直接URL</h3>
+            <p>Claude Agent SDKやブラウザで以下のURLにアクセスできます：</p>
+            <p><code>http://localhost:8080/hero_index.html</code></p>
+            <p><code>http://localhost:8080/esports_ai_hero_section.md</code></p>
+            <p><code>http://localhost:8080/HERO_QUICKSTART.md</code></p>
+        </div>
+
+        <div class="info-box" style="border-left-color: #f56565; margin-top: 20px;">
+            <h3>⚠️ 画像について</h3>
+            <p>ヒーロー背景画像はまだ生成されていません。</p>
+            <p>
+                <strong>生成方法：</strong><br>
+                1. Claude Codeで <code>/nanobanana-pro</code> を実行<br>
+                2. esports_ai_hero_section.md のプロンプトをコピペ<br>
+                3. 生成された画像を <code>images/hero-bg-gaming-ai.png</code> として保存<br>
+                4. ブラウザをリロード
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px; color: #718096; font-size: 14px;">
+            <p>TAISUN v2 Agent System - LP Generator</p>
+            <p style="margin-top: 5px;">Powered by Claude Sonnet 4.5 & NanoBanana</p>
+        </div>
+    </div>
+</body>
+</html>

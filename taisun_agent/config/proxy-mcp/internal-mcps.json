@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+  "mcps": [
+    {
+      "name": "github",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github@0.6.2"],
+      "enabled": false,
+      "versionPin": "0.6.2",
+      "requiredEnv": ["GITHUB_TOKEN"],
+      "tags": ["vcs", "issues", "pr", "repository", "git"],
+      "shortDescription": "GitHub issues, PRs, repository management",
+      "dangerousOperations": ["delete", "force-push", "archive", "admin"],
+      "allowlist": ["get_*", "list_*", "search_*", "create_issue", "create_pr", "add_comment"],
+      "resilience": {
+        "timeout": { "spawnMs": 10000, "toolCallMs": 30000 },
+        "retry": { "maxAttempts": 2, "backoffMs": 500, "jitter": true },
+        "circuit": { "enabled": true, "failureThreshold": 5, "cooldownMs": 60000 }
+      }
+    },
+    {
+      "name": "notion",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-notion@0.1.0"],
+      "enabled": false,
+      "versionPin": "0.1.0",
+      "requiredEnv": ["NOTION_API_KEY"],
+      "tags": ["docs", "wiki", "database", "knowledge"],
+      "shortDescription": "Notion pages, databases, and blocks",
+      "dangerousOperations": ["delete", "archive"],
+      "allowlist": ["get_*", "list_*", "search_*", "create_page", "append_block"],
+      "resilience": {
+        "timeout": { "spawnMs": 10000, "toolCallMs": 20000 },
+        "retry": { "maxAttempts": 2, "backoffMs": 500, "jitter": true },
+        "circuit": { "enabled": true, "failureThreshold": 5, "cooldownMs": 60000 }
+      }
+    },
+    {
+      "name": "postgres",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres@0.6.1"],
+      "enabled": false,
+      "versionPin": "0.6.1",
+      "requiredEnv": ["POSTGRES_DSN"],
+      "tags": ["database", "sql", "query", "analytics"],
+      "shortDescription": "PostgreSQL database queries and schema inspection",
+      "dangerousOperations": ["drop", "truncate", "delete", "alter", "insert", "update"],
+      "allowlist": ["query", "describe_table", "list_tables"],
+      "resilience": {
+        "timeout": { "spawnMs": 5000, "toolCallMs": 30000 },
+        "retry": { "maxAttempts": 1, "backoffMs": 250, "jitter": false },
+        "circuit": { "enabled": true, "failureThreshold": 3, "cooldownMs": 120000 }
+      }
+    },
+    {
+      "name": "filesystem",
+      "transport": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem@0.6.2", "."],
+      "enabled": false,
+      "versionPin": "0.6.2",
+      "requiredEnv": [],
+      "tags": ["file", "directory", "local", "storage"],
+      "shortDescription": "Local filesystem read/write operations",
+      "dangerousOperations": ["delete", "write", "move"],
+      "allowlist": ["read_file", "list_directory", "get_file_info"],
+      "resilience": {
+        "timeout": { "spawnMs": 5000, "toolCallMs": 10000 },
+        "retry": { "maxAttempts": 2, "backoffMs": 250, "jitter": true },
+        "circuit": { "enabled": true, "failureThreshold": 5, "cooldownMs": 30000 }
+      }
+    }
+  ],
+  "routerConfig": {
+    "ruleFirst": true,
+    "semanticThreshold": 0.7,
+    "topK": 5,
+    "fallback": "require_clarify"
+  }
+}

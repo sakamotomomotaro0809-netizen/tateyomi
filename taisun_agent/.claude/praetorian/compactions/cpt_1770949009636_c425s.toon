@@ -1,0 +1,15 @@
+type: web_research
+title: Marketplace Best Practices - Cross-Platform Lessons
+source: Multiple marketplace platforms 2026 research
+key_insights[6]: MCP market projected $10.4B by 2026 (24.7% CAGR),"Design for user/agent intent, not 1:1 API wrapping","Start with read-only servers, narrow blast radius",Cost transparency before onboarding critical,Self-healing mechanisms in AI QA systems,Systematic feedback loops prevent recurring defects
+findings[4]: ClawHub requires identity verification after ClawHavoc incident,VirusTotal scanning + daily re-scans for threats,Skills evaluated on 5 dimensions (Practicality/Clarity/Automation/Quality/Impact),Human oversight needed until AI models improve through learning
+techniques:
+  "Security First": Read-only start + scoped servers + logging
+  "DX Optimization": Real-time access reduces onboarding friction
+  "Quality Automation": Self-healing + pattern detection + anomaly flagging
+  Governance: Minimum star requirements + community validation + verification badges
+anti_patterns[4]: "1:1 API wrapping instead of intent-based design",Over-reliance on automation without human oversight,No systematic capture of lessons learned,Ignoring cost transparency until post-deployment
+recommendations[6]: "Implement tiered security: read-only → limited write → full access",Add cost estimation before skill/agent installation,Build self-healing error recovery mechanisms,Create systematic feedback loops for improvement,Require identity verification for publishers,Implement multi-dimensional quality scoring
+id: cpt_1770949009636_c425s
+created: "2026-02-13T02:16:49.636Z"
+updated: "2026-02-13T02:16:49.636Z"

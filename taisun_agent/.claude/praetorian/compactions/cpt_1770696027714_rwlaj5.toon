@@ -1,0 +1,30 @@
+type: web_research
+title: LLM Automatic Routing Systems Research - 2025/2026
+source: "Multiple web sources on LLM routing, cascading, and model selection"
+key_insights[7]: RouteLLM (ICLR 2025) achieves 85% cost reduction while maintaining 95% GPT-4 performance using trained routers on preference data,"Cascade pattern (cheap-first, expensive-fallback) handles 60-70% queries on small models, achieving 40-85% cost reduction",Semantic Router uses vector space similarity (not LLM generation) for fast routing decisions,"ModernBERT classifier in vLLM Semantic Router provides lightweight, fast intent classification with long context support",Matrix factorization router outperforms BERT/causal LLM classifiers in RouteLLM benchmarks,Cascade routing (combined routing+cascading) shows 1-4% improvement over pure routing or cascading,"Commercial routers (Martian, Not Diamond, Unify) offer auto-selection but are 40%+ more expensive than RouteLLM"
+findings[8]: "LiteLLM router focuses on infrastructure-level routing (latency, cost, availability) NOT semantic content analysis",RouteLLM generalizes well to model pairs not seen during training,"Quality validation in cascades: length checks, logprob confidence, format validation, semantic alignment",Domain classification helps route coding vs math vs data queries appropriately,Token count alone insufficient - semantic understanding needed for accurate routing,"Routers often overfit to category heuristics, sending all coding/math to expensive models regardless of actual complexity",Threshold calibration critical - determines cost-quality tradeoff point,"OpenRouter Auto uses NotDiamond technology, no additional routing fee"
+techniques:
+  preference_data_training: Train on Chatbot Arena preference comparisons (win/loss/tie between models)
+  matrix_factorization: Learn scoring function for model-prompt compatibility
+  similarity_weighted: Weighted Elo calculation based on semantic similarity to training queries
+  bert_classifier: Fine-tuned BERT on preference data for binary routing decisions
+  clip_embeddings: CLIP + neural network for multimodal prompt encoding and routing
+  speculative_execution: "Execute cheap model first, validate quality, escalate if needed"
+  intent_classification: Use small LLM (Qwen 1.7B) to categorize query intent then map to models
+  embedding_similarity: Semantic vector space matching between query and route utterances
+  cost_spectrum_routing: Map prompts and models into shared embedding space for k-NN lookup
+decisions[3]:
+  - chose: RouteLLM matrix factorization
+    over[3]: BERT classifier,causal LLM,similarity-weighted
+    reason: "Best benchmark results: 95% GPT-4 quality at 26% calls (48% cost reduction) without augmentation, 75% cost reduction with augmentation"
+  - chose: Cascade pattern over pure routing
+    over[2]: single model routing,parallel ensemble
+    reason: "Adaptive - starts cheap, escalates only when needed. Handles 60-70% on small models. 1-4% better than pure routing"
+  - chose: ModernBERT for classification
+    over[2]: older BERT variants,GPT-based classifiers
+    reason: "Fast, memory-efficient, long context support, incorporates RoPE + FlashAttention"
+refs[9]: "github.com/lm-sys/RouteLLM - Python SDK, OpenAI-compatible server, 4 trained routers",github.com/aurelio-labs/semantic-router - Fast vector-based routing library,github.com/lemony-ai/cascadeflow - Speculative execution with quality validation,github.com/NVIDIA-AI-Blueprints/llm-router - Intent-based (Qwen) + CLIP auto-routing,"github.com/vllm-project/semantic-router - ModernBERT classifier, Rust engine",github.com/lamini-ai/llm-routing-agent - LLM classifier SDK for tool routing,"docs.litellm.ai/docs/routing - Load balancing, fallbacks, NOT content-aware",arxiv.org/html/2410.10347v1 - Cascade routing paper with mathematical formulation,lmsys.org/blog/2024-07-01-routellm - RouteLLM announcement with benchmarks
+recommendations[7]: "For production: Use RouteLLM matrix factorization router (best cost-quality balance)","For speed: Semantic Router with cached embeddings (no LLM inference needed)","For adaptability: Cascade routing to skip/reorder models based on quality checks","For multimodal: NVIDIA blueprint with CLIP embeddings","For training: Start with Chatbot Arena preference data or LLM judge augmentation","Avoid: LiteLLM for semantic routing (it's infrastructure-only)","Consider: Combining intent classification (ModernBERT) with cost-based selection"
+id: cpt_1770696027714_rwlaj5
+created: "2026-02-10T04:00:27.714Z"
+updated: "2026-02-10T04:00:27.714Z"

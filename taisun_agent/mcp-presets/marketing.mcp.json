@@ -1,0 +1,28 @@
+{
+  "mcpServers": {
+    "taisun-proxy": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["dist/proxy-mcp/server.js"],
+      "disabled": false,
+      "description": "TAISUN Proxy MCP (single entrypoint)",
+      "category": "system"
+    },
+    "open-websearch": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["open-websearch-mcp"],
+      "disabled": false,
+      "description": "無料検索（DuckDuckGo/Bing/Brave）",
+      "category": "search"
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "disabled": false,
+      "description": "ブラウザ自動化（LP確認等）",
+      "category": "browser-automation"
+    }
+  }
+}

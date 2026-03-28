@@ -1,0 +1,9 @@
+type: web_research
+title: 暗号通貨トレード停止シグナルシステム ディープリサーチ
+key_insights[15]: システム構築は十分に可能。学術研究・商用サービス・OSSの全てが支持,単一指標では不十分。センチメント+オンチェーン+デリバティブ+マクロの複合分析必須,"暴落予測精度: TCN-LSTM-Attention 78.85%, FinBERT-BiLSTM BTC98%/ETH97%, Fear&Greed+RSI+MACD 73%勝率",Flash Crash(60秒以内)は予測不可。デリバティブ指標(OI+Funding Rate)で12-24h前に早期警戒,月額$35-$1100で段階的構築可能,CryptoBERTはFinBERTより19%高精度（暗号通貨ドメイン特化）,MVRV Z-Score > 3.2はサイクルトップ検出精度90%以上,CryptoQuant Bull Score < 40はベアマーケットと一致（2022年・2025年で実証）,Twitterセンチメントの15-18%がボット由来。SNRフィルタリング必須,"DXY-BTC逆相関: -0.3〜-0.8（クリプト固有要因支配時は崩壊）","BTC-S&P500: 非対称相関（下落には連動、上昇は無視）",8月9月だけ現金保有→B&Hの4倍パフォーマンス,"CMEギャップフィル率: 90-98%","Elon Muskツイート: 2分以内に3.58%異常リターン、長期影響は限定的","2025年10月暴落: 60秒で$32.1億清算、通常の86倍の速度"
+findings[9]: "3層アラートシステム推奨: Layer1(早期警戒:MVRV/NUPL/BullScore), Layer2(中期:FundingRate/OI/F&G), Layer3(緊急:NLP/WhaleAlert)","データ取得: Apify($49/月)orX API($200/月), CryptoPanic(無料), WhaleAlert($29.95/月), CCXT WebSocket","NLPパイプライン: CryptoBERT→Claude Haiku($1/Mtokens)→時系列保存→アラート","バックテスト: Freqtrade+FreqAI(39.9K Stars)が最適。VectorBTは大規模リサーチ向け","ストレージ: ホット→Redis, トランザクション→TimescaleDB, 分析→ClickHouse","配信: Telegram Bot(推奨)+Discord Webhook+TradingView Webhook","商用サービス: CryptoQuant(Bull Score/ExchangeFlow), Nansen(SmartMoney), Arkham(アドレスラベル)","OSS: Freqtrade, Jesse, FinRL, Hummingbot, AI-Trader(LangChain+MCP)","学術エビデンス: 100+出典、MDPI/Elsevier/Springer等の査読論文多数"
+refs[3]: "レポート: トレード停止シグナルシステム_ディープリサーチ.md (約1950行)","前回DI調査: DI_実装深掘りレポート.md","情報源リサーチ: 暗号通貨情報源リサーチ.md"
+recommendations[4]: "Phase1(MVP $5/月): F&G+RSI+MACD複合→Telegram配信","Phase2($140/月): CryptoBERT NLP+Whale Alert+CryptoQuant","Phase3($190/月): HMMレジーム検出+Freqtrade FreqAIバックテスト","Phase4($1100/月): Glassnode Pro+X API+Kafka+自動トレード"
+id: cpt_1770618243730_i7v3sw
+created: "2026-02-09T06:24:03.730Z"
+updated: "2026-02-09T06:24:03.730Z"

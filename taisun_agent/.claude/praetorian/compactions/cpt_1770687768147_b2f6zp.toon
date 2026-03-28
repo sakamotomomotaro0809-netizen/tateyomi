@@ -1,0 +1,16 @@
+type: web_research
+title: MCP Ecosystem Deep Research - LINE AI Command Center Architecture
+source: "https://modelcontextprotocol.io"
+key_insights[8]: MCP is an open protocol by Anthropic for connecting AI applications to external tools and data sources,"Official SDK available in TypeScript, Python, Kotlin, Java, C#, and Rust","Three core server primitives: Tools (functions), Resources (data), Prompts (templates)","Two client primitives: Sampling (LLM access), Elicitation (user input)","Two transport types: stdio (local) and Streamable HTTP (remote)",Official MCP Registry at registry.modelcontextprotocol.io for server discovery,"30+ official integrations including AWS, Azure, GitHub, Slack, Notion, databases","Security critical: OAuth 2.1, scope minimization, SSRF prevention, no token passthrough"
+findings[8]: "MCP follows client-server architecture where one MCP host manages multiple MCP clients, each connected to one MCP server",Data layer uses JSON-RPC 2.0 for protocol communication with lifecycle management,Transport layer handles connection establishment and authentication (stdio or HTTP+SSE),Capability negotiation during initialization determines supported features,Servers can send real-time notifications for dynamic updates,Registry uses reverse DNS naming (io.github.user/server) with namespace verification,"Security best practices include per-client consent, SSRF protection, local server sandboxing","Production deployment requires HTTPS, rate limiting, OAuth authentication"
+techniques:
+  "Client Setup": @modelcontextprotocol/sdk - StdioClientTransport or HTTP with SSE
+  "Server Discovery": "tools/list, resources/list, prompts/list methods"
+  "Tool Execution": tools/call with JSON Schema validated inputs
+  "Real-time Updates": notifications/tools/list_changed and other notification types
+  Authentication: OAuth 2.1 with scope minimization and per-client consent
+  "Multi-MCP Management": One MCP client instance per MCP server connection
+recommendations[8]: Use TypeScript SDK for LINE bot integration - mature and well-documented,"Start with official reference servers (filesystem, fetch, memory, git) for core functionality",Implement MCP client manager to handle multiple server connections,Use HTTP+SSE transport for scalable remote server deployment,Integrate OAuth for secure third-party API access,Consider Spring AI MCP for Java-based backend integration,Use MCP Registry API to discover community servers programmatically,Implement scope minimization pattern for security
+id: cpt_1770687768147_b2f6zp
+created: "2026-02-10T01:42:48.147Z"
+updated: "2026-02-10T01:42:48.147Z"

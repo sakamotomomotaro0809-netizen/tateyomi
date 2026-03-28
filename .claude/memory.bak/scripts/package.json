@@ -1,0 +1,27 @@
+{
+  "name": "ait42-memory-scripts",
+  "version": "1.4.0",
+  "description": "AIT42 Memory System TypeScript utilities for task recording and agent statistics",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "memory:record-task": "tsx record-task.ts",
+    "memory:update-stats": "tsx update-agent-stats.ts",
+    "memory:init-chromadb": "tsx init-chromadb.ts"
+  },
+  "dependencies": {
+    "commander": "^11.1.0",
+    "js-yaml": "^4.1.0",
+    "proper-lockfile": "^4.1.2",
+    "chromadb": "^1.8.1",
+    "tsx": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

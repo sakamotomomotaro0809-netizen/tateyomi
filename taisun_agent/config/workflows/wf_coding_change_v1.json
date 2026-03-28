@@ -1,0 +1,114 @@
+{
+  "id": "wf_coding_change_v1",
+  "name": "Workflow: コード変更（汎用）",
+  "version": "1.0.0",
+  "description": "ソフトウェア変更（バグ修正/機能追加/リファクタ）向けの汎用ワークフロー。coding_change_v1 policy と組で使用。",
+  "policy_id": "coding_change_v1",
+  "phases": [
+    {
+      "id": "phase_1_intake",
+      "name": "要件定義・契約",
+      "description": "目的・制約・DoD（完了条件）を固定する。",
+      "allowedSkills": ["requirements-elicitation", "planner"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm run workflow:status || true",
+          "errorMessage": "ワークフロー状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_2_reproduce"
+    },
+    {
+      "id": "phase_2_reproduce",
+      "name": "再現・調査",
+      "description": "再現・原因仮説・最小修正方針を作る。",
+      "allowedSkills": ["code-searcher", "log-analyzer", "bug-fixer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm test || true",
+          "errorMessage": "テストの実行に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_3_design"
+    },
+    {
+      "id": "phase_3_design",
+      "name": "設計・計画",
+      "description": "変更点を最小化した設計/手順を確定する。",
+      "allowedSkills": ["system-architect", "api-designer", "planner"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git status",
+          "errorMessage": "Git状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_4_implement"
+    },
+    {
+      "id": "phase_4_implement",
+      "name": "実装",
+      "description": "最小差分で実装し、回帰を増やさない。",
+      "allowedSkills": ["implementer", "backend-developer", "frontend-developer", "bug-fixer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm test",
+          "errorMessage": "テストが失敗しました"
+        },
+        {
+          "type": "command",
+          "command": "npm run lint || true",
+          "errorMessage": "Lintエラーがあります"
+        }
+      ],
+      "nextPhase": "phase_5_verify"
+    },
+    {
+      "id": "phase_5_verify",
+      "name": "検証",
+      "description": "テスト/静的解析/差分確認で品質を証明する。",
+      "allowedSkills": ["test-engineer", "qa-validator", "code-reviewer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "npm test",
+          "errorMessage": "テストが失敗しました"
+        },
+        {
+          "type": "command",
+          "command": "npm run lint",
+          "errorMessage": "Lintエラーがあります"
+        },
+        {
+          "type": "command",
+          "command": "npm run typecheck || true",
+          "errorMessage": "型エラーがあります"
+        }
+      ],
+      "nextPhase": "phase_6_finalize"
+    },
+    {
+      "id": "phase_6_finalize",
+      "name": "PR作成",
+      "description": "コミット/PR化し、レビュー可能状態にする。",
+      "allowedSkills": ["PRAgent"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git status",
+          "errorMessage": "Git状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": null
+    }
+  ]
+}

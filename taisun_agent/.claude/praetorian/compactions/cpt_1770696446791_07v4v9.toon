@@ -1,0 +1,26 @@
+type: web_research
+title: Cascade Routing Systems for Claude Code (2026 Implementation Guide)
+key_insights[7]: "CascadeFlow achieves 60-70% query handling with cheap models, 40-85% cost reduction with <2ms overhead",LiteLLM provides production-ready 3-tier cascade with Ollama → DeepSeek → Anthropic,DeepSeek V3.2 is 35x cheaper than Claude Haiku ($0.028 vs $1 per million input tokens),Semantic Router achieves sub-100ms local classification without LLM calls,"RouteLLM supports only binary routing, not 3+ tiers","OpenRouter auto-routing unpredictable for production, but provides multi-provider failover",ccproxy enables intelligent routing with hook-based request interception
+findings[7]: CascadeFlow uses speculative execution + quality validation for automatic escalation,"LiteLLM supports context_window_fallbacks, content_policy_fallbacks, and standard fallbacks","Ollama is 100% free for local inference, making it ideal for tier-1 routing",NVIDIA LLM Router v2 uses neural network for auto-routing based on prompt complexity,Martian uses 'Model Mapping' interpretability for routing without running models,Token count alone is poor predictor - structural patterns better for complexity detection,Average prompt size increased 4x (1.5K → 6K tokens) in 2025-2026
+techniques:
+  quality_validation: "CascadeFlow multi-dimensional checks (length, confidence via logprobs, format, semantic alignment)"
+  fallback_types: "Standard (all errors), content_policy (filtering), context_window (size limits)"
+  retry_logic: num_retries per model + allowed_fails + cooldown_time for circuit breaking
+  request_classification: Semantic Router with HuggingFace embeddings for local operation
+  cost_calculation: "Router estimates cost before execution, routes to cheapest sufficient model"
+anti_patterns[5]: Using token count alone for complexity detection (poor predictor),Relying on OpenRouter auto for production (unpredictable model selection),Building custom proxy from scratch (reinventing LiteLLM),Running all requests through Claude Opus (unnecessary cost),Parallel WebFetch/WebSearch >3 calls (cascade failure risk)
+decisions[3]:
+  - chose: LiteLLM + CascadeFlow hybrid approach
+    over[3]: RouteLLM (binary only),OpenRouter auto (unpredictable),Custom proxy from scratch
+    reason: "LiteLLM provides proven 3-tier fallback, CascadeFlow adds quality validation, both production-ready with Anthropic support"
+  - chose: Semantic Router for request classification
+    over[3]: Token count heuristics,Custom ML model,GPT-based classification
+    reason: "Sub-100ms latency, runs fully local, better than simple heuristics, no per-request LLM cost"
+  - chose: DeepSeek V3.2 for mid-tier
+    over[3]: GPT-4o-mini,Claude Haiku,Mixtral
+    reason: "35x cheaper than Claude Haiku ($0.028 vs $1/M input), competitive quality, 128K context"
+refs[7]: github.com/lemony-ai/cascadeflow - CascadeFlow implementation,docs.litellm.ai/docs/proxy/reliability - LiteLLM fallback config,github.com/lm-sys/RouteLLM - Binary routing framework,github.com/aurelio-labs/semantic-router - Fast local classification,github.com/starbaser/ccproxy - Claude Code proxy with hooks,api-docs.deepseek.com/quick_start/pricing - DeepSeek pricing,ollama.com - Free local LLM runtime
+recommendations[6]: "Use LiteLLM proxy with fallback chain: Ollama → DeepSeek V3.2 → Claude Opus 4.6",Add Semantic Router layer BEFORE LiteLLM for pre-classification (saves even more),Enable context_window_fallbacks for automatic escalation on large contexts,Use ccproxy hooks for advanced routing logic if needed,"Configure enable_pre_call_checks: true to validate before sending requests","Test with mock_testing_fallbacks: true before production deployment"
+id: cpt_1770696446791_07v4v9
+created: "2026-02-10T04:07:26.791Z"
+updated: "2026-02-10T04:07:26.791Z"

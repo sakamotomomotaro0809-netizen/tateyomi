@@ -1,0 +1,17 @@
+type: task_result
+title: Phase 2 Deep Research Synthesis - Phase 3 Improvements
+key_insights[10]: True SSE streaming needed - current chat route simulates streaming by chunking non-streamed response,"Cascade model routing: simple→Gemini Flash($0.50/M), medium→Haiku($3/M), complex→Opus($30/M) = 85% savings",LINE Flex Messages for rich interactive responses (CSS Flexbox hierarchy),webhookEventId deduplication for LINE webhook reliability,force-dynamic export required in Next.js for SSE to prevent Vercel caching,MCP TypeScript SDK (@modelcontextprotocol/sdk) for production client,OAuth 2.1 + SSRF prevention for MCP security,Prompt caching for 90% savings on repeated system prompts,Redis/Upstash for LLM response caching,LLM-based Japanese intent classification outperforms rule-based (2025)
+decisions[3]:
+  - chose: Enhance existing implementation incrementally
+    over[2]: Full rewrite with LangGraph,Switch to Assistant-UI
+    reason: System already has solid Next.js + React foundation; incremental improvements are safer and faster
+  - chose: True SSE streaming with OpenRouter
+    over[2]: Keep simulated streaming,Switch to WebSocket
+    reason: "OpenRouter supports streaming, SSE is simpler than WebSocket for unidirectional chat"
+  - chose: Add Dashboard and Settings pages
+    over[2]: Keep single-page app,Add only admin API
+    reason: Users need visual monitoring and configuration capabilities
+next[7]: "Phase 3A: True SSE streaming with OpenRouter stream: true","Phase 3B: Enhanced model routing with cascade pattern + cost tracking","Phase 3C: LINE Flex Message templates for rich responses","Phase 3D: Webhook deduplication via webhookEventId","Phase 3E: Dashboard page - system status, metrics, MCP connections","Phase 3F: Settings page - API key configuration, model preferences","Phase 3G: Error boundaries and loading states"
+id: cpt_1770687991968_vorafo
+created: "2026-02-10T01:46:31.968Z"
+updated: "2026-02-10T01:46:31.968Z"

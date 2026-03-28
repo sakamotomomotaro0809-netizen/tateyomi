@@ -1,0 +1,288 @@
+{
+  "mcpServers": {
+    "ide-integration": {
+      "command": "node",
+      "args": [".claude/mcp-servers/ide-integration.js"],
+      "disabled": false,
+      "description": "VS Code diagnostics and Jupyter execution integration",
+      "category": "development"
+    },
+    "github-enhanced": {
+      "command": "node",
+      "args": [".claude/mcp-servers/github-enhanced.js"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+        "REPOSITORY": "${REPOSITORY}"
+      },
+      "disabled": false,
+      "description": "Enhanced GitHub operations for Issue/PR management",
+      "category": "development"
+    },
+    "project-context": {
+      "command": "node",
+      "args": [".claude/mcp-servers/project-context.js"],
+      "disabled": false,
+      "description": "Project-specific context and dependency information",
+      "category": "development"
+    },
+    "filesystem": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."],
+      "description": "Local Filesystem Access",
+      "category": "system"
+    },
+    "context-engineering": {
+      "command": "node",
+      "args": ["external/context-engineering-mcp/mcp-server/index.js"],
+      "env": {
+        "AI_GUIDES_API_URL": "http://localhost:8888"
+      },
+      "disabled": true,
+      "description": "Context Engineering - AI-powered context analysis, optimization, and semantic search",
+      "category": "ai"
+    },
+    "taiyou": {
+      "command": "node",
+      "args": [".claude/mcp-servers/taiyou-integration.js"],
+      "disabled": true,
+      "description": "Taiyou CLI - Project creation, Agent execution, automation features",
+      "category": "automation"
+    },
+    "dev3000": {
+      "command": "npx",
+      "args": ["-y", "dev3000", "--mcp"],
+      "disabled": true,
+      "description": "dev3000 - UI/UX integrated debug tool (83% debug time reduction)",
+      "category": "development"
+    },
+    "youtube-automation": {
+      "command": "node",
+      "args": [".claude/mcp-servers/youtube-automation.js"],
+      "env": {
+        "YOUTUBE_API_KEY": "${YOUTUBE_API_KEY}",
+        "CLAUDE_API_KEY": "${CLAUDE_API_KEY}",
+        "WHISPER_API_KEY": "${WHISPER_API_KEY}"
+      },
+      "disabled": true,
+      "description": "YouTube auto research, analysis, and script generation system",
+      "category": "media"
+    },
+    "youtube": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["/Users/matsumototoshihiko/mcp-youtube/dist/index.js"],
+      "disabled": false,
+      "description": "YouTube subtitle downloader using yt-dlp",
+      "category": "media"
+    },
+    "taiyou-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "taiyou-mcp-bundle"],
+      "disabled": true,
+      "description": "Taiyou MCP Bundle - All-in-one Taiyou integration",
+      "category": "automation"
+    },
+    "remotion-documentation": {
+      "command": "npx",
+      "args": ["@remotion/mcp@latest"],
+      "disabled": true,
+      "description": "Remotion video documentation and API reference",
+      "category": "media"
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "description": "Playwright browser automation and testing",
+      "category": "testing"
+    },
+    "asana": {
+      "type": "sse",
+      "url": "https://mcp.asana.com/sse",
+      "description": "Asana project management integration",
+      "category": "productivity"
+    },
+    "atlassian": {
+      "type": "sse",
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "description": "Atlassian (Jira/Confluence) integration",
+      "category": "productivity"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "description": "Context7 - AI context management",
+      "category": "ai"
+    },
+    "firebase": {
+      "command": "npx",
+      "args": ["-y", "firebase-tools@latest", "mcp"],
+      "description": "Firebase backend services integration",
+      "category": "infrastructure"
+    },
+    "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      },
+      "description": "GitHub Copilot MCP API",
+      "category": "development"
+    },
+    "gitlab": {
+      "type": "http",
+      "url": "https://gitlab.com/api/v4/mcp",
+      "description": "GitLab MCP API integration",
+      "category": "development"
+    },
+    "greptile": {
+      "type": "http",
+      "url": "https://api.greptile.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${GREPTILE_API_KEY}"
+      },
+      "description": "Greptile code search and analysis",
+      "category": "development"
+    },
+    "laravel-boost": {
+      "command": "php",
+      "args": ["artisan", "boost:mcp"],
+      "disabled": true,
+      "description": "Laravel Boost MCP for PHP/Laravel projects",
+      "category": "development"
+    },
+    "linear": {
+      "type": "sse",
+      "url": "https://mcp.linear.app/sse",
+      "description": "Linear issue tracking integration",
+      "category": "productivity"
+    },
+    "notion": {
+      "type": "sse",
+      "url": "https://mcp.notion.com/sse",
+      "description": "Notion workspace integration",
+      "category": "productivity"
+    },
+    "sentry": {
+      "type": "sse",
+      "url": "https://mcp.sentry.dev/sse",
+      "description": "Sentry error tracking integration",
+      "category": "observability"
+    },
+    "serena": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/oraios/serena", "serena", "start-mcp-server"],
+      "disabled": true,
+      "description": "Serena AI assistant",
+      "category": "ai"
+    },
+    "slack": {
+      "type": "sse",
+      "url": "https://mcp.slack.com/sse",
+      "description": "Slack workspace integration",
+      "category": "communication"
+    },
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp",
+      "description": "Supabase backend integration",
+      "category": "infrastructure"
+    },
+    "vercel": {
+      "type": "sse",
+      "url": "https://mcp.vercel.com/sse",
+      "description": "Vercel deployment integration",
+      "category": "infrastructure"
+    },
+    "postgres-ro": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${POSTGRES_MCP_DSN}"],
+      "description": "PostgreSQL Read-Only Analytics",
+      "category": "database"
+    },
+    "postgres-rw": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "${POSTGRES_MCP_DSN_RW}"],
+      "description": "PostgreSQL Read-Write Access (use with caution)",
+      "category": "database",
+      "requires_confirmation": true
+    },
+    "docker": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "mcp-server-docker"],
+      "description": "Docker Container Management",
+      "category": "infrastructure"
+    },
+    "brave-search": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "Brave Search API for Web Research",
+      "category": "search"
+    },
+    "memory": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "Persistent Memory/Knowledge Graph",
+      "category": "memory"
+    },
+    "sequential-thinking": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Sequential Thinking for Complex Problem Solving",
+      "category": "reasoning"
+    }
+  },
+  "mcpConfig": {
+    "healthCheck": {
+      "enabled": true,
+      "interval": 300,
+      "timeout": 30
+    },
+    "categories": {
+      "development": "IDE, GitHub, GitLab, Greptile, Laravel",
+      "productivity": "Asana, Atlassian, Linear, Notion",
+      "infrastructure": "Firebase, Supabase, Vercel, Docker",
+      "database": "PostgreSQL (RO/RW)",
+      "communication": "Slack",
+      "ai": "Context Engineering, Context7, Serena",
+      "automation": "Taiyou, Taiyou MCP Bundle",
+      "media": "YouTube Automation, Remotion",
+      "testing": "Playwright",
+      "observability": "Sentry",
+      "search": "Brave Search",
+      "memory": "Persistent Memory/Knowledge Graph",
+      "reasoning": "Sequential Thinking",
+      "system": "Filesystem"
+    },
+    "totalServers": 33,
+    "taisunTools": {
+      "description": "203+ MCP Tools available via taisun package",
+      "reference": "../taisun/dist/mcp/tools/",
+      "categories": {
+        "git": 20,
+        "file": 18,
+        "process": 19,
+        "agent": 18,
+        "marketing": 10,
+        "sns": 10,
+        "content": 9,
+        "cloud": 25,
+        "database": 25,
+        "observability": 25,
+        "devops": 25,
+        "development": 25
+      },
+      "totalTools": 229
+    }
+  }
+}

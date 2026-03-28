@@ -1,0 +1,13 @@
+{
+  "$comment": "Copy this file to internal-mcps.local.json and enable MCPs you need. This file is gitignored.",
+  "mcps": [
+    {
+      "name": "github",
+      "enabled": true
+    },
+    {
+      "name": "filesystem",
+      "enabled": true
+    }
+  ]
+}

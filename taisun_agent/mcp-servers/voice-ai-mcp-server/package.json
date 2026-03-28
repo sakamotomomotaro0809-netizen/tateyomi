@@ -1,0 +1,39 @@
+{
+  "name": "@taisun/voice-ai-mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for Voice AI - Twilio + OpenAI Realtime integration",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "module": "./dist/index.js",
+  "bin": {
+    "voice-ai-mcp-server": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "twilio": "^5.0.0",
+    "ws": "^8.18.0",
+    "express": "^4.21.0",
+    "zod": "^3.25.0",
+    "uuid": "^11.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/ws": "^8.5.0",
+    "@types/express": "^5.0.0",
+    "@types/uuid": "^10.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  }
+}

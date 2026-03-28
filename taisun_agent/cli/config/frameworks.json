@@ -1,0 +1,204 @@
+{
+  "frameworks": [
+    {
+      "id": "nextjs",
+      "name": "Next.js",
+      "language": "typescript",
+      "type": "fullstack",
+      "versions": ["14.x", "13.x"],
+      "dependencies": {
+        "next": "^14.0.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+      },
+      "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "typescript": "^5.3.0"
+      },
+      "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+      }
+    },
+    {
+      "id": "express",
+      "name": "Express",
+      "language": "typescript",
+      "type": "backend",
+      "versions": ["5.x", "4.x"],
+      "dependencies": {
+        "express": "^5.0.0",
+        "dotenv": "^16.3.1"
+      },
+      "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.0.0",
+        "typescript": "^5.3.0",
+        "tsx": "^4.0.0",
+        "nodemon": "^3.0.0"
+      },
+      "scripts": {
+        "dev": "nodemon --exec tsx src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js"
+      }
+    },
+    {
+      "id": "hono",
+      "name": "Hono",
+      "language": "typescript",
+      "type": "backend",
+      "versions": ["latest"],
+      "dependencies": {
+        "hono": "^3.11.0"
+      },
+      "devDependencies": {
+        "@types/node": "^20.0.0",
+        "typescript": "^5.3.0",
+        "tsx": "^4.0.0"
+      },
+      "scripts": {
+        "dev": "tsx watch src/index.ts",
+        "build": "tsc",
+        "start": "node dist/index.js"
+      }
+    },
+    {
+      "id": "fastapi",
+      "name": "FastAPI",
+      "language": "python",
+      "type": "backend",
+      "versions": ["0.100+"],
+      "dependencies": {
+        "fastapi": "^0.100.0",
+        "uvicorn[standard]": "^0.23.0",
+        "pydantic": "^2.0.0"
+      },
+      "devDependencies": {
+        "pytest": "^7.4.0",
+        "httpx": "^0.24.0",
+        "ruff": "^0.1.0"
+      },
+      "scripts": {
+        "dev": "uvicorn src.main:app --reload",
+        "test": "pytest",
+        "lint": "ruff check .",
+        "format": "ruff format ."
+      }
+    },
+    {
+      "id": "flask",
+      "name": "Flask",
+      "language": "python",
+      "type": "backend",
+      "versions": ["3.x", "2.x"],
+      "dependencies": {
+        "flask": "^3.0.0",
+        "python-dotenv": "^1.0.0"
+      },
+      "devDependencies": {
+        "pytest": "^7.4.0",
+        "pytest-flask": "^1.2.0",
+        "ruff": "^0.1.0"
+      },
+      "scripts": {
+        "dev": "flask run --debug",
+        "test": "pytest",
+        "lint": "ruff check .",
+        "format": "ruff format ."
+      }
+    },
+    {
+      "id": "django",
+      "name": "Django",
+      "language": "python",
+      "type": "fullstack",
+      "versions": ["5.x", "4.x"],
+      "dependencies": {
+        "django": "^5.0.0",
+        "djangorestframework": "^3.14.0"
+      },
+      "devDependencies": {
+        "pytest": "^7.4.0",
+        "pytest-django": "^4.5.0",
+        "ruff": "^0.1.0"
+      },
+      "scripts": {
+        "dev": "python manage.py runserver",
+        "migrate": "python manage.py migrate",
+        "test": "pytest",
+        "lint": "ruff check .",
+        "format": "ruff format ."
+      }
+    },
+    {
+      "id": "react",
+      "name": "React (Vite)",
+      "language": "typescript",
+      "type": "frontend",
+      "versions": ["18.x"],
+      "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+      },
+      "devDependencies": {
+        "@types/react": "^18.2.0",
+        "@types/react-dom": "^18.2.0",
+        "@vitejs/plugin-react": "^4.2.0",
+        "typescript": "^5.3.0",
+        "vite": "^5.0.0"
+      },
+      "scripts": {
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview"
+      }
+    },
+    {
+      "id": "vue",
+      "name": "Vue 3 (Vite)",
+      "language": "typescript",
+      "type": "frontend",
+      "versions": ["3.x"],
+      "dependencies": {
+        "vue": "^3.3.0"
+      },
+      "devDependencies": {
+        "@vitejs/plugin-vue": "^5.0.0",
+        "typescript": "^5.3.0",
+        "vite": "^5.0.0",
+        "vue-tsc": "^1.8.0"
+      },
+      "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview"
+      }
+    },
+    {
+      "id": "sveltekit",
+      "name": "SvelteKit",
+      "language": "typescript",
+      "type": "fullstack",
+      "versions": ["2.x", "1.x"],
+      "dependencies": {
+        "@sveltejs/kit": "^2.0.0"
+      },
+      "devDependencies": {
+        "@sveltejs/adapter-auto": "^3.0.0",
+        "svelte": "^4.2.0",
+        "typescript": "^5.3.0",
+        "vite": "^5.0.0"
+      },
+      "scripts": {
+        "dev": "vite dev",
+        "build": "vite build",
+        "preview": "vite preview"
+      }
+    }
+  ]
+}

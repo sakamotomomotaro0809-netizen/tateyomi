@@ -1,0 +1,5 @@
+{"timestamp":"2026-02-15T13:13:17.213Z","event":"dynamic_compression_status","original_bytes":7530,"compressed_bytes":6647,"saved_bytes":883,"file_count":5}
+{"timestamp":"2026-02-15T13:13:42.502Z","event":"dynamic_compression_status","original_bytes":7530,"compressed_bytes":6647,"saved_bytes":883,"file_count":5}
+{"timestamp":"2026-02-15T13:13:42.627Z","event":"dynamic_compression_status","original_bytes":7530,"compressed_bytes":6647,"saved_bytes":883,"file_count":5}
+{"timestamp":"2026-02-15T13:16:08.252Z","event":"dynamic_compression_status","original_bytes":7530,"compressed_bytes":6647,"saved_bytes":883,"file_count":5}
+{"timestamp":"2026-02-15T13:16:08.377Z","event":"dynamic_compression_status","original_bytes":7530,"compressed_bytes":6647,"saved_bytes":883,"file_count":5}

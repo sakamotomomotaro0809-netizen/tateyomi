@@ -1,0 +1,55 @@
+# AIT42 Memory System Configuration
+# Test data generated for integration testing
+
+version: "1.0"
+
+# Task retention settings
+max_tasks: 1000
+retention_days: 90
+
+# Backup settings
+backup_enabled: true
+backup_path: ".claude/memory-backup/"
+backup_interval_days: 7
+
+# Quality thresholds
+quality_threshold:
+  excellent: 90
+  good: 75
+  acceptable: 60
+  poor: 0
+
+# Success rate thresholds for agent selection
+success_rate_threshold:
+  preferred: 0.85
+  acceptable: 0.70
+  warning: 0.50
+
+# Recent tasks tracking
+recent_tasks_limit: 10
+
+# Task types
+task_types:
+  - implementation
+  - bug-fix
+  - refactoring
+  - testing
+  - documentation
+  - deployment
+  - optimization
+  - security
+  - integration
+  - migration
+  - analysis
+  - design
+
+# Rotation policy
+rotation:
+  enabled: true
+  archive_path: ".claude/memory-backup/archive/"
+  compress_archives: true
+
+# Statistics
+statistics:
+  calculate_trends: true
+  trend_window_days: 30

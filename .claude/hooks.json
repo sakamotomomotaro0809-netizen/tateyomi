@@ -1,0 +1,40 @@
+{
+  "$schema": "https://claude.ai/schemas/hooks-v1.json",
+  "version": "1.0",
+  "description": "AIT42 Memory System Hooks - Automatic task recording on agent completion",
+  "hooks": {
+    "task-complete": {
+      "description": "Record task execution to Memory System after agent completes",
+      "command": "bash .claude/hooks/task-complete.sh",
+      "timeout": 5000,
+      "env": {
+        "MEMORY_DIR": ".claude/memory",
+        "AUTO_CAPTURE_DIFF": "true"
+      },
+      "failurePolicy": "warn"
+    },
+    "task-start": {
+      "description": "Initialize task tracking when agent starts",
+      "command": "bash .claude/hooks/task-start.sh",
+      "timeout": 1000,
+      "env": {
+        "MEMORY_DIR": ".claude/memory"
+      },
+      "failurePolicy": "ignore"
+    },
+    "agent-select": {
+      "description": "Log agent selection for debugging",
+      "command": "bash .claude/hooks/agent-select.sh",
+      "timeout": 500,
+      "env": {
+        "LOG_DIR": ".claude/memory/logs"
+      },
+      "failurePolicy": "ignore"
+    }
+  },
+  "globalSettings": {
+    "enableHooks": true,
+    "verboseLogging": false,
+    "retryOnFailure": false
+  }
+}

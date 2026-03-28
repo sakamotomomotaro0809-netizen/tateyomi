@@ -1,0 +1,8 @@
+{
+  "monitoring_session": {
+    "start_time": "2025-11-12T03:10:24Z",
+    "interval_seconds": 5,
+    "duration_minutes": 1
+  },
+  "metrics": []
+}

@@ -1,0 +1,68 @@
+version: "3.9"
+
+services:
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: taisun-litellm
+    ports:
+      - "4000:4000"
+    environment:
+      - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-litellm-master-local}
+      - DATABASE_URL=postgresql://postgres:litellm_password@litellm-db:5432/litellm
+      - REDIS_HOST=litellm-redis
+      - REDIS_PORT=6379
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+    volumes:
+      - ./config/litellm-config.yaml:/app/config.yaml
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      litellm-db:
+        condition: service_healthy
+      litellm-redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4000/health/liveliness"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+
+  litellm-db:
+    image: postgres:16-alpine
+    container_name: taisun-litellm-db
+    ports:
+      - "5433:5432"
+    environment:
+      - POSTGRES_DB=litellm
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=litellm_password
+    volumes:
+      - litellm_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  litellm-redis:
+    image: redis:7-alpine
+    container_name: taisun-litellm-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - litellm_redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  litellm_postgres_data:
+  litellm_redis_data:

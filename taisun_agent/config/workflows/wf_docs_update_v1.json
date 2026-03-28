@@ -1,0 +1,84 @@
+{
+  "id": "wf_docs_update_v1",
+  "name": "Workflow: ドキュメント更新",
+  "version": "1.0.0",
+  "description": "ドキュメント更新（設計書/README/運用手順）向けワークフロー。docs_update_v1 policy と組で使用。",
+  "policy_id": "docs_update_v1",
+  "phases": [
+    {
+      "id": "phase_1_intake",
+      "name": "目的確認",
+      "description": "更新目的・対象読者・スコープを確定する。",
+      "allowedSkills": ["requirements-elicitation", "planner"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git status",
+          "errorMessage": "Git状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_2_research"
+    },
+    {
+      "id": "phase_2_research",
+      "name": "調査",
+      "description": "既存ドキュメント/実装をReadし、矛盾がない形に方針を決める。",
+      "allowedSkills": ["researcher", "code-searcher", "doc-reviewer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git diff || true",
+          "errorMessage": "差分確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_3_write"
+    },
+    {
+      "id": "phase_3_write",
+      "name": "執筆・編集",
+      "description": "文章を更新し、手順や用語の一貫性を担保する。",
+      "allowedSkills": ["tech-writer", "knowledge-manager"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git diff",
+          "errorMessage": "差分がありません"
+        }
+      ],
+      "nextPhase": "phase_4_review"
+    },
+    {
+      "id": "phase_4_review",
+      "name": "レビュー",
+      "description": "セルフレビュー（誤字・リンク・手順の正しさ）を行う。",
+      "allowedSkills": ["doc-reviewer", "code-reviewer"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git diff && git status",
+          "errorMessage": "確認に失敗しました"
+        }
+      ],
+      "nextPhase": "phase_5_publish"
+    },
+    {
+      "id": "phase_5_publish",
+      "name": "公開・PR作成",
+      "description": "コミット/PR化し、レビュー可能状態にする。",
+      "allowedSkills": ["PRAgent"],
+      "requiredArtifacts": [],
+      "validations": [
+        {
+          "type": "command",
+          "command": "git status",
+          "errorMessage": "Git状態の確認に失敗しました"
+        }
+      ],
+      "nextPhase": null
+    }
+  ]
+}

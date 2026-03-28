@@ -1,0 +1,7 @@
+type: task_result
+title: 米国株オプション取引アラートシステム完全調査
+key_insights[10]: 4エージェント並列+Round2で60+検索の2回ディープリサーチ完了,"レポート出力先: research/runs/20260210__us-stock-options-alert-system/analysis.md","MCP Server推奨: Unusual Whales(33ツール), Alpaca, Alpha Vantage, FRED, n8n, Apify","最適Iron Condor: 45-DTE, 16-delta shorts = 77.6%勝率","FRED APIで無料取得: VIX(VIXCLS), EPU(USEPUINDXD), TPU(EPUTRADE)","GEX DIY計算可能: gex-tracker, SPX-Gamma-Exposure等のGitHub OSSあり",n8n MCP経由でClaude CodeからTradingView→Discord自動パイプライン構築可能,"コスト: MVP $69-99/月, 中級 $350-421/月, プロ $987-5,584/月","NLP推奨: FinBERT(86%ニュース精度) + VADER(68%SNS精度)","地政学リスク: GDELT(無料,15分更新) + GPR Index + EPU Index"
+refs[2]: research/runs/20260210__us-stock-options-alert-system/analysis.md - 完全レポート,research/runs/20260210__us-stock-options-alert-system/input.yaml - 入力パラメータ
+id: cpt_1770732735658_s1vwtl
+created: "2026-02-10T14:12:15.658Z"
+updated: "2026-02-10T14:12:15.658Z"

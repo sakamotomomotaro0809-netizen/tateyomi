@@ -1,0 +1,25 @@
+agent_name: "test-agent"
+total_tasks: 10
+successful_tasks: 8
+failed_tasks: 2
+success_rate: 0.8
+avg_quality_score: 88.5
+avg_duration_ms: 12000
+last_updated: "2025-11-13T10:00:00Z"
+recent_tasks:
+  - task_id: "2025-11-13-001"
+    quality_score: 95
+    success: true
+    timestamp: "2025-11-13T09:00:00Z"
+  - task_id: "2025-11-13-002"
+    quality_score: 90
+    success: true
+    timestamp: "2025-11-13T08:00:00Z"
+trends:
+  success_rate_trend: 0.05
+  quality_score_trend: 2.5
+  avg_duration_trend: -500
+specializations:
+  implementation: 6
+  bug-fix: 3
+  testing: 1

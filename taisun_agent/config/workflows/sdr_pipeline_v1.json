@@ -1,0 +1,142 @@
+{
+  "id": "sdr_pipeline_v1",
+  "name": "AI SDR パイプラインワークフロー",
+  "version": "1.0.0",
+  "description": "自律営業AIパイプライン。リード取込からレポートまで12フェーズ。スコアランク別の条件分岐・マルチチャネル並列送信対応。",
+  "phases": [
+    {
+      "id": "import",
+      "name": "リード取込",
+      "description": "sdr_lead_importでCSV/APIからリードを取込。output/sdr/imported-leads.jsonに結果保存。",
+      "requiredArtifacts": ["output/sdr/imported-leads.json"],
+      "allowedSkills": ["ai-sdr"],
+      "nextPhase": "enrich"
+    },
+    {
+      "id": "enrich",
+      "name": "データエンリッチメント",
+      "description": "リード情報の補完。業種・企業規模・SNSプロフィール等を追加。",
+      "requiredArtifacts": ["output/sdr/enriched-leads.json"],
+      "allowedSkills": ["ai-sdr"],
+      "nextPhase": "score"
+    },
+    {
+      "id": "score",
+      "name": "スコアリング",
+      "description": "sdr_score_bulkで全リードを4次元スコアリング。ランク（HOT/WARM/COLD/DISQUALIFIED）判定。",
+      "requiredArtifacts": ["output/sdr/scoring-results.json"],
+      "allowedSkills": ["ai-sdr", "lead-scoring"],
+      "nextPhase": "segment"
+    },
+    {
+      "id": "segment",
+      "name": "セグメント分類",
+      "description": "スコアランク別にリードを分類。output/sdr/segment-type.txtにhot/warm/cold/disqualifiedを書き込み。",
+      "conditionalNext": {
+        "condition": {
+          "type": "file_content",
+          "source": "output/sdr/segment-type.txt",
+          "pattern": "^(hot|warm|cold|disqualified)$"
+        },
+        "branches": {
+          "hot": "compose_hot",
+          "warm": "compose_warm",
+          "cold": "compose_cold",
+          "disqualified": "report"
+        },
+        "defaultNext": "compose_warm"
+      }
+    },
+    {
+      "id": "compose_hot",
+      "name": "HOTリードメッセージ作成",
+      "description": "HOTリード（80+）向け。即座にLINE + 24h以内電話。",
+      "requiredArtifacts": ["output/sdr/hot-messages.json"],
+      "allowedSkills": ["ai-sdr", "outreach-composer"],
+      "parallelNext": {
+        "phases": ["send_line", "send_voice"],
+        "waitStrategy": "all"
+      }
+    },
+    {
+      "id": "compose_warm",
+      "name": "WARMリードメッセージ作成",
+      "description": "WARMリード（50-79）向け。LINE → 72h → Email → 72h → SMSシーケンス。",
+      "requiredArtifacts": ["output/sdr/warm-messages.json"],
+      "allowedSkills": ["ai-sdr", "outreach-composer"],
+      "nextPhase": "send_line"
+    },
+    {
+      "id": "compose_cold",
+      "name": "COLDリードメッセージ作成",
+      "description": "COLDリード（20-49）向け。週1ナーチャリングメール。",
+      "requiredArtifacts": ["output/sdr/cold-messages.json"],
+      "allowedSkills": ["ai-sdr", "outreach-composer"],
+      "nextPhase": "send_email"
+    },
+    {
+      "id": "send_line",
+      "name": "LINE送信",
+      "description": "sdr_send_outreachでLINEメッセージ送信。",
+      "requiredArtifacts": ["output/sdr/line-sent.json"],
+      "allowedSkills": ["ai-sdr", "outreach-composer"],
+      "nextPhase": "monitor"
+    },
+    {
+      "id": "send_email",
+      "name": "Email送信",
+      "description": "sdr_send_outreachでEmail送信。",
+      "requiredArtifacts": ["output/sdr/email-sent.json"],
+      "allowedSkills": ["ai-sdr", "outreach-composer"],
+      "nextPhase": "monitor"
+    },
+    {
+      "id": "send_voice",
+      "name": "Voice AI架電",
+      "description": "voice_make_callで自動架電。Voice AIワークフロー連携。",
+      "requiredArtifacts": ["output/sdr/voice-calls.json"],
+      "allowedSkills": ["ai-sdr", "voice-ai"],
+      "nextPhase": "monitor"
+    },
+    {
+      "id": "monitor",
+      "name": "反応モニタリング",
+      "description": "送信後の反応（開封、クリック、返信）を監視。",
+      "allowedSkills": ["ai-sdr"],
+      "nextPhase": "followup"
+    },
+    {
+      "id": "followup",
+      "name": "フォローアップ",
+      "description": "sdr_schedule_followupで未反応リードへのフォローアップをスケジュール。",
+      "requiredArtifacts": ["output/sdr/followup-scheduled.json"],
+      "allowedSkills": ["ai-sdr", "outreach-composer"],
+      "nextPhase": "meeting"
+    },
+    {
+      "id": "meeting",
+      "name": "面談設定",
+      "description": "反応のあったリードへの面談設定。sdr_update_pipeline_stageでステージ更新。",
+      "requiredArtifacts": ["output/sdr/meetings.json"],
+      "allowedSkills": ["ai-sdr"],
+      "nextPhase": "update_crm"
+    },
+    {
+      "id": "update_crm",
+      "name": "CRM更新",
+      "description": "全リードのパイプラインステージ・アクティビティを更新。",
+      "requiredArtifacts": ["output/sdr/crm-updates.json"],
+      "allowedSkills": ["ai-sdr"],
+      "nextPhase": "report"
+    },
+    {
+      "id": "report",
+      "name": "レポート",
+      "description": "sdr_get_analyticsでKPIダッシュボード生成。最終レポート出力。",
+      "requiredArtifacts": ["output/sdr/analytics-report.json"],
+      "allowedSkills": ["ai-sdr"],
+      "allowRollbackTo": ["compose_hot", "compose_warm", "compose_cold"],
+      "nextPhase": null
+    }
+  ]
+}

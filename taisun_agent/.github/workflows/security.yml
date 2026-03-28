@@ -1,0 +1,192 @@
+name: Security Scan
+
+on:
+  schedule:
+    # 毎週月曜日 9:00 JST (0:00 UTC)
+    - cron: '0 0 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'package*.json'
+      - 'Dockerfile*'
+      - '.github/workflows/security.yml'
+  workflow_dispatch:
+
+# Required for SARIF upload to GitHub Security
+permissions:
+  contents: read
+  security-events: write
+
+env:
+  NODE_VERSION: '20.x'
+
+jobs:
+  # ============================================
+  # Dependency Scan
+  # ============================================
+  dependency-scan:
+    name: Dependency Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        id: npm-audit
+        run: |
+          npm audit --json > audit-report.json 2>&1 || true
+          CRITICAL=$(jq '.metadata.vulnerabilities.critical // 0' audit-report.json)
+          HIGH=$(jq '.metadata.vulnerabilities.high // 0' audit-report.json)
+          echo "critical=$CRITICAL" >> $GITHUB_OUTPUT
+          echo "high=$HIGH" >> $GITHUB_OUTPUT
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: audit-report.json
+
+      - name: Check vulnerabilities
+        run: |
+          echo "## NPM Audit Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Severity | Count |" >> $GITHUB_STEP_SUMMARY
+          echo "|----------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Critical | ${{ steps.npm-audit.outputs.critical }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| High | ${{ steps.npm-audit.outputs.high }} |" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ steps.npm-audit.outputs.critical }}" != "0" ]]; then
+            echo "::error::Critical vulnerabilities found!"
+            exit 1
+          fi
+
+  # ============================================
+  # Trivy Filesystem Scan
+  # ============================================
+  trivy-fs-scan:
+    name: Trivy Filesystem Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH,MEDIUM'
+          format: 'table'
+          output: 'trivy-fs-report.txt'
+
+      - name: Upload Trivy report
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-fs-report
+          path: trivy-fs-report.txt
+
+      - name: Run Trivy for SARIF
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload to GitHub Security
+        uses: github/codeql-action/upload-sarif@v4
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # ============================================
+  # Secret Scan
+  # ============================================
+  secret-scan:
+    name: Secret Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: true
+
+  # ============================================
+  # License Check
+  # ============================================
+  license-check:
+    name: License Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install license-checker
+        run: npm install -g license-checker
+
+      - name: Check licenses
+        run: |
+          license-checker --summary --production > license-summary.txt
+          cat license-summary.txt
+
+      - name: Check for problematic licenses
+        run: |
+          # Check for GPL licenses in production dependencies
+          if license-checker --production --failOn 'GPL' 2>/dev/null; then
+            echo "✅ No problematic licenses found"
+          else
+            echo "⚠️ Found GPL licenses - manual review required"
+          fi
+
+      - name: Upload license report
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-report
+          path: license-summary.txt
+
+  # ============================================
+  # Security Summary
+  # ============================================
+  security-summary:
+    name: Security Summary
+    runs-on: ubuntu-latest
+    needs: [dependency-scan, trivy-fs-scan, secret-scan, license-check]
+    if: always()
+    steps:
+      - name: Generate summary
+        run: |
+          echo "## 🔒 Security Scan Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Scan | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Dependency Scan | ${{ needs.dependency-scan.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Trivy FS Scan | ${{ needs.trivy-fs-scan.result == 'success' && '✅ Pass' || '⚠️ Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Secret Scan | ${{ needs.secret-scan.result == 'success' && '✅ Pass' || '❌ Fail' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| License Check | ${{ needs.license-check.result == 'success' && '✅ Pass' || '⚠️ Warning' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "📅 Scan Date: $(date -u)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail if critical issues found
+        if: needs.dependency-scan.result == 'failure' || needs.secret-scan.result == 'failure'
+        run: |
+          echo "::error::Critical security issues found!"
+          exit 1

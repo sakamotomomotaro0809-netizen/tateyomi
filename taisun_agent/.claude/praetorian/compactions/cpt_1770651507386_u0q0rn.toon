@@ -1,0 +1,8 @@
+type: task_result
+title: Obsidian+NotebookLM+ローカルLLM LP知識管理システム ディープリサーチ
+key_insights[13]: 6並列リサーチエージェントで70+回の検索を実行,15件中13件のツール実在を確認,5つの実装パターンA-Eを提案,"パターンA: 最速スタート(1-2日) - Web Clipper+Smart Connections、無料","パターンB: Google Drive同期(1週間) - Obsidian↔NotebookLM自動同期、無料","パターンC: ローカルRAG完全自律型(2-3週間) - Ollama+ELYZA+ChromaDB+n8n、完全無料","パターンD: オールインワン(1-2週間) - AnythingLLM(54K stars)またはDify v1.12.1","パターンE: Claude Code+MCP(2-4週間) - obsidian-mcp-serverでフル自動化","推奨ローカルLLM: ELYZA-Shortcut-1.0-Qwen-32B (Ollama)","推奨埋め込み: BAAI/bge-m3 (100+言語)","推奨MCP: cyanheads/obsidian-mcp-server v2.0.7","推奨自動化: n8n(セルフホスト) + Apify","推奨日本語NLP: Sudachi + spaCy"
+refs[7]: DEEP_RESEARCH_REPORT.md - 最終レポート(500+行),"Vault構造: 01-inbox/02-references/03-patterns/04-moc/05-templates/06-output/07-ab-test/08-audio-video","obsidian-mcp-server: github.com/cyanheads/obsidian-mcp-server v2.0.7","AnythingLLM: github.com/Mintplex-Labs/anything-llm (54K stars)","ObsidianRAG: github.com/Vasallo94/ObsidianRAG","n8n-nodes-obsidian-local-rest-api: n8nからObsidian操作","notebooklm-py: github.com/teng-lin/notebooklm-py (非公式API)"
+recommendations[4]: ユーザーに5パターンから選択してもらう,技術スキルとゴールに応じてパターンC or Eが最も強力,段階的にA→C→Eとスケールアップも可能,GPU(NVIDIA 8GB+)があればローカルLLMの品質大幅向上
+id: cpt_1770651507386_u0q0rn
+created: "2026-02-09T15:38:27.386Z"
+updated: "2026-02-09T15:38:27.386Z"

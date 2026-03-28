@@ -1,0 +1,9 @@
+type: web_research
+title: 暗号通貨トレードシステム構築ツール調査 - 4サイト調査結果
+source: "skillsmp.com, mcpmarket.com, apify.com, reddit.com"
+key_insights[7]: "SkillsMP: 170,226件のスキル中、ブロックチェーンカテゴリに2,693件。CCXTスキル（PHP/Go/Python/TypeScript/C#）が最重要、各40.9kスター","MCPMarket: 20,668サーバー中、暗号通貨関連20+。CCXT MCP（複数バージョン、最大126スター）、Bitget Trading MCP、Bybit MCP（3バージョン）、Binance MCP（2バージョン）が存在","MCPMarket: CryptoAnalysis MCP（テクニカル分析・トレーディングシグナル）、Crypto Indicators MCP（112スター）、Whale Tracker、CryptoPanic（ニュース）あり","Apify Store: 62件の暗号通貨関連アクター。DexScreener Scraper（544ユーザー）、GMGN Wallet Holdings Scraper（81）、Web3 Intelligence Pipeline、Crypto AI Market Analyzer等","Apify: SNSスクレイパー充実 - Tweet Scraper V2（35K）、YouTube Scraper（52K）、Instagram Scraper（177K）","Reddit/Web検索: CCXT（108取引所対応）、Freqtrade（25K+ GitHub stars）、Jesse、Hummingbot が主要フレームワーク",Bitget Dual Investmentは非元本保証型で2つの暗号資産に投資。Bybit Dual Assetは1/3/5日のロックイン
+findings[8]: CCXT MCPサーバーが最も汎用性高い - 100+取引所API対応,"Bitget Trading MCP: spot/futures両対応","Bybit MCP: 3バージョン（読取専用、AI Trader、フルAPI）",Apify MCPサーバー（337スター）でApifyアクターをMCPツールとして利用可能,"Firecrawl MCP（5,424スター）がWebスクレイピングで最人気","Bright Data MCP（2,005スター）がアンチボット対策に強い",Web3 Research MCP（154スター）で暗号通貨リサーチ,"TrendRadar MCP（45,709スター）で35+プラットフォームからトレンド収集"
+recommendations[7]: CCXT MCPサーバーを最優先で導入 - Bitget/Bybit/Binance全て対応,Bitget Trading MCPをDual Investment操作用に導入検討,CryptoAnalysis MCPでテクニカル分析自動化,Apify ActorsのDexScreener ScraperとCrypto News Aggregatorを市場データ収集に活用,Firecrawl or Bright Data MCPでWeb情報収集基盤構築,TrendRadar MCPでSNS/ニューストレンド監視,Freqtradeをバックテスト・自動売買エンジンとして検討
+id: cpt_1770564913907_pyhmon
+created: "2026-02-08T15:35:13.907Z"
+updated: "2026-02-08T15:35:13.907Z"

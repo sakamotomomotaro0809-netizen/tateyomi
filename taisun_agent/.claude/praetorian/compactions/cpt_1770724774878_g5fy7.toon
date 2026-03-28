@@ -1,0 +1,8 @@
+type: web_research
+title: LINE AI Agent 50 Use Cases Research - Round 2
+key_insights[10]: "LINE公式アカウントAIチャットボット(β)が2025年11月に追加、チャットProオプション月額3,000円で2026年3月提供開始","Gartner: 40%の企業アプリが2026年までにタスク特化AIエージェント搭載予定","エージェンティックコマース市場: 2025年467億ドル→2030年1,751億ドル(CAGR 30.2%)","JAPAN AI MARKETING: LINE診断コンテンツ作成時間75%削減","Lステップ: メルマガ比較で開封率15倍、クリック率12倍、成約率5倍",日本のAI利用率42.5%で米国39.4%・英国36%を上回る,中小企業AI導入にはIT導入補助金(最大450万円)や省力化投資補助(最大1億円)が利用可能,AIコーディングエージェント利用率85%(2025年末時点),Amazon Rufus AIショッピングアシスタントで購入完了率60%改善,2026年はAIエージェント決済元年と予測
+findings[7]: "taisun_agentは100以上のスキルディレクトリを持つ(marketing, content, research, dev, designカテゴリ)","LINE特化スキル: line-marketing, taiyo-style-step-mail, funnel-builder","コンテンツスキル: video-agent, anime-slide-generator, youtube-content, kindle-publishing, note-marketing","マーケティングスキル: taiyo-style-sales-letter, taiyo-style-vsl, taiyo-style-headline, sns-marketing, lp-full-generation","リサーチスキル: world-research, mega-research, gpt-researcher, research-cited-report","開発スキル: dr-build, security-scan-trivy, sdd-design, sdd-tasks","デザインスキル: figma-design, diagram-illustration, lp-design"
+recommendations[3]: 50ユースケースをA-G 7カテゴリに整理,各ユースケースにtaisun_agentの具体的スキル名をマッピング,収益ポテンシャルと実装難易度を現実的に評価
+id: cpt_1770724774878_g5fy7
+created: "2026-02-10T11:59:34.878Z"
+updated: "2026-02-10T11:59:34.878Z"

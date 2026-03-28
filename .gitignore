@@ -40,9 +40,6 @@ desktop.ini
 node_modules/
 
 # 除外: 別プロジェクト・個人設定
-taisun_agent/
-.claude/
-.mcp.json
 
 # テスト生成物
 test_out*.epub

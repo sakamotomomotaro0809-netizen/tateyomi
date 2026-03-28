@@ -1,0 +1,103 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Evidence",
+  "description": "Deep Research の証拠レコード（evidence.jsonl の1行分）",
+  "type": "object",
+  "required": [
+    "id",
+    "source_type",
+    "source_url",
+    "retrieved_at",
+    "title",
+    "language",
+    "excerpt",
+    "reliability"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "証拠ID（ev-001, ev-002, ...）",
+      "pattern": "^ev-[0-9]{3,}$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["news", "sns", "paper", "docs", "code", "dataset", "other"],
+      "description": "情報源の種類"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "ソースURL"
+    },
+    "retrieved_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "取得日時（ISO8601）"
+    },
+    "title": {
+      "type": "string",
+      "description": "記事/投稿タイトル"
+    },
+    "author": {
+      "type": ["string", "null"],
+      "description": "著者名（不明ならnull）"
+    },
+    "published_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "公開日時（不明ならnull）"
+    },
+    "language": {
+      "type": "string",
+      "description": "言語コード（ja, en, ...）",
+      "pattern": "^[a-z]{2}$"
+    },
+    "excerpt": {
+      "type": "string",
+      "description": "重要部分の短い引用（500文字以内推奨）",
+      "maxLength": 1000
+    },
+    "notes": {
+      "type": "string",
+      "description": "抽出メモ（要約/文脈）"
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "この証拠から導ける主張候補"
+    },
+    "reliability": {
+      "type": "object",
+      "required": ["score", "rationale"],
+      "properties": {
+        "score": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5,
+          "description": "信頼度スコア（0-5）"
+        },
+        "rationale": {
+          "type": "string",
+          "description": "スコアの根拠"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "タグ（任意）"
+    },
+    "related_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "関連する証拠ID（任意）"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,89 @@
+{
+  "id": "coding_change_v1",
+  "name": "Coding Change Workflow Policy (v1)",
+  "description": "ソフトウェア変更（バグ修正/機能追加/リファクタ）向けの汎用 strict policy。目的は『勝手なショートカット（テスト未実行・大規模変更・完了詐称）』を構造的に防ぐこと。",
+  "strict_default": true,
+  "triggers_when_state_missing": [
+    "Bash command contains: git commit",
+    "Bash command contains: git push",
+    "Bash command contains: gh pr create",
+    "Bash command contains: npm publish",
+    "Bash command contains: rm -rf",
+    "Write/Edit creates *.ts/*.js/*.py under project"
+  ],
+  "invariants": {
+    "read_before_write": true,
+    "completion_requires_verify": true,
+    "no_new_pipeline_scripts": false,
+    "baseline_files": [],
+    "require_skill_evidence": {
+      "enabled": false,
+      "required_skill_ids": []
+    }
+  },
+  "phase_permissions": {
+    "1_intake_contract": {
+      "name": "要件定義・契約",
+      "deny_bash_patterns": [
+        "git commit",
+        "git push",
+        "gh pr create",
+        "npm publish",
+        "rm -rf",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["ls", "pwd", "git status", "rg", "cat"]
+    },
+    "2_reproduce_discovery": {
+      "name": "再現・調査",
+      "deny_bash_patterns": [
+        "git commit",
+        "git push",
+        "gh pr create",
+        "npm publish",
+        "rm -rf",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["rg", "cat", "git status", "git diff", "npm test", "npm run lint", "npm run typecheck"]
+    },
+    "3_design_plan": {
+      "name": "設計・計画",
+      "deny_bash_patterns": [
+        "git commit",
+        "git push",
+        "gh pr create",
+        "npm publish",
+        "rm -rf",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["rg", "cat", "git status", "git diff"]
+    },
+    "4_implement": {
+      "name": "実装",
+      "deny_bash_patterns": [
+        "git push",
+        "gh pr create",
+        "npm publish",
+        "rm -rf",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["git status", "git diff", "npm test", "npm run lint", "npm run typecheck"]
+    },
+    "5_verify": {
+      "name": "検証",
+      "deny_bash_patterns": [
+        "git push",
+        "gh pr create",
+        "npm publish",
+        "rm -rf",
+        "sudo"
+      ],
+      "allow_bash_patterns": ["npm test", "npm run lint", "npm run typecheck", "git diff", "git status"]
+    },
+    "6_finalize_pr": {
+      "name": "PR作成",
+      "deny_bash_patterns": ["rm -rf", "sudo"],
+      "allow_bash_patterns": ["git commit", "git push", "gh pr create", "git status", "git diff"]
+    }
+  }
+}

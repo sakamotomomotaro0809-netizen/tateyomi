@@ -1,0 +1,38 @@
+{
+  "$comment": "Production overlay example. Copy to internal-mcps.prod.json (gitignored) or external path",
+  "mcps": [
+    {
+      "name": "github",
+      "enabled": true,
+      "rollout": {
+        "mode": "canary",
+        "canaryPercent": 5,
+        "allowlist": {
+          "runIds": []
+        }
+      }
+    },
+    {
+      "name": "notion",
+      "enabled": false,
+      "rollout": {
+        "mode": "off"
+      }
+    },
+    {
+      "name": "postgres",
+      "enabled": true,
+      "rollout": {
+        "mode": "canary",
+        "canaryPercent": 5
+      }
+    },
+    {
+      "name": "filesystem",
+      "enabled": true,
+      "rollout": {
+        "mode": "full"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+type: web_research
+title: claude-code-router config.json フォーマット調査
+source: "GitHub: musistudio/claude-code-router, 複数の解説サイト"
+key_insights[5]: config.jsonは~/.claude-code-router/ディレクトリに配置される,設定ファイルはProviders、Router、Transformersの3つの主要セクションで構成,環境変数の$VAR_NAME形式で APIキーを安全に管理できる,ルーティングはデフォルト、バックグラウンド、思考、長文脈、Web検索の5タイプに分類,トランスフォーマーはプロバイダー固有の要件に合わせてリクエスト/レスポンスを変換
+findings[5]: OpenRouter、DeepSeek、Ollama、Gemini、Volcengine、SiliconFlowなど複数プロバイダーに対応,各プロバイダーは名前、API基底URL、APIキー、モデルリストで定義,ルーター設定でタスク種別ごとにどのモデルを使用するか指定可能,組み込みトランスフォーマーにはdeepeek、gemini、openrouter、groq、maxtoken、tooluse、reasoningなどがある,カスタムトランスフォーマーはJavaScriptファイルで実装可能
+techniques:
+  config_location: ~/.claude-code-router/config.json
+  env_variable_syntax: "$VAR_NAME or ${VAR_NAME}"
+  provider_fields: "name, api_base_url, api_key, models, transformer"
+  router_types: "default, background, think, longContext, webSearch"
+recommendations[3]: GitHubリポジトリのREADMEを公式ドキュメントとして参照,設定ファイルの完全なスキーマはソースコード内のTypeScript型定義を確認,実装時はOpenRouterやOllamaのプロバイダー設定を参考に
+id: cpt_1770693135106_bt2fxq
+created: "2026-02-10T03:12:15.106Z"
+updated: "2026-02-10T03:12:15.106Z"

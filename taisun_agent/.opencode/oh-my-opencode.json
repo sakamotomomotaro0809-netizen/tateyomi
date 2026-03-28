@@ -1,0 +1,9 @@
+{
+  "disabled_hooks": [],
+  "disabled_agents": [],
+  "ralph_loop": {
+    "enabled": false,
+    "default_max_iterations": 30,
+    "state_dir": ".opencode/"
+  }
+}

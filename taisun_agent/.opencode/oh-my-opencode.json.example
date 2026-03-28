@@ -1,0 +1,11 @@
+{
+  // これは example です。必要に応じて各自でコピーして利用してください。
+  // 既定では"何も暴走しない"前提で最小にしています。
+  "disabled_hooks": [],
+  "disabled_agents": [],
+  "ralph_loop": {
+    "enabled": false,
+    "default_max_iterations": 30,
+    "state_dir": ".opencode/"
+  }
+}

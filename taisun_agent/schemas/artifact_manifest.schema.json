@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Artifact Manifest",
+  "description": "Schema for artifact manifest",
+  "type": "object",
+  "patternProperties": {
+    ".*": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Artifact key"
+        },
+        "path": {
+          "type": "string",
+          "description": "Path to artifact file"
+        },
+        "producer_step": {
+          "type": "string",
+          "description": "Step that produced this artifact"
+        },
+        "inputs_used": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Input artifacts used"
+        },
+        "schema_used": {
+          "type": ["string", "null"],
+          "description": "Schema file used for validation"
+        },
+        "validated": {
+          "type": "boolean",
+          "description": "Whether artifact passed validation"
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA256 hash of artifact"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "python_version": {
+          "type": "string",
+          "description": "Python version used"
+        }
+      },
+      "required": ["key", "path", "producer_step", "inputs_used", "validated", "created_at"]
+    }
+  },
+  "additionalProperties": false
+}

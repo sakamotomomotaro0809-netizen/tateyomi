@@ -1,0 +1,171 @@
+# AIT42 v2.0.0 - Incident RAG Schema
+# Purpose: Define structure for failure-centric memory (AutoPatch)
+
+version: "1.0.0"
+schema_type: "incident_rag"
+
+# Document Structure for ChromaDB
+document_schema:
+  # Unique identifier
+  id:
+    type: "string"
+    format: "YYYY-MM-DD-NNN-incident"
+    description: "Unique incident ID matching task ID"
+    required: true
+
+  # Embedded text (stored in ChromaDB)
+  text:
+    type: "string"
+    description: "Full error log + stack trace for semantic search"
+    required: true
+    max_length: 10000
+
+  # Metadata (stored alongside embeddings)
+  metadata:
+    incident_type:
+      type: "enum"
+      values: ["build_failure", "test_failure", "runtime_error", "deployment_error", "quality_failure"]
+      description: "Category of failure"
+      required: true
+
+    timestamp:
+      type: "datetime"
+      format: "ISO 8601"
+      description: "When the incident occurred"
+      required: true
+
+    affected_agent:
+      type: "string"
+      description: "Agent that encountered the failure"
+      required: true
+
+    task_id:
+      type: "string"
+      description: "Associated task ID"
+      required: true
+
+    error_code:
+      type: "string"
+      description: "Error code or exception type"
+      required: false
+
+    severity:
+      type: "enum"
+      values: ["critical", "high", "medium", "low"]
+      description: "Impact severity"
+      required: true
+
+    root_cause:
+      type: "string"
+      description: "Identified root cause (if analyzed)"
+      required: false
+
+    applied_patch:
+      type: "object"
+      description: "Patch that resolved this incident"
+      required: false
+      properties:
+        patch_id: "string"
+        patch_type: "enum[code_change, config_change, dependency_update]"
+        files_modified: "array[string]"
+        diff: "string"
+        success: "boolean"
+
+    resolution_time_ms:
+      type: "integer"
+      description: "Time taken to resolve (MTTR)"
+      required: false
+
+    recurrence_count:
+      type: "integer"
+      description: "How many times this error pattern recurred"
+      default: 1
+      required: true
+
+    tags:
+      type: "array"
+      items: "string"
+      description: "Searchable tags (e.g., 'typescript', 'authentication', 'npm')"
+      required: false
+
+# Query Patterns for AutoPatch
+query_patterns:
+  - name: "similar_errors"
+    description: "Find similar error logs using cosine similarity"
+    method: "semantic_search"
+    top_k: 3
+    filters:
+      - "incident_type == current.incident_type"
+      - "severity >= current.severity"
+
+  - name: "successful_resolutions"
+    description: "Find incidents with successful patches"
+    method: "metadata_filter"
+    filter:
+      applied_patch.success: true
+
+  - name: "recurring_patterns"
+    description: "Find frequently occurring error patterns"
+    method: "aggregation"
+    group_by: "error_code"
+    having: "recurrence_count > 2"
+
+# Expected Data Volume
+capacity:
+  initial: 0
+  max_incidents: 10000
+  retention_days: 365
+  cleanup_policy: "FIFO (oldest first when max_incidents reached)"
+
+# Performance Targets
+performance:
+  query_latency_p95: "< 100ms"
+  insertion_latency_p95: "< 50ms"
+  embedding_generation: "< 500ms (depends on LLM API)"
+
+# Integration Points
+integrations:
+  - name: "AutoPatch"
+    trigger: "CI build failure"
+    action: "Query similar_errors, generate patch from historical data"
+
+  - name: "SpecSynth"
+    trigger: "Patch applied successfully"
+    action: "Insert incident with patch metadata, generate regression test"
+
+  - name: "K5D Coach"
+    trigger: "Agent quality degradation"
+    action: "Query incidents by affected_agent, analyze failure patterns"
+
+# Example Document
+example_document:
+  id: "2025-11-14-001-incident"
+  text: |
+    TypeError: Cannot read properties of undefined (reading 'user')
+    at AuthController.login (/app/src/controllers/auth.controller.ts:45:18)
+    at Layer.handle [as handle_request] (/app/node_modules/express/lib/router/layer.js:95:5)
+    ...
+  metadata:
+    incident_type: "runtime_error"
+    timestamp: "2025-11-14T12:34:56Z"
+    affected_agent: "backend-developer"
+    task_id: "2025-11-14-001"
+    error_code: "TypeError"
+    severity: "high"
+    root_cause: "Null check missing for req.body.user"
+    applied_patch:
+      patch_id: "patch-2025-11-14-001"
+      patch_type: "code_change"
+      files_modified: ["src/controllers/auth.controller.ts"]
+      diff: |
+        @@ -42,7 +42,10 @@
+         async login(req: Request, res: Response) {
+        -  const { user } = req.body;
+        +  const { user } = req.body || {};
+        +  if (!user) {
+        +    return res.status(400).json({ error: 'User data required' });
+        +  }
+      success: true
+    resolution_time_ms: 180000
+    recurrence_count: 1
+    tags: ["typescript", "authentication", "null-check", "express"]

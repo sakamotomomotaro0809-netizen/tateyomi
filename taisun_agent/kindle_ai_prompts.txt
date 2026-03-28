@@ -1,0 +1,305 @@
+================================================================================
+         Kindle AI美少女イラスト表紙用 画像生成プロンプト集
+================================================================================
+
+【使用方法】
+- 各プロンプトをコピーして画像生成AIに入力
+- {変数} 部分は適宜変更可能
+- ネガティブプロンプトも必ず併用すること
+
+================================================================================
+■ パターン1: サイバーパンク・AI系
+================================================================================
+
+【プロンプト A: AIテクノロジー系】
+(masterpiece:1.2), (best quality:1.2),
+beautiful anime girl as AI entity,
+long silver hair with glowing blue digital particles,
+luminous cyan circuit-pattern eyes,
+wearing sleek white and blue tech suit,
+neural network patterns glowing on skin,
+holographic data streams and interfaces floating around her,
+dark blue gradient background with floating binary code,
+soft cyan and purple ambient glow,
+highly detailed, sharp focus, 8k resolution,
+professional digital art, trending on artstation
+
+Negative: low quality, blurry, distorted face, extra fingers,
+bad anatomy, watermark, text, nsfw, realistic photo
+
+---
+
+【プロンプト B: サイバーパンクシティ】
+(masterpiece:1.2), (best quality:1.2),
+cyberpunk anime girl, electric blue bob cut hair,
+neon pink glowing eyes, confident smirk,
+wearing black leather jacket with LED strips,
+standing on rooftop overlooking neon-lit city,
+rain falling, wet surfaces reflecting neon lights,
+dramatic low angle shot, volumetric fog,
+pink and blue color scheme, cinematic lighting,
+highly detailed background, 8k
+
+Negative: bright daylight, cheerful, low quality,
+bad anatomy, extra limbs, watermark
+
+---
+
+【プロンプト C: ホログラム・未来系】
+(masterpiece:1.2), (best quality:1.2),
+ethereal anime girl materializing from hologram,
+translucent body with visible data streams,
+long flowing hair made of light particles,
+gentle expression, reaching out hand,
+minimalist white tech room background,
+soft blue and white color palette,
+floating geometric shapes, clean aesthetic,
+highly detailed, 8k resolution
+
+Negative: dark, gritty, horror, low quality, watermark
+
+================================================================================
+■ パターン2: ファンタジー・魔法系
+================================================================================
+
+【プロンプト D: 魔法使い】
+(masterpiece:1.2), (best quality:1.2),
+beautiful anime sorceress,
+long flowing silver-white hair with stars,
+deep purple mystical eyes,
+elegant dark purple dress with gold embroidery,
+holding crystal staff emitting golden light,
+intricate magic circle glowing beneath feet,
+starry night sky with aurora background,
+soft magical particle effects everywhere,
+highly detailed, fantasy art style
+
+Negative: modern clothing, technology, urban,
+low quality, bad hands, watermark
+
+---
+
+【プロンプト E: 精霊系】
+(masterpiece:1.2), (best quality:1.2),
+ethereal anime spirit girl,
+long mint green flowing hair with flowers,
+soft golden eyes, serene expression,
+wearing flowing white dress with leaf patterns,
+surrounded by glowing fireflies and petals,
+enchanted forest background with soft sunbeams,
+dreamy atmosphere, soft focus background,
+pastel color palette, highly detailed
+
+Negative: dark themes, horror, technology,
+low quality, bad anatomy
+
+---
+
+【プロンプト F: 闇の魔術師】
+(masterpiece:1.2), (best quality:1.2),
+mysterious anime dark mage girl,
+long black hair with purple highlights,
+glowing red mystical eyes,
+wearing ornate black and gold robe,
+dark energy swirling around hands,
+ancient ruins background with ominous sky,
+dramatic lighting from magic,
+detailed fabric textures, 8k resolution
+
+Negative: cheerful, bright colors, modern,
+low quality, bad anatomy
+
+================================================================================
+■ パターン3: 清楚・日常系
+================================================================================
+
+【プロンプト G: 春の少女】
+(masterpiece:1.2), (best quality:1.2),
+cute anime girl, gentle warm smile,
+soft brown hair in twin tails with pink ribbons,
+bright amber eyes, rosy cheeks,
+wearing white blouse and pink cardigan,
+cherry blossom petals floating around her,
+soft pastel pink and white background,
+warm golden hour lighting, bokeh effect,
+kawaii style, innocent expression,
+highly detailed, soft rendering
+
+Negative: dark themes, revealing clothes,
+low quality, bad anatomy, watermark
+
+---
+
+【プロンプト H: 読書少女】
+(masterpiece:1.2), (best quality:1.2),
+cute anime girl reading a book,
+long black hair with simple hairpin,
+gentle brown eyes behind round glasses,
+wearing cozy cream sweater,
+sitting by window with soft sunlight,
+stack of books and tea cup nearby,
+warm indoor atmosphere, autumn leaves outside,
+soft color palette, detailed textures,
+slice of life aesthetic
+
+Negative: fantasy, magic, dark themes,
+low quality, bad hands
+
+---
+
+【プロンプト I: 制服少女】
+(masterpiece:1.2), (best quality:1.2),
+beautiful anime high school girl,
+long straight black hair, side bangs,
+clear blue eyes, soft smile,
+wearing navy sailor uniform with red ribbon,
+holding notebook against chest,
+school rooftop background with blue sky,
+soft afternoon lighting, wind in hair,
+clean line art style, highly detailed
+
+Negative: fantasy, revealing clothes, adult themes,
+low quality, bad anatomy
+
+================================================================================
+■ パターン4: ダーク・ゴシック系
+================================================================================
+
+【プロンプト J: ゴシックプリンセス】
+(masterpiece:1.2), (best quality:1.2),
+elegant gothic anime princess,
+long silver-white hair with black roses,
+piercing crimson red eyes,
+wearing elaborate black Victorian dress,
+intricate lace details and corset,
+sitting on ornate dark throne,
+gothic cathedral background with stained glass,
+dramatic candlelight, rose petals falling,
+dark romantic atmosphere, highly detailed
+
+Negative: cheerful, bright colors, modern,
+low quality, bad anatomy
+
+---
+
+【プロンプト K: 堕天使】
+(masterpiece:1.2), (best quality:1.2),
+beautiful anime fallen angel girl,
+long platinum blonde hair,
+heterochromia eyes (one gold, one red),
+wearing tattered white dress,
+large black feathered wings spread wide,
+floating in dark void with light rays,
+feathers falling around her,
+melancholic expression, elegant pose,
+dramatic lighting, 8k resolution
+
+Negative: cheerful, colorful, technology,
+low quality, bad wings anatomy
+
+---
+
+【プロンプト L: 吸血鬼】
+(masterpiece:1.2), (best quality:1.2),
+elegant anime vampire girl,
+long raven black hair with red highlights,
+glowing blood red eyes, fangs visible,
+wearing elegant dark red and black dress,
+sitting in gothic mansion interior,
+moonlight through tall windows,
+wine glass in hand, confident smirk,
+dark romantic atmosphere, detailed fabric
+
+Negative: daylight, cheerful, casual clothes,
+low quality, bad anatomy
+
+================================================================================
+■ パターン5: AI・テクノロジー特化
+================================================================================
+
+【プロンプト M: ニューラルネットワーク】
+(masterpiece:1.2), (best quality:1.2),
+anime girl representing artificial intelligence,
+short white hair with fiber optic glow,
+digital matrix eyes displaying code,
+transparent tech suit showing circuit patterns,
+neural network visualization behind her,
+floating data nodes and connections,
+clean dark background with grid lines,
+teal and magenta accent lighting,
+minimalist tech aesthetic, 8k
+
+Negative: organic, nature, fantasy,
+low quality, cluttered background
+
+---
+
+【プロンプト N: データストリーム】
+(masterpiece:1.2), (best quality:1.2),
+beautiful anime AI assistant girl,
+long gradient hair (black to cyan),
+calm confident expression,
+wearing holographic floating UI elements,
+data streams flowing around her body,
+clean white tech environment,
+soft blue ambient lighting,
+professional corporate aesthetic,
+highly detailed, crisp rendering
+
+Negative: dark, gritty, fantasy elements,
+low quality, messy composition
+
+---
+
+【プロンプト O: 量子コンピューティング】
+(masterpiece:1.2), (best quality:1.2),
+anime girl as quantum computing entity,
+hair made of interweaving light streams,
+eyes showing spinning qubits,
+semi-transparent digital form,
+surrounded by orbiting quantum particles,
+abstract space background with equations,
+purple and blue color scheme,
+mysterious yet elegant presence,
+highly detailed particle effects
+
+Negative: solid physical form, traditional clothing,
+low quality, realistic style
+
+================================================================================
+■ 共通ネガティブプロンプト（必ず使用）
+================================================================================
+
+【基本】
+low quality, worst quality, blurry, distorted,
+bad anatomy, extra fingers, extra limbs,
+watermark, text, logo, signature,
+cropped, out of frame, duplicate,
+ugly, deformed, disfigured,
+poorly drawn face, poorly drawn hands
+
+【NSFW防止用追加】
+nsfw, nude, revealing, suggestive,
+inappropriate, adult content
+
+================================================================================
+■ 品質向上キーワード（プロンプト末尾に追加）
+================================================================================
+
+【高品質化】
+masterpiece, best quality, highly detailed,
+sharp focus, 8k resolution, HDR,
+professional digital art, trending on artstation
+
+【スタイル指定】
+anime style, illustration, digital painting,
+cel shading, vibrant colors
+
+【ライティング】
+dramatic lighting, volumetric lighting,
+soft ambient light, rim lighting,
+cinematic lighting, golden hour
+
+================================================================================
+                           プロンプト集 終わり
+================================================================================

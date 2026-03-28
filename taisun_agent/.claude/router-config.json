@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "description": "LLM Auto-Switching System v1.0 - claude-code-router config",
+  "routing": {
+    "default": "claude-sonnet",
+    "rules": [
+      { "pattern": "background", "model": "ollama-qwen3-coder" },
+      { "pattern": "think", "model": "claude-opus" },
+      { "pattern": "longContext", "model": "ollama-qwen3-coder" },
+      { "pattern": "webSearch", "model": "claude-haiku" },
+      { "pattern": "codegen", "model": "gpt53-codex" }
+    ]
+  },
+  "providers": {
+    "anthropic": { "apiKeyEnv": "ANTHROPIC_API_KEY", "models": ["claude-opus", "claude-sonnet", "claude-haiku"] },
+    "ollama": { "baseUrl": "http://localhost:11434", "models": ["ollama-qwen3-coder", "ollama-glm4"] },
+    "openai": { "apiKeyEnv": "OPENAI_API_KEY", "models": ["gpt53-codex"] },
+    "openrouter": { "apiKeyEnv": "OPENROUTER_API_KEY", "baseUrl": "https://openrouter.ai/api/v1", "models": ["openrouter-free"] }
+  },
+  "budget": { "monthly": 50, "daily": 5, "warningPercent": 80 }
+}

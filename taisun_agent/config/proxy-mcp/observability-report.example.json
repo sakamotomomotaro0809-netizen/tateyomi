@@ -1,0 +1,16 @@
+{
+  "github": {
+    "owner": "your-org",
+    "repo": "your-repo",
+    "issueNumber": 999
+  },
+  "schedule": {
+    "daily": true,
+    "weekly": true
+  },
+  "thresholds": {
+    "warnSuccessRate": 0.95,
+    "criticalSuccessRate": 0.90,
+    "warnP95Ms": 5000
+  }
+}

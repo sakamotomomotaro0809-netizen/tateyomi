@@ -1,0 +1,71 @@
+{
+  "id": "voice_ai_v1",
+  "name": "Voice AI ワークフロー",
+  "version": "1.0.0",
+  "description": "Twilio + OpenAI Realtime APIを使用した音声AI通話ワークフロー。セットアップからコール実行、後処理まで8フェーズ。",
+  "phases": [
+    {
+      "id": "setup",
+      "name": "環境セットアップ",
+      "description": "Twilio/OpenAI APIの接続確認。voice_health_checkでヘルスチェック実行。",
+      "requiredArtifacts": ["output/voice-ai/health-check.json"],
+      "allowedSkills": ["voice-ai"],
+      "nextPhase": "configure"
+    },
+    {
+      "id": "configure",
+      "name": "セッション設定",
+      "description": "通話目的・システムプロンプト・音声設定を定義。output/voice-ai/session-config.jsonに設定を保存。",
+      "requiredArtifacts": ["output/voice-ai/session-config.json"],
+      "allowedSkills": ["voice-ai"],
+      "nextPhase": "initiate_call"
+    },
+    {
+      "id": "initiate_call",
+      "name": "コール発信",
+      "description": "voice_make_callでアウトバウンドコール発信。output/voice-ai/call-info.jsonにcallSidを記録。",
+      "requiredArtifacts": ["output/voice-ai/call-info.json"],
+      "allowedSkills": ["voice-ai"],
+      "nextPhase": "realtime_session"
+    },
+    {
+      "id": "realtime_session",
+      "name": "リアルタイムセッション",
+      "description": "OpenAI Realtime APIセッション開始。WebSocketブリッジで双方向音声通信。",
+      "requiredArtifacts": ["output/voice-ai/session-id.json"],
+      "allowedSkills": ["voice-ai"],
+      "nextPhase": "conversation"
+    },
+    {
+      "id": "conversation",
+      "name": "会話実行",
+      "description": "AI会話の進行を監視。必要に応じてconfigure_sessionで設定変更。",
+      "allowedSkills": ["voice-ai"],
+      "nextPhase": "post_call"
+    },
+    {
+      "id": "post_call",
+      "name": "後処理",
+      "description": "voice_get_conversation_logで会話ログ取得。サマリー生成。voice_get_call_statusでコスト確認。",
+      "requiredArtifacts": ["output/voice-ai/conversation-log.json", "output/voice-ai/call-summary.json"],
+      "allowedSkills": ["voice-ai"],
+      "allowRollbackTo": ["configure"],
+      "nextPhase": "analytics"
+    },
+    {
+      "id": "analytics",
+      "name": "分析",
+      "description": "会話内容の分析。センチメント・キーワード・次アクション抽出。",
+      "requiredArtifacts": ["output/voice-ai/analytics.json"],
+      "allowedSkills": ["voice-ai"],
+      "nextPhase": "complete"
+    },
+    {
+      "id": "complete",
+      "name": "完了",
+      "description": "ワークフロー完了。結果サマリーと次アクション一覧を出力。",
+      "requiredArtifacts": ["output/voice-ai/final-report.json"],
+      "nextPhase": null
+    }
+  ]
+}

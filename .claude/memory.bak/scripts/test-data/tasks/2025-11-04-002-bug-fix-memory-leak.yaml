@@ -1,0 +1,48 @@
+# Task Record: Bug Fix - Memory Leak
+# Test data generated for integration testing
+
+id: "2025-11-04-002"
+timestamp: "2025-11-04T15:00:00Z"
+request: "Fix memory leak in WebSocket handler"
+task_type: "bug-fix"
+
+selected_agents:
+  - backend-developer
+  - performance-engineer
+
+duration_ms: 30000
+success: true
+quality_score: 88
+
+errors: []
+warnings: []
+
+quality_metrics:
+  code_coverage: 85
+  documentation_complete: true
+  security_review_passed: true
+  performance_benchmark: "good"
+
+reflection:
+  score: 88
+  decision: "approved"
+  feedback: "メモリリークを修正。パフォーマンステストで検証済み。"
+  improvements:
+    - "Add more comprehensive memory profiling tests"
+
+artifacts:
+  - path: "src/websocket/handler.rs"
+    type: "fix"
+  - path: "tests/websocket/memory_test.rs"
+    type: "test"
+
+resources:
+  tokens_used: 55000
+  api_calls: 8
+  files_modified: 3
+
+tags:
+  - bug-fix
+  - performance
+  - websocket
+  - memory

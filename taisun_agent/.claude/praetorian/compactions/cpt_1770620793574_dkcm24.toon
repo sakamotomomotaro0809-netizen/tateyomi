@@ -1,0 +1,8 @@
+type: web_research
+title: OpenClaw セキュリティリスク＆活用事例 詳細リサーチ
+source: "https://thehackernews.com/2026/02/researchers-find-341-malicious-clawhub.html, https://jangwook.net/en/blog/en/openclaw-advanced-usage/"
+key_insights[6]: "CVE-2026-25253(CVSS 8.8): 1クリックRCE、WebSocketオリジン未検証でトークン窒取→ゲートウェイ完全侵害",ClawHubレジストリの12-20%がマルウェア(341-900個)。Atomic Stealer(AMOS)配布,"ZeroLeaks診断: 100点中2点。デフォルトポート18789が未認証で公開","25万件のAPIキー・DMが漏洩。auth:noneでVPSにデプロイしたユーザーが被害","致命的三重奏(Simon Willison): プライベートデータアクセス+信頼できないコンテンツへの露出+外部通信能力+持続メモリ","活用事例20+: メール6000件自動処理、車の値段自動交渉、マルチエージェントソロファウンダー運営、IoT監視カメラ、ブラウザ自動化価格監視"
+findings[5]: "v2026.1.29でauth:none削除、CVE-2026-25253修正済み",クリーヴァ株式会社はOpenClaw業務利用禁止,"Shadow AIリスク: 従業員が勝手に社内PCにデプロイ","Hudson Rock: RedLine/Lumma/Vidarが~/.openclaw/ファイル構造をターゲット化","8つの高度な実用例: Cron自動化、Webhook(n8n/Make)、MCPサーバー、マルチエージェント、ブラウザ自動化、IoT監視、カスタムスキル、ワークスペースファイル"
+id: cpt_1770620793574_dkcm24
+created: "2026-02-09T07:06:33.574Z"
+updated: "2026-02-09T07:06:33.574Z"

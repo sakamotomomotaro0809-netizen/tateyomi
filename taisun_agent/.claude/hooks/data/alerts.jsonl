@@ -1,0 +1,14 @@
+{"timestamp":"2026-02-15T13:22:31.060Z","level":"critical","category":"entry_count","message":"Metrics entry count exceeds critical threshold (100 entries)","value":100,"threshold":100}
+{"timestamp":"2026-02-15T13:22:31.061Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}
+{"timestamp":"2026-02-15T13:22:57.044Z","level":"warn","category":"entry_count","message":"Metrics entry count exceeds warning threshold (100 entries)","value":100,"threshold":80}
+{"timestamp":"2026-02-15T13:22:57.044Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}
+{"timestamp":"2026-02-15T13:25:01.300Z","level":"warn","category":"entry_count","message":"Metrics entry count exceeds warning threshold (100 entries)","value":100,"threshold":80}
+{"timestamp":"2026-02-15T13:25:01.300Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}
+{"timestamp":"2026-02-15T13:25:02.044Z","level":"warn","category":"entry_count","message":"Metrics entry count exceeds warning threshold (100 entries)","value":100,"threshold":80}
+{"timestamp":"2026-02-15T13:25:02.045Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}
+{"timestamp":"2026-02-15T13:26:16.578Z","level":"warn","category":"entry_count","message":"Metrics entry count exceeds warning threshold (100 entries)","value":100,"threshold":80}
+{"timestamp":"2026-02-15T13:26:16.579Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}
+{"timestamp":"2026-02-15T13:26:16.647Z","level":"warn","category":"entry_count","message":"Metrics entry count exceeds warning threshold (100 entries)","value":100,"threshold":80}
+{"timestamp":"2026-02-15T13:26:16.648Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}
+{"timestamp":"2026-02-15T13:26:16.672Z","level":"warn","category":"entry_count","message":"Metrics entry count exceeds warning threshold (100 entries)","value":100,"threshold":80}
+{"timestamp":"2026-02-15T13:26:16.673Z","level":"critical","category":"completion_rate","message":"Session completion rate is critically low (0.0%)","value":0,"threshold":0.8}

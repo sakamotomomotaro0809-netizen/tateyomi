@@ -1,0 +1,117 @@
+{
+  "features": [
+    {
+      "id": "typescript",
+      "name": "TypeScript",
+      "description": "Add TypeScript support with strict mode",
+      "languages": ["javascript", "typescript"],
+      "dependencies": {},
+      "devDependencies": {
+        "typescript": "^5.3.0",
+        "@types/node": "^20.0.0"
+      },
+      "files": {
+        "tsconfig.json": true
+      }
+    },
+    {
+      "id": "testing-jest",
+      "name": "Testing (Jest)",
+      "description": "Add Jest testing framework",
+      "languages": ["javascript", "typescript"],
+      "dependencies": {},
+      "devDependencies": {
+        "jest": "^29.7.0",
+        "@types/jest": "^29.5.0",
+        "ts-jest": "^29.1.0"
+      },
+      "scripts": {
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:coverage": "jest --coverage"
+      },
+      "files": {
+        "jest.config.js": true
+      }
+    },
+    {
+      "id": "testing-pytest",
+      "name": "Testing (pytest)",
+      "description": "Add pytest testing framework",
+      "languages": ["python"],
+      "dependencies": {
+        "pytest": "^7.4.0",
+        "pytest-cov": "^4.1.0"
+      },
+      "devDependencies": {},
+      "scripts": {
+        "test": "pytest",
+        "test:cov": "pytest --cov=src tests/"
+      },
+      "files": {
+        "pytest.ini": true
+      }
+    },
+    {
+      "id": "linting-eslint",
+      "name": "Linting (ESLint)",
+      "description": "Add ESLint with recommended rules",
+      "languages": ["javascript", "typescript"],
+      "dependencies": {},
+      "devDependencies": {
+        "eslint": "^8.55.0",
+        "@typescript-eslint/eslint-plugin": "^6.15.0",
+        "@typescript-eslint/parser": "^6.15.0"
+      },
+      "scripts": {
+        "lint": "eslint src/",
+        "lint:fix": "eslint src/ --fix"
+      },
+      "files": {
+        ".eslintrc.json": true,
+        ".eslintignore": true
+      }
+    },
+    {
+      "id": "linting-ruff",
+      "name": "Linting (Ruff)",
+      "description": "Add Ruff linter and formatter",
+      "languages": ["python"],
+      "dependencies": {
+        "ruff": "^0.1.0"
+      },
+      "devDependencies": {},
+      "scripts": {
+        "lint": "ruff check .",
+        "format": "ruff format ."
+      },
+      "files": {
+        "ruff.toml": true
+      }
+    },
+    {
+      "id": "docker",
+      "name": "Docker Support",
+      "description": "Add Dockerfile and docker-compose.yml",
+      "languages": ["javascript", "typescript", "python"],
+      "dependencies": {},
+      "devDependencies": {},
+      "files": {
+        "Dockerfile": true,
+        "docker-compose.yml": true,
+        ".dockerignore": true
+      }
+    },
+    {
+      "id": "cicd-github",
+      "name": "CI/CD (GitHub Actions)",
+      "description": "Add GitHub Actions workflow",
+      "languages": ["javascript", "typescript", "python"],
+      "dependencies": {},
+      "devDependencies": {},
+      "files": {
+        ".github/workflows/ci.yml": true
+      }
+    }
+  ]
+}

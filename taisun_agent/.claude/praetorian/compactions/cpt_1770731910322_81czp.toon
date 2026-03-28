@@ -1,0 +1,8 @@
+type: web_research
+title: 米国株オプション取引リサーチアラートシステム - ツール調査結果
+key_insights[7]: "MCP Server: Unusual Whales (33ツール, オプションフロー/ダークプール/議員取引), Alpha Vantage (公式MCP), Polygon.io, EODHD, FRED(経済指標800k+系列)","MCP Server: TradingView MCP (リアルタイムスクリーニング), MaverickMCP (29ツール), mcp-stockscreen, mcp-stockflow","MCP Server: Reddit MCP Buddy, Twitter Scraper MCP, Google RSS MCP, Newsfeed MCP","Apify: Twitter/X Scraper (複数), Reddit Sentiment Analyzer, Google News Scraper, Yahoo Finance Scraper, Finance Monitoring Agent, Global Markets Intelligence","GitHub: FinBERT (ProsusAI), FinVADER, py_vollib (オプションプライシング), QuantLib, Backtesting.py, Backtrader, bt","GitHub: TradingView Webhook Bot (fabston), lightweight-charts-python, Alpaca MCP Server (オプション取引対応)","GitHub: wallstreetbets-sentiment-analysis, wsbtickerbot, PRAW Reddit API"
+findings[6]: "Unusual Whales MCP: 3つのGitHub実装あり (phields, erikmaday, danwagnerco)","Alpha Vantage: 唯一のベンダー公式MCP Server","MaverickMCP: mcp-traderの後継、29ツール搭載、本番品質","FinBERT: VADERより金融テキストで優れた精度（Transformer系）","Apify Global Markets Intelligence: Bloomberg/FT/Reuters/Alpha Vantageを監視しAI分析","FRED MCP Server: 800,000以上の経済時系列データにアクセス可能"
+recommendations[4]: "Phase 1: MCP Server群の導入 (Unusual Whales + Alpha Vantage + FRED + TradingView + Reddit MCP)","Phase 2: Apifyアクターの設定 (Twitter Scraper + Reddit Sentiment + Google News + Yahoo Finance)","Phase 3: GitHub ライブラリ統合 (FinBERT + py_vollib + Backtesting.py + PRAW)","Phase 4: アラートシステム構築 (TradingView Webhook + Discord/Telegram通知)"
+id: cpt_1770731910322_81czp
+created: "2026-02-10T13:58:30.322Z"
+updated: "2026-02-10T13:58:30.322Z"

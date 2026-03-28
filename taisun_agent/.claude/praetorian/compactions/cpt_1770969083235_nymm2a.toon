@@ -1,0 +1,40 @@
+type: flow_analysis
+title: Intent Parser Hook Integration - 既存構造と統合ポイント分析
+key_insights[8]: Intent Parser (Stage 2A) は 14 ファイル、35+ パターン、85% テストカバレッジで完成,Hook Integration 既に実装 (src/intent-parser/integrations/hook-integration.ts) - 160行,Hook システムは 26 個のファイル、7292 行総コード - workflow-state-manager が中核 (1019行),"既存 Hook Layer 構成: L0=CLAUDE.md, L1=SessionStart, L2=Permission, L3=Read-before-Write, L4-13=各種ガード","Stage 1 メトリクス収集は既に実装・動作中 - metrics-collector.js, aggregator.js, reporter.js","False Positive削減の関鍵: deviation-approval-guard (228行) と workflow-fidelity-guard (505行)",Metrics スキーマ確立済み - metrics-collector.spec.json が完全定義,"統合のジャンクション: unified-guard.js (212行) が全ガードを通す出入り口"
+findings[7]: "HookIntegration クラスは既に 8つのメソッド実装: analyzeUserInput, shouldSkipHook, isWorkflowReuse, isSkillInvocation, isExistingFileReference, isDeviationRequest, isSessionContinuation, getRecommendedAction, generateHookMessage, isFalsePositive","Intent の shouldSkipLayers フィールド (number[]) で Layer 別スキップ判定が可能な設計","Hook Integration のテスト既存: intent-integration.test.ts (150行以上), layer-1-intent-router.test.ts 等","False Positive 検出ロジック既に実装: confidence < 30, UNKNOWN intent, workflow reuse ブロック時の誤検知など","Metrics 記録は 6個のフェーズで構成: SessionStart→PreToolUse→PostToolUse→EventType判定→ログ記録→バッファ管理","Stage 1 成功基準: False Positive < 10%, Block Rate < 5%, Processing Time <10ms (既に spec化)","統合ポイント候補は 3つ: (1) unified-guard で Intent Parser 呼び出し, (2) deviation-approval-guard に Intent 判定追加, (3) workflow-fidelity-guard の新規スクリプト検出に Intent 活用"
+techniques:
+  hook_layer_skip: "IntentResult.shouldSkipLayers[number] で Hook Layer をスキップ可能"
+  confidence_confidence_calibration: "Intent confidence >= 85% → allow, 50-85% → warn, <50% → block"
+  false_positive_mitigation: HookIntegration.isFalsePositive() で事後検知し、metrics に記録
+  workflow_fidelity_enforcement: WORKFLOW_REUSE 検出時は Read-before-Write (L3) スキップを許可
+  skill_invocation_guard: SKILL_INVOCATION 検出時は Deviation Approval (L6) スキップを許可
+  risk_assessment: Intent riskLevel (low/medium/high) × confidence で 3x3 マトリックス判定
+decisions[4]:
+  - chose: unified-guard.js に Intent Parser を統合する
+    over[2]: 個別 hook に統合,新規 intent-integration-hook.js を作成
+    reason: unified-guard が全ガードの統一入口であり、1ポイント統合でシステム全体に反映される
+  - chose: Hook Layer 2-3 (Permission + Read-before-Write) に集中統合
+    over[2]: 全 Layer に統合,Layer 6 (Deviation) のみに統合
+    reason: Layer 2-3 が最も False Positive が多いポイント (既存 metrics で確認)
+  - chose: intent.shouldSkipLayers を Hook skipLayers パラメータに渡す
+    over[2]: Hook ごとに判定ロジック追加,Intent 結果をメトリクスのみに使用
+    reason: shouldSkipLayers 設計が既に存在し、Hook フレームワークと親和性が高い
+  - chose: "テスト戦略: 既存テスト + 統合テスト追加（新規作成なし）"
+    over[2]: 既存テストの修正,全テストの書き直し
+    reason: "intent-parser.test.ts, intent-integration.test.ts が既に 85% カバレッジ、統合テストのみ追加"
+paths:
+  intent_parser_main:
+    status: working
+    trace[4]: src/intent-parser/index.ts (エクスポート),src/intent-parser/classifiers/intent-classifier.ts (分類エンジン),src/intent-parser/engines/confidence-scorer.ts (信頼度スコア),src/intent-parser/engines/risk-evaluator.ts (リスク評価)
+  hook_integration:
+    status: working
+    trace[4]: src/intent-parser/integrations/hook-integration.ts (HookIntegration クラス),.claude/hooks/deviation-approval-guard.js (適用対象1),.claude/hooks/workflow-fidelity-guard.js (適用対象2),.claude/hooks/unified-guard.js (統合エントリ)
+  metrics_collection:
+    status: working
+    trace[4]: .claude/hooks/metrics-collector.js (記録),.claude/hooks/metrics-aggregator.js (日次集計),.claude/hooks/generate-metrics-report.js (レポート),.claude/hooks/data/metrics-daily/*.json (ストレージ)
+refs[7]: "src/intent-parser/integrations/hook-integration.ts:33-35 - shouldSkipHook 実装","src/intent-parser/types.ts:104 - shouldSkipLayers 定義",".claude/hooks/unified-guard.js:100-165 - performQuickChecks 関数",".claude/hooks/deviation-approval-guard.js:59-90 - strict mode 判定",".claude/hooks/workflow-fidelity-guard.js:67-120 - PostToolUse イベント処理",".claude/hooks/metrics-collector.spec.json:221-258 - イベントスキーマ例","STAGE1_DESIGN.md:160-200 - メトリクス実装仕様"
+recommendations[5]: HookIntegration.ts をビルド時に Hook .js ファイルにバンドルするか、Node.js require で動的ロード可能に設計,"Intent Parser 遅延実行: Hook 処理 (<10ms) との競合を避けるため、Intent 分析を PostToolUse で実施","Metrics への Intent データ追加: eventMetadata.intent, eventMetadata.confidence, eventMetadata.skipLayers","False Positive カウント: blockRate 計算時に Intent 信頼度で重み付けフィルタリング検討","段階的展開: まず Layer 2 のみで Intent 統合テスト、その後 Layer 3, 6 へ拡大"
+next[6]: 統合計画 v1.0 を詳細設計ドキュメントに落とし込む,unified-guard.js への Intent Parser 統合ポイント特定 (60-100行追加),deviation-approval-guard.js への Intent パラメータ追加 (30-50行修正),workflow-fidelity-guard.js への Intent 活用 (40-80行追加),"統合テスト: intent-hook-integration.test.ts 作成 (200行)","ロールバック戦略: 環境変数 TAISUN_INTENT_PARSER_ENABLED で制御可能に"
+id: cpt_1770969083235_nymm2a
+created: "2026-02-13T07:51:23.235Z"
+updated: "2026-02-13T07:51:23.235Z"

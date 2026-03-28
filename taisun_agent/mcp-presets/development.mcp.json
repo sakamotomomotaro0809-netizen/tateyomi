@@ -1,0 +1,53 @@
+{
+  "mcpServers": {
+    "taisun-proxy": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["dist/proxy-mcp/server.js"],
+      "disabled": false,
+      "description": "TAISUN Proxy MCP (single entrypoint)",
+      "category": "system"
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "disabled": false,
+      "description": "最新ドキュメント取得（ハルシネーション防止）",
+      "category": "documentation"
+    },
+    "playwright": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest"],
+      "disabled": false,
+      "description": "E2Eテスト・ブラウザ自動化",
+      "category": "browser-automation"
+    },
+    "qdrant": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["mcp-server-qdrant"],
+      "env": {
+        "QDRANT_URL": "${QDRANT_URL:-http://localhost:6333}",
+        "COLLECTION_NAME": "${QDRANT_COLLECTION_NAME:-taisun_memory}",
+        "EMBEDDING_MODEL": "sentence-transformers/all-MiniLM-L6-v2"
+      },
+      "disabled": false,
+      "description": "ベクトル検索・長期記憶",
+      "category": "database"
+    },
+    "chroma": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["chroma-mcp"],
+      "env": {
+        "CHROMA_PERSISTENCE_PATH": "./.chroma",
+        "EMBEDDING_FUNCTION": "default"
+      },
+      "disabled": false,
+      "description": "ローカルベクトルDB",
+      "category": "memory"
+    }
+  }
+}

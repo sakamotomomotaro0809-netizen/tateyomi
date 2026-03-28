@@ -1,0 +1,97 @@
+# Dependencies
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.tools
+.claude/.env
+
+# MCP overlay configs (contain secrets/enabled status)
+config/proxy-mcp/internal-mcps.local.json
+config/proxy-mcp/internal-mcps.staging.json
+config/proxy-mcp/internal-mcps.prod.json
+config/proxy-mcp/observability-report.json
+
+# Build outputs
+dist/
+build/
+*.tsbuildinfo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Test coverage
+coverage/
+
+# Cache
+.cache/
+.eslintcache
+
+# Memory backups (large files)
+.claude/memory-backup/archive/*.tar.gz
+
+# Credentials
+credentials.json
+**/secrets/
+*.pem
+*.key
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Memory storage (M3)
+.taisun/
+
+# Agent Trace (local traces, not committed)
+.agent-trace/
+
+# Document exports
+docs/exports/
+# Mac duplicate files
+*\ 2.*
+*\ 2
+test-results.txt
+
+# Workflow state files (session-specific)
+.workflow_state.json
+.agent_usage_state.json
+
+# Auto-backup system (session-specific data)
+.backups/
+.workflow_state_backups/
+.backup_logs/
+
+# Browser profiles and virtual environments (large cache files)
+.claude/skills/*/data/browser_profile/
+.claude/skills/*/.venv/
+.claude/skills/*/venv/
+
+# Test outputs and development artifacts
+output/
+resource_audit_*.json
+unused_resources_report.json
+
+# Removed submodule directories (do not re-add)
+taisun_agent/
+
+# Google Auth browser profile (large cache, 959MB)
+google-auth-system/
+
+# Large binary files (GitHub 100MB limit)
+完成版.pdf

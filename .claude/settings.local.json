@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(pip3 list:*)",
+      "Bash(python3:*)",
+      "Bash(find:*)",
+      "Bash(pip install:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli convert /tmp/test_novel.txt /tmp/test_output.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli convert /tmp/test_novel.txt /c/Users/User/AI/tateyomi/test_output.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli info /c/Users/User/AI/tateyomi/test_output.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -c \"\nfrom tateyomi.parsers.epub_parser import EpubParser\nfrom pathlib import Path\np = EpubParser\\(\\)\nbook = p.parse\\(Path\\('C:/Users/User/AI/tateyomi/test_output.epub'\\)\\)\nprint\\('title:', book.title\\)\nprint\\('author:', repr\\(book.author\\)\\)\nprint\\('chapters:', len\\(book.chapters\\)\\)\nprint\\('ch1 title:', book.chapters[0].title if book.chapters else 'none'\\)\n\" 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli convert \\\\\n  /c/Users/User/AI/tateyomi/test_output.epub \\\\\n  /c/Users/User/AI/tateyomi/test_roundtrip.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli convert \\\\\n  /c/Users/User/AI/tateyomi/test_output.epub \\\\\n  /c/Users/User/AI/tateyomi/test_output.pdf 2>&1)",
+      "Bash(git init:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli --help 2>&1)",
+      "Bash(git add:*)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli info \\\\\n  /c/Users/User/AI/tateyomi/samples/neko.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli convert \\\\\n  /c/Users/User/AI/tateyomi/samples/kokoro.txt \\\\\n  /c/Users/User/AI/tateyomi/samples/kokoro_tate.epub \\\\\n  --title \"こころ\" --author \"夏目漱石\" 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli info \\\\\n  /c/Users/User/AI/tateyomi/samples/kokoro_tate.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m pytest tests/ -v 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli check /c/Users/User/AI/tateyomi/samples/kokoro_tate.epub 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m pytest tests/ -q 2>&1)",
+      "Bash(PYTHONIOENCODING=utf-8 python3 -m tateyomi.cli check /c/Users/User/AI/tateyomi/samples/kokoro_final.epub 2>&1)",
+      "Bash(cd:*)",
+      "Bash(dir:*)"
+    ]
+  }
+}
