@@ -31,8 +31,28 @@ def _inline(text: str) -> str:
     text = re.sub(r"\*\*(.+?)\*\*|__(.+?)__", lambda m: f"<strong>{m.group(1) or m.group(2)}</strong>", text)
     # *italic* / _italic_
     text = re.sub(r"\*(.+?)\*|_(.+?)_", lambda m: f"<em>{m.group(1) or m.group(2)}</em>", text)
-    # [text](url) → テキストのみ（EPUB内でURLは意味をなさないため）
-    text = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", text)
+    # [text](url) → http(s) は <a> にする。それ以外は従来どおりテキストだけ残す。
+    #
+    # 2026-08-20: 以前はURLを捨てていた（「EPUB内でURLは意味をなさない」という前提）。
+    #   実際には Kindle はハイパーリンクに対応していて、この前提のせいで巻末CTAの
+    #   導線が切れていた。本にはURLが文字として載るだけになり、スマホで読んでいる
+    #   読者が手で打ち込む必要があった。集客を目的にした本ではここが致命傷になる。
+    def _link(m):
+        label, url = m.group(1), m.group(2)
+        if re.match(r"https?://", url):
+            return f'<a href="{url}">{label}</a>'
+        return label
+
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", _link, text)
+    # 素のURL（行にそのまま書かれたもの）もリンクにする。原稿にMarkdown記法を
+    # 強制すると、PDFから起こした原稿では抜けやすいため、こちらでも拾う。
+    #   全角括弧や句読点はURLの一部ではないので終端として扱う。これを入れないと
+    #   「…https://example.com/（続き）」のような行でカッコまで飲み込む。
+    text = re.sub(
+        r'(?<!href=")(?<!>)(https?://[^\s<>"（）「」『』、。・…！？]+?)([.,;:!?)\]】』」）]*)(?=$|[\s（「『、。・…！？])',
+        lambda m: f'<a href="{m.group(1)}">{m.group(1)}</a>{m.group(2)}',
+        text,
+    )
     return text
 
 
@@ -55,6 +75,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
     code_lines: list[str] = []
     ul_items: list[str] = []
     ol_items: list[str] = []
+    para_lines: list[str] = []
 
     def flush_ul():
         nonlocal ul_items
@@ -62,6 +83,20 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
             items_html = "".join(f"<li>{_inline(_escape_html(li))}</li>" for li in ul_items)
             blocks.append(_Block("ul", f"<ul>{items_html}</ul>"))
             ul_items = []
+
+    def flush_p():
+        """連続する行を1段落にまとめる。行末2スペースは <br/>（原稿の改行）"""
+        nonlocal para_lines
+        if not para_lines:
+            return
+        parts: list[str] = []
+        for n, raw_line in enumerate(para_lines):
+            hard_break = raw_line.endswith("  ")
+            parts.append(_inline(_escape_html(raw_line.strip())))
+            if n < len(para_lines) - 1:
+                parts.append("<br/>" if hard_break else "")
+        blocks.append(_Block("p", "<p>" + "".join(parts) + "</p>"))
+        para_lines = []
 
     def flush_ol():
         nonlocal ol_items
@@ -76,13 +111,13 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
         # fenced code block
         if line.startswith("```") or line.startswith("~~~"):
             if in_code:
-                flush_ul(); flush_ol()
+                flush_p(); flush_ul(); flush_ol()
                 code_html = _escape_html("\n".join(code_lines))
                 blocks.append(_Block("pre", f"<pre><code>{code_html}</code></pre>"))
                 code_lines = []
                 in_code = False
             else:
-                flush_ul(); flush_ol()
+                flush_p(); flush_ul(); flush_ol()
                 in_code = True
             i += 1
             continue
@@ -96,7 +131,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
         if i + 1 < len(lines):
             next_line = lines[i + 1]
             if re.fullmatch(r"=+", next_line.strip()) and line.strip():
-                flush_ul(); flush_ol()
+                flush_p(); flush_ul(); flush_ol()
                 heading_text = _inline(_escape_html(line.strip()))
                 if not title:
                     title = line.strip()
@@ -104,7 +139,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
                 i += 2
                 continue
             if re.fullmatch(r"-+", next_line.strip()) and line.strip() and not line.startswith("-"):
-                flush_ul(); flush_ol()
+                flush_p(); flush_ul(); flush_ol()
                 heading_text = _inline(_escape_html(line.strip()))
                 blocks.append(_Block("heading", f"<h2>{heading_text}</h2>", level=2))
                 i += 2
@@ -113,7 +148,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
         # ATX heading
         m = re.match(r"^(#{1,6})\s+(.*)", line)
         if m:
-            flush_ul(); flush_ol()
+            flush_p(); flush_ul(); flush_ol()
             level = len(m.group(1))
             heading_text = _inline(_escape_html(m.group(2).rstrip("#").strip()))
             if level == 1 and not title:
@@ -124,7 +159,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
 
         # horizontal rule
         if re.fullmatch(r"[-*_]{3,}", line.strip()):
-            flush_ul(); flush_ol()
+            flush_p(); flush_ul(); flush_ol()
             blocks.append(_Block("hr", "<hr/>"))
             i += 1
             continue
@@ -132,7 +167,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
         # unordered list
         m = re.match(r"^[-*+]\s+(.*)", line)
         if m:
-            flush_ol()
+            flush_p(); flush_ol()
             ul_items.append(m.group(1))
             i += 1
             continue
@@ -140,7 +175,7 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
         # ordered list
         m = re.match(r"^\d+\.\s+(.*)", line)
         if m:
-            flush_ul()
+            flush_p(); flush_ul()
             ol_items.append(m.group(1))
             i += 1
             continue
@@ -148,23 +183,24 @@ def _parse_md(text: str) -> tuple[str, str, list[_Block]]:
         # blockquote → <blockquote>
         m = re.match(r"^>\s?(.*)", line)
         if m:
-            flush_ul(); flush_ol()
+            flush_p(); flush_ul(); flush_ol()
             blocks.append(_Block("p", f"<blockquote>{_inline(_escape_html(m.group(1)))}</blockquote>"))
             i += 1
             continue
 
         # blank line
         if not line.strip():
-            flush_ul(); flush_ol()
+            flush_p(); flush_ul(); flush_ol()
             blocks.append(_Block("blank", ""))
             i += 1
             continue
 
-        # paragraph
+        # paragraph（連続行は flush_p でまとめる）
         flush_ul(); flush_ol()
-        blocks.append(_Block("p", f"<p>{_inline(_escape_html(line.strip()))}</p>"))
+        para_lines.append(line)
         i += 1
 
+    flush_p()
     flush_ul()
     flush_ol()
     if in_code and code_lines:
@@ -200,6 +236,10 @@ def _blocks_to_chapter(idx: int, title: str, blocks: list[_Block]) -> Chapter:
 
 
 class MdParser(BaseParser):
+    def __init__(self, split_level: int = 1):
+        # split_level 以下の見出しで章を分割する（1 = h1 のみ）
+        self.split_level = max(1, min(6, int(split_level)))
+
     def parse(self, path: Path) -> ParsedBook:
         from tateyomi.utils.encoding import read_text_auto
         raw, _ = read_text_auto(path)
@@ -208,13 +248,13 @@ class MdParser(BaseParser):
         if not title:
             title = path.stem
 
-        # h1 を章区切りとして分割
+        # split_level 以下の見出しを章区切りとして分割
         chapters: list[Chapter] = []
         current_title = title
         current_blocks: list[_Block] = []
 
         for block in blocks:
-            if block.kind == "heading" and block.level == 1:
+            if block.kind == "heading" and block.level <= self.split_level:
                 if current_blocks:
                     chapters.append(_blocks_to_chapter(len(chapters), current_title, current_blocks))
                 # タグを除去してテキストだけを章タイトルとして使う
