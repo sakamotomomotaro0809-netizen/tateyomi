@@ -15,14 +15,17 @@ _PARA_SPLIT_THRESHOLD = 150
 def transform(
     book: ParsedBook,
     enable_tcy: bool = True,
+    vertical_forms: bool = True,
     normalize: bool = False,
     auto_reflow: bool = True,
+    horizontal: bool = False,
     progress_cb: Optional[Callable[[int, int, str], None]] = None,
 ) -> ParsedBook:
     """
     全チャプターのHTML内テキストを縦書き用に変換する。
     normalize=True の場合、N. テキスト正規化も適用する。
     auto_reflow=True の場合、長段落を句点で自動分割する。
+    horizontal=True の場合、縦書き固有の変換（約物・縦中横）をスキップする。
     progress_cb(current, total, chapter_title) を章ごとに呼び出す。
     """
     total = len(book.chapters)
@@ -37,8 +40,15 @@ def transform(
             html = normalize_html_text(html)
         if auto_reflow:
             html = split_long_paragraphs(html)
-        html = apply_vertical_chars(html)
-        if enable_tcy:
+        if not horizontal and vertical_forms:
+            # 約物の縦書きUnicodeフォームは横書きでは不要。
+            # 2026-08-21: 縦書きでも切れるようにした。この置換は互換用の
+            #   presentation form (U+FE11 等) を本文に埋め込むため、読者が
+            #   本文内検索したときに通常の「」や。と一致しなくなる。
+            #   見た目は writing-mode: vertical-rl でフォント側が処理するので、
+            #   置換しなくても縦組みにはなる。既定は従来どおり有効。
+            html = apply_vertical_chars(html)
+        if enable_tcy and not horizontal:
             html = wrap_tcy_spans(html)
         chapter.html_content = html
     if progress_cb and total:

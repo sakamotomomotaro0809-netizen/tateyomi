@@ -36,6 +36,11 @@ def convert(
     title: Optional[str] = typer.Option(None, "--title", "-t", help="書籍タイトルを上書き"),
     author: Optional[str] = typer.Option(None, "--author", "-a", help="著者名を上書き"),
     no_tcy: bool = typer.Option(False, "--no-tcy", help="縦中横（数字横組み）を無効化"),
+    no_vertical_forms: bool = typer.Option(
+        False, "--no-vertical-forms",
+        help="約物を縦書き専用文字に置換しない（本文内検索が効くようにする）"),
+    horizontal: bool = typer.Option(False, "--horizontal", "-H",
+                                    help="横書き（左から右）で出力する。既定は縦書き"),
     embed_font: bool = typer.Option(False, "--embed-font", help="F. Noto Serif CJKフォントを埋め込む"),
     font_dir: Optional[Path] = typer.Option(None, "--font-dir", help="F. 埋め込むフォントのディレクトリ"),
     css: Optional[Path] = typer.Option(None, "--css", help="H. 追加CSSファイルのパス"),
@@ -43,12 +48,15 @@ def convert(
     font_size: Optional[str] = typer.Option(None, "--font-size", help="フォントサイズ (例: 1em, 14pt)"),
     line_height: Optional[float] = typer.Option(None, "--line-height", help="行間 (例: 1.8)"),
     gen_cover: bool = typer.Option(False, "--gen-cover", help="表紙画像を自動生成して追加する"),
+    cover: Optional[Path] = typer.Option(None, "--cover", help="表紙に使う画像ファイル (.png/.jpg)"),
+    split_level: int = typer.Option(1, "--split-level",
+                                    help="Markdown入力を章分割する見出しレベル (1=# のみ, 2=## まで)"),
     auto_ruby: bool = typer.Option(False, "--auto-ruby", help="AX. 漢字にルビを自動付与 (fugashi/cutlet 必要)"),
     dry_run: bool = typer.Option(False, "--dry-run", help="変換せず書籍情報のみ表示する"),
     log_file: Optional[Path] = typer.Option(None, "--log-file", help="AZ. ログ出力先ファイル"),
     verbose: bool = typer.Option(False, "--verbose", "-v", help="詳細ログを表示"),
 ) -> None:
-    """電子書籍を縦書きフォーマットに変換する"""
+    """電子書籍を縦書き（既定）または横書き（--horizontal）に変換する"""
 
     # 入力ファイル確認
     if not input_file.exists():
@@ -71,6 +79,10 @@ def convert(
     # I. 設定ファイル読み込み
     from tateyomi.settings import TateyomiConfig
     cfg = TateyomiConfig.load(config_file)
+
+    # 横書きモード
+    if horizontal:
+        cfg.convert.horizontal = True
 
     # H. --css オプションで extra_css_file を上書き
     if css:
@@ -103,7 +115,7 @@ def convert(
         # ── 1. パース ──
         task = progress.add_task(f"[cyan]読み込み中: {input_file.name}", total=None)
         try:
-            book = _parse(input_file, in_ext, verbose, progress)
+            book = _parse(input_file, in_ext, verbose, progress, split_level=split_level)
         except Exception as e:
             from tateyomi.utils.error_messages import format_error
             console.print(f"[red]読み込みエラー: {format_error(e, verbose)}[/red]")
@@ -129,6 +141,16 @@ def convert(
                 fd = getattr(book, "font_dir", None)
                 if fd:
                     console.print(f"  フォントディレクトリ: {fd}")
+
+        # 表紙画像を指定ファイルから設定
+        if cover:
+            if not cover.exists():
+                console.print(f"[red]エラー: 表紙画像が見つかりません: {cover}[/red]")
+                raise typer.Exit(1)
+            from tateyomi.utils.cover_gen import set_cover_from_file
+            set_cover_from_file(book, cover)
+            if verbose:
+                console.print(f"  表紙画像を設定しました: {cover.name}")
 
         # AN. 表紙画像自動生成
         if gen_cover:
@@ -160,7 +182,8 @@ def convert(
 
         # ── 2. 変換 ──
         n_chapters = len(book.chapters)
-        task2 = progress.add_task("[cyan]縦書き変換中...", total=n_chapters)
+        mode_label = "横書き" if cfg.convert.horizontal else "縦書き"
+        task2 = progress.add_task(f"[cyan]{mode_label}変換中...", total=n_chapters)
 
         def _on_chapter(current: int, total: int, ch_title: str) -> None:
             progress.update(
@@ -173,10 +196,12 @@ def convert(
         book = text_transform.transform(
             book,
             enable_tcy=not no_tcy and cfg.convert.enable_tcy,
+            vertical_forms=not no_vertical_forms,
             normalize=cfg.convert.normalize_text,
+            horizontal=cfg.convert.horizontal,
             progress_cb=_on_chapter,
         )
-        book = html_transform.transform(book)
+        book = html_transform.transform(book, horizontal=cfg.convert.horizontal)
         progress.update(task2, completed=n_chapters, description="[green]変換完了")
 
         # ── 3. 出力 ──
@@ -232,6 +257,7 @@ def _dry_run(input_file: Path, ext: str, cfg) -> None:
         if len(book.chapters) > 15:
             console.print(f"    ... 他 {len(book.chapters) - 15} 章")
     console.print("\n  [bold]適用設定:[/bold]")
+    console.print(f"    書字方向       : {'横書き' if cfg.convert.horizontal else '縦書き'}")
     console.print(f"    縦中横         : {cfg.convert.enable_tcy}")
     console.print(f"    テキスト正規化 : {cfg.convert.normalize_text}")
     console.print(f"    画像リサイズ   : {cfg.convert.resize_images}")
@@ -240,7 +266,7 @@ def _dry_run(input_file: Path, ext: str, cfg) -> None:
     console.print("\n[yellow]--dry-run: 出力ファイルは生成されていません[/yellow]")
 
 
-def _parse(path: Path, ext: str, verbose: bool, progress):
+def _parse(path: Path, ext: str, verbose: bool, progress, split_level: int = 1):
     if ext == ".epub":
         from tateyomi.parsers.epub_parser import EpubParser
         parser = EpubParser()
@@ -252,7 +278,7 @@ def _parse(path: Path, ext: str, verbose: bool, progress):
         parser = DocxParser()
     elif ext == ".md":
         from tateyomi.parsers.md_parser import MdParser
-        parser = MdParser()
+        parser = MdParser(split_level=split_level)
     elif ext in (".html", ".htm"):
         from tateyomi.parsers.html_parser import HtmlParser
         parser = HtmlParser()
@@ -569,14 +595,19 @@ def _quick_epub_check(epub_file: Path) -> None:
             # OPF 解析
             try:
                 opf = zf.read("OEBPS/content.opf").decode("utf-8")
-                if 'page-progression-direction="rtl"' in opf:
-                    ok_items.append("RTL page-progression-direction")
+                # 縦書き(vertical-rl/rtl) と 横書き(horizontal-tb/ltr) の整合を見る
+                is_horizontal = "horizontal-tb" in opf
+                want_dir = "ltr" if is_horizontal else "rtl"
+                want_mode = "horizontal-tb" if is_horizontal else "vertical-rl"
+                if f'page-progression-direction="{want_dir}"' in opf:
+                    ok_items.append(f"page-progression-direction: {want_dir}")
                 else:
-                    issues.append("page-progression-direction='rtl' が設定されていません")
-                if "vertical-rl" in opf:
-                    ok_items.append("primary-writing-mode: vertical-rl")
+                    issues.append(
+                        f"page-progression-direction='{want_dir}' が設定されていません")
+                if want_mode in opf:
+                    ok_items.append(f"primary-writing-mode: {want_mode}")
                 else:
-                    warn_items.append("primary-writing-mode: vertical-rl が見つかりません")
+                    warn_items.append(f"primary-writing-mode: {want_mode} が見つかりません")
 
                 # タイトル・著者確認
                 import re as _re
