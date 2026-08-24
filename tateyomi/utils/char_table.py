@@ -20,20 +20,42 @@ HORIZONTAL_TO_VERTICAL: dict[str, str] = {
 }
 
 # 縦中横 (tate-chu-yoko) に変換すべきパターン
-# 2〜4桁の数字、アルファベット2〜4文字など
+# 詳しい規則は下の TCY_PATTERN 付近のコメントを参照
 import re
 
-# 縦中横の対象は「2文字まで」。
+# 縦中横の対象。
 #
 # 2026-08-24: 以前は数字4桁・英字8文字までを対象にしていたが、縦中横は対象を
 #   1文字ぶんの枡に押し込む指定なので、長い綴りを入れると潰れて読めなくなる。
 #   実測では Google(6文字)が36回、ChatGPT(7文字)が5回、この状態で入っていた。
-#   日本語組版の原則どおり2文字までに絞り、3文字以上は回転に任せる
-#   （text-orientation: mixed の既定動作。SEO や PPC が横に寝るのは通常の見え方）。
+#
+#   そこで次の2つだけを縦中横にし、それ以外は回転に任せる
+#   （text-orientation: mixed の既定動作）。
+#     1. 1〜3文字の数字（100・500）と1〜2文字のラテン文字（AI など）
+#     2. 2〜3文字の全大文字略語（SNS・PPC・SEO・URL・PDF など）
+#
+#   2 を足したのは、SNS や PPC が横倒しで出てくると読みの流れが切れるため。
+#   日本語組版では2〜3文字の欧文略語を縦中横に組むのが通例（W3C 日本語組版処理の要件）。
+#   Google や ChatGPT のような綴りの語はここに該当しないので、従来どおり回転する。
+#
 #   ⚠ 対象は「綴り全体」で拾う。ここを 2文字ずつ拾う正規表現にすると
 #     Google が Go/og/le と刻まれて、かえって悪化する。
-TCY_PATTERN = re.compile(r"[0-9]+|[A-Za-z][A-Za-z0-9]*")
+#   ⚠ 桁区切りのカンマを含めて1つの数として拾う。含めないと「1,000」が
+#     1 と 000 に割れ、1 だけ立って 000 が寝るという不揃いな組みになる
+#     （実測でこの割れが24箇所あった）。
+TCY_PATTERN = re.compile(r"[0-9]+(?:,[0-9]{3})*|[A-Za-z][A-Za-z0-9]*")
 TCY_MAX_LEN = 2
+TCY_ACRONYM_MAX_LEN = 3
+
+
+def _is_tcy(s: str) -> bool:
+    """縦中横にすべき綴りか。"""
+    if len(s) <= TCY_MAX_LEN:
+        return True
+    # 3桁の数字（100・500 など）と、全大文字の略語（SNS・PPC など）は3文字まで許す
+    if len(s) <= TCY_ACRONYM_MAX_LEN and (s.isdigit() or s.isupper()):
+        return True
+    return False
 
 
 def apply_vertical_chars(html: str) -> str:
@@ -50,15 +72,16 @@ def apply_vertical_chars(html: str) -> str:
 
 def wrap_tcy_spans(html: str) -> str:
     """
-    2文字までの数字・ラテン文字列を <span class="tcy"> で囲む（縦中横）。
+    縦中横にすべき綴りを <span class="tcy"> で囲む。
 
-    3文字以上は囲まない。縦中横は1文字ぶんの枡に押し込む指定なので、長い綴りを
+    対象は 1〜2文字の数字・ラテン文字と、2〜3文字の全大文字略語（SNS・PPC など）。
+    それ以外は囲まない。縦中横は1文字ぶんの枡に押し込む指定なので、長い綴りを
     入れると潰れて読めなくなるため（Google・ChatGPT など）。囲まなければ
     text-orientation: mixed の既定どおり回転して表示され、そちらが通常の見え方。
     """
     def replacer(m: re.Match) -> str:
         s = m.group()
-        if len(s) > TCY_MAX_LEN:
+        if not _is_tcy(s):
             return s
         return f'<span class="tcy">{s}</span>'
 
