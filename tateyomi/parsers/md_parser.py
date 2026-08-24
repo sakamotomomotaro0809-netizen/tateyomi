@@ -8,8 +8,84 @@ import re
 import uuid
 from pathlib import Path
 
-from tateyomi.config import ParsedBook, Chapter
+from tateyomi.config import ParsedBook, Chapter, ImageItem
 from tateyomi.parsers.base import BaseParser
+
+
+# ── 画像 ![alt](path) ────────────────────────────────────────────────
+#
+# 2026-08-24: それまで md からの画像は**黙って消えていた**。
+#   ![alt](path) が [text](url) のリンク規則に食われ、本文には "!" と alt だけが
+#   残っていた。しかも変換後の表示は「画像数 1」（表紙のぶん）と出るので、
+#   入ったつもりで気づけない。docx と epub のパーサーには画像対応があるのに、
+#   md だけ無かった。集客マンガを本の冒頭に入れようとして判明した。
+#
+# 生の <img> を書いても通らない（HTMLはエスケープされる）ので、ここで対応する。
+
+IMG_MD = re.compile(r"!\[([^\]]*)\]\(([^)]+)\)")
+IMG_TOKEN = "\x00IMG{}\x00"          # 本文には出ない文字で囲む
+_EXT_MEDIA = {
+    ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png",
+    ".gif": "image/gif", ".svg": "image/svg+xml", ".webp": "image/webp",
+}
+
+
+def _extract_images(raw: str, base_dir: Path) -> tuple[str, list[ImageItem], list[str]]:
+    """![alt](path) を拾い、本文をプレースホルダに置き換える。
+
+    画像ファイルは Markdown からの相対パスで探す。見つからないものは
+    **落とさずに例外にする**。黙って消えるのが今回の元凶だったため、
+    「入っているつもりで入っていない」状態を二度と作らない。
+    戻り値: (置き換え後のテキスト, ImageItem のリスト, alt のリスト)
+    """
+    images: list[ImageItem] = []
+    alts: list[str] = []
+    missing: list[str] = []
+
+    def repl(m: re.Match) -> str:
+        alt, src = m.group(1), m.group(2).strip()
+        if re.match(r"https?://", src):
+            # 外部URLの画像はEPUBに同梱できない（読者の端末は通信しない）
+            missing.append(f"{src} (外部URLはEPUBに入れられません)")
+            return m.group(0)
+        p = (base_dir / src).resolve()
+        if not p.is_file():
+            missing.append(f"{src} (見つかりません: {p})")
+            return m.group(0)
+        ext = p.suffix.lower()
+        media = _EXT_MEDIA.get(ext)
+        if not media:
+            missing.append(f"{src} (対応していない形式: {ext})")
+            return m.group(0)
+        idx = len(images) + 1
+        href = f"Images/md_img{idx:03d}{ext}"
+        images.append(ImageItem(
+            item_id=f"md-img-{idx:03d}",
+            href=href,
+            media_type=media,
+            data=p.read_bytes(),
+        ))
+        alts.append(alt)
+        return IMG_TOKEN.format(idx)
+
+    out = IMG_MD.sub(repl, raw)
+    if missing:
+        raise FileNotFoundError(
+            "Markdown の画像を読み込めませんでした:\n  " + "\n  ".join(missing)
+            + "\nパスは Markdown ファイルからの相対で書いてください。"
+        )
+    return out, images, alts
+
+
+def _tokens_to_img(html: str, images: list[ImageItem], alts: list[str]) -> str:
+    """プレースホルダを <img> に戻す。エスケープ後に行うこと。"""
+    def repl(m: re.Match) -> str:
+        i = int(m.group(1)) - 1
+        if i < 0 or i >= len(images):
+            return ""
+        alt = _escape_html(alts[i]) if i < len(alts) else ""
+        return f'<img src="../{images[i].href}" alt="{alt}" />'
+    return re.sub(r"\x00IMG(\d+)\x00", repl, html)
 
 
 def _escape_html(text: str) -> str:
@@ -24,7 +100,11 @@ def _escape_html(text: str) -> str:
 # ── 簡易 Markdown → HTML 変換 ─────────────────────────────────────────
 
 def _inline(text: str) -> str:
-    """インライン要素変換: **bold**, *italic*, `code`, [link](url)"""
+    """インライン要素変換: **bold**, *italic*, `code`, [link](url), ![alt](画像)"""
+    # ![alt](path) は、この関数より前に _extract_images() が
+    # プレースホルダ（IMG_TOKEN）へ置き換えている。ここでは何もしない。
+    # ★ リンク規則より前に処理しないと ![alt](path) の [alt](path) 部分だけが
+    #   食われて、"!" + alt だけが本文に残り、画像は黙って消える。実際にそうなっていた。
     # `code`
     text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
     # **bold** / __bold__
@@ -244,6 +324,9 @@ class MdParser(BaseParser):
         from tateyomi.utils.encoding import read_text_auto
         raw, _ = read_text_auto(path)
 
+        # ![alt](path) を先に取り出す。リンク規則に食われる前に処理する必要がある。
+        raw, images, alts = _extract_images(raw, path.parent)
+
         title, author, blocks = _parse_md(raw)
         if not title:
             title = path.stem
@@ -266,11 +349,20 @@ class MdParser(BaseParser):
         if current_blocks or not chapters:
             chapters.append(_blocks_to_chapter(len(chapters), current_title, current_blocks))
 
+        # プレースホルダを <img> に戻し、その章がどの画像を使ったかを記録する。
+        for ch in chapters:
+            if "\x00IMG" not in ch.html_content:
+                continue
+            used = [int(n) for n in re.findall(r"\x00IMG(\d+)\x00", ch.html_content)]
+            ch.html_content = _tokens_to_img(ch.html_content, images, alts)
+            ch.image_refs = [images[i - 1].href for i in used if 0 < i <= len(images)]
+
         return ParsedBook(
             title=title,
             author=author,
             language="ja",
             uid=str(uuid.uuid4()),
             chapters=chapters,
+            images=images,
             source_format="md",
         )
